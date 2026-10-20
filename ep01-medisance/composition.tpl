@@ -68,7 +68,7 @@
     .titre-sourate { left: 88px; top: 960px; width: 832px; text-align: center; font: 600 76px/1.1 "Source Serif 4", serif; }
     .sous-titre-sourate { left: 88px; top: 1066px; width: 832px; text-align: center; font: 600 30px/1.2 "Inter", sans-serif; letter-spacing: .16em; text-transform: uppercase; color: #c6a15b; }
 
-    .tag { font: 500 24px/1 "Inter", sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #b9b3a5; opacity: .75; }
+    .tag { font: 500 24px/1.5 "Inter", sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #b9b3a5; opacity: .75; }
     .tag-ar { left: 88px; width: 832px; top: 590px; text-align: center; }
     .verset { left: 150px; width: 708px; top: 760px; text-align: center; font: 400 50px/1.32 "Source Serif 4", serif; }
     .ref-v { left: 88px; width: 832px; top: 1340px; text-align: center; font: 500 28px/1.4 "Inter", sans-serif; color: #b9b3a5; }
@@ -109,6 +109,7 @@
     </svg>
     %%ETIQUETTES%%
     %%SCENES%%
+    %%AUDIO%%
   </div>
   <script>
     const tl = gsap.timeline({ paused: true });

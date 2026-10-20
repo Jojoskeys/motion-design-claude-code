@@ -1,19 +1,25 @@
 # Reprise : épisode 1 « La médisance » (état au 2026-10-20, révision 7)
 
-## État actuel (révision 7 : nouvelle narration, ~3 min 30)
-- Texte à enregistrer : `serie-coran/episodes/ep01/VOIX-OFF.txt` (466 mots), construit par `build-voix-off.py`
-  depuis `NARRATION-r7.txt` + sources. Corrections signalées C1-C3 : `SCRIPT.md` ; sources : `SOURCES.md` § 7.
-- Verset 49:12 : texte fourni depuis Quran.com, comparé (SOURCES.md § 8). Texte finalisé pour l'essai audio (466 mots).
-  Restent avant publication : conditions de réutilisation des traductions, arabe vs mushaf imprimé.
-- Montage : `ep01-medisance/index.html` est **généré** par `python3 -I ep01-medisance/build-composition.py`
-  (gabarit `composition.tpl`) : 20 scènes, sous-titres, minutage provisoire estimé (`temps-provisoires.json`).
-  Après réception de la voix : mesurer les débuts/fins de chaque unité (u01…u36), les écrire dans un `temps.json`
-  et lancer `build-composition.py temps.json` ; ajouter l'audio, aperçu léger, puis rendu final 1080×1920.
-- L'ancien prototype d'accroche (« Et si ce que je dis sur lui est vrai ? ») et les essais audio sont abandonnés.
-
-
-
-Branche : `claude/determined-tesla-akfm85`. Règles permanentes : `CLAUDE.md` (série) et `AGENTS.md` (garde-fous HyperFrames).
+## État actuel (révision 7, voix enregistrée, aperçu complet en attente de retour)
+- Texte enregistré : `serie-coran/episodes/ep01/VOIX-OFF.txt` (461 mots), produit par `build-voix-off.py` depuis
+  `NARRATION-r7.txt` + sources (verset : Quran.com fourni par l'utilisateur, `SOURCES.md` § 8). Appel à l'action :
+  « Pour mieux comprendre le Coran, abonne-toi. »
+- Voix (hors git, règle *.mp3 / *.wav) : originaux intacts dans `ep01-medisance/assets/audio/voix-originaux/`
+  (`1-debut.mp3` u01-u08, `2-suite.mp3` u09-u36, sha256 dans l'historique de session). Assemblage sans changer
+  vitesse ni hauteur : `ffmpeg -i 1-debut.mp3 -f lavfi -t 0.26 -i anullsrc=r=44100:cl=mono -i 2-suite.mp3
+  -filter_complex concat=n=3:v=0:a=1 -c:a pcm_s16le assets/audio/voix-ep01.wav` (146,96 s ; jonction : 0,25 s + 0,26 s
+  de silence ajouté + 0,14 s, pas de saut d'échantillon).
+- Synchronisation : `python3 -I ep01-medisance/aligner.py` (alignement forcé local : espeak-ng + MFCC + DTW en numpy,
+  frontières recalées sur les pauses réelles ; aucun modèle téléchargé, Hugging Face étant bloqué) → `temps.json`.
+  Contrôlé : 39 unités recalées sur des pauses, aucune pause interne mal placée, voix rendue à +0,300 s constant.
+- Montage : `python3 -I ep01-medisance/build-composition.py ep01-medisance/temps.json` régénère `index.html`
+  (20 écrans, 32 sous-titres, voix à 0,3 s, durée 149,4 s). Aperçu : `npx hyperframes render -q draft` puis réduction
+  ffmpeg en 540×960 (`renders/ep01-medisance-apercu-540x960.mp4`, hors git).
+- Limites connues : voix rapide (~22 car/s) → 13 sous-titres sur 32 au-dessus de 20 car/s ; arabe non affiché
+  (emplacement signalé « provisoire, non affiché »).
+- **Prochaine étape** : retour de l'utilisateur sur l'aperçu, corrections, puis seulement export final 1080×1920
+  (`npx hyperframes render -q delivery`).
+- Restent avant publication : conditions de réutilisation des traductions, arabe vs mushaf imprimé.
 
 ## Fichiers
 - Script actuel (révision 6, structure validée, **texte définitif non validé**) : `serie-coran/episodes/ep01/SCRIPT.md`

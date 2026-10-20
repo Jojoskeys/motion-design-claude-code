@@ -16,6 +16,8 @@ et As-Sa'di (AR). Sources et extraits : `SOURCES.md` § 7.
   prêter à quelqu’un une mauvaise intention ou une faute sans preuve. » (Al-Mukhtasar : « accusations qui ne reposent
   souvent sur aucune preuve », « pense du mal » ; Al-Muyassar : ظن السوء).
 - C1 et C2 validées par l'utilisateur (2026-10-20).
+- Appel à l'action enregistré par l'utilisateur : « Pour mieux comprendre le Coran, abonne-toi. » (« un passage à la
+  fois » retiré du script et du montage, 2026-10-20).
 - C3 retirée à la demande de l'utilisateur : la narration garde « … élargit cette mise en garde : » ; l'écran affiche
   « Traduction du sens — Muhammad Hamidullah » pendant la lecture du verset.
 - Verset provisoire remplacé par Hamidullah 49:12 entier, mot pour mot, dans le texte fourni depuis Quran.com.

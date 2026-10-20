@@ -43,7 +43,7 @@ FIN_V = V4[V4.index("Car Allah"):]                            # « Car Allah est
 U = [
     ("u01", "Dans le Coran, Allah interdit la médisance.", "carton"),
     ("u02", "Mais est-ce que tu sais vraiment ce qui en fait partie ?", "carton"),
-    ("u03", "Pour mieux comprendre le Coran, un passage à la fois, abonne-toi.", "carton"),
+    ("u03", "Pour mieux comprendre le Coran, abonne-toi.", "carton"),
     ("u04", "Pour comprendre la médisance, commençons par un échange entre le Prophète, paix et salut sur lui, et ses compagnons.", "st"),
     ("u05", "Dans un hadith rapporté par Muslim, il les interroge :", "st"),
     ("u06", H1, "carton"),
@@ -98,8 +98,14 @@ for k, txt, _ in U:
     d = mots / (2.2 if k in CITATION else 2.45) + 0.25
     T[k] = [round(t, 2), round(t + d, 2)]
     t += d + (0.25 if k == "u15a" else 0.75 if k in PAUSE_LONGUE else 0.4)
-if len(sys.argv) > 1:                  # temps mesurés sur l'audio réel
-    T.update(json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8")))
+AUDIO = ""
+VOIX_DEBUT = 0.3                       # la voix démarre 0,3 s après l'image 0 (accroche déjà lisible)
+if len(sys.argv) > 1:                  # temps mesurés sur l'audio réel (secondes dans voix-ep01.wav)
+    mesures = json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))
+    assert set(mesures) == set(T), "temps.json doit couvrir toutes les unités"
+    T = {k: [round(d + VOIX_DEBUT, 3), round(f + VOIX_DEBUT, 3)] for k, (d, f) in mesures.items()}
+    AUDIO = (f'<audio id="voix-ep01" src="assets/audio/voix-ep01.wav" data-start="{VOIX_DEBUT}" '
+             f'data-track-index="10" data-volume="1"></audio>')
 DUREE = round(T["u36"][1] + 2.5, 2)
 
 # ---- outils HTML --------------------------------------------------------------------------------------------------
@@ -258,7 +264,7 @@ CADRE = '''<svg class="decor" viewBox="0 0 1080 1920" aria-hidden="true">
   <line x1="568" y1="690" x2="830" y2="690" stroke="#c6a15b" stroke-opacity=".6" stroke-width="2"/>
   ''' + etoile(540, 690) + '''
 </svg>
-<p class="bloc tag tag-ar">Texte arabe de 49:12 · emplacement réservé</p>
+<p class="bloc tag tag-ar">Texte arabe de 49:12 · provisoire, non affiché <span style="display:block">(vérification sur mushaf imprimé en cours)</span></p>
 <p class="bloc ref-v"><strong>Traduction du sens</strong> — Muhammad Hamidullah</p>'''
 vers = [("u23a", V1, True, False), ("u23b", V2, False, False), ("u23c", V3, False, False), ("u23d", V4, False, True)]
 scene("s-verset", "u23a", "u23d", CADRE + "".join(
@@ -341,6 +347,7 @@ def morceaux(s, maxc=62):
         dernier = out.pop(); out[-1] += " " + dernier
     return out
 ST = []
+SUIVANT = {U[i][0]: U[i + 1][0] for i in range(len(U) - 1)}
 for k, txt, rendu in U:
     if rendu != "st":
         continue
@@ -349,7 +356,9 @@ for k, txt, rendu in U:
     d0, d1 = T[k]; tot = sum(len(p) for p in parts); c = d0
     for i, p in enumerate(parts):
         fin = c + (d1 - d0) * len(p) / tot
-        ST.append((f"st-{k}-{i}", p, c, fin + (0.35 if i == len(parts) - 1 else 0)))
+        # le dernier morceau reste pendant la pause qui suit (0,8 s au plus) : lecture plus confortable
+        tenue = min(T[SUIVANT[k]][0] - 0.05, d1 + 0.8) - d1 if k in SUIVANT else 0.8
+        ST.append((f"st-{k}-{i}", p, c, fin + (max(tenue, 0.15) if i == len(parts) - 1 else 0)))
         c = fin
 
 # ---- assemblage -------------------------------------------------------------------------------------------------------
@@ -371,11 +380,12 @@ for sid, p, d, f in ST:
     JS.append(f'tl.to("#{sid}", {{opacity: 0, duration: 0.15}}, {f - 0.15:.2f});')
 
 page = (ICI / "composition.tpl").read_text(encoding="utf-8")
-page = (page.replace("%%DUREE%%", f"{DUREE}")
+page = (page.replace("%%DUREE%%", f"{DUREE}").replace("%%AUDIO%%", AUDIO)
             .replace("%%ETIQUETTES%%", "\n    ".join(etiquettes))
             .replace("%%SCENES%%", "\n    ".join(corps))
             .replace("%%FILS%%", json.dumps(FILS))
             .replace("%%JS%%", "\n    ".join(JS)))
 (ICI / "index.html").write_text(page, encoding="utf-8")
+(ICI / "unites.json").write_text(json.dumps([[k, t] for k, t, _ in U], ensure_ascii=False, indent=0), encoding="utf-8")
 (ICI / "temps-provisoires.json").write_text(json.dumps(T, ensure_ascii=False, indent=0), encoding="utf-8")
 print(f"index.html : {len(SCENES)} scènes, {len(ST)} sous-titres, durée provisoire {DUREE} s")
