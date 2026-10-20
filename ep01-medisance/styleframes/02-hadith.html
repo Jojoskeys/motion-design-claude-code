@@ -1,13 +1,44 @@
 <!doctype html>
-<html lang="fr"><head><meta charset="utf-8"><link rel="stylesheet" href="style.css"><title>02 hadith</title></head>
+<html lang="fr"><head><meta charset="utf-8"><link rel="stylesheet" href="style.css"><title>02 hadith</title>
+<style>
+  .label { left: 88px; top: 452px; }
+  .citation { left: 148px; top: 610px; width: 712px; font: 400 60px/1.3 "Source Serif 4", serif; }
+  .ref { left: 88px; top: 1112px; }
+</style></head>
 <body>
-  <div class="maquette">Maquette 2/3 · style</div>
-  <div class="zone">
-    <p class="etiquette">Hadith · extrait</p>
-    <div class="filet"></div>
-    <p class="citation" id="citation">«&nbsp;[…] C'est que tu évoques ton frère en des termes qu’il répugnerait.&nbsp;»</p>
-    <div class="filet"></div>
-    <p class="reference"><strong>Sahih Muslim 2589</strong> · authentique<br>Traduction : HadeethEnc</p>
-  </div>
+  <svg class="decor" viewBox="0 0 1080 1920" aria-hidden="true">
+    <defs>
+      <pattern id="trame" width="132" height="132" patternUnits="userSpaceOnUse">
+        <g transform="translate(66 66)" fill="none" stroke="#c6a15b" stroke-width="1.4">
+          <rect x="-26" y="-26" width="52" height="52"/><rect x="-26" y="-26" width="52" height="52" transform="rotate(45)"/>
+        </g>
+      </pattern>
+      <radialGradient id="fondu" cx="12%" cy="88%" r="50%"><stop offset="0" stop-color="#fff" stop-opacity="1"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+      <mask id="m"><rect width="1080" height="1920" fill="url(#fondu)"/></mask>
+    </defs>
+    <rect width="1080" height="1920" fill="url(#trame)" opacity=".09" mask="url(#m)"/>
+
+    <g stroke-linecap="round" stroke-linejoin="round">
+      <!-- Petite bulle d'origine, reprise de l'accroche -->
+      <path d="M640 250 h170 a40 40 0 0 1 40 40 v56 a40 40 0 0 1 -40 40 h-24 v34 l-38 -34 h-108 a40 40 0 0 1 -40 -40 v-56 a40 40 0 0 1 40 -40 z"
+            fill="#0f1d40" stroke="#f3ead7" stroke-opacity=".4" stroke-width="3"/>
+      <g fill="#f3ead7" fill-opacity=".4"><circle cx="688" cy="318" r="8"/><circle cx="725" cy="318" r="8"/><circle cx="762" cy="318" r="8"/></g>
+      <!-- Le fil de la parole, jusqu'à la grande bulle de la citation -->
+      <path d="M786 432 C 780 480, 700 500, 640 528" fill="none" stroke="#c6a15b" stroke-width="3" stroke-dasharray="2 14"/>
+      <circle cx="786" cy="432" r="7" fill="#c6a15b"/>
+      <!-- Grande bulle qui porte la citation : contour doré discret -->
+      <path d="M128 528 h752 a48 48 0 0 1 48 48 v370 a48 48 0 0 1 -48 48 h-632 l-58 52 v-52 h-62 a48 48 0 0 1 -48 -48 v-370 a48 48 0 0 1 48 -48 z"
+            fill="#0f1d40" fill-opacity=".55" stroke="#c6a15b" stroke-opacity=".55" stroke-width="2.5"/>
+      <!-- Ornement : étoile à huit branches sur le bord bas -->
+      <g transform="translate(880 994)" fill="#0b1630" stroke="#c6a15b" stroke-width="2.5">
+        <rect x="-14" y="-14" width="28" height="28"/><rect x="-14" y="-14" width="28" height="28" transform="rotate(45)"/>
+      </g>
+    </g>
+  </svg>
+
+  <div class="maquette">Maquette 2/3 · style v2</div>
+  <p class="bloc etiquette label">Hadith · extrait</p>
+  <p class="bloc citation" id="citation">«&nbsp;[…] C'est que tu évoques ton frère en des termes qu’il répugnerait.&nbsp;»</p>
+  <p class="bloc reference ref"><strong>Sahih Muslim 2589</strong> · authentique<br>Traduction : HadeethEnc</p>
   <!-- Le texte de la citation est inséré par build-styleframes.py, copié depuis la source enregistrée. -->
 </body></html>

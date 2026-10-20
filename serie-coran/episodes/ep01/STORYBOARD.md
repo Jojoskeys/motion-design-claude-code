@@ -22,7 +22,7 @@ Codes visuels constants : **citation coranique** = cadre fin doré + mention « 
 Son : voix seule. Bruitage éventuel : un seul son doux au plan 4 (case « médire »), à valider. Pas de musique.
 
 ## Étape C : maquettes fixes de style (2026-10-20)
-`ep01-medisance/styleframes/` : 01-accroche, 02-hadith, 03-coran (HTML + PNG 1080×1920, export Chromium local par
+`ep01-medisance/styleframes/` (version 2 du style, notes dans `NOTES.md`) : 01-accroche, 02-hadith, 03-coran (HTML + PNG 1080×1920, export Chromium local par
 `build-styleframes.py`). Elles valident le style, pas l'exactitude du contenu : le texte arabe et la traduction de
 49:12 sont des emplacements réservés tant que leur vérification reste ouverte. L'extrait du hadith est copié par script
 depuis `sources-brutes/ep01-hadeethenc-5326.txt`. Polices : Source Serif 4 et Inter (SIL OFL 1.1, paquets npm

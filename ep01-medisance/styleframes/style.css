@@ -1,5 +1,7 @@
-/* Maquettes fixes ep01 : bleu nuit, ivoire, doré discret. 1080×1920, zone sûre TikTok indicative :
-   220 px en haut, 420 px en bas, 160 px à droite. */
+/* Maquettes fixes ep01, version 2 : bleu nuit, ivoire, doré discret. 1080×1920.
+   Zone sûre TikTok indicative : 220 px en haut, 420 px en bas, 160 px à droite.
+   Motif commun : « le fil de la parole » (ligne dorée à nœuds qui relie des bulles abstraites)
+   et l'étoile à huit branches (trame discrète, ornement). Voir NOTES.md. */
 @font-face { font-family: "Source Serif 4"; font-weight: 400; src: url(../assets/fonts/source-serif-4-latin-400-normal.woff2); }
 @font-face { font-family: "Source Serif 4"; font-weight: 600; src: url(../assets/fonts/source-serif-4-latin-600-normal.woff2); }
 @font-face { font-family: "Source Serif 4"; font-weight: 400; font-style: italic; src: url(../assets/fonts/source-serif-4-latin-400-italic.woff2); }
@@ -9,58 +11,30 @@
 
 :root {
   --nuit: #0b1630;
-  --nuit-2: #11214a;
+  --nuit-2: #13254f;
   --ivoire: #f3ead7;
   --ivoire-doux: #b9b3a5;
   --or: #c6a15b;
-  --or-pale: rgba(198, 161, 91, .45);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { width: 1080px; height: 1920px; }
 html { background: var(--nuit); }
 body {
-  background: radial-gradient(120% 70% at 30% 35%, var(--nuit-2) 0%, var(--nuit) 70%);
+  background: radial-gradient(110% 60% at 35% 45%, var(--nuit-2) 0%, var(--nuit) 72%);
   color: var(--ivoire);
   font-family: "Inter", sans-serif;
   position: relative;
   overflow: hidden;
 }
-/* Mention de maquette, dans la bande haute réservée à l'interface TikTok */
+svg.decor { position: absolute; inset: 0; width: 1080px; height: 1920px; }
 .maquette {
   position: absolute; top: 96px; left: 88px;
   font: 500 26px/1 "Inter", sans-serif; letter-spacing: .14em; text-transform: uppercase;
-  color: var(--ivoire-doux); opacity: .55;
-}
-/* Zone utile : à gauche 88 px, à droite 160 + 32 px, haut 220, bas 420 */
-.zone {
-  position: absolute; top: 220px; bottom: 420px; left: 88px; right: 192px;
-  display: flex; flex-direction: column; justify-content: center;
+  color: var(--ivoire-doux); opacity: .5;
 }
 .etiquette {
-  font: 600 30px/1.2 "Inter", sans-serif; letter-spacing: .16em; text-transform: uppercase;
-  color: var(--or);
+  font: 600 28px/1.2 "Inter", sans-serif; letter-spacing: .16em; text-transform: uppercase; color: var(--or);
 }
-.filet { width: 96px; height: 3px; background: var(--or); opacity: .8; margin: 36px 0; }
-.accroche {
-  font: 600 104px/1.12 "Source Serif 4", serif; letter-spacing: -.01em;
-}
-.citation {
-  font: 400 70px/1.28 "Source Serif 4", serif;
-}
-.reference {
-  font: 500 36px/1.45 "Inter", sans-serif; color: var(--ivoire-doux);
-}
+.reference { font: 500 32px/1.45 "Inter", sans-serif; color: var(--ivoire-doux); }
 .reference strong { color: var(--ivoire); font-weight: 600; }
-
-/* Emplacements réservés (texte à vérifier) */
-.reserve {
-  border: 3px dashed var(--or-pale); border-radius: 14px;
-  padding: 34px 36px; display: flex; flex-direction: column; gap: 22px;
-}
-.reserve .titre {
-  font: 600 28px/1.3 "Inter", sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--or);
-}
-.reserve .note { font: 400 30px/1.4 "Inter", sans-serif; color: var(--ivoire-doux); }
-.ligne { height: 26px; border-radius: 13px; background: rgba(243, 234, 215, .14); }
-.rtl { align-items: flex-end; text-align: right; }
-.rtl .ligne { align-self: flex-end; }
+.bloc { position: absolute; }

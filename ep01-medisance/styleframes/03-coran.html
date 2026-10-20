@@ -1,22 +1,59 @@
 <!doctype html>
-<html lang="fr"><head><meta charset="utf-8"><link rel="stylesheet" href="style.css"><title>03 coran</title></head>
+<html lang="fr"><head><meta charset="utf-8"><link rel="stylesheet" href="style.css"><title>03 coran</title>
+<style>
+  .label { left: 88px; width: 832px; top: 378px; text-align: center; }
+  .tag { font: 500 24px/1 "Inter", sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--ivoire-doux); opacity: .75; }
+  .tag-ar { left: 88px; width: 832px; top: 724px; text-align: center; }
+  .tag-fr { left: 88px; width: 832px; top: 1236px; text-align: center; }
+  .ref { left: 88px; width: 832px; top: 1318px; text-align: center; }
+</style></head>
 <body>
-  <div class="maquette">Maquette 3/3 · style</div>
-  <div class="zone" style="gap:44px">
-    <p class="etiquette">Coran · 49:12 · extrait</p>
-    <div class="reserve rtl">
-      <p class="titre">Texte arabe · emplacement réservé</p>
-      <div class="ligne" style="width:100%;height:40px"></div>
-      <div class="ligne" style="width:82%;height:40px"></div>
-      <p class="note">À copier par script depuis la source vérifiée<br>(mushaf, lecture Hafs) · police coranique, RTL</p>
-    </div>
-    <div class="reserve">
-      <p class="titre">Traduction · emplacement réservé</p>
-      <div class="ligne" style="width:100%"></div>
-      <div class="ligne" style="width:94%"></div>
-      <div class="ligne" style="width:72%"></div>
-      <p class="note">Extrait à relire sur l'édition Hamidullah retenue<br>avant d'être affiché</p>
-    </div>
-    <p class="reference"><strong>Traduction du sens</strong><br>Muhammad Hamidullah</p>
-  </div>
+  <svg class="decor" viewBox="0 0 1080 1920" aria-hidden="true">
+    <defs>
+      <pattern id="trame" width="132" height="132" patternUnits="userSpaceOnUse">
+        <g transform="translate(66 66)" fill="none" stroke="#c6a15b" stroke-width="1.4">
+          <rect x="-26" y="-26" width="52" height="52"/><rect x="-26" y="-26" width="52" height="52" transform="rotate(45)"/>
+        </g>
+      </pattern>
+      <radialGradient id="fondu" cx="50%" cy="50%" r="62%"><stop offset=".55" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity="1"/></radialGradient>
+      <mask id="m"><rect width="1080" height="1920" fill="url(#fondu)"/></mask>
+      <g id="etoile"><rect x="-14" y="-14" width="28" height="28"/><rect x="-14" y="-14" width="28" height="28" transform="rotate(45)"/></g>
+    </defs>
+    <rect width="1080" height="1920" fill="url(#trame)" opacity=".08" mask="url(#m)"/>
+
+    <!-- Cadre ornemental : double filet doré, étoiles aux angles -->
+    <rect x="88" y="300" width="832" height="1140" rx="28" fill="#0f1d40" fill-opacity=".6" stroke="#c6a15b" stroke-opacity=".6" stroke-width="2.5"/>
+    <rect x="104" y="316" width="800" height="1108" rx="18" fill="none" stroke="#c6a15b" stroke-opacity=".22" stroke-width="1.5"/>
+    <g fill="#0b1630" stroke="#c6a15b" stroke-width="2.5">
+      <use href="#etoile" x="88" y="300"/><use href="#etoile" x="920" y="300"/>
+      <use href="#etoile" x="88" y="1440"/><use href="#etoile" x="920" y="1440"/>
+    </g>
+
+    <!-- Zone arabe : emplacement réservé (texte à insérer après vérification) -->
+    <g fill="#f3ead7" fill-opacity=".13">
+      <rect x="180" y="480" width="650" height="52" rx="26"/>
+      <rect x="290" y="580" width="540" height="52" rx="26"/>
+    </g>
+
+    <!-- Séparateur : le fil de la parole arrive sur l'étoile centrale -->
+    <path d="M28 820 C 120 820, 140 900, 250 900" fill="none" stroke="#c6a15b" stroke-width="3" stroke-dasharray="2 14"/>
+    <circle cx="28" cy="820" r="7" fill="#c6a15b"/>
+    <line x1="250" y1="900" x2="512" y2="900" stroke="#c6a15b" stroke-opacity=".6" stroke-width="2"/>
+    <line x1="568" y1="900" x2="830" y2="900" stroke="#c6a15b" stroke-opacity=".6" stroke-width="2"/>
+    <g transform="translate(540 900)" fill="none" stroke="#c6a15b" stroke-width="2.5"><use href="#etoile"/></g>
+
+    <!-- Zone traduction : emplacement réservé -->
+    <g fill="#f3ead7" fill-opacity=".13">
+      <rect x="170" y="990" width="670" height="30" rx="15"/>
+      <rect x="200" y="1048" width="610" height="30" rx="15"/>
+      <rect x="170" y="1106" width="670" height="30" rx="15"/>
+      <rect x="290" y="1164" width="430" height="30" rx="15"/>
+    </g>
+  </svg>
+
+  <div class="maquette">Maquette 3/3 · style v2</div>
+  <p class="bloc etiquette label">Coran · 49:12 · extrait</p>
+  <p class="bloc tag tag-ar">Texte arabe · emplacement réservé</p>
+  <p class="bloc tag tag-fr">Traduction · emplacement réservé</p>
+  <p class="bloc reference ref"><strong>Traduction du sens</strong><br>Muhammad Hamidullah</p>
 </body></html>

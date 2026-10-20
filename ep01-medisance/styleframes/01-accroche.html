@@ -1,9 +1,48 @@
 <!doctype html>
-<html lang="fr"><head><meta charset="utf-8"><link rel="stylesheet" href="style.css"><title>01 accroche</title></head>
+<html lang="fr"><head><meta charset="utf-8"><link rel="stylesheet" href="style.css"><title>01 accroche</title>
+<style>
+  .question { left: 88px; top: 1010px; width: 820px; font: 600 92px/1.12 "Source Serif 4", serif; letter-spacing: -.01em; }
+  .question .vrai { display: block; margin-top: 18px; font: 400 italic 156px/1 "Source Serif 4", serif; color: var(--or); }
+</style></head>
 <body>
-  <div class="maquette">Maquette 1/3 · style</div>
-  <div class="zone">
-    <div class="filet" style="margin-top:0"></div>
-    <p class="accroche">Et si ce que je dis sur lui est vrai&nbsp;?</p>
-  </div>
+  <svg class="decor" viewBox="0 0 1080 1920" aria-hidden="true">
+    <defs>
+      <!-- Trame commune : étoiles à huit branches au trait -->
+      <pattern id="trame" width="132" height="132" patternUnits="userSpaceOnUse">
+        <g transform="translate(66 66)" fill="none" stroke="#c6a15b" stroke-width="1.4">
+          <rect x="-26" y="-26" width="52" height="52"/><rect x="-26" y="-26" width="52" height="52" transform="rotate(45)"/>
+        </g>
+      </pattern>
+      <radialGradient id="fondu" cx="85%" cy="12%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity="1"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+      <mask id="m"><rect width="1080" height="1920" fill="url(#fondu)"/></mask>
+    </defs>
+    <rect width="1080" height="1920" fill="url(#trame)" opacity=".09" mask="url(#m)"/>
+
+    <!-- Bulles abstraites : la parole qui passe de l'un à l'autre, de plus en plus pâle -->
+    <g fill="#0f1d40" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M150 300 h250 a46 46 0 0 1 46 46 v84 a46 46 0 0 1 -46 46 h-176 l-46 40 v-40 h-28 a46 46 0 0 1 -46 -46 v-84 a46 46 0 0 1 46 -46 z"
+            stroke="#f3ead7" stroke-opacity=".55" stroke-width="3"/>
+      <g fill="#f3ead7" fill-opacity=".55"><circle cx="232" cy="388" r="9"/><circle cx="275" cy="388" r="9"/><circle cx="318" cy="388" r="9"/></g>
+
+      <path d="M560 560 h250 a46 46 0 0 1 46 46 v84 a46 46 0 0 1 -46 46 h-28 v40 l-46 -40 h-176 a46 46 0 0 1 -46 -46 v-84 a46 46 0 0 1 46 -46 z"
+            stroke="#f3ead7" stroke-opacity=".32" stroke-width="3"/>
+      <g fill="#f3ead7" fill-opacity=".32"><circle cx="642" cy="648" r="9"/><circle cx="685" cy="648" r="9"/><circle cx="728" cy="648" r="9"/></g>
+
+      <path d="M210 800 h170 a40 40 0 0 1 40 40 v58 a40 40 0 0 1 -40 40 h-140 l-38 34 v-34 h-0 a40 40 0 0 1 -32 -40 v-58 a40 40 0 0 1 40 -40 z"
+            stroke="#f3ead7" stroke-opacity=".22" stroke-width="3" stroke-dasharray="10 12"/>
+
+      <!-- Le fil de la parole : relie les bulles et descend vers « vrai ? » -->
+      <path fill="none" d="M224 516 C 300 640, 430 580, 512 650" stroke="#c6a15b" stroke-width="3" stroke-dasharray="2 14" opacity=".9"/>
+      <path fill="none" d="M736 776 C 700 860, 520 830, 422 868" stroke="#c6a15b" stroke-width="3" stroke-dasharray="2 14" opacity=".7"/>
+      <g fill="#c6a15b"><circle cx="224" cy="516" r="7"/><circle cx="736" cy="776" r="7" opacity=".8"/><circle cx="240" cy="972" r="6" opacity=".6"/></g>
+    </g>
+    <!-- Filet sous « vrai ? » -->
+    <line x1="88" y1="1420" x2="520" y2="1420" stroke="#c6a15b" stroke-width="3" opacity=".75"/>
+    <g transform="translate(548 1420)" fill="none" stroke="#c6a15b" stroke-width="2.5" opacity=".9">
+      <rect x="-12" y="-12" width="24" height="24"/><rect x="-12" y="-12" width="24" height="24" transform="rotate(45)"/>
+    </g>
+  </svg>
+
+  <div class="maquette">Maquette 1/3 · style v2</div>
+  <p class="bloc question">Et si ce que je dis sur lui est <span class="vrai">vrai&nbsp;?</span></p>
 </body></html>

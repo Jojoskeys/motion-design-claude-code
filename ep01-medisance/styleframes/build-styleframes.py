@@ -24,7 +24,7 @@ citation = f"«&nbsp;[…] {html.escape(extrait, quote=False)}&nbsp;»"
 
 page = ICI / "02-hadith.html"
 contenu = page.read_text(encoding="utf-8")
-contenu = re.sub(r'(<p class="citation" id="citation">).*?(</p>)', lambda m: m.group(1) + citation + m.group(2),
+contenu = re.sub(r'(<p [^>]*id="citation">).*?(</p>)', lambda m: m.group(1) + citation + m.group(2),
                  contenu, count=1, flags=re.S)
 page.write_text(contenu, encoding="utf-8")
 
