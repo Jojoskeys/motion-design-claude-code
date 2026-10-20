@@ -1,6 +1,6 @@
 # Épisode 1 : « La médisance » (sourate 49, extrait du verset 12)
 
-Statut : **révision 5 (narration), structure validée, texte définitif non validé**. Après validation, texte conservé
+Statut : **révision 6 (narration, 2 corrections de l'utilisateur), structure validée, texte définitif non validé**. Après validation, texte conservé
 mot pour mot.
 Traduction du sens du Coran : Muhammad Hamidullah. Hadith : Sahih Muslim n° 2589, traduction française publiée sur
 HadeethEnc (https://hadeethenc.com/fr/browse/hadith/5326), contenu fourni par l'utilisateur depuis la page d'origine.
@@ -16,6 +16,11 @@ Tafsir : Al-Mukhtasar fi tafsir (FR) ; Al-Muyassar (AR) pour le cadrage. Sources
   interdits du verset et ceux du verset 11 ; (3) garder la fin du verset (crainte d'Allah, repentir, miséricorde),
   qui en fait partie.
 
+## Changements de la révision 6
+- « Donc, si c'est vrai, c'est de la médisance. Si c'est faux, c'est de la diffamation. » remplacé par « Le fait que
+  ce soit vrai ne suffit donc pas à écarter la médisance. » (texte fourni par l'utilisateur).
+- Supprimé : « Alors, avant de parler de quelqu'un, demande-toi : est-ce qu'il aimerait entendre ça ? ». Rien ajouté.
+
 ## Changements de la révision 5 (style de narration)
 - Ton oral, phrases courtes, tutoiement ; rythme : accroche, citation, courte explication, pause.
 - Citations du hadith (HadeethEnc) et du verset (Hamidullah) inchangées, mot pour mot ; le hadith reste complet, avec
@@ -26,8 +31,8 @@ Tafsir : Al-Mukhtasar fi tafsir (FR) ; Al-Muyassar (AR) pour le cadrage. Sources
   détaillées.
 
 ## Voix off (texte intégral)
-**209 mots** hors indications de pause (comptage : mots séparés par des espaces, ponctuation exclue), 7 pauses
-courtes. À 130-140 mots par minute, pauses comprises : environ 90 à 100 s. Estimation à confirmer sur l'audio réel.
+**196 mots** hors indications de pause (comptage : mots séparés par des espaces, ponctuation exclue), 6 pauses
+courtes. À 130-140 mots par minute, pauses comprises : environ 85 à 95 s. Estimation à confirmer sur l'audio réel.
 
 Lecture : les guillemets délimitent les citations (mots exacts, non modifiables) ; tout le reste est notre
 narration. « [pause courte] » est une indication de lecture, placée hors des citations, non prononcée.
@@ -40,15 +45,13 @@ Dans un hadith rapporté par Muslim, le Prophète, paix et salut sur lui, a d'ab
 [pause courte]
 On demanda : « Et qu’en est-il si cette caractéristique est présente en lui ? - Il répondit : si ce que tu dis est présent en lui, tu auras alors médit à son sujet ; mais si ce n’est pas le cas, tu l'auras alors diffamé. »
 [pause courte]
-Donc, si c'est vrai, c'est de la médisance. Si c'est faux, c'est de la diffamation.
+Le fait que ce soit vrai ne suffit donc pas à écarter la médisance.
 [pause courte]
 Dans le Coran, sourate Al-Hujurat, verset douze : après le soupçon et l'espionnage, vient la médisance.
 Un extrait, en traduction du sens de Hamidullah :
 « … et ne médisez pas les uns des autres. L'un de vous aimerait-il manger la chair de son frère mort ? (Non !) vous en aurez horreur. Et craignez Allah. Car Allah est Grand Accueillant au repentir, Très Miséricordieux. »
 [pause courte]
 Selon le tafsir Al-Mukhtasar, on devrait ressentir la même répulsion devant la médisance.
-[pause courte]
-Alors, avant de parler de quelqu'un, demande-toi : est-ce qu'il aimerait entendre ça ?
 [pause courte]
 Et si une parole t'a échappé, le verset se termine sur le repentir et la miséricorde.
 ```
@@ -58,11 +61,11 @@ Et si une parole t'a échappé, le verset se termine sur le repentir et la misé
 |---|---|---|
 | Accroche | Formulation éditoriale | aucune référence (pas une citation) |
 | Hadith | CITATION | « Sahih Muslim 2589 — authentique (HadeethEnc) — traduction : HadeethEnc » |
-| « Donc, si c'est vrai… » | EXPLICATION | étiquette « explication » ; source : le hadith ci-dessus |
+| « Le fait que ce soit vrai… » | EXPLICATION | étiquette « explication » ; source : le hadith ci-dessus |
 | Introduction du verset | EXPLICATION | « Coran 49:12 — extrait » ; mention discrète : « le verset 11 met en garde contre la moquerie, le dénigrement et les surnoms » |
 | Verset | TRADUCTION DU SENS | « Extrait — 49:12 — traduction du sens : Muhammad Hamidullah » ; « (Non !) » laissé entre parenthèses (ajout du traducteur, lu à l'oral) |
 | Répulsion | EXPLICATION attribuée | « Tafsir Al-Mukhtasar, 49:12 » |
-| Fin | ILLUSTRATION PÉDAGOGIQUE + rappel de la fin de 49:12 | étiquette « à retenir » |
+| Fin | EXPLICATION : rappel de la fin de 49:12 | étiquette « à retenir » |
 
 Les tirets de la traduction du hadith marquent les changements d'interlocuteur : à l'oral, une courte respiration à
 chaque tiret, sans ajouter de mots. À l'écran, découper la citation en plusieurs cartons sans changer un mot.

@@ -20,3 +20,10 @@ Codes visuels constants : **citation coranique** = cadre fin doré + mention « 
 | 9 | 82 – 90 s | citation | « Allah est Grand Accueillant au repentir, Très Miséricordieux » + « Al-Hujurat · 49:12 » | fondu lent, fin sur la référence |
 
 Son : voix seule. Bruitage éventuel : un seul son doux au plan 4 (case « médire »), à valider. Pas de musique.
+
+## Étape C : maquettes fixes de style (2026-10-20)
+`ep01-medisance/styleframes/` : 01-accroche, 02-hadith, 03-coran (HTML + PNG 1080×1920, export Chromium local par
+`build-styleframes.py`). Elles valident le style, pas l'exactitude du contenu : le texte arabe et la traduction de
+49:12 sont des emplacements réservés tant que leur vérification reste ouverte. L'extrait du hadith est copié par script
+depuis `sources-brutes/ep01-hadeethenc-5326.txt`. Polices : Source Serif 4 et Inter (SIL OFL 1.1, paquets npm
+@fontsource 5.1.0, licences dans `ep01-medisance/assets/fonts/`).
