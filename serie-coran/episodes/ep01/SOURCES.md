@@ -97,3 +97,30 @@ Extrait affiché (mots 14 à 31 de l'édition retenue) :
    plus précise à l'écran, fournir le texte exact de ce point.
 4. [Réglé le 2026-10-20] Formule « paix et salut sur lui » : retenue par l'utilisateur.
 5. Conditions de réutilisation de la traduction HadeethEnc dans une vidéo : à vérifier séparément avant publication.
+
+## 7. Révision 7 : tableau narration ↔ sources (2026-10-20)
+
+Citations : extraits exacts de la traduction HadeethEnc (H1 à H5) et Hamidullah 49:12 entier (V), copiés par
+`build-voix-off.py`. Hamidullah 49:12 : texte du miroir `fra-muhammadhamidul` (origine déclarée tanzil.net) ; l'extrait
+« … et ne médisez pas … Très Miséricordieux » a été comparé par l'utilisateur à https://quran.com/fr/al-hujurat/12
+(vérification rapportée) ; **le début du verset n'est pas encore comparé** : quran.com refusé par le proxy de
+l'environnement (une tentative le 2026-10-20), texte intégral demandé à l'utilisateur.
+
+| # | Narration (r7) | Source | Extrait justificatif |
+|---|---|---|---|
+| N1 | « Dans le Coran, Allah interdit la médisance. » | Hamidullah 49:12 | « et ne médisez pas les uns des autres » |
+| N2 | « un échange entre le Prophète … et ses compagnons » ; « Ses compagnons lui répondent » | Muslim 2589 (HadeethEnc) | AR : « قَالُوا: اللهُ وَرَسُولُهُ أَعْلَمُ » ; le hadith dit « ils », « compagnons » désigne ses interlocuteurs croyants (cadrage éditorial, sans nom ni scène) |
+| N3 | « Une question lui est alors posée » | idem | AR « قِيلَ » ; FR « On demanda » |
+| N4 | « Autrement dit : et si ce qu’on dit de cette personne est vrai ? » (reformulation annoncée) | idem | AR « أَفَرَأَيْتَ إِنْ كَانَ فِي أَخِي مَا أَقُولُ » |
+| N5 | « ne consiste pas forcément à inventer » ; « un défaut réel … peut déjà être de la médisance » ; « Lui attribuer ce qui n’est pas en lui, c’est de la diffamation » ; « Dire la vérité ne suffit donc pas, à lui seul, à justifier cette parole » | idem | « si ce que tu dis est présent en lui, tu auras alors médit à son sujet ; mais si ce n’est pas le cas, tu l'auras alors diffamé » ; « peut » et « à lui seul » laissent la place aux situations particulières du commentaire HadeethEnc (point 5, résumé de l'utilisateur), affichées à l'écran |
+| N6 | « l’excès de soupçons, l’espionnage et la médisance » (C1) | Hamidullah 49:12 | « Evitez de trop conjecturer [sur autrui] car une partie des conjectures est péché. Et n'espionnez pas; et ne médisez pas » |
+| N7 | « Le soupçon visé, c’est prêter à quelqu’un une mauvaise intention ou une faute sans preuve » (C2) | Al-Mukhtasar 49:12 ; Al-Muyassar 49:12 | « abstenez-vous de porter des accusations qui ne reposent souvent sur aucune preuve car certaines conjectures sont des péchés, comme lorsque l’on pense du mal de quelqu’un qui est droit en apparence » ; « اجتنبوا كثيرًا من ظن السوء بالمؤمنين » |
+| N8 | « Espionner, c’est chercher à découvrir ce qu’il garde privé » | Al-Muyassar 49:12 ; As-Sa'di 49:12 | « ولا تُفَتِّشوا عن عورات المسلمين » ; « لا تفتشوا عن عورات المسلمين، ولا تتبعوها » |
+| N9 | « Médire, c’est évoquer de lui ce qui lui déplaît, même lorsque c’est vrai » | Muslim 2589 ; Al-Mukhtasar 49:12 | « C'est que tu évoques ton frère en des termes qu’il répugnerait » ; « que personne parmi vous ne mentionne son frère d’une manière qui ne lui plaît pas » |
+| N10 | « ce qu’une personne ne peut pas défendre à cet instant : sa vie privée et sa réputation » (explication éditoriale) | Al-Muyassar 49:12 | « ولا يقل بعضكم في بعضٍ بظهر الغيب ما يكره » (en son absence) ; « عورات » (ce qui est caché) |
+| N11 | « une répulsion … pour nous faire mesurer la gravité de la médisance » | Al-Mukhtasar 49:12 ; As-Sa'di 49:12 | « ayez donc la même répulsion à l’égard de ces deux méfaits » ; « دليل على التحذير الشديد من الغيبة » |
+| N12 | « il se termine sur le repentir et la miséricorde d’Allah » | Hamidullah 49:12 | « Car Allah est Grand Accueillant au repentir, Très Miséricordieux » |
+| N13 | « Reconnaître ses paroles comme une faute, c’est aussi comprendre qu’il faut changer sa manière de parler des autres » (explication éditoriale) | Al-Mukhtasar 49:12 | « Craignez Allah en vous conformant à Ses commandements et en renonçant à Ses interdits. Allah accepte le repentir de Ses serviteurs » |
+
+Points d'attention (non corrigés, à décider par l'utilisateur) : N2 (« compagnons » n'est pas dans le texte du hadith) ;
+N9 est la définition du hadith, sans ses exceptions : la carte « situations particulières » à l'écran l'accompagne.

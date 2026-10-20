@@ -1,11 +1,23 @@
 # Épisode 1 : « La médisance » (sourate 49, extrait du verset 12)
 
-Statut : **révision 6 (narration, 2 corrections de l'utilisateur), structure validée ; texte validé le 2026-10-20 pour
-un essai de voix off privé, publication non validée** (texte à enregistrer : `VOIX-OFF.txt`). Après validation, texte conservé
-mot pour mot.
-Traduction du sens du Coran : Muhammad Hamidullah. Hadith : Sahih Muslim n° 2589, traduction française publiée sur
-HadeethEnc (https://hadeethenc.com/fr/browse/hadith/5326), contenu fourni par l'utilisateur depuis la page d'origine.
-Tafsir : Al-Mukhtasar fi tafsir (FR) ; Al-Muyassar (AR) pour le cadrage. Sources et extraits : `SOURCES.md`.
+Statut : **révision 7 (2026-10-20) : nouvelle direction narrative fournie par l'utilisateur ; style validé, pas une
+validation religieuse ; verset 49:12 encore en attente de comparaison avec quran.com ; publication non validée.**
+Texte à enregistrer : `VOIX-OFF.txt`, produit par `build-voix-off.py` à partir de `NARRATION-r7.txt` (narration) et des
+fichiers sources (citations copiées par script). La révision 6 ci-dessous est conservée pour l'historique.
+Traduction du sens du Coran : Muhammad Hamidullah (49:12 entier, miroir GitHub de tanzil.net). Hadith : Sahih Muslim
+n° 2589, traduction HadeethEnc (contenu de la page fourni par l'utilisateur). Tafsir : Al-Mukhtasar (FR), Al-Muyassar
+et As-Sa'di (AR). Sources et extraits : `SOURCES.md` § 7.
+
+## Révision 7 : corrections signalées à l'utilisateur (sens)
+- C1 « trois choses : les soupçons, … » → « l’excès de soupçons, … » : le verset demande d'éviter *beaucoup* de
+  conjectures (Hamidullah « trop conjecturer » ; arabe كَثِيرًا مِّنَ ٱلظَّنِّ), pas toute supposition.
+- C2 « Soupçonner quelqu’un, c’est lui prêter une intention ou une faute sans savoir. » → « Le soupçon visé, c’est
+  prêter à quelqu’un une mauvaise intention ou une faute sans preuve. » (Al-Mukhtasar : « accusations qui ne reposent
+  souvent sur aucune preuve », « pense du mal » ; Al-Muyassar : ظن السوء).
+- C3 « … élargit cette mise en garde : » → « … élargit cette mise en garde. En voici une traduction du sens : » (règle
+  de la série : lecture française annoncée comme traduction du sens).
+- Verset provisoire remplacé par Hamidullah 49:12 entier, mot pour mot. Seule adaptation pour ElevenLabs : « [sur
+  autrui] » en « (sur autrui) », car le modèle v3 lit les crochets comme des balises. À l'écran : crochets d'origine.
 
 ## Vérification du cadrage (faite avant rédaction)
 - Le verset 12 contient trois interdits liés : trop soupçonner, espionner, médire. Le verset 11 interdit la moquerie,
@@ -31,7 +43,9 @@ Tafsir : Al-Mukhtasar fi tafsir (FR) ; Al-Muyassar (AR) pour le cadrage. Sources
   (commentaire HadeethEnc), le verset 11 (moquerie, dénigrement, surnoms), le numéro de sourate et les références
   détaillées.
 
-## Voix off (texte intégral)
+## Révision 6 (historique, remplacée par la révision 7)
+
+### Voix off (texte intégral)
 **196 mots** hors indications de pause (comptage : mots séparés par des espaces, ponctuation exclue), 6 pauses
 courtes. À 130-140 mots par minute, pauses comprises : environ 85 à 95 s. Estimation à confirmer sur l'audio réel.
 
