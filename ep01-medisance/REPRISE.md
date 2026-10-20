@@ -1,4 +1,17 @@
-# Reprise : épisode 1 « La médisance » (état au 2026-10-20)
+# Reprise : épisode 1 « La médisance » (état au 2026-10-20, révision 7)
+
+## État actuel (révision 7 : nouvelle narration, ~3 min 30)
+- Texte à enregistrer : `serie-coran/episodes/ep01/VOIX-OFF.txt` (472 mots), construit par `build-voix-off.py`
+  depuis `NARRATION-r7.txt` + sources. Corrections signalées C1-C3 : `SCRIPT.md` ; sources : `SOURCES.md` § 7.
+- **Blocage avant enregistrement définitif** : Hamidullah 49:12 entier (miroir tanzil) à comparer avec le texte
+  intégral de https://quran.com/fr/al-hujurat/12, fourni par l'utilisateur (site refusé par le proxy).
+- Montage : `ep01-medisance/index.html` est **généré** par `python3 -I ep01-medisance/build-composition.py`
+  (gabarit `composition.tpl`) : 20 scènes, sous-titres, minutage provisoire estimé (`temps-provisoires.json`).
+  Après réception de la voix : mesurer les débuts/fins de chaque unité (u01…u36), les écrire dans un `temps.json`
+  et lancer `build-composition.py temps.json` ; ajouter l'audio, aperçu léger, puis rendu final 1080×1920.
+- L'ancien prototype d'accroche (« Et si ce que je dis sur lui est vrai ? ») et les essais audio sont abandonnés.
+
+
 
 Branche : `claude/determined-tesla-akfm85`. Règles permanentes : `CLAUDE.md` (série) et `AGENTS.md` (garde-fous HyperFrames).
 
