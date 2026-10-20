@@ -26,6 +26,7 @@ Ce fichier complète `AGENTS.md` (garde-fous HyperFrames, toujours valables). Po
 - Trois compositions : citation (arabe + traduction), explication (une phrase FR), schéma pédagogique.
 - Ne pas représenter Allah, les prophètes, les anges, Satan, le paradis ni l'enfer. Typographie et formes abstraites.
 - Arabe : texte vérifié, RTL, police coranique adaptée, jamais fragmenté, déformé ou animé lettre par lettre.
+- Arabe toujours copié par script depuis le fichier source cité, jamais retapé ni « corrigé » à la main.
 
 ## Méthode et économie
 - Étapes avec validation : A 3 sujets → B script + sources + storyboard → C 3 images fixes → D prototype 10-15 s →
