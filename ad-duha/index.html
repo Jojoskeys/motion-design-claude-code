@@ -220,38 +220,41 @@
         <path d="M 384 1262 Q 380 1214 452 1200 H 644 Q 716 1214 712 1262 Q 548 1300 384 1262 Z" fill="#1b2030" />
         <path d="M 386 1250 Q 400 1222 452 1214" stroke="#d29a62" stroke-width="4" fill="none" opacity="0.4" />
         <path d="M 710 1250 Q 696 1222 644 1214" stroke="#9fb0d6" stroke-width="4" fill="none" opacity="0.45" />
-        <g id="torso">
-          <!-- back (hoodie): broad shoulders, narrower waist -->
-          <path d="M 452 990 Q 458 948 548 940 Q 638 948 644 990 Q 652 1080 638 1150 Q 650 1210 656 1236 Q 548 1258 440 1236 Q 446 1210 458 1150 Q 444 1080 452 990 Z" fill="url(#g-hoodie)" />
-          <!-- arms along the sides, elbows slightly out -->
-          <path d="M 456 972 Q 426 992 420 1060 Q 414 1130 432 1196 Q 446 1206 462 1196 Q 458 1120 470 1040 Z" fill="#2c2d3c" />
-          <path d="M 640 972 Q 670 992 676 1060 Q 682 1130 664 1196 Q 650 1206 634 1196 Q 638 1120 626 1040 Z" fill="#242c42" />
-          <path d="M 462 1000 Q 450 1100 458 1190" stroke="#10131e" stroke-width="4" fill="none" opacity="0.7" />
-          <path d="M 634 1000 Q 646 1100 638 1190" stroke="#10131e" stroke-width="4" fill="none" opacity="0.7" />
-          <!-- folds and seam -->
-          <path d="M 500 1070 Q 520 1140 506 1230" stroke="#141a2a" stroke-width="4" fill="none" opacity="0.45" />
-          <path d="M 598 1060 Q 584 1140 596 1230" stroke="#141a2a" stroke-width="4" fill="none" opacity="0.4" />
-          <path d="M 470 1150 Q 548 1170 626 1150" stroke="#141a2a" stroke-width="3" fill="none" opacity="0.4" />
-          <!-- rim lights: cool from the window (right), warm from the lamp (left) -->
-          <path d="M 664 996 Q 672 1100 658 1188" stroke="#9fb0d6" stroke-width="4" fill="none" opacity="0.45" filter="url(#f-blur-sm)" />
-          <path d="M 432 996 Q 424 1100 438 1188" stroke="#d29a62" stroke-width="4" fill="none" opacity="0.45" filter="url(#f-blur-sm)" />
-          <path d="M 470 960 Q 548 932 626 960" stroke="#8e9cc0" stroke-width="3" fill="none" opacity="0.35" />
-          <!-- hood resting on the back -->
-          <path d="M 494 948 Q 548 1036 602 948 Q 600 986 548 1012 Q 496 986 494 948 Z" fill="#1f2638" />
-          <path d="M 502 952 Q 548 1018 594 952" stroke="#3e4a6a" stroke-width="3" fill="none" opacity="0.6" />
-        </g>
-        <!-- head and neck: short hair, nape, ears -->
-        <g id="head">
-          <rect x="530" y="896" width="36" height="56" rx="14" fill="#6a4a3a" />
-          <path d="M 528 930 Q 548 940 568 930" stroke="#3a2a24" stroke-width="3" fill="none" opacity="0.6" />
-          <ellipse cx="494" cy="872" rx="9" ry="16" fill="#7a5442" />
-          <ellipse cx="602" cy="872" rx="9" ry="16" fill="#5f4a48" />
-          <path d="M 496 870 Q 490 808 548 800 Q 606 808 600 870 Q 598 904 574 914 Q 548 906 522 914 Q 498 904 496 870 Z" fill="url(#g-hair)" />
-          <g stroke="#3a3446" stroke-width="2" fill="none" opacity="0.28">
-            <path d="M 520 820 Q 540 860 532 906" /><path d="M 552 812 Q 560 860 552 904" /><path d="M 580 822 Q 578 860 570 906" />
+        <!-- one parent for the whole upper body: breathing moves head, neck and torso together -->
+        <g id="upperbody">
+          <!-- head and neck (drawn under the collar); pivots around the neck junction (548, 946) -->
+          <g id="head">
+            <rect x="530" y="896" width="36" height="104" rx="14" fill="#6a4a3a" />
+            <path d="M 528 930 Q 548 940 568 930" stroke="#3a2a24" stroke-width="3" fill="none" opacity="0.6" />
+            <ellipse cx="494" cy="872" rx="9" ry="16" fill="#7a5442" />
+            <ellipse cx="602" cy="872" rx="9" ry="16" fill="#5f4a48" />
+            <path d="M 496 870 Q 490 808 548 800 Q 606 808 600 870 Q 598 904 574 914 Q 548 906 522 914 Q 498 904 496 870 Z" fill="url(#g-hair)" />
+            <g stroke="#3a3446" stroke-width="2" fill="none" opacity="0.28">
+              <path d="M 520 820 Q 540 860 532 906" /><path d="M 552 812 Q 560 860 552 904" /><path d="M 580 822 Q 578 860 570 906" />
+            </g>
+            <path d="M 596 840 Q 606 872 592 906" stroke="#9fb0d6" stroke-width="4" fill="none" opacity="0.6" filter="url(#f-blur-sm)" />
+            <path d="M 500 840 Q 490 872 504 906" stroke="#c48a58" stroke-width="4" fill="none" opacity="0.5" filter="url(#f-blur-sm)" />
           </g>
-          <path d="M 596 840 Q 606 872 592 906" stroke="#9fb0d6" stroke-width="4" fill="none" opacity="0.6" filter="url(#f-blur-sm)" />
-          <path d="M 500 840 Q 490 872 504 906" stroke="#c48a58" stroke-width="4" fill="none" opacity="0.5" filter="url(#f-blur-sm)" />
+          <g id="torso">
+            <!-- back (hoodie): broad shoulders, narrower waist -->
+            <path d="M 452 990 Q 458 948 548 940 Q 638 948 644 990 Q 652 1080 638 1150 Q 650 1210 656 1236 Q 548 1258 440 1236 Q 446 1210 458 1150 Q 444 1080 452 990 Z" fill="url(#g-hoodie)" />
+            <!-- arms along the sides, elbows slightly out -->
+            <path d="M 456 972 Q 426 992 420 1060 Q 414 1130 432 1196 Q 446 1206 462 1196 Q 458 1120 470 1040 Z" fill="#2c2d3c" />
+            <path d="M 640 972 Q 670 992 676 1060 Q 682 1130 664 1196 Q 650 1206 634 1196 Q 638 1120 626 1040 Z" fill="#242c42" />
+            <path d="M 462 1000 Q 450 1100 458 1190" stroke="#10131e" stroke-width="4" fill="none" opacity="0.7" />
+            <path d="M 634 1000 Q 646 1100 638 1190" stroke="#10131e" stroke-width="4" fill="none" opacity="0.7" />
+            <!-- folds and seam -->
+            <path d="M 500 1070 Q 520 1140 506 1230" stroke="#141a2a" stroke-width="4" fill="none" opacity="0.45" />
+            <path d="M 598 1060 Q 584 1140 596 1230" stroke="#141a2a" stroke-width="4" fill="none" opacity="0.4" />
+            <path d="M 470 1150 Q 548 1170 626 1150" stroke="#141a2a" stroke-width="3" fill="none" opacity="0.4" />
+            <!-- rim lights: cool from the window (right), warm from the lamp (left) -->
+            <path d="M 664 996 Q 672 1100 658 1188" stroke="#9fb0d6" stroke-width="4" fill="none" opacity="0.45" filter="url(#f-blur-sm)" />
+            <path d="M 432 996 Q 424 1100 438 1188" stroke="#d29a62" stroke-width="4" fill="none" opacity="0.45" filter="url(#f-blur-sm)" />
+            <path d="M 470 960 Q 548 932 626 960" stroke="#8e9cc0" stroke-width="3" fill="none" opacity="0.35" />
+            <!-- hood resting on the back -->
+            <path d="M 494 948 Q 548 1036 602 948 Q 600 986 548 1012 Q 496 986 494 948 Z" fill="#1f2638" />
+            <path d="M 502 952 Q 548 1018 594 952" stroke="#3e4a6a" stroke-width="3" fill="none" opacity="0.6" />
+          </g>
         </g>
       </g>
     </svg>
@@ -384,11 +387,12 @@
 
   // ---- Scene life ----
   // Breathing (finite repeats).
-  tl.fromTo("#torso", { scaleY: 1, transformOrigin: "548px 1272px" }, { scaleY: 1.012, duration: 1.4, ease: "sine.inOut", yoyo: true, repeat: 5 }, 0);
-  // The head lowers a little as the wait gets heavy, then lifts towards the window.
-  tl.fromTo("#head", { y: 0, rotation: 0, transformOrigin: "548px 940px" }, { y: 9, rotation: -3, duration: 1.3, ease: "sine.inOut" }, 2.6);
-  tl.to("#head", { y: -3, rotation: 2, duration: 1.1, ease: "sine.inOut" }, 4.6);
-  tl.to("#head", { y: 4, rotation: 0, duration: 1.4, ease: "sine.inOut" }, 6.3);
+  tl.fromTo("#upperbody", { scaleY: 1, svgOrigin: "548 1272" }, { scaleY: 1.012, duration: 1.4, ease: "sine.inOut", yoyo: true, repeat: 5 }, 0);
+  // The head bows a little as the wait gets heavy, then lifts towards the window. Rotation and foreshortening only,
+  // around the neck junction (svgOrigin, in SVG coordinates): no translation, the neck stays under the collar.
+  tl.fromTo("#head", { rotation: 0, scaleY: 1, svgOrigin: "548 946" }, { rotation: -3, scaleY: 0.955, duration: 1.3, ease: "sine.inOut" }, 2.6);
+  tl.to("#head", { rotation: 2, scaleY: 1.01, duration: 1.1, ease: "sine.inOut" }, 4.6);
+  tl.to("#head", { rotation: 0, scaleY: 0.985, duration: 1.4, ease: "sine.inOut" }, 6.3);
   // Clock: time passes.
   tl.fromTo("#hand-m", { rotation: 40, svgOrigin: "120 560" }, { rotation: 150, duration: 5.6, ease: "none" }, 1.5);
   tl.fromTo("#hand-h", { rotation: 280, svgOrigin: "120 560" }, { rotation: 290, duration: 5.6, ease: "none" }, 1.5);

@@ -41,6 +41,16 @@ Contrôle après rendu : décalage 0 ms avec l'original, mêmes pauses, silence 
 - Texte à l'écran : titre discret « Ad-Duha · Comprendre les premiers versets » (0,25-3,3 s), sous-titres Source Serif 4
   dans la zone sûre (haut 220, bas 420, droite 160). Aucun arabe, aucune source ni note à l'image.
 
+## Correctif v2 : tête solidaire du corps
+- Défaut corrigé : la tête était animée seule (groupe frère du torse), avec une translation `y` et un
+  `transformOrigin` en px que GSAP rapporte à la boîte de la tête, d'où une dérive jusqu'à 92 px par rapport au col.
+- Structure : `#upperbody` (parent, respiration `scaleY` autour de `svgOrigin 548 1272`) contient `#head` (dessiné sous
+  le torse) puis `#torso`. La tête ne fait que pivoter et se raccourcir légèrement autour de la jonction du cou
+  (`svgOrigin 548 946`), sans translation. Cou allongé jusqu'à y = 1000 : il passe sous le col (chevauchement caché).
+- Contrôle automatique sur les 253 images (puppeteer, `getScreenCTM`) : écart du pivot tête/torse 0 px, base du cou
+  toujours dans la capuche, cou visible 32-34 px. Ancienne version : 92 px d'écart, 70 points hors du col.
+- Aperçu léger : `prototype/ad-duha-intro-prototype-v2.mp4` (non versionné). Audio inchangé (mêmes silences).
+
 ## Limites connues
 - Rendu « peint » imité par filtres SVG : plus proche d'une illustration vectorielle soignée que d'une vraie peinture.
 - Personnage stylisé et peu articulé (respiration, inclinaison de tête seulement).
