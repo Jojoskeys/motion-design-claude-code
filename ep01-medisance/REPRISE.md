@@ -30,9 +30,11 @@ Le script et les maquettes V2 ne sont plus à modifier sans demande explicite.
 Réseau de l'environnement cloud : sunnah.com, dorar.net, hadeethenc.com, quranenc.com, tanzil.net, jsDelivr bloqués.
 
 ## Prototype de l'accroche (étape D, en attente de retour)
-- Composition : `ep01-medisance/index.html` (1080×1920, 7 s, muette), d'après la maquette V2 01 ; `meta.json` passé en 1080×1920.
-- Aperçu : `ep01-medisance/prototypes/ep01-accroche-proto-540x960.mp4` (rendu `draft` 1080×1920 puis réduit par ffmpeg).
-- Rythme : bulles et fil 0,1–1,9 s ; question 1,4 s ; « vrai ? » 2,35 s ; filet et étoile 2,7–3,55 s ; bulles à 60 % dès 3,6 s.
+- Composition : `ep01-medisance/index.html` (1080×1920, 5 s, muette), d'après la maquette V2 01 ; `meta.json` passé en 1080×1920.
+- Aperçu : `ep01-medisance/renders/ep01-accroche-proto-540x960.mp4`, hors git (règle du dépôt sur les MP4) ; rendu `draft`
+  1080×1920 puis réduit par ffmpeg.
+- Rythme v2 (accroche immédiate) : question dès 0 s, « vrai ? » 0,2–0,65 s ; filet et étoile 0,5–1,2 s ; bulles et fil
+  en parallèle 0–1,65 s ; bulles à 60 % 1,8–2,6 s ; lecture jusqu'à 5 s. Minutage définitif à caler sur la voix off.
 - GSAP 3.14.2 embarqué dans `assets/vendor/` (jsDelivr bloqué ; copié du paquet npm, licence GSAP « Standard no-charge »).
 - Rendu : `npx hyperframes render -q draft -o renders/accroche-1080.mp4` depuis `ep01-medisance/`, puis
   `ffmpeg -i renders/accroche-1080.mp4 -vf scale=540:960:flags=lanczos -c:v libx264 -crf 20 -pix_fmt yuv420p -an …`.

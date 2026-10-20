@@ -25,7 +25,7 @@
   </style>
 </head>
 <body>
-  <div id="root" data-composition-id="ep01-accroche" data-start="0" data-width="1080" data-height="1920" data-duration="7">
+  <div id="root" data-composition-id="ep01-accroche" data-start="0" data-width="1080" data-height="1920" data-duration="5">
     <section id="accroche" class="clip">
       <svg class="decor" viewBox="0 0 1080 1920" aria-hidden="true">
         <defs>
@@ -101,26 +101,26 @@
       { strokeDasharray: f.len + 2, strokeDashoffset: f.len + 2 },
       { strokeDashoffset: 0, duration: d, ease: "power1.inOut" }, at);
 
-    // 1. La parole passe de bulle en bulle (0 à 1,9 s)
-    bulle("#bulle1", 0.1);
-    tl.fromTo(".p1", { opacity: 0 }, { opacity: 1, duration: 0.2, stagger: 0.08, ease: "none" }, 0.3);
-    noeud("#noeud1", 0.45);
-    fil(f1, 0.55, 0.5);
-    bulle("#bulle2", 0.9);
-    tl.fromTo(".p2", { opacity: 0 }, { opacity: 1, duration: 0.2, stagger: 0.08, ease: "none" }, 1.05);
-    noeud("#noeud2", 1.15);
-    fil(f2, 1.25, 0.5);
-    bulle("#bulle3", 1.6);
-    noeud("#noeud3", 1.85);
+    // Question d'abord : complète et lisible avant 0,8 s ; bulles et fil en parallèle, sans retarder le texte
+    tl.fromTo("#debut", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0);
+    tl.fromTo("#vrai", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 0.2);
+    tl.fromTo("#filet", { scaleX: 0 }, { scaleX: 1, duration: 0.45, ease: "power2.inOut", transformOrigin: "0% 50%" }, 0.5);
+    tl.fromTo("#etoile", { opacity: 0, rotation: -45 }, { opacity: 0.9, rotation: 0, duration: 0.4, ease: "power2.out", svgOrigin: "0 0" }, 0.8);
 
-    // 2. La question (dès 1,4 s), puis « vrai ? » mis en valeur
-    tl.fromTo("#debut", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 1.4);
-    tl.fromTo("#vrai", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 2.35);
-    tl.fromTo("#filet", { scaleX: 0 }, { scaleX: 1, duration: 0.55, ease: "power2.inOut", transformOrigin: "0% 50%" }, 2.7);
-    tl.fromTo("#etoile", { opacity: 0, rotation: -45 }, { opacity: 0.9, rotation: 0, duration: 0.45, ease: "power2.out", svgOrigin: "0 0" }, 3.1);
+    // La parole passe de bulle en bulle (0 à 1,65 s)
+    bulle("#bulle1", 0);
+    tl.fromTo(".p1", { opacity: 0 }, { opacity: 1, duration: 0.2, stagger: 0.08, ease: "none" }, 0.15);
+    noeud("#noeud1", 0.3);
+    fil(f1, 0.35, 0.45);
+    bulle("#bulle2", 0.6);
+    tl.fromTo(".p2", { opacity: 0 }, { opacity: 1, duration: 0.2, stagger: 0.08, ease: "none" }, 0.75);
+    noeud("#noeud2", 0.85);
+    fil(f2, 0.9, 0.45);
+    bulle("#bulle3", 1.2);
+    noeud("#noeud3", 1.4);
 
-    // 3. Les bulles s'effacent un peu : le regard reste sur la question jusqu'à la fin
-    tl.to("#bulles", { opacity: 0.6, duration: 1.0, ease: "power1.inOut" }, 3.6);
+    // Les bulles s'effacent un peu : temps de lecture sur la question jusqu'à la fin (5 s)
+    tl.to("#bulles", { opacity: 0.6, duration: 0.8, ease: "power1.inOut" }, 1.8);
 
     window.__timelines["ep01-accroche"] = tl;
   </script>
