@@ -33,8 +33,6 @@
   .scene .w { position: absolute; inset: 0; }
   .ly { position: absolute; inset: 0; }
   .ly svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-  #sc11c { z-index: 3; }
-  #sc11c .w { overflow: hidden; }
   .ov { position: absolute; inset: 0; pointer-events: none; opacity: 0; }
   #wipe { left: -2400px; width: 2400px; right: auto; background: linear-gradient(90deg, rgba(7,13,31,0) 0%, #070d1f 26%, #070d1f 74%, rgba(7,13,31,0) 100%); opacity: 1; }
   #flash { background: radial-gradient(circle at 50% 38%, #fff4dc 0%, #f6e2b8 60%, #e8d0a4 100%); }
@@ -68,6 +66,12 @@
   #prop-a { position: absolute; right: 610px; top: 0; display: block; opacity: 0; }
   #prop-ne { position: absolute; left: 500px; top: 0; right: auto; bottom: auto; width: 80px; height: 80px; display: block; opacity: 0; }
   #prop-b { position: absolute; left: 610px; top: 0; display: block; opacity: 0; }
+  .ctx { position: absolute; left: 160px; right: 160px; top: 548px; text-align: center; opacity: 0; font: 400 58px/1.2 "Source Serif 4", serif; color: #f3ead7; }
+  .ctx span { display: block; margin: 22px auto 0; width: 100px; height: 2px; background: #c6a15b; opacity: 0.8; }
+  .ctx-m { position: absolute; left: 160px; right: 160px; top: 740px; text-align: center; opacity: 0; font: 400 52px/1.2 "Source Serif 4", serif; color: #f3ead7; }
+  .dg { position: absolute; top: 752px; width: 300px; text-align: center; opacity: 0; font: 400 50px/1.2 "Source Serif 4", serif; color: #f3ead7; white-space: nowrap; }
+  #s09a-l { left: 150px; } #s09a-r { left: 615px; }
+  .dgi { position: absolute; left: 605px; top: 830px; width: 320px; text-align: center; opacity: 0; font: italic 400 38px/1.2 "Source Serif 4", serif; color: #d6b36c; white-space: nowrap; }
   .verse { position: absolute; left: 160px; right: 160px; text-align: center; white-space: nowrap; font: 400 56px/1.25 "Source Serif 4", serif; color: #f3ead7; opacity: 0; }
 </style>
 </head>
@@ -378,8 +382,8 @@
   <div class="clip scene" id="sc03b" data-start="26.4" data-duration="6.45" data-track-index="2"></div>
   <div class="clip scene" id="sc07" data-start="38.5" data-duration="11.4" data-track-index="2"></div>
   <div class="clip scene" id="sc09a" data-start="49.3" data-duration="6.0" data-track-index="2"></div>
-  <div class="clip scene" id="sc09b" data-start="54.75" data-duration="4.4" data-track-index="1"></div>
-  <div class="clip scene" id="sc10" data-start="58.65" data-duration="5.2" data-track-index="2"></div>
+  <div class="clip scene" id="sc09b" data-start="54.75" data-duration="6.55" data-track-index="1"></div>
+  <div class="clip scene" id="sc10" data-start="60.9" data-duration="2.95" data-track-index="2"></div>
   <div class="clip scene" id="sc11a" data-start="63.45" data-duration="2.3" data-track-index="1"></div>
   <div class="clip scene" id="sc11b" data-start="65.4" data-duration="5.55" data-track-index="2"></div>
   <div class="clip scene" id="sc11c" data-start="70.4" data-duration="2.8" data-track-index="1"></div>
@@ -629,7 +633,7 @@
     [69.00, 70.70, "le livre qui allait lui être révélé."],
     [70.72, 72.92, "Démuni, il a été enrichi."],
     [72.94, 74.48, "Trois rappels successifs."],
-    [74.54, 77.56, "Un refuge, une guidée, des moyens de vivre."],
+    // 74.54-77.56 "Un refuge, une guidée, des moyens de vivre.": the three names appear under the arches (S12)
     [77.58, 80.96, `Après avoir répondu à l${AP}accusation d${AP}abandon et annoncé l${AP}avenir,`],
     [80.98, 83.22, "le passage rappelle ainsi les bienfaits du passé."],
     [83.24, 85.20, "Et nous, en méditant ces versets,"],
@@ -770,7 +774,7 @@
       }
       return s + `</g>`;
     }) },
-    { d: 1.15, svg: svg(() => `<g id="s01-rain" stroke="#c9d4ea" stroke-linecap="round" opacity="0.5">${rainTile(60, -200, 1280, 320, -7, 9, -6, 1, 2.4, 0.4, 1, 30, 70)}</g>`) },
+    { d: 1.15, svg: svg(() => `<g id="s01-rain" stroke="#c9d4ea" stroke-linecap="round" opacity="0.38">${rainTile(38, -200, 1280, 320, -7, 9, -6, 0.8, 1.6, 0.4, 1, 26, 60).replace(/<line /g, '<line vector-effect="non-scaling-stroke" ')}</g>`) },
     { svg: svg(() => FINISH()) },
   ]);
   // Lit window of the room: centre (565, 1060). Start close on it, pull back to the whole facade, then rise to the clouds.
@@ -786,54 +790,47 @@
   pictos("pic-a", [["bell", 430, 8.94], ["heart", 540, 11.76], ["share", 650, 12.64]], 1212, 13.25);
 
   // =====================================================================================
-  // S02 · 13.45-21.25 · the valley at dusk (its only appearance); slow crane down, echoes of what was said.
-  // =====================================================================================
-  sd = 512;
-  const S02_SKY = [[0, "#050a1c"], [0.42, "#101b3c"], [0.6, "#2d3657"], [0.69, "#7a5f5a"], [0.745, "#c08a62"], [1, "#c08a62"]];
-  const s02 = build("sc02", [
-    { d: 0.2, svg: svg(() => {
-      let s = layer("M-400 -2600H1480V2800H-400Z", grad(S02_SKY)) + stars(30, -2400, -300, 0.6, -300, 1380);
-      s += `<circle id="s02-glow" cx="560" cy="1120" r="560" fill="${radial([[0, "#f0b878", 0.55], [0.5, "#c08a62", 0.18], [1, "#c08a62", 0]])}"/>`;
-      s += `<g id="s02-clouds" filter="url(#f-blur-md)">`;
-      for (let i = 0; i < 7; i++) { const y = -1300 + i * 260, x = R(-500, 300); s += `<path d="M ${x} ${y} q 180 -60 380 -10 q 180 -50 320 10 q 120 10 160 40 h -860 z" fill="${i > 4 ? "#6a5260" : "#28305a"}" opacity="${(0.55 + i * 0.04).toFixed(2)}"/>`; }
-      return s + `</g>`;
-    }) },
-    { d: 0.4, svg: svg(() => { sd = 512; const r1 = ridge(820, 70, 0.006); return layer(r1, "#3b3550") + mottle(r1, 0.08); }) },
-    { d: 0.55, svg: svg(() => { sd = 520; return layer(ridge(960, 90, 0.008), "#4a3a44"); }) },
-    { d: 0.7, svg: svg(() => { sd = 530; const r3 = ridge(1120, 60, 0.01); return layer(r3, "#5a4238") + mottle(r3, 0.12); }) },
-    { d: 1, svg: svg(() => {
-      const g = "M -400 1150 Q 540 1110 1480 1160 V 2900 H -400 Z";
-      let s = layer(g, grad([[0, "#7a5a40"], [0.4, "#3a2a28"], [1, "#2c2024"]])) + mottle(g, 0.14, "f-sand");
-      s += `<path d="M 300 2900 Q 380 1560 554 1140 L 566 1140 Q 640 1560 820 2900 Z" fill="#9a7a58"/>`;
-      sd = 540;
-      s += rock(170, 1260, 260, 170, "#3a2a2a", "#7a5a46") + rock(930, 1300, 300, 210, "#3a2a2a", "#7a5a46") + rock(760, 1190, 120, 60, "#3a2a2a", "#7a5a46");
-      s += `<g id="s02-dust" fill="#e8c89a">` + Array.from({ length: 22 }, () => `<circle cx="${R(-100, 1100).toFixed(0)}" cy="${R(1000, 1400).toFixed(0)}" r="${R(1.5, 3.5).toFixed(1)}" opacity="${R(0.15, 0.4).toFixed(2)}"/>`).join("") + `</g>`;
-      return s;
-    }) },
-    { d: 0.85, svg: svg(() => {
-      let s = `<g id="s02-echo" fill="none" stroke="#f3ead7" stroke-linecap="round" filter="url(#f-blur-sm)" opacity="0">`;
-      for (let i = 0; i < 6; i++) { const y = 880 + i * 60; s += `<path pathLength="1" stroke-dasharray="0.35 0.65" stroke-dashoffset="1" d="M ${-120 + i * 30} ${y} Q 300 ${y - 70} 560 ${y - 10} T 1200 ${y - 40}" stroke-width="${(3.4 - i * 0.3).toFixed(1)}" opacity="${(0.75 - i * 0.08).toFixed(2)}"/>`; }
-      return s + `</g>`;
-    }) },
-    { svg: svg(() => FINISH()) },
-  ]);
-  fadeIn(13.25, s02.w, 0.5);
-  cam(s02, { x: 0, y: -2000, z: 1 }, 13.25);
-  cam(s02, { x: 0, y: 0, z: 1.05 }, 13.3, 5.4, "power2.inOut");
-  cam(s02, { x: 14, y: -24, z: 1.1 }, 18.7, 1.95, "sine.inOut");
-  cam(s02, { x: 0, y: -1500, z: 1.1 }, 20.65, 0.9, "power2.in");
-  ft(13.25, "#s02-glow", { opacity: 1 }, { opacity: 0.5, duration: 8, ease: "none" });
-  ft(13.25, "#s02-clouds", { x: 0 }, { x: 140, duration: 8.3, ease: "none" });
-  ft(14.5, "#s02-dust", { x: 0 }, { x: 120, duration: 6.8, ease: "none" });
-  // "ce qui se disait": fine lines of wind cross the valley like echoes
-  ft(19.7, "#s02-echo", { opacity: 0 }, { opacity: 0.55, duration: 0.6, ease: "power1.out" });
-  ft(19.7, "#s02-echo path", { attr: { "stroke-dashoffset": 1 } }, { attr: { "stroke-dashoffset": -0.7 }, duration: 1.8, ease: "none", stagger: 0.07 });
-
-  // =====================================================================================
-  // S03a · 21.25-26.40 · the wait: one great sky, passing once from dusk to night (no count, no duration).
+  // Revision 3 · S02 · 13.45-21.25 · the context of Ad-Duha: the great sky at dusk, the title, then wordless speech
+  // fragments (bubbles with three dots, never words) that circulate. No figure, no invented dialogue.
   // =====================================================================================
   const mixc = (a, b, t) => { const h = (c) => [1, 3, 5].map((k) => parseInt(c.slice(k, k + 2), 16)); const A = h(a), B = h(b); return "#" + A.map((v, i) => Math.round(v + (B[i] - v) * t).toString(16).padStart(2, "0")).join(""); };
   const bigSkyGrad = (t) => grad([[0, mixc("#1d2c58", "#060c22", t)], [0.6, mixc("#5a5e80", "#14224a", t)], [1, mixc("#c8946a", "#2e3456", t)]]);
+  const bubble = (x, y, k, rot) => {
+    const w = 96 * k, h = 62 * k;
+    return `<g transform="translate(${x} ${y}) rotate(${rot})"><path d="M ${-w / 2 + 14} ${-h / 2} h ${w - 28} a 14 14 0 0 1 14 14 v ${h - 28} a 14 14 0 0 1 -14 14 h ${-(w / 2 - 34)} l -20 18 l 2 -18 h ${-(w / 2 - 4)} a 14 14 0 0 1 -14 -14 v ${-(h - 28)} a 14 14 0 0 1 14 -14 z" stroke-width="3"/>` +
+      [-1, 0, 1].map((j) => `<circle cx="${(j * 18 * k).toFixed(1)}" cy="0" r="${(4 * k).toFixed(1)}" fill="#f3ead7" stroke="none"/>`).join("") + `</g>`;
+  };
+  const S02_B = [[190, 1010, 1], [360, 900, 0.8], [640, 960, 0.9], [830, 840, 1.1], [500, 1150, 0.7], [880, 1100, 0.8], [150, 780, 0.6]];
+  const s02 = build("sc02", [
+    { svg: svg(() => layer("M-200 -200H1280V2120H-200Z", bigSkyGrad(0))) },
+    { d: 0.5, svg: svg(() => { sd = 301; let s = `<g id="s02-stars">${stars(14, 80, 900, 0.5, 20, 1060)}</g>`; sd = 300; s += `<g id="s02-clouds" filter="url(#f-blur-md)">`;
+      for (let i = 0; i < 6; i++) { const y = 380 + i * 160, x = R(-260, 260); s += `<path d="M ${x} ${y} q 160 -60 340 -10 q 160 -50 300 10 q 120 10 160 40 h -800 z" fill="#7a6a80" opacity="${(0.5 - i * 0.04).toFixed(2)}"/>`; }
+      return s + `</g>`; }) },
+    { d: 1, svg: svg(() => { sd = 300; const h = ridge(1560, 18, 0.006, -400, 1480); return layer(h, "#4a3a40") + mottle(h, 0.12, "f-sand"); }) },
+    { d: 0.8, svg: svg(() => {
+      let s = `<g id="s02-talk" fill="none" stroke="#f3ead7" stroke-linecap="round" opacity="0">`;
+      for (let i = 0; i < 4; i++) { const y = 940 + i * 90; s += `<path class="s02-trail" pathLength="1" stroke-dasharray="0.02 0.035" stroke-dashoffset="0" d="M ${-40 + i * 40} ${y} Q 300 ${y - 120} 560 ${y - 60} T 1120 ${y - 140}" stroke-width="2" opacity="0.35"/>`; }
+      S02_B.forEach(([x, y, k], i) => (s += `<g class="s02-b">${bubble(x, y, k, i % 2 ? 6 : -5)}</g>`));
+      return s + `</g>`;
+    }) },
+    { svg: svg(() => FINISH()) },
+    { html: `<div class="ctx" id="s02-title">Le contexte d’Ad-Duha<span></span></div>` },
+  ]);
+  fadeIn(13.25, s02.w, 0.5);
+  cam(s02, { y: -620, z: 1 }, 13.25);                                  // coming down from the sky above the facade
+  cam(s02, { y: 0, z: 1.03 }, 13.3, 5.6, "power2.inOut");
+  cam(s02, { y: -12, z: 1.06 }, 18.9, 2.6, "sine.inOut");
+  ft(13.25, "#s02-clouds", { x: 0 }, { x: 120, duration: 8.3, ease: "none" });
+  ft(17.38, "#s02-title", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" });   // "Pour en comprendre"
+  ft(19.75, "#s02-talk", { opacity: 0 }, { opacity: 0.85, duration: 0.5, ease: "power1.out" });            // "ce qui se disait"
+  $$(".s02-b").forEach((b, i) => ft(19.75 + i * 0.12, b, { x: -30, y: 12, opacity: 0 }, { x: 40 + (i % 3) * 20, y: -18, opacity: 1, duration: 1.6, ease: "sine.out" }));
+  ft(19.75, ".s02-trail", { attr: { "stroke-dashoffset": 0 } }, { attr: { "stroke-dashoffset": -0.4 }, duration: 1.7, ease: "none" });
+  fadeOut(20.95, ["#s02-talk", "#s02-title"], 0.45);
+
+  // =====================================================================================
+  // Revision 3 · S03a · 21.25-26.40 · the wait: the sky passes once from dusk to night; two markers on a line, the
+  // second never reached (the interval stays open). No calendar, no count of days, no figure, no depiction of Gabriel.
+  // =====================================================================================
   const s03a = build("sc03a", [
     { d: 1, svg: svg(() => {
       let s = layer("M-200 -200H1280V2120H-200Z", bigSkyGrad(0)) + `<path id="s03a-night" d="M-200 -200H1280V2120H-200Z" fill="${bigSkyGrad(1)}" opacity="0"/>`;
@@ -844,22 +841,30 @@
       sd = 300; const h = ridge(1560, 18, 0.006, -400, 1480);
       return s + layer(h, "#4a3a40", 'id="s03a-hz"') + mottle(h, 0.12, "f-sand");
     }) },
-    { d: 1.2, svg: svg(() => {
-      let s = `<g id="s03a-gust" fill="#e2c08e" filter="url(#f-blur-md)" opacity="0">`;
-      for (let i = 0; i < 12; i++) { const y = 500 + i * 110; s += `<path d="M -80 ${y} Q 300 ${y - 50} 600 ${y - 10} T 1180 ${y - 30} L 1180 ${y - 4} Q 820 ${y + 26} 600 ${y + 14} T -80 ${y + 28} Z" opacity="${(0.25 + (i % 3) * 0.12).toFixed(2)}"/>`; }
-      return s + `</g>`;
-    }) },
     { svg: svg(() => FINISH()) },
+    { html: `<div class="ctx-m" id="s03a-txt">La venue de Gabriel tarde</div>` + svg(() =>
+      `<g id="s03a-int"><path id="s03a-base" d="M 180 930 H 900" stroke="#f3ead7" stroke-width="2" opacity="0"/>` +
+      `<circle id="s03a-A" cx="250" cy="930" r="16" fill="#d6b36c" opacity="0"/><path id="s03a-AB" ${dashed()} d="M 250 930 H 470" stroke="#d6b36c" stroke-width="5"/>` +
+      `<path id="s03a-gap" d="M 470 930 H 770" stroke="#d6b36c" stroke-width="5" stroke-dasharray="14 18" opacity="0"/>` +
+      `<circle id="s03a-B" cx="830" cy="930" r="16" fill="none" stroke="#d6b36c" stroke-width="3" opacity="0"/></g>`) },
   ]);
   fadeIn(21.05, s03a.w, 0.5);
-  cam(s03a, { z: 1 }, 21.05);
-  cam(s03a, { z: 1.045, y: -20 }, 21.1, 5.5, "none");
+  cam(s03a, { y: -12, z: 1.06 }, 21.05);
+  cam(s03a, { y: -20, z: 1.09 }, 21.1, 5.5, "none");
   ft(21.6, "#s03a-night", { opacity: 0 }, { opacity: 1, duration: 4.7, ease: "sine.inOut" });
   ft(21.6, ".s03a-cl", { fill: "#7a6a80" }, { fill: "#1a2446", duration: 4.7, ease: "sine.inOut" });
   ft(21.6, "#s03a-hz", { fill: "#4a3a40" }, { fill: "#0e1426", duration: 4.7, ease: "sine.inOut" });
-  $$(".s03a-cl").forEach((p, i) => ft(21.05, p, { x: 0 }, { x: 40 + i * 22, duration: 5.6, ease: "none" }));
+  $$(".s03a-cl").forEach((p, i) => ft(21.05, p, { x: 120 }, { x: 160 + i * 22, duration: 5.6, ease: "none" }));
   hideAll("#s03a-stars circle");
   $$("#s03a-stars circle").forEach((c, i) => fadeIn(22.6 + (i % 15) * 0.22, c, 0.6, +c.dataset.o));
+  // the interval: "Jundub raconte" -> both markers; "tarde à venir" -> the line leaves A and thins out, B is not reached
+  ft(23.3, "#s03a-base", { opacity: 0 }, { opacity: 0.18, duration: 0.5 });
+  ft(23.35, "#s03a-A", { opacity: 0, scale: 0.4, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" });
+  ft(23.55, "#s03a-B", { opacity: 0 }, { opacity: 0.6, duration: 0.4 });
+  draw(24.5, "#s03a-AB", 0.55, "power1.in");
+  ft(25.05, "#s03a-gap", { opacity: 0 }, { opacity: 0.5, duration: 0.9, ease: "sine.out" });
+  ft(24.45, "#s03a-txt", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" });  // "tarde"
+  fadeOut(26.1, ["#s03a-txt", "#s03a-int"], 0.35);
 
   // =====================================================================================
   // Revision 3 · the reported account and its answer, one composition that evolves (same night sky as S03a).
@@ -976,25 +981,24 @@
   roomVisible(39.0, false);
 
   // =====================================================================================
-  // S09a · 49.60-55.00 · from a dune crest in shade, a slow tilt up to an open horizon at first light.
+  // Revision 3 · S09a · 49.60-55.00 · the future: a discreet dune crest in shade, a night sky without any dawn glow;
+  // "Vie présente -> Vie dernière, meilleure pour lui". The landscape does not stand for the hereafter.
   // =====================================================================================
   sd = 900;
   const s09a = build("sc09a", [
-    { d: 0.3, svg: svg(() => layer("M-400 -1600H1480V2600H-400Z", grad([[0, "#0a1230"], [0.3, "#1c2a50"], [0.55, "#5a6488"], [0.62, "#c8aa8a"], [0.66, "#e8d2aa"], [1, "#e8d2aa"]])) +
-      `<ellipse id="s09a-dawn" cx="540" cy="1180" rx="1100" ry="520" fill="${radial([[0, "#f6dcae", 0.9], [0.45, "#f0d0a0", 0.4], [1, "#e8c89a", 0]])}" opacity="0"/>`) },
-    { d: 0.6, svg: svg(() => { sd = 901; const f1 = ridge(1180, 14, 0.004), f2 = ridge(1240, 30, 0.006); return layer(f1, "#6e5a52") + layer(f2, "#5a4440") + mottle(f2, 0.15, "f-sand") + `<path id="s09a-far" d="${f1}" fill="#e8c89a" opacity="0"/>`; }) },
-    { d: 1.25, svg: svg(() => {
-      const c = "M -500 3200 L -500 1480 Q 300 1380 640 1430 Q 900 1470 1580 1400 L 1580 3200 Z";
-      return `<path d="${c}" fill="#3a2a26"/>` + mottle(c, 0.12, "f-sand") + `<path id="s09a-rim" d="M -500 1480 Q 300 1380 640 1430 Q 900 1470 1580 1400" stroke="#f0d8ae" stroke-width="5" fill="none" opacity="0.15"/>`;
-    }) },
+    { d: 0.3, svg: svg(() => layer("M-400 -800H1480V2400H-400Z", grad([[0, "#0a1230"], [0.45, "#1a2850"], [0.75, "#2a3458"], [1, "#3a3a58"]])) + stars(18, -300, 900, 0.5, -200, 1280)) },
+    { d: 1, svg: svg(() => { const c = "M -500 3000 L -500 1480 Q 300 1380 640 1430 Q 900 1470 1580 1400 L 1580 3000 Z"; return `<path d="${c}" fill="#241c22"/>` + mottle(c, 0.1, "f-sand"); }) },
     { svg: svg(() => FINISH()) },
+    { html: `<div class="dg" id="s09a-l">Vie présente</div><div class="dg" id="s09a-r">Vie dernière</div><div class="dgi" id="s09a-m">meilleure pour lui</div>` +
+      svg(() => `<g id="s09a-arrow" stroke="#d6b36c" stroke-width="4" fill="none" stroke-linecap="round"><path ${dashed()} d="M 465 785 H 610"/><path ${dashed()} d="M 592 770 L 612 785 L 592 800"/></g>`) },
   ]);
   fadeIn(49.3, s09a.w, 0.5);
-  cam(s09a, { y: 820, z: 1.12 }, 49.3);
-  cam(s09a, { y: -60, z: 1.0 }, 49.4, 5.3, "sine.inOut");
-  ft(50.4, "#s09a-dawn", { opacity: 0 }, { opacity: 0.75, duration: 4.4, ease: "sine.inOut" });
-  ft(51.8, "#s09a-rim", { opacity: 0.15 }, { opacity: 0.75, duration: 2.8, ease: "sine.inOut" });
-  ft(51.5, "#s09a-far", { opacity: 0 }, { opacity: 0.22, duration: 3.2, ease: "sine.inOut" });
+  cam(s09a, { y: 140, z: 1.05 }, 49.3);
+  cam(s09a, { y: 0, z: 1.0 }, 49.35, 5.9, "sine.inOut");             // slight rise
+  ft(52.5, "#s09a-l", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" });   // "la vie dernière"
+  draw(52.75, "#s09a-arrow path", 0.45, "power2.out");
+  ft(52.9, "#s09a-r", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" });
+  ft(53.4, "#s09a-m", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" });  // "meilleure"
 
   // =====================================================================================
   // S09b · 55.00-58.85 · the wording of verse 5, by groups of words (never letter by letter); no image of the favours.
@@ -1008,45 +1012,55 @@
     { svg: svg(() => FINISH(false)) },
   ]);
   fadeIn(54.75, s09b.w, 0.45);
-  ft(54.75, "#s09b-orn", { scale: 1, svgOrigin: "540 900" }, { scale: 1.035, duration: 0.95, ease: "sine.inOut", yoyo: true, repeat: 3 });
-  ft(58.55, "#s09b-orn", { scale: 1, opacity: 1 }, { scale: 1.32, opacity: 0, duration: 0.55, ease: "power2.in", svgOrigin: "540 900" });
+  ft(54.75, "#s09b-orn", { scale: 1, svgOrigin: "540 900" }, { scale: 1.035, duration: 0.95, ease: "sine.inOut", yoyo: true, repeat: 5 });
   fadeIn(55.05, "#s09b-tag", 0.35, 0.95);
   [55.2, 56.28, 57.3, 57.9].forEach((t, i) => ft(t, `#s09b-l${i}`, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }));
   draw(58.1, "#s09b-ul", 0.55, "power2.out");
-  fadeOut(58.7, ["#s09b-tag", "#s09b-l0", "#s09b-l1", "#s09b-l2", "#s09b-l3", "#s09b-ul"], 0.3);
+  // revision 3: on "ce qui viendra" the wording rises and fades; the arches of S10 follow
+  ft(60.5, ["#s09b-tag", "#s09b-l0", "#s09b-l1", "#s09b-l2", "#s09b-l3", "#s09b-ul", "#s09b-orn"], { y: 0, opacity: 1 }, { y: -170, opacity: 0, duration: 0.7, ease: "power2.in" });
 
   // =====================================================================================
-  // S10 · 58.85-63.50 · the star as a diagram turns back (counter-clockwise); three branches light up.
+  // Revision 3 · S10 · 58.85-63.50 · back to the favours already received: three arches open one after the other with
+  // the miniatures of the three reminders (door, marked route, basket); the camera then enters the door (S11a).
   // =====================================================================================
-  const CX = 540, CY = 860, RS = 330;
+  const AT = 400, AB = AT + 600, AW = 260, AXS = [90, 410, 730];
+  const ARCHP = (x) => `M ${x} ${AB} V ${AT + 160} Q ${x} ${AT + 20} ${x + AW / 2} ${AT} Q ${x + AW} ${AT + 20} ${x + AW} ${AT + 160} V ${AB} Z`;
+  const MINI = [
+    (x) => `<rect x="${x}" y="${AT - 20}" width="260" height="640" fill="#7a5a44"/><path class="mini-door" d="M ${x + 80} ${AB} V ${AB - 280} Q ${x + 130} ${AB - 340} ${x + 180} ${AB - 280} V ${AB} Z" fill="#f0c890"/><path d="M ${x + 180} ${AB - 270} L ${x + 222} ${AB - 290} V ${AB + 6} L ${x + 180} ${AB} Z" fill="#4a3226"/>`,
+    (x) => `<rect x="${x}" y="${AT - 20}" width="260" height="640" fill="#0e1834"/>` + [[60, 90], [180, 130], [120, 210], [220, 250], [40, 300]].map(([a, c]) => `<circle class="mini-st" cx="${x + a}" cy="${AT + c}" r="2.6" fill="#f3ead7"/>`).join("") +
+      `<rect x="${x}" y="${AB - 170}" width="260" height="180" fill="#26304a"/><path d="M ${x + 160} ${AB} Q ${x + 90} ${AB - 70} ${x + 115} ${AB - 100} T ${x + 140} ${AB - 150}" stroke="#9fb0d6" stroke-width="2.5" fill="none" stroke-dasharray="5 8" opacity="0.7"/>` +
+      [[140, AB - 140, 0.4], [110, AB - 95, 0.7], [165, AB - 30, 1]].map(([a, c, k]) => `<path d="M ${x + a - 10 * k} ${c} L ${x + a - 6 * k} ${c - 60 * k} L ${x + a + 6 * k} ${c - 62 * k} L ${x + a + 10 * k} ${c} Z" fill="#9fb0d6" opacity="0.85"/>`).join(""),
+    (x) => `<rect x="${x}" y="${AT - 20}" width="260" height="640" fill="#4a3428"/><path d="M ${x - 20} ${AB - 100} H ${x + 280} V ${AB} H ${x - 20} Z" fill="#8a6a48"/>` +
+      `<path d="M ${x + 50} ${AB - 160} C ${x + 50} ${AB - 110} ${x + 70} ${AB - 60} ${x + 80} ${AB - 55} Q ${x + 130} ${AB - 45} ${x + 180} ${AB - 55} C ${x + 190} ${AB - 60} ${x + 210} ${AB - 110} ${x + 210} ${AB - 160} Z" fill="#b48a52"/>` +
+      [0, 1, 2, 3, 4].map((k) => `<path d="M ${x + 52 + k * 2} ${AB - 148 + k * 20} Q ${x + 130} ${AB - 138 + k * 20} ${x + 208 - k * 2} ${AB - 148 + k * 20}" stroke="${k % 2 ? "#d2aa6a" : "#8a6236"}" stroke-width="9" fill="none"/>`).join("") +
+      `<path d="M ${x + 56} ${AB - 160} Q ${x + 130} ${AB - 200} ${x + 204} ${AB - 160} Z" fill="#4a1e12"/><ellipse cx="${x + 130}" cy="${AB - 160}" rx="80" ry="15" fill="none" stroke="#d8b278" stroke-width="6" stroke-dasharray="8 6"/>`,
+  ];
+  // the same three arches for S10 and S12 (pre: id prefix)
+  const archesSVG = (pre) => svg(() => {
+    let s = "";
+    AXS.forEach((x, i) => {
+      defs.push(`<clipPath id="${pre}-ac${i}"><path d="${ARCHP(x)}"/></clipPath>`);
+      s += `<g id="${pre}-mini${i}"><g clip-path="url(#${pre}-ac${i})" filter="url(#f-paint)">${MINI[i](x)}</g></g><path id="${pre}-arch${i}" ${dashed()} d="${ARCHP(x)}" fill="none" stroke="#c6a15b" stroke-width="3"/>`;
+    });
+    return s;
+  });
+  const NAVY = () => svg(() => layer("M-400 -400H1480V2320H-400Z", grad([[0, "#0b1630"], [1, "#16274f"]], 0.4, 1)) + mottle("M-400 -400H1480V2320H-400Z", 0.08));
   const s10 = build("sc10", [
-    { svg: svg(() => layer("M0 0H1080V1920H0Z", grad([[0, "#0b1630"], [1, "#1a2a52"]], 0.4, 1)) + mottle("M0 0H1080V1920H0Z", 0.08)) },
-    { d: 1, svg: svg(() => {
-      const p = (a, q) => `${(CX + Math.cos(a) * q).toFixed(1)} ${(CY + Math.sin(a) * q).toFixed(1)}`;
-      let s = `<g id="s10-star">`;
-      for (let i = 0; i < 8; i++) {
-        const a0 = Math.PI / 4 * i - Math.PI / 2, d = `M ${CX} ${CY} L ${p(a0 - Math.PI / 8, RS * 0.72)} L ${p(a0, RS)} L ${p(a0 + Math.PI / 8, RS * 0.72)} Z`;
-        s += `<path d="${d}" fill="#1e2e58" opacity="0.8" stroke="#c6a15b" stroke-width="2"/><path id="s10-lit${i}" d="${d}" fill="#c6a15b" opacity="0"/>`;
-      }
-      s += `<circle cx="${CX}" cy="${CY}" r="70" fill="#0b1630" stroke="#c6a15b" stroke-width="2"/></g>`;
-      s += `<path id="s10-arrow" ${dashed()} d="M ${CX + 420} ${CY - 40} A 420 420 0 0 0 ${CX + 150} ${CY - 392}" stroke="#f3ead7" stroke-width="4" fill="none" opacity="0.55"/>`;
-      s += `<path id="s10-head" d="M ${CX + 180} ${CY - 408} L ${CX + 150} ${CY - 392} L ${CX + 176} ${CY - 370}" stroke="#f3ead7" stroke-width="4" fill="none" opacity="0"/>`;
-      return s;
-    }) },
+    { svg: NAVY() },
+    { d: 1, svg: archesSVG("s10") },
     { svg: svg(() => FINISH(false)) },
   ]);
-  fadeIn(58.65, s10.w, 0.45);
-  cam(s10, { z: 0.92 }, 58.65);
-  cam(s10, { z: 1.0 }, 58.7, 1.2, "power2.out");
-  draw(59.2, "#s10-arrow", 1.1, "power2.inOut");
-  fadeIn(60.2, "#s10-head", 0.3, 0.55);
-  ft(59.15, "#s10-star", { rotation: 0, svgOrigin: `${CX} ${CY}` }, { rotation: -45, duration: 1.9, ease: "power2.inOut" });
-  fadeOut(61.3, ["#s10-arrow", "#s10-head"], 0.5, 0.55);
-  [0, 7, 6].forEach((k, i) => ft(62.15 + i * 0.4, `#s10-lit${k}`, { opacity: 0 }, { opacity: 0.6, duration: 0.35, ease: "power2.out" }));
-  // tip of branch 0 after the turn: angle -135 deg
-  const B0 = [CX + Math.cos(-0.75 * Math.PI) * RS * 0.55, CY + Math.sin(-0.75 * Math.PI) * RS * 0.55];
-  cam(s10, { x: 1.12 * (B0[0] - 540) * 0.35, y: 1.12 * (B0[1] - 960) * 0.35, z: 1.12 }, 61.4, 1.9, "sine.inOut");
-  cam(s10, { x: 3.2 * (B0[0] - 540), y: 3.2 * (B0[1] - 960), z: 3.2 }, 63.3, 0.55, "power2.in");
+  fadeIn(60.9, s10.w, 0.5);
+  cam(s10, { z: 1.06 }, 60.9);
+  cam(s10, { z: 1.0 }, 60.95, 2.0, "sine.out");                           // slight pull back while the arches open
+  [61.5, 62.2, 62.9].forEach((t, i) => {
+    draw(t, `#s10-arch${i}`, 0.5, "power2.out");
+    ft(t + 0.1, `#s10-mini${i}`, { opacity: 0, scale: 0.92, svgOrigin: `${AXS[i] + AW / 2} ${AB}` }, { opacity: 1, scale: 1, duration: 0.45, ease: "power2.out" });
+  });
+  tl.set(["#s10-mini0", "#s10-mini1", "#s10-mini2"], { opacity: 0 }, 0);
+  // into the first arch: its door is brought to the place and size of the door of S11a (match)
+  const ZD = 2.3, DC = [AXS[0] + 130, AB - 170];
+  cam(s10, { x: 540 + ZD * (DC[0] - 540) - 540, y: 960 + ZD * (DC[1] - 960) - 867, z: ZD }, 62.95, 0.5, "power2.inOut");
 
   // =====================================================================================
   // S11a · 63.50-65.40 · refuge: a door opens, warm light spreads on the ground. No figure.
@@ -1065,10 +1079,10 @@
       s += `<g id="s11a-pool" opacity="0"><path d="M 360 1500 H 720 L 900 1990 H 200 Z" fill="#f0c890" opacity="0.45" filter="url(#f-blur-md)"/><path d="M 360 1500 H 720 L 900 1990 H 200 Z" fill="#f0c890" opacity="0.3"/></g>`;
       return s;
     }) },
-    { svg: svg(() => FINISH()) },
+    { svg: svg(() => FINISH() + `<rect x="-20" y="1180" width="1120" height="420" fill="${grad([[0, "#0a0706", 0], [0.3, "#0a0706", 0.62], [0.75, "#0a0706", 0.62], [1, "#0a0706", 0]])}"/>`) },
     { html: `<div id="s11a-iris" style="position:absolute;inset:0;--r:1500px;background:radial-gradient(circle at 540px 860px, rgba(5,10,30,0) var(--r), #050a1e calc(var(--r) + 70px))"></div>` },
   ]);
-  fadeIn(63.45, s11a.w, 0.4);
+  fadeIn(63.45, s11a.w, 0.2);                                          // the door of S11a takes the place of the arch's door
   cam(s11a, { z: 0.86, y: 170 }, 63.45);
   cam(s11a, { z: 0.94, y: 190 }, 63.5, 1.9, "sine.inOut");
   ft(63.85, "#s11a-leaf", { scaleX: 1, svgOrigin: "720 1100" }, { scaleX: 0.06, duration: 0.85, ease: "power2.inOut" });
@@ -1099,15 +1113,15 @@
     { svg: svg(() => FINISH()) },
   ]);
   fadeIn(65.4, s11b.w, 0.4);
-  const mkCam = (i, z) => { const [x, y, k] = MK[i], ty = y - 60 * k; return { x: (z - 0.4) * (x - 540), y: 960 + z * (ty - 960) - 800, z }; };
   const MT = [65.65, 66.3, 66.95, 67.7, 68.5, 69.3];
-  cam(s11b, mkCam(0, 1.12), 65.4);
+  cam(s11b, { x: -20, y: 540, z: 0.8 }, 65.4);
   MT.forEach((t, i) => {
     ft(t, `#s11b-m${i}`, { opacity: 0.14 }, { opacity: 1, duration: 0.5, ease: "power1.out" });
     ft(t, `#s11b-m${i} .hl`, { opacity: 0.15 }, { opacity: 0.6, duration: 0.6, ease: "power1.out" });
-    if (i) cam(s11b, mkCam(i, 1.12 - i * 0.025), MT[i - 1] + 0.15, t - MT[i - 1] + 0.1, "sine.inOut");
+    // the camera follows the route a little, left and right, without letting a marker reach the subtitle
+    cam(s11b, { x: (i % 2 ? 24 : -24) + (MK[i][0] - 540) * 0.08, y: 540 - i * 10, z: 0.8 + i * 0.006 }, (i ? MT[i - 1] : 65.4) + 0.1, (i ? t - MT[i - 1] : 0.25) + 0.1, "sine.inOut");
   });
-  cam(s11b, { ...mkCam(5, 0.99), y: mkCam(5, 0.99).y - 40 }, 69.55, 1.35, "sine.out");
+  cam(s11b, { x: 10, y: 470, z: 0.84 }, 69.6, 1.35, "sine.out");
   ft(65.6, "#s11b-path", { opacity: 0 }, { opacity: 0.3, duration: 3.6, ease: "sine.inOut" });
   $$("#s11b-tw circle").forEach((c, i) => ft(65.4 + i * 0.37, c, { opacity: 0.25 }, { opacity: 0.95, duration: 0.7, ease: "sine.inOut", yoyo: true, repeat: 2 }));
 
@@ -1160,62 +1174,42 @@
   cam(s11c, { z: 1, r: 0 }, 70.4);
   cam(s11c, { z: 1.06, r: 1.3, y: 20 }, 70.45, 2.2, "sine.inOut");
   [["#bk0-fill", 71.0], ["#bk1-fill", 71.45], ["#bk2-fill", 71.95]].forEach(([s, t]) => ft(t, s, { y: 90 }, { y: 0, duration: 0.7, ease: "power2.out" }));
-  ft(72.55, s11c.w, { x: 0, y: 0, scale: 1 }, { x: 860 - 540, y: 650 - 960, scale: 0.26, duration: 0.55, ease: "power2.inOut" });
-  fadeOut(72.85, s11c.w, 0.3);
+  cam(s11c, { z: 1.2, r: 1.3, y: 50 }, 72.35, 0.45, "power2.in");     // pushes on the baskets, then a short dip to dark:
+  fadeOut(72.42, s11c.w, 0.33);                                        // no image laid over another (S12 opens on the basket of its arch)
 
   // =====================================================================================
-  // S12 · 72.80-83.10 · triptych (refuge, guidance, means of living) and the frieze answer · future · past.
+  // Revision 3 · S12 · 72.80-83.10 · synthesis: the same three arches (camera pulls back from the basket of S11c), each
+  // named on the word heard; then the order of the passage in words only: Réponse, Avenir, Passé.
   // =====================================================================================
-  const ARCH = (x, w) => `M ${x} 940 V 500 Q ${x} 360 ${x + w / 2} 340 Q ${x + w} 360 ${x + w} 500 V 940 Z`;
-  const AX = [90, 410, 730], FY = 1110;
   const s12 = build("sc12", [
-    { svg: svg(() => layer("M0 0H1080V1920H0Z", grad([[0, "#0b1630"], [1, "#16274f"]], 0.4, 1)) + mottle("M0 0H1080V1920H0Z", 0.08)) },
+    { svg: NAVY() },
+    { d: 1, svg: archesSVG("s12") },
     { d: 1, svg: svg(() => {
-      const mini = [
-        (x) => `<rect x="${x}" y="320" width="260" height="640" fill="#7a5a44"/><path id="s12-door" d="M ${x + 80} 940 V 660 Q ${x + 130} 600 ${x + 180} 660 V 940 Z" fill="#f0c890"/><path d="M ${x + 80} 940 L ${x + 20} 960 H ${x + 240} L ${x + 180} 940 Z" fill="#f0c890" opacity="0.5"/>`,
-        (x) => `<rect x="${x}" y="320" width="260" height="640" fill="#0e1834"/>` + [[60, 430], [180, 470], [120, 550], [220, 590], [40, 640]].map(([a, b], i) => `<circle class="s12-st" cx="${x + a}" cy="${b}" r="2.6" fill="#f3ead7"/>`).join("") + `<rect x="${x}" y="800" width="260" height="160" fill="#26304a"/>` + [[140, 820, 0.4], [110, 860, 0.7], [160, 920, 1]].map(([a, b, k]) => `<path d="M ${x + a - 10 * k} ${b} L ${x + a - 6 * k} ${b - 60 * k} L ${x + a + 6 * k} ${b - 62 * k} L ${x + a + 10 * k} ${b} Z" fill="#9fb0d6" opacity="0.7"/>`).join(""),
-        (x) => `<rect x="${x}" y="320" width="260" height="640" fill="#4a3428"/><path d="M ${x - 20} 860 H ${x + 280} V 960 H ${x - 20} Z" fill="#8a6a48"/>` +
-          `<path d="M ${x + 50} 800 C ${x + 50} 850 ${x + 70} 900 ${x + 80} 905 Q ${x + 130} 915 ${x + 180} 905 C ${x + 190} 900 ${x + 210} 850 ${x + 210} 800 Z" fill="#b48a52"/>` +
-          [0, 1, 2, 3, 4].map((k) => `<path d="M ${x + 52 + k * 2} ${812 + k * 20} Q ${x + 130} ${822 + k * 20} ${x + 208 - k * 2} ${812 + k * 20}" stroke="${k % 2 ? "#d2aa6a" : "#8a6236"}" stroke-width="9" fill="none"/>`).join("") +
-          `<path d="M ${x + 56} 800 Q ${x + 130} 760 ${x + 204} 800 Z" fill="#4a1e12"/><ellipse cx="${x + 130}" cy="800" rx="80" ry="15" fill="none" stroke="#d8b278" stroke-width="6" stroke-dasharray="8 6"/>`,
-      ];
-      let s = `<g id="s12-arches">`;
-      AX.forEach((x, i) => {
-        defs.push(`<clipPath id="s12-ac${i}"><path d="${ARCH(x, 260)}"/></clipPath>`);
-        s += `<g id="s12-mini${i}" opacity="0.16"><g clip-path="url(#s12-ac${i})" filter="url(#f-paint)">${mini[i](x)}</g></g><path id="s12-arch${i}" ${dashed()} d="${ARCH(x, 260)}" fill="none" stroke="#c6a15b" stroke-width="3" opacity="0.55"/>`;
+      let s = "";
+      [["Refuge"], ["Guidée"], ["Moyens", "de vivre"]].forEach((lines, i) => {
+        s += `<g id="s12-name${i}" opacity="0">` + lines.map((t, j) => `<text x="${AXS[i] + AW / 2}" y="${AB + 70 + j * 46}" text-anchor="middle" style="font:400 40px 'Source Serif 4', serif" fill="#f3ead7">${t}</text>`).join("") + `</g>`;
       });
-      s += `</g><path id="s12-line" ${dashed()} d="M 140 ${FY} H 940" stroke="#f3ead7" stroke-width="2" opacity="0.45"/>`;
-      [[220, "réponse"], [540, "avenir"], [860, "passé"]].forEach(([x, t], i) => {
-        s += `<circle id="s12-dot${i}" cx="${x}" cy="${FY}" r="${i === 2 ? 12 : 9}" fill="${i === 2 ? "#c6a15b" : "#f3ead7"}" opacity="0"/>`;
-        s += `<text id="s12-lab${i}" x="${x}" y="${FY + 62}" text-anchor="middle" style="font:500 34px Inter, sans-serif;letter-spacing:0.12em;text-transform:uppercase" fill="${i === 2 ? "#d6b36c" : "#f3ead7"}" opacity="0">${t}</text>`;
+      [[220, "Réponse"], [540, "Avenir"], [860, "Passé"]].forEach(([x, t], i) => {
+        s += `<text id="s12-w${i}" x="${x}" y="1110" text-anchor="middle" style="font:400 40px 'Source Serif 4', serif" fill="${i === 2 ? "#d6b36c" : "#f3ead7"}" opacity="0">${t}</text>`;
       });
-      s += `<path id="s12-ul" ${dashed()} d="M 790 ${FY + 80} H 930" stroke="#c6a15b" stroke-width="3"/>`;
-      return s;
+      return s + `<path id="s12-ul" ${dashed()} d="M 805 1130 H 915" stroke="#d6b36c" stroke-width="3"/>`;
     }) },
     { svg: svg(() => FINISH(false)) },
     { svg: svg(() => `<g id="s12-rain" stroke="#c9d4ea" stroke-linecap="round" opacity="0">${(sd = 1250, rainTile(70, -40, 1120, 380, -1, 6, -4, 1.2, 2.6, 0.35, 0.85, 40, 110))}</g>`) },
   ]);
-  fadeIn(72.6, s12.w, 0.4);
-  cam(s12, { z: 1.08 }, 72.55);
-  cam(s12, { z: 1.0 }, 72.6, 2.4, "power2.out");
-  cam(s12, { z: 0.985, y: -10 }, 75.0, 8.4, "sine.inOut");
-  [0, 1, 2].forEach((i) => draw(72.95 + i * 0.3, `#s12-arch${i}`, 0.75, "power2.inOut"));
-  [74.54, 75.48, 76.34].forEach((t, i) => {
-    ft(t, `#s12-mini${i}`, { opacity: 0.16 }, { opacity: 1, duration: 0.45, ease: "power2.out" });
-    ft(t, `#s12-arch${i}`, { opacity: 0.55 }, { opacity: 1, duration: 0.45, ease: "power2.out" });
-  });
-  ft(75.0, "#s12-door", { opacity: 1 }, { opacity: 0.72, duration: 1.1, ease: "sine.inOut", yoyo: true, repeat: 5 });
-  $$(".s12-st").forEach((c, i) => ft(75.6 + i * 0.3, c, { opacity: 1 }, { opacity: 0.3, duration: 0.6, ease: "sine.inOut", yoyo: true, repeat: 3 }));
-  // the frieze: the order of the passage (answer, future, past)
-  ft(77.6, "#s12-arches", { opacity: 1 }, { opacity: 0.5, duration: 0.6, ease: "sine.inOut" });
-  draw(77.6, "#s12-line", 0.8, "power2.out");
-  [78.02, 79.78, 82.0].forEach((t, i) => {
-    ft(t, `#s12-dot${i}`, { opacity: 0, scale: 1.6, svgOrigin: `${[220, 540, 860][i]} ${FY}` }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2)" });
-    ft(t, `#s12-lab${i}`, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" });
-  });
-  ft(81.3, "#s12-arches", { opacity: 0.5 }, { opacity: 1, duration: 0.6, ease: "sine.inOut" });    // "rappelle ainsi les bienfaits"
-  ft(82.0, ["#s12-lab0", "#s12-lab1", "#s12-dot0", "#s12-dot1"], { opacity: 1 }, { opacity: 0.45, duration: 0.5 });
-  draw(82.4, "#s12-ul", 0.45, "power2.out");
+  tl.set(["#s12-arch0", "#s12-arch1", "#s12-arch2"], { attr: { "stroke-dashoffset": 0 } }, 0);   // arches already drawn
+  fadeIn(72.78, s12.w, 0.3);
+  const BK = [AXS[2] + 130, AB - 110], ZB = 2.3;                        // basket of the third arch
+  cam(s12, { x: 540 + ZB * (BK[0] - 540) - 540, y: 960 + ZB * (BK[1] - 960) - 900, z: ZB }, 72.55);
+  cam(s12, { x: 0, y: 0, z: 1 }, 72.6, 1.8, "power2.inOut");
+  cam(s12, { x: 0, y: -8, z: 0.985 }, 74.4, 8.6, "sine.inOut");
+  // names on the words heard (no subtitle for this sentence)
+  [74.6, 75.5, 76.4].forEach((t, i) => ft(t, `#s12-name${i}`, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }));
+  ft(75.0, "#s12-mini0 .mini-door", { opacity: 1 }, { opacity: 0.75, duration: 1.1, ease: "sine.inOut", yoyo: true, repeat: 1 });
+  fadeOut(77.55, ["#s12-name0", "#s12-name1", "#s12-name2"], 0.35);
+  [78.0, 79.75, 82.0].forEach((t, i) => ft(t, `#s12-w${i}`, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }));
+  ft(82.0, ["#s12-w0", "#s12-w1"], { opacity: 1 }, { opacity: 0.5, duration: 0.5 });
+  draw(82.3, "#s12-ul", 0.45, "power2.out");
   // the arches dissolve into rain streaks: match on the window glass (S13)
   ft(82.8, "#s12-rain", { opacity: 0 }, { opacity: 0.9, duration: 0.35, ease: "power1.in" });
   ft(82.8, "#s12-rain", { y: 0 }, { y: 380, duration: 0.32, ease: "none", repeat: 1 });
@@ -1234,7 +1228,7 @@
   // rain loops (finite) on the glass
   ft(82.8, "#rain2", { y: -320 }, { y: 0, duration: 0.62, ease: "none", repeat: Math.floor((101.8 - 82.8) / 0.62) - 1 });
   ft(82.8, "#rain3", { y: -260 }, { y: 0, duration: 0.42, ease: "none", repeat: Math.floor((96 - 82.8) / 0.42) - 1 });
-  ft(82.8, "#streaks", { y: -200 }, { y: 120, duration: 3.2, ease: "none", repeat: Math.floor((99 - 82.8) / 3.2) - 1 });
+  ft(82.8, "#streaks", { y: -200 }, { y: 120, duration: 3.2, ease: "none", repeat: Math.floor((101.8 - 82.8) / 3.2) - 1 });
   // breathing and head (same articulation as the validated introduction: rotation and foreshortening around the neck)
   ft(82.8, "#upperbody", { scaleY: 1, svgOrigin: "548 1272" }, { scaleY: 1.012, duration: 1.4, ease: "sine.inOut", yoyo: true, repeat: 13 });
   tl.set("#head", { rotation: 0, scaleY: 0.985, svgOrigin: "548 946" }, 82.8);
@@ -1270,8 +1264,8 @@
   ft(98.9, "#clouds", { opacity: 0, x: -20 }, { opacity: 1, x: -140, duration: 2.6, ease: "sine.out" });
   ft(98.1, "#town", { fill: "#0f1730" }, { fill: "#6e7a94", duration: 1.3, ease: "sine.inOut" });
   townLights.forEach((r, i) => ft(97.8 + (i % 6) * 0.08, r, { opacity: i % 4 === 1 ? 0.55 : 0.04 }, { opacity: 0, duration: 0.5 }));
-  ft(98.1, "#rain2", { opacity: 0.45 }, { opacity: 0, duration: 1.2, ease: "sine.out" });
-  ft(98.1, "#streaks", { opacity: 0.5 }, { opacity: 0, duration: 1.2, ease: "sine.out" });
+  ft(98.1, "#rain2", { opacity: 0.45 }, { opacity: 0.22, duration: 1.2, ease: "sine.out" });      // a light rain stays (S15)
+  ft(98.1, "#streaks", { opacity: 0.5 }, { opacity: 0.3, duration: 1.2, ease: "sine.out" });
   ft(98.2, "#moonshaft", { opacity: 0.12, x: -40 }, { opacity: 1, x: 40, duration: 3.0, ease: "sine.out" });
   ft(99.85, "#lampglow", { opacity: 0.85 }, { opacity: 0, duration: 0.55, ease: "power2.in" });
   glows.forEach((g) => ft(99.85, g, { opacity: 0.32 }, { opacity: 0.1, duration: 0.6 }));

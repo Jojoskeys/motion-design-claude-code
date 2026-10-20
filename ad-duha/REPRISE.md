@@ -1,4 +1,4 @@
-# Reprise : Ad-Duha, premiers versets (état au 2026-10-20, storyboard révision 3 en attente de validation)
+# Reprise : Ad-Duha, premiers versets (état au 2026-10-20, révision 3 animée, aperçu complet en attente de retour)
 
 
 Branche : `claude/determined-tesla-akfm85`. Règles : `../CLAUDE.md` (série) et `../AGENTS.md` (garde-fous HyperFrames).
@@ -124,7 +124,7 @@ L'ancienne liste de ce fichier y a été fusionnée ; ne plus tenir de liste ici
   `ffmpeg -i renders/ad-duha-draft.mp4 -vf scale=540:960 -c:v libx264 -crf 26 -preset slow -pix_fmt yuv420p -c:a aac -b:a 128k prototype/ad-duha-apercu.mp4`
   (non versionnés). Captures de contrôle versionnées : `prototype/apercu-planche-*.jpg`.
 
-## Défauts non résolus de l'aperçu (à trancher au retour)
+## Défauts relevés sur le premier aperçu (corrigés en révision 3, voir plus bas, sauf mention)
 - S11a (64-65 s) : la mention « Sens du verset 93:6 » passe sur la lumière claire de la porte : lisible mais faible.
 - S11b (66-69 s) : une borne au premier plan passe un instant derrière le sous-titre.
 - Transitions S10 → S11a et S11c → S12 : surimpressions brèves (≈0,4 s) où deux images se superposent visiblement.
@@ -158,9 +158,28 @@ L'ancienne liste de ce fichier y a été fusionnée ; ne plus tenir de liste ici
   de la source (29,05 / 32,34 / … / 45,25 s), écart nul.
 - Fin de l'extrait (49,3-49,6 s) : début du fondu vers l'ancien S09a (dune), pas encore remplacé.
 
+## Révision 3 animée en entier (2026-10-20)
+- Extrait S03b → S08 validé par l'utilisateur (animation, rythme, relation narration / images) : conservé sans refonte.
+- Animés selon la révision 3 : S02 (grand ciel au crépuscule, titre « Le contexte d'Ad-Duha » sur « Pour en
+  comprendre », bulles vides sur « ce qui se disait »), S03a (deux repères, intervalle ouvert, « La venue de Gabriel
+  tarde » sur « tarde »), S09a (crête sombre, « Vie présente → Vie dernière · meilleure pour lui », sans lueur d'aube),
+  S09b prolongé (la formulation monte et pâlit sur « ce qui viendra »), S10 (trois arches qui s'ouvrent : porte,
+  parcours balisé, panier), S12 (mêmes arches, noms sur les mots entendus, puis « Réponse · Avenir · Passé »), S15
+  (une pluie légère reste visible au matin). Plus d'acacia, de vallée, de trait dans le sable ni d'étoile tournante.
+- Défauts corrigés : S11a (bande sombre derrière la mention et le sous-titre devant la lumière de la porte) ; S11b
+  (un seul cadre large : aucune borne ne passe sous y = 1200) ; S10 → S11a (la caméra amène la porte de l'arche à la
+  place et à la taille de la porte de S11a, fondu court) ; S11c → S12 (plus de carte qui rétrécit : bref passage au
+  sombre, S12 s'ouvre sur le panier de la troisième arche puis recule) ; S01 (pluie plus fine, traits non grossis par
+  le gros plan).
+- Sous-titres : pas de sous-titre pour « Un refuge, une guidée, des moyens de vivre. » (les trois noms s'affichent).
+- Contrôle HyperFrames / Chromium avant rendu : `npx hyperframes snapshot` (runtime HyperFrames) comparé à la capture
+  Chromium de l'aperçu aux mêmes instants (5,0 / 28,0 / 41,5 / 47,3 / 63,55 / 72,6 / 76,8 / 104,6 s) : mêmes plans,
+  mêmes positions ; PSNR 30-44 dB ou identique, écarts limités au lissage des lettres.
+- Contrôles automatiques : 67 blocs de texte (≤ 2 lignes, rien coupé, rien sous y = 1500) ; articulations : pivot
+  tête/torse 0 px.
+
 ## Prochaines tâches
 1. Vignettes de la révision 3 : retenues comme base du test.
-2. Retour de l'utilisateur sur l'extrait animé S03b → S08 (`prototype/extrait-26.4-49.6.mp4`) ; pas de rendu complet
-   avant validation.
-3. Ensuite : animation des autres plans modifiés, nouvel aperçu, export final après accord.
-4. En parallèle et avant publication : points de `VERIFICATIONS.md` (sources et extraits dans `SOURCES.md`).
+2. Extrait S03b → S08 validé. Retour de l'utilisateur sur l'aperçu complet `prototype/ad-duha-apercu.mp4` ; export
+   final haute résolution (`-q delivery`) seulement après accord.
+3. En parallèle et avant publication : points de `VERIFICATIONS.md` (sources et extraits dans `SOURCES.md`).
