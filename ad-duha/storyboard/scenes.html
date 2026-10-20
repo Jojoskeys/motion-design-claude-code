@@ -15,6 +15,10 @@
     font: 400 50px/1.3 "Source Serif 4", serif; color: #f3ead7; text-shadow: 0 2px 18px rgba(4, 8, 20, 0.85); }
   .title { position: absolute; left: 100px; right: 160px; top: 252px; text-align: center; white-space: nowrap;
     font: 500 23px/1.3 "Inter", sans-serif; letter-spacing: 0.1em; text-transform: uppercase; color: #c6a15b; }
+  .tag { position: absolute; left: 100px; right: 160px; top: 1296px; text-align: center;
+    font: 500 22px/1.2 "Inter", sans-serif; letter-spacing: 0.12em; text-transform: uppercase; color: #c6a15b; opacity: 0.9; }
+  .tagsvg { font: 500 24px "Inter", sans-serif; letter-spacing: 0.12em; text-transform: uppercase; fill: #c6a15b; }
+  .quote { font: 400 62px "Source Serif 4", serif; fill: #f3ead7; }
   .label { font: 500 30px "Inter", sans-serif; letter-spacing: 0.12em; text-transform: uppercase; fill: #f3ead7; }
 </style>
 </head>
@@ -99,6 +103,31 @@ function valley(p) {
 const VALLEY_DUSK = { sky: [[0, "#101b3c"], [0.5, "#2d3657"], [0.8, "#7a5f5a"], [1, "#c08a62"]], m1: "#3b3550", m2: "#4a3a44", m3: "#5a4238",
   ground: [[0, "#7a5a40"], [1, "#2c2024"]], road: "#9a7a58", rock1: "#3a2a2a", rock2: "#7a5a46" };
 
+
+// ---------- reusable decor: the big sky over a low horizon (S03a, S04) ----------
+function bigSky(t) { // t: 0 = dusk, 1 = night; a single slow change, never a cycle
+  seed = 300;
+  const mix = (a, b) => { const h = (c) => [1, 3, 5].map((k) => parseInt(c.slice(k, k + 2), 16)); const A = h(a), B = h(b);
+    return "#" + A.map((v, i) => Math.round(v + (B[i] - v) * t).toString(16).padStart(2, "0")).join(""); };
+  let s = layer("M0 0H1080V1920H0Z", grad([[0, mix("#1d2c58", "#060c22")], [0.6, mix("#5a5e80", "#14224a")], [1, mix("#c8946a", "#2e3456")]]));
+  s += stars(Math.round(26 * t), 80, 1100, 0.7);
+  s += `<g filter="url(#f-blur-md)">`;
+  for (let i = 0; i < 6; i++) { const y = 380 + i * 160, x = R(-200, 300); s += `<path d="M ${x} ${y} q 160 -60 340 -10 q 160 -50 300 10 q 120 10 160 40 h -800 z" fill="${mix("#7a6a80", "#1a2446")}" opacity="${0.5 - i * 0.04}"/>`; }
+  s += `</g>`;
+  const h = ridge(1560, 18, 0.006, 1);
+  s += layer(h, mix("#4a3a40", "#0e1426")) + mottle(h, 0.12, "f-sand");
+  return s;
+}
+// ---------- the acacia (S03b in the wind, S07 at rest) ----------
+function acacia(bend) {
+  const k = bend / 14;
+  let s = `<g filter="url(#f-paint)"><path d="M 440 1510 Q 450 1300 ${430 + 60 * k} 1150 Q ${420 + 90 * k} 1080 ${380 + 120 * k} 1030 L ${400 + 120 * k} 1020 Q ${460 + 90 * k} 1070 ${470 + 60 * k} 1140 Q ${510 + 40 * k} 1060 ${600 + 80 * k} 1020 L ${606 + 80 * k} 1032 Q ${520 + 40 * k} 1090 ${480 + 30 * k} 1200 Q 470 1340 480 1510 Z" fill="#2a1e1c"/>`;
+  s += `<path d="M ${200 + 160 * k} ${1010 - 10 * k} Q ${300 + 150 * k} ${900 - 30 * k} ${520 + 140 * k} ${880 - 20 * k} Q ${760 + 120 * k} ${890 + 10 * k} ${860 + 110 * k} ${990 + 30 * k} Q ${700 + 120 * k} ${1050 + 10 * k} ${520 + 140 * k} ${1040} Q ${330 + 150 * k} ${1050} ${200 + 160 * k} ${1010 - 10 * k} Z" fill="#2e3a2e"/>`;
+  s += `<path d="M ${260 + 160 * k} ${990} Q ${420 + 150 * k} ${930 - 20 * k} ${560 + 140 * k} ${930 - 14 * k}" stroke="#7a8a5a" stroke-width="6" fill="none" opacity="0.5"/></g>`;
+  return s;
+}
+const star8 = (cx, cy, r) => { let d = ""; for (let i = 0; i < 16; i++) { const a = Math.PI / 8 * i, rr = i % 2 ? r * 0.72 : r; d += (i ? "L" : "M") + (cx + Math.cos(a) * rr).toFixed(1) + " " + (cy + Math.sin(a) * rr).toFixed(1); } return d + "Z"; };
+
 // ---------- scenes ----------
 const SCENES = {
   // S01: the building facade at night, our window lit, rain; discreet pictograms.
@@ -128,90 +157,83 @@ const SCENES = {
     s += `</g>` + finish();
     return { svg: s, sub: "… il faut revenir à ce qui se disait autour de lui." };
   },
-  // S03a: same valley, locked-off time-lapse: arc of suns and moons = days passing; shadows turning.
+  // S03a: waiting without a count: a vast sky over a low horizon passes once from dusk to night (no repeated cycle).
   s03a() {
-    let s = valley({ ...VALLEY_DUSK, sky: [[0, "#1d2c52"], [0.55, "#4a5878"], [1, "#b89a78"]] });
-    for (let i = 0; i < 9; i++) {
-      const a = Math.PI * (0.1 + i * 0.1), x = 540 - Math.cos(a) * 430, y = 860 - Math.sin(a) * 520, sun = i % 2 === 0;
-      s += sun ? `<circle cx="${x}" cy="${y}" r="20" fill="#f0d9a8" opacity="${0.35 + i * 0.06}"/>` : `<path d="M ${x + 14} ${y - 16} A 18 18 0 1 0 ${x + 14} ${y + 16} A 14 14 0 1 1 ${x + 14} ${y - 16} Z" fill="#efe6cf" opacity="${0.3 + i * 0.06}"/>`;
-    }
-    s += `<path d="M 110 860 A 430 520 0 0 1 970 860" fill="none" stroke="#f3ead7" stroke-width="2" stroke-dasharray="4 14" opacity="0.35"/>`;
-    for (let k = 0; k < 4; k++) s += `<path d="M 230 1255 L ${470 - k * 120} ${1300 + k * 20} L ${520 - k * 120} ${1330 + k * 20} Z" fill="#120d14" opacity="${0.12 + k * 0.05}"/>`;
-    s += finish();
-    return { svg: s, sub: "Jundub raconte que Gabriel tarde à venir auprès du Prophète." };
+    let s = bigSky(0.55);
+    return { svg: s + finish(), sub: "Jundub raconte que Gabriel tarde à venir auprès du Prophète.", tag: "Ṣaḥīḥ Muslim 1797a" };
   },
-  // S03b: wind rises, dust ribbons sweep across the valley and cover the path (what was said).
+  // S03b: an acacia alone in the wind; sand streams across (the words that circulate). Close, low, no figure.
   s03b() {
-    let s = valley({ ...VALLEY_DUSK, sky: [[0, "#2a2a44"], [0.5, "#6a5452"], [1, "#b88a60"]] });
-    s += `<rect width="1080" height="1920" fill="#b88a60" opacity="0.18"/>`;
-    s += `<g fill="#d8b688" filter="url(#f-blur-md)">`;
-    for (let i = 0; i < 7; i++) { const y = 980 + i * 80; s += `<path d="M -80 ${y} Q 300 ${y - 90} 560 ${y - 20} T 1180 ${y - 50} L 1180 ${y - 20} Q 820 ${y + 30} 560 ${y + 10} T -80 ${y + 30} Z" opacity="${0.22 + (i % 3) * 0.08}"/>`; }
+    let s = layer("M0 0H1080V1920H0Z", grad([[0, "#3a3048"], [0.5, "#8a6450"], [1, "#c89464"]]));
+    s += `<rect width="1080" height="1920" fill="#c89464" opacity="0.15"/>`;
+    s += acacia(-14) + layer("M -60 1500 Q 540 1460 1140 1510 V 1990 H -60 Z", grad([[0, "#9a7050"], [1, "#3a2a24"]])) + mottle("M -60 1500 Q 540 1460 1140 1510 V 1990 H -60 Z", 0.18, "f-sand");
+    s += `<g fill="#e2c08e" filter="url(#f-blur-md)">`;
+    for (let i = 0; i < 9; i++) { const y = 700 + i * 110; s += `<path d="M -80 ${y} Q 300 ${y - 50} 600 ${y - 10} T 1180 ${y - 30} L 1180 ${y - 10} Q 820 ${y + 20} 600 ${y + 8} T -80 ${y + 22} Z" opacity="${0.16 + (i % 3) * 0.07}"/>`; }
+    s += `</g><g fill="#3a3a26">`;
+    for (let i = 0; i < 14; i++) s += `<ellipse cx="${R(620, 1060)}" cy="${R(600, 1100)}" rx="7" ry="3" transform="rotate(${R(-40, 40)})" opacity="0.7"/>`;
     s += `</g>` + finish();
     return { svg: s, sub: "Les polythéistes affirment alors qu’il a été abandonné." };
   },
-  // S04: the dust settles; a geometric eight-pointed frame (gold line) closes around the valley -> window match cut.
+  // S04: the calmed sky of S03a; an eight-pointed frame closes around it -> becomes the window of the room (match cut).
   s04() {
-    let s = valley({ ...VALLEY_DUSK, sky: [[0, "#13204a"], [0.6, "#3a4466"], [1, "#9a7a68"]] });
-    s += `<rect width="1080" height="1920" fill="#b88a60" opacity="0.06"/>`;
-    const star = (cx, cy, r) => { let d = ""; for (let i = 0; i < 16; i++) { const a = Math.PI / 8 * i, rr = i % 2 ? r * 0.72 : r; d += (i ? "L" : "M") + (cx + Math.cos(a) * rr).toFixed(1) + " " + (cy + Math.sin(a) * rr).toFixed(1); } return d + "Z"; };
-    s += `<path fill-rule="evenodd" d="M -10 -10 H 1090 V 1930 H -10 Z ${star(540, 900, 520)}" fill="#0b1630" opacity="0.93"/>`;
-    s += `<path d="${star(540, 900, 520)}" fill="none" stroke="#c6a15b" stroke-width="4" opacity="0.85"/><path d="${star(540, 900, 548)}" fill="none" stroke="#c6a15b" stroke-width="1.5" opacity="0.5"/>`;
+    let s = bigSky(1);
+    s += `<path fill-rule="evenodd" d="M -10 -10 H 1090 V 1930 H -10 Z ${star8(540, 900, 520)}" fill="#0b1630" opacity="0.93"/>`;
+    s += `<path d="${star8(540, 900, 520)}" fill="none" stroke="#c6a15b" stroke-width="4" opacity="0.85"/><path d="${star8(540, 900, 548)}" fill="none" stroke="#c6a15b" stroke-width="1.5" opacity="0.5"/>`;
     s += finish(false);
     return { svg: s, sub: "C’est dans ce contexte que sont révélés les premiers versets d’Ad-Duha.", title: "Ad-Duha" };
   },
-  // S07: the wind drops, the dust falls back to the ground, the path is clear again; low angle.
+  // S07: the same acacia: the wind has dropped, the sand lies smooth, the tree stands straight in a clear dusk.
   s07() {
-    let s = valley({ ...VALLEY_DUSK, sky: [[0, "#1a2850"], [0.55, "#56607e"], [1, "#d6b88e"]] });
-    s += `<g fill="#d8b688" filter="url(#f-blur-sm)">`;
-    for (let i = 0; i < 40; i++) s += `<ellipse cx="${R(0, 1080)}" cy="${R(1180, 1900)}" rx="${R(10, 40)}" ry="${R(2, 5)}" opacity="${R(0.1, 0.3)}"/>`;
-    s += `</g><path d="M 300 1990 Q 520 1560 554 1140 L 566 1140 Q 600 1560 820 1990 Z" fill="#c9a676" opacity="0.18"/>` + finish();
-    return { svg: s, sub: "Son Seigneur ne l’a ni abandonné, ni détesté." };
+    let s = layer("M0 0H1080V1920H0Z", grad([[0, "#14224a"], [0.55, "#4a5a80"], [1, "#d8b88e"]])) + stars(10, 100, 600, 0.5);
+    s += acacia(0) + layer("M -60 1500 Q 540 1470 1140 1510 V 1990 H -60 Z", grad([[0, "#a8805a"], [1, "#3a2a24"]])) + mottle("M -60 1500 Q 540 1470 1140 1510 V 1990 H -60 Z", 0.18, "f-sand");
+    for (let i = 0; i < 9; i++) { const y = 1540 + i * 45; s += `<path d="M -40 ${y} Q 540 ${y - 14} 1120 ${y + 6}" stroke="#5a3e2c" stroke-width="2" fill="none" opacity="0.25"/>`; }
+    s += finish();
+    return { svg: s, sub: "Son Seigneur ne l’a ni abandonné, ni détesté.", tag: "Sens du verset 93:3" };
   },
-  // S08: top-down on the sand: a row of stones (days) with a gap; the line drawn in the sand runs through the gap.
+  // S08: top-down on the sand: a traced line, a stretch where it fades, then it goes on. No countable marks.
   s08() {
     let s = layer("M0 0H1080V1920H0Z", grad([[0, "#a07c58"], [1, "#6a4e3a"]], 1, 1)) + mottle("M0 0H1080V1920H0Z", 0.3, "f-sand");
     for (let i = 0; i < 30; i++) { const y = R(0, 1920); s += `<path d="M -20 ${y} Q 540 ${y + R(-60, 60)} 1100 ${y + R(-30, 30)}" stroke="#4a3426" stroke-width="2" fill="none" opacity="0.18"/>`; }
-    s += `<path d="M 540 120 C 470 520 610 900 540 1250" stroke="#f3ead7" stroke-width="5" fill="none" opacity="0.55" stroke-dasharray="2 0"/>`;
-    const ys = [180, 280, 380, 480, 580, 940, 1040, 1140, 1240];
-    ys.forEach((y, i) => { const x = 540 + Math.sin(y / 180) * 40; s += `<g filter="url(#f-paint)"><ellipse cx="${x + 6}" cy="${y + 8}" rx="34" ry="24" fill="#2a1e18" opacity="0.5"/><ellipse cx="${x}" cy="${y}" rx="32" ry="24" fill="${i % 2 ? "#4a4a5a" : "#6a5a4e"}"/><ellipse cx="${x - 8}" cy="${y - 8}" rx="14" ry="7" fill="#d8c8a8" opacity="0.4"/></g>`; });
-    s += `<path d="M 610 700 Q 640 760 610 820" stroke="#c6a15b" stroke-width="3" fill="none" opacity="0.7"/>` + finish();
-    return { svg: s, sub: "Le retard de la révélation ne signifiait pas qu’Allah avait rejeté son prophète." };
+    const P = "M 540 140 C 470 520 610 900 540 1260";
+    s += `<path d="${P}" stroke="#3a2a20" stroke-width="16" fill="none" opacity="0.35" stroke-dasharray="560 260 900"/>`;
+    s += `<path d="${P}" stroke="#f3ead7" stroke-width="5" fill="none" opacity="0.6" stroke-dasharray="560 260 900"/>`;
+    s += `<path d="${P}" stroke="#c6a15b" stroke-width="3" fill="none" opacity="0.55" stroke-dasharray="0 560 260 900"/>`;
+    s += finish();
+    return { svg: s, sub: "Le retard de la révélation ne signifiait pas qu’Allah avait rejeté son prophète.", tag: "Explication" };
   },
-  // S09a: forward travelling along the path through dunes towards a natural dawn horizon.
+  // S09a: no path: from the shaded dune crest the camera tilts up to an open horizon at first light (no sun disc, nothing "at the end").
   s09a() {
     seed = 900;
-    let s = layer("M0 0H1080V1920H0Z", grad([[0, "#1c2a50"], [0.45, "#6a7090"], [0.75, "#d8b890"], [1, "#f0dcb4"]]));
-    s += `<circle cx="700" cy="960" r="62" fill="#f6e6c2" opacity="0.85"/><circle cx="700" cy="960" r="180" fill="${radial([[0, "#f6e6c2", 0.3], [1, "#f6e6c2", 0]])}"/>`;
-    s += layer(ridge(950, 30, 0.006, 1), "#a8826a", 'opacity="0.8"');
-    const d2 = ridge(1040, 60, 0.005, 2), d3 = ridge(1180, 90, 0.004, 3);
-    s += layer(d2, "#8a6650") + mottle(d2, 0.15, "f-sand");
-    s += layer(d3, "#6a4c3c") + mottle(d3, 0.15, "f-sand");
-    s += `<path d="M 330 1990 C 360 1600 700 1450 520 1250 S 420 1080 470 1010 L 482 1010 C 450 1090 560 1180 556 1250 S 450 1600 760 1990 Z" fill="#a8845e"/>`;
-    s += `<path d="M 330 1990 C 360 1600 700 1450 520 1250" stroke="#d8b88c" stroke-width="3" fill="none" opacity="0.35"/>`;
-    s += finish();
-    return { svg: s, sub: "Pour lui, la vie dernière sera meilleure que la vie présente." };
+    let s = layer("M0 0H1080V1920H0Z", grad([[0, "#1c2a50"], [0.45, "#5a6488"], [0.62, "#c8aa8a"], [0.7, "#e8d2aa"], [1, "#e8d2aa"]]));
+    const f1 = ridge(1180, 14, 0.004, 1), f2 = ridge(1240, 30, 0.006, 2);
+    s += layer(f1, "#b89474", 'opacity="0.9"') + layer(f2, "#9a7658") + mottle(f2, 0.15, "f-sand");
+    s += `<path d="M -60 1990 L -60 1480 Q 300 1380 640 1430 Q 900 1470 1140 1420 L 1140 1990 Z" fill="#3a2a26"/>`;
+    s += `<path d="M -60 1480 Q 300 1380 640 1430 Q 900 1470 1140 1420" stroke="#f0d8ae" stroke-width="5" fill="none" opacity="0.55"/>`;
+    s += mottle("M -60 1990 L -60 1480 Q 300 1380 640 1430 Q 900 1470 1140 1420 L 1140 1990 Z", 0.12, "f-sand") + finish();
+    return { svg: s, sub: "Pour lui, la vie dernière sera meilleure que la vie présente.", tag: "Sens du verset 93:4" };
   },
-  // S09b: close-up, side view: water from a stone channel fills a clay jar to the brim.
+  // S09b: sober composition centred on the wording; no image is given to the promised favours.
   s09b() {
-    let s = layer("M0 0H1080V1920H0Z", grad([[0, "#3a4a6a"], [0.6, "#8a7a6a"], [1, "#5a4234"]]));
-    s += `<g filter="url(#f-paint)"><path d="M -40 520 H 620 L 640 600 H -40 Z" fill="#6a5a4e"/><path d="M -40 520 H 620 L 626 540 H -40 Z" fill="#b8a488" opacity="0.6"/></g>`;
-    s += `<path d="M 610 560 Q 650 620 640 1100" stroke="#cfe0ee" stroke-width="22" fill="none" opacity="0.65"/><path d="M 616 570 Q 652 640 646 1100" stroke="#ffffff" stroke-width="5" fill="none" opacity="0.5"/>`;
-    s += `<g filter="url(#f-paint)"><path d="M 470 1060 Q 440 1110 450 1180 Q 400 1260 410 1420 Q 430 1600 540 1640 Q 640 1660 720 1640 Q 830 1600 850 1420 Q 860 1260 810 1180 Q 820 1110 790 1060 Z" fill="${grad([[0, "#b0704a"], [0.5, "#8a5038"], [1, "#4a2a22"]], 1, 0)}"/>`;
-    s += `<ellipse cx="630" cy="1062" rx="162" ry="26" fill="#3a2520"/><ellipse cx="630" cy="1064" rx="148" ry="20" fill="#9fc0d8" opacity="0.85"/><ellipse cx="640" cy="1062" rx="60" ry="8" fill="#ffffff" opacity="0.5"/>`;
-    s += `<path d="M 470 1060 Q 440 1110 450 1180 Q 400 1260 410 1420" stroke="#e0a878" stroke-width="6" fill="none" opacity="0.5"/></g>`;
-    s += layer("M -40 1640 H 1120 V 1990 H -40 Z", "#3a2a24") + mottle("M -40 1640 H 1120 V 1990 H -40 Z", 0.15, "f-sand");
-    s += finish();
-    return { svg: s, sub: "Son Seigneur lui accordera de ses bienfaits, jusqu’à ce qu’il soit satisfait." };
+    let s = layer("M0 0H1080V1920H0Z", grad([[0, "#0b1630"], [1, "#13254f"]], 0.4, 1)) + mottle("M0 0H1080V1920H0Z", 0.06);
+    s += `<path d="${star8(540, 900, 430)}" fill="none" stroke="#c6a15b" stroke-width="1.5" opacity="0.18"/><path d="${star8(540, 900, 300)}" fill="none" stroke="#c6a15b" stroke-width="1" opacity="0.12"/>`;
+    s += `<text class="tagsvg" x="540" y="700" text-anchor="middle">Sens du verset 93:5</text>`;
+    s += `<text class="quote" x="540" y="820" text-anchor="middle">Son Seigneur</text><text class="quote" x="540" y="900" text-anchor="middle">lui accordera de ses bienfaits,</text>`;
+    s += `<text class="quote" x="540" y="1010" text-anchor="middle">jusqu’à ce qu’il</text><text class="quote" x="540" y="1090" text-anchor="middle">soit satisfait.</text>`;
+    s += `<path d="M 330 1124 H 750" stroke="#c6a15b" stroke-width="3" opacity="0.8"/>` + finish(false);
+    return { svg: s };
   },
-  // S10: the camera has turned round: the path behind, three cairns in the late light.
+  // S10: the eight-pointed star of S04 returns as a diagram: it turns back (counter-clockwise), three branches light up.
   s10() {
-    seed = 1000;
-    let s = layer("M0 0H1080V1920H0Z", grad([[0, "#22305a"], [0.55, "#7a6a7a"], [1, "#d0a070"]]));
-    s += layer(ridge(980, 50, 0.007, 1), "#5a4a5a") + layer(ridge(1080, 50, 0.006, 2), "#6a4e44");
-    s += layer("M -60 1100 Q 540 1080 1140 1110 V 1990 H -60 Z", grad([[0, "#9a7656"], [1, "#3a2a26"]])) + mottle("M -60 1100 Q 540 1080 1140 1110 V 1990 H -60 Z", 0.16, "f-sand");
-    s += road(600, 1092, 220, 860, "#b8946a", 60);
-    s += cairn(700, 1150, 0.55, "#5a4a46", "#d8c0a0") + cairn(410, 1300, 0.9, "#5a4a46", "#d8c0a0", 1) + cairn(820, 1560, 1.4, "#4a3c3a", "#d8c0a0", 1);
-    s += finish();
+    let s = layer("M0 0H1080V1920H0Z", grad([[0, "#0b1630"], [1, "#1a2a52"]], 0.4, 1)) + mottle("M0 0H1080V1920H0Z", 0.08);
+    const cx = 540, cy = 860, r = 330;
+    for (let i = 0; i < 8; i++) {
+      const a0 = Math.PI / 4 * i - Math.PI / 2, lit = i >= 5;
+      const p = (a, rr) => `${(cx + Math.cos(a) * rr).toFixed(1)} ${(cy + Math.sin(a) * rr).toFixed(1)}`;
+      s += `<path d="M ${cx} ${cy} L ${p(a0 - Math.PI / 8, r * 0.72)} L ${p(a0, r)} L ${p(a0 + Math.PI / 8, r * 0.72)} Z" fill="${lit ? "#c6a15b" : "#1e2e58"}" opacity="${lit ? 0.55 : 0.8}" stroke="#c6a15b" stroke-width="2"/>`;
+    }
+    s += `<circle cx="${cx}" cy="${cy}" r="70" fill="#0b1630" stroke="#c6a15b" stroke-width="2"/>`;
+    s += `<path d="M ${cx + 420} ${cy - 40} A 420 420 0 0 0 ${cx + 150} ${cy - 392}" stroke="#f3ead7" stroke-width="4" fill="none" opacity="0.5"/><path d="M ${cx + 150} ${cy - 392} l 30 -16 M ${cx + 150} ${cy - 392} l 26 22" stroke="#f3ead7" stroke-width="4" opacity="0.5"/>`;
+    s += finish(false);
     return { svg: s, sub: "Elle lui rappelle aussi ce qu’il a déjà reçu." };
   },
   // S11a: refuge: a simple doorway at dusk; the door opens and warm light spills onto the ground.
@@ -225,7 +247,7 @@ const SCENES = {
     s += `<path d="M 360 1500 H 720 L 900 1990 H 200 Z" fill="#f0c890" opacity="0.45" filter="url(#f-blur-md)"/>`;
     s += layer("M -40 1500 H 1120 V 1990 H -40 Z", "#3a2a24", 'opacity="0.75"') + `<path d="M 360 1500 H 720 L 900 1990 H 200 Z" fill="#f0c890" opacity="0.3"/>`;
     s += finish();
-    return { svg: s, sub: "Orphelin, il a été accueilli." };
+    return { svg: s, sub: "Orphelin, il a été accueilli.", tag: "Sens du verset 93:6" };
   },
   // S11b: guidance: night desert, stone markers lead the way, natural starlight; the camera follows them.
   s11b() {
@@ -235,7 +257,7 @@ const SCENES = {
     const pts = [[620, 1110, 0.45], [570, 1160, 0.65], [650, 1240, 0.9], [520, 1370, 1.3], [700, 1580, 1.9], [380, 1900, 2.8]];
     pts.forEach(([x, y, k]) => { s += `<g filter="url(#f-paint)"><path d="M ${x - 18 * k} ${y} L ${x - 12 * k} ${y - 90 * k} L ${x + 12 * k} ${y - 96 * k} L ${x + 18 * k} ${y} Z" fill="#3a3a50"/><path d="M ${x + 2 * k} ${y - 94 * k} L ${x + 12 * k} ${y - 96 * k} L ${x + 18 * k} ${y} L ${x + 4 * k} ${y} Z" fill="#9fb0d6" opacity="0.45"/></g>`; });
     s += `<path d="M 470 1990 Q 600 1500 560 1300 T 620 1110" stroke="#9fb0d6" stroke-width="3" fill="none" opacity="0.25" stroke-dasharray="6 14"/>` + finish();
-    return { svg: s, sub: "Il a reçu la guidée." };
+    return { svg: s, sub: "Il a reçu la guidée.", tag: "Sens du verset 93:7" };
   },
   // S11c: means of living: woven baskets on a mat, filling with dates and grain (top-down, three-quarter).
   s11c() {
@@ -252,26 +274,30 @@ const SCENES = {
     };
     s += basket(330, 820, 190, "#4a2418", "date") + basket(740, 1000, 170, "#cdb07a", "grain") + basket(420, 1250, 150, "#4a2418", "date");
     s += finish();
-    return { svg: s, sub: "Démuni, il a été enrichi." };
+    return { svg: s, sub: "Démuni, il a été enrichi.", tag: "Sens du verset 93:8" };
   },
-  // S12: pedagogical diagram, seen from above: past (three cairns), the answer, the future (path ahead).
+  // S12: triptych of the three reminders in arched niches, then a short frieze of the passage's order (explanation).
   s12() {
-    let s = layer("M0 0H1080V1920H0Z", grad([[0, "#8a6a4e"], [1, "#4a3428"]], 1, 1)) + mottle("M0 0H1080V1920H0Z", 0.25, "f-sand");
-    const P = "M 520 1290 C 420 1100 640 960 540 760 S 500 420 560 260";
-    s += `<path d="${P}" stroke="#d8bc90" stroke-width="80" fill="none" opacity="0.55" stroke-linecap="round"/>`;
-    s += `<path d="${P}" stroke="#f3ead7" stroke-width="3" fill="none" opacity="0.5" stroke-dasharray="3 12"/>`;
-    // three cairns (past) from above, each with its engraved sign: door, marker, basket
-    [[420, 1200], [640, 1080], [440, 950]].forEach(([x, y], i) => {
-      s += `<g filter="url(#f-paint)"><circle cx="${x + 6}" cy="${y + 8}" r="64" fill="#2a1e18" opacity="0.4"/><circle cx="${x}" cy="${y}" r="62" fill="#5a4a46"/><circle cx="${x}" cy="${y}" r="44" fill="#6a5a52"/></g>`;
-      s += [`<path d="M ${x - 16} ${y + 20} V ${y - 4} Q ${x} ${y - 24} ${x + 16} ${y - 4} V ${y + 20}" stroke="#f0d9a8" stroke-width="4" fill="none"/>`,
-            `<path d="M ${x} ${y + 22} L ${x - 5} ${y - 20} L ${x + 7} ${y - 22} Z" fill="#f0d9a8"/>`,
-            `<ellipse cx="${x}" cy="${y + 4}" rx="20" ry="12" fill="none" stroke="#f0d9a8" stroke-width="4"/><path d="M ${x - 20} ${y + 4} Q ${x} ${y - 30} ${x + 20} ${y + 4}" stroke="#f0d9a8" stroke-width="3" fill="none"/>`][i];
+    let s = layer("M0 0H1080V1920H0Z", grad([[0, "#0b1630"], [1, "#16274f"]], 0.4, 1)) + mottle("M0 0H1080V1920H0Z", 0.08);
+    const arch = (x, w) => `M ${x} 1000 V 560 Q ${x} 420 ${x + w / 2} 400 Q ${x + w} 420 ${x + w} 560 V 1000 Z`;
+    const mini = [
+      // refuge: wall and an open lit door
+      (x) => `<rect x="${x}" y="380" width="260" height="640" fill="#7a5a44"/><path d="M ${x + 80} 1000 V 700 Q ${x + 130} 640 ${x + 180} 700 V 1000 Z" fill="#f0c890"/><path d="M ${x + 80} 1000 L ${x + 20} 1020 H ${x + 240} L ${x + 180} 1000 Z" fill="#f0c890" opacity="0.5"/>`,
+      // guidance: stars and stone markers
+      (x) => `<rect x="${x}" y="380" width="260" height="640" fill="#0e1834"/>` + [[60, 470], [180, 520], [120, 600], [220, 640], [40, 690]].map(([a, b]) => `<circle cx="${x + a}" cy="${b}" r="2.4" fill="#f3ead7"/>`).join("") + `<rect x="${x}" y="860" width="260" height="160" fill="#26304a"/>` + [[140, 880, 0.4], [110, 920, 0.7], [160, 980, 1]].map(([a, b, k]) => `<path d="M ${x + a - 10 * k} ${b} L ${x + a - 6 * k} ${b - 60 * k} L ${x + a + 6 * k} ${b - 62 * k} L ${x + a + 10 * k} ${b} Z" fill="#9fb0d6" opacity="0.7"/>`).join(""),
+      // means of living: a basket on a mat, side view
+      (x) => `<rect x="${x}" y="380" width="260" height="640" fill="#5a4234"/><rect x="${x}" y="900" width="260" height="120" fill="#8a6a48"/><path d="M ${x + 60} 900 Q ${x + 50} 820 ${x + 70} 800 H ${x + 190} Q ${x + 210} 820 ${x + 200} 900 Z" fill="#b08a56"/><ellipse cx="${x + 130}" cy="800" rx="60" ry="14" fill="#4a2418"/>` + [0, 1, 2, 3].map((k) => `<path d="M ${x + 62} ${820 + k * 22} H ${x + 198}" stroke="#7a5a36" stroke-width="3" opacity="0.6"/>`).join("")
+    ];
+    [90, 410, 730].forEach((x, i) => {
+      defs.push(`<clipPath id="arch${i}"><path d="${arch(x, 260)}"/></clipPath>`);
+      s += `<g clip-path="url(#arch${i})" filter="url(#f-paint)">${mini[i](x)}</g><path d="${arch(x, 260)}" fill="none" stroke="#c6a15b" stroke-width="3" opacity="${i === 2 ? 0.95 : 0.6}"/>`;
     });
-    s += `<circle cx="540" cy="760" r="30" fill="none" stroke="#c6a15b" stroke-width="5"/><circle cx="540" cy="760" r="10" fill="#c6a15b"/>`;
-    s += `<path d="M 560 260 l -20 44 M 560 260 l 24 40" stroke="#f3ead7" stroke-width="5" opacity="0.75"/>`;
-    s += `<text class="label" x="740" y="1100">passé</text><text class="label" x="610" y="770">réponse</text><text class="label" x="630" y="320">avenir</text>`;
-    s += finish();
-    return { svg: s, sub: "Un refuge, une guidée, des moyens de vivre." };
+    s += `<path d="M 140 1180 H 940" stroke="#f3ead7" stroke-width="2" opacity="0.4"/>`;
+    [[220, "réponse"], [540, "avenir"], [860, "passé"]].forEach(([x, t], i) => {
+      s += `<circle cx="${x}" cy="1180" r="${i === 2 ? 12 : 8}" fill="${i === 2 ? "#c6a15b" : "#f3ead7"}" opacity="${i === 2 ? 1 : 0.6}"/><text class="label" x="${x}" y="1240" text-anchor="middle" opacity="${i === 2 ? 1 : 0.6}">${t}</text>`;
+    });
+    s += finish(false);
+    return { svg: s, sub: "Un refuge, une guidée, des moyens de vivre.", tag: "Explication" };
   },
   // S16: end card, the building facade again, now in the morning.
   s16() {
@@ -296,7 +322,7 @@ defs = [];
 const out = SCENES[id]();
 document.getElementById("stage").innerHTML =
   `<svg viewBox="0 0 1080 1920"><defs>${BASE_DEFS}${defs.join("")}</defs>${out.svg}</svg>` +
-  (out.title ? `<div class="title"${out.titleColor ? ` style="color:${out.titleColor}"` : ""}>${out.title}</div>` : "") + (out.sub ? `<div class="sub">${out.sub}</div>` : "");
+  (out.title ? `<div class="title"${out.titleColor ? ` style="color:${out.titleColor}"` : ""}>${out.title}</div>` : "") + (out.tag ? `<div class="tag">${out.tag}</div>` : "") + (out.sub ? `<div class="sub">${out.sub}</div>` : "");
 window.__ready = true;
 </script>
 </body>

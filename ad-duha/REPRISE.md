@@ -1,4 +1,4 @@
-# Reprise : Ad-Duha, premiers versets (état au 2026-10-20, storyboard complet)
+# Reprise : Ad-Duha, premiers versets (état au 2026-10-20, storyboard révision 2)
 
 Branche : `claude/determined-tesla-akfm85`. Règles : `../CLAUDE.md` (série) et `../AGENTS.md` (garde-fous HyperFrames).
 Dossier distinct de `ep01-medisance/` (conservé tel quel ; sa direction visuelle n'est pas reprise).
@@ -59,7 +59,7 @@ Contrôle après rendu : décalage 0 ms avec l'original, mêmes pauses, silence 
 ## Statut
 - **Introduction V2 validée** par l'utilisateur (animation + correction du personnage). Ne plus modifier `index.html`
   sans demande ; la séquence et sa direction artistique sont la référence de tout le film.
-- **Storyboard complet préparé, en attente de validation** : `STORYBOARD.md` (17 séquences, minutage réel, passage,
+- **Storyboard retenu par l'utilisateur** (ensemble et continuité chambre début / fin), corrigé en révision 2 : `STORYBOARD.md` (17 séquences, minutage réel, passage,
   image, action, caméra, transition), vignettes `storyboard/frames/S00…S16.jpg`, planches `storyboard/planche-1.jpg` à
   `planche-3.jpg`. Vignettes : `storyboard/scenes.html` (décors hors chambre, SVG peint) et variantes de la chambre
   validée appliquées dans la page ; export `node ad-duha/storyboard/build-storyboard.cjs`.
@@ -75,8 +75,50 @@ Contrôle après rendu : décalage 0 ms avec l'original, mêmes pauses, silence 
 - Cadrages variés (liste de contrôle en fin de `STORYBOARD.md`) ; raccord de forme étoile → fenêtre (S04 → S05).
 - Fin : image tenue ~0,5 s après la fin du fichier audio (silence ajouté après, audio intact).
 
+## Storyboard révision 2 (corrections demandées)
+- Répétition vallée / chemin supprimée : vallée seulement en S02 ; S03a grand ciel à horizon bas ; S03b et S07 un même
+  acacia (vent / calme) ; S08 tracé dans le sable ; S09a horizon ouvert sans chemin ; S10 étoile-schéma tournée vers
+  le passé ; S12 triptyque en arches + frise réponse · avenir · passé.
+- S09b : la jarre est remplacée par une composition typographique sobre (formulation du verset, aucune forme donnée
+  aux bienfaits promis).
+- Aucune durée suggérée : plus de suite de soleils et de lunes (S03a), plus de pierres dénombrables (S08).
+- Mentions à l'écran : « Sens des versets 93:1–2 », « Sens du verset 93:3 » à « 93:8 » au-dessus du sous-titre ;
+  « Explication » si nécessaire ; référence courte « Ṣaḥīḥ Muslim 1797a » en S03a. Sans guillemets autour des
+  reformulations. Les notes techniques, réserves et commentaires restent hors de l'image. Références complètes :
+  description de la vidéo et `SOURCES.md` (à créer dans `serie-coran/episodes/<ep>/`).
+- Notation retenue « 93:x » (sourate:verset) pour la mention demandée « Sens des versets 93–y » ; à changer si l'utilisateur
+  préfère une autre forme.
+- Vignettes régénérées : S03a, S03b, S04, S05, S06, S07, S08, S09a, S09b, S10, S11a, S11b, S11c, S12 et les planches.
+
+## Référence externe communiquée
+- Sahih Muslim 1797a, https://sunnah.com/muslim:1797a : selon l'utilisateur, rapporte d'après Jundub le retard de la
+  venue de Gabriel et les propos des polythéistes. **Communiquée par l'utilisateur, non consultée ici** (sunnah.com est
+  bloqué dans cet environnement ; ne pas relancer l'accès). Elle ne vaut pas vérification des autres affirmations.
+
+## Vérifications restantes (précises ; aucun accès bloqué à relancer)
+`VERIFICATIONS.md` n'a pas été modifié dans cette révision (consigne) ; la liste ci-dessous en donne l'état à jour.
+1. Muslim 1797a : texte arabe et traduction nommée de l'extrait ; numérotation selon l'édition citée ; degré
+   (Ṣaḥīḥ Muslim) et formulation exacte : « tarde à venir », « les polythéistes ». À faire par l'utilisateur ou depuis
+   un accès qui fonctionne ; extrait à copier dans `SOURCES.md`.
+2. Nom du transmetteur entendu dans l'audio (transcrit « John Dobre ») = Jundub : confirmer à l'écoute.
+3. Autre version du récit (al-Bukhari) où la parole serait attribuée à une femme : vérifier, et ne pas présenter la
+   version de Muslim comme la seule.
+4. Circonstance de révélation (« c'est dans ce contexte que sont révélés les premiers versets ») : tafsir nommé.
+5. « La sourate s'adresse d'abord au Prophète » : tafsir nommé.
+6. Numéros des versets affichés (93:1-2, 93:3 … 93:8) : contrôler sur un mushaf ou une édition citée.
+7. Paraphrases des versets 1 à 8 : les comparer à une traduction du sens nommée (droit d'usage) ; si l'écart est
+   grand, garder « Sens du verset » et ne pas citer comme traduction.
+8. Explications (« le retard… ne signifiait pas… », structure réponse / avenir / passé) : tafsir nommé, ou présentées
+   comme lecture pédagogique.
+9. Verset 7 (« il ne connaissait pas encore le livre… ») : interprétation discutée, source précise, ne pas la présenter
+   comme la seule lecture.
+10. Verset 4 : « vie dernière / vie présente » face à la lecture « la fin / le début » : ne pas présenter une lecture
+    comme consensus.
+11. Formule « paix et salut sur lui » : choix éditorial à confirmer (même question qu'en épisode 1).
+12. Forme : « ces/ses versets » (84 s), « annoncé/annoncer » (80 s), dernier mot non tronqué en fin de fichier.
+
 ## Prochaines tâches
-1. Validation du storyboard par l'utilisateur (séquences, métaphores visuelles, cadrages).
+1. Validation de la révision 2 du storyboard par l'utilisateur.
 2. Vérifications religieuses de `VERIFICATIONS.md` avec sources et extraits dans `serie-coran/episodes/<ep>/SOURCES.md` ;
    décision sur la distinction paraphrase de verset / explication dans les sous-titres.
 3. Ensuite seulement : animation séquence par séquence (aperçus basse résolution), en réutilisant les plans de

@@ -17,20 +17,20 @@ const SHOTS = [
   ["S00", "0,00–7,40", "Introduction (validée)", { room: 0.8, variant: "intro" }],
   ["S01", "7,40–13,45", "Appel : la façade la nuit", { scene: "s01" }],
   ["S02", "13,45–21,25", "La vallée au crépuscule", { scene: "s02" }],
-  ["S03a", "21,25–26,40", "Les jours passent", { scene: "s03a" }],
-  ["S03b", "26,40–29,25", "Le vent et la poussière", { scene: "s03b" }],
+  ["S03a", "21,25–26,40", "L'attente : un grand ciel", { scene: "s03a" }],
+  ["S03b", "26,40–29,25", "L'acacia dans le vent", { scene: "s03b" }],
   ["S04", "29,25–32,60", "Le cadre se referme", { scene: "s04" }],
-  ["S05", "32,60–36,60", "La clarté de la matinée", { room: 8.3, variant: "morning" }],
-  ["S06", "36,60–38,70", "La nuit calme", { room: 1.2, variant: "calm" }],
-  ["S07", "38,70–45,40", "Le vent retombe", { scene: "s07" }],
+  ["S05", "32,60–36,60", "La clarté de la matinée", { room: 8.3, variant: "morning", tag: "Sens des versets 93:1–2" }],
+  ["S06", "36,60–38,70", "La nuit calme", { room: 1.2, variant: "calm", tag: "Sens des versets 93:1–2" }],
+  ["S07", "38,70–45,40", "L'acacia au calme", { scene: "s07" }],
   ["S08", "45,40–49,60", "L'intervalle n'est pas une rupture", { scene: "s08" }],
-  ["S09a", "49,60–55,00", "Vers l'horizon", { scene: "s09a" }],
-  ["S09b", "55,00–58,85", "La jarre se remplit", { scene: "s09b" }],
-  ["S10", "58,85–63,50", "Demi-tour : trois cairns", { scene: "s10" }],
+  ["S09a", "49,60–55,00", "L'horizon ouvert", { scene: "s09a" }],
+  ["S09b", "55,00–58,85", "La formulation du verset", { scene: "s09b" }],
+  ["S10", "58,85–63,50", "L'étoile se tourne vers le passé", { scene: "s10" }],
   ["S11a", "63,50–65,40", "Un refuge", { scene: "s11a" }],
   ["S11b", "65,40–70,65", "Une guidée", { scene: "s11b" }],
   ["S11c", "70,65–72,80", "Des moyens de vivre", { scene: "s11c" }],
-  ["S12", "72,80–83,10", "Le chemin vu d'en haut", { scene: "s12" }],
+  ["S12", "72,80–83,10", "Triptyque et frise", { scene: "s12" }],
   ["S13", "83,10–92,55", "La pluie occupe tout", { room: 5.0, variant: "rain" }],
   ["S14", "92,55–98,65", "Ce qui était déjà là", { room: 7.6, variant: "objects" }],
   ["S15", "98,65–101,40", "Le matin", { room: 2.0, variant: "morningPerson" }],
@@ -47,7 +47,7 @@ const SUBS = {
 };
 
 // Variants of the validated room, applied inside the page after seeking.
-function applyVariant(variant, sub) {
+function applyVariant(variant, sub, tag) {
   const $ = (s) => document.querySelector(s);
   const all = (s) => document.querySelectorAll(s);
   const stops = (id, colors) => all(`#${id} stop`).forEach((st, i) => colors[i] && st.setAttribute("stop-color", colors[i]));
@@ -103,6 +103,11 @@ function applyVariant(variant, sub) {
     add("#p-person", 850, 1390, 90);  // folded prayer rug
   }
   const s = document.getElementById("s1"); s.textContent = sub; s.style.opacity = "1"; s.style.transform = "none";
+  if (tag) { // discreet mention above the subtitle (same style as scenes.html .tag)
+    const t = document.createElement("div"); t.textContent = tag;
+    t.style.cssText = "position:absolute;left:100px;right:160px;top:1296px;text-align:center;font:500 22px/1.2 Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#c6a15b;opacity:.9";
+    document.getElementById("root").appendChild(t);
+  }
 }
 
 (async () => {
@@ -117,7 +122,7 @@ function applyVariant(variant, sub) {
     } else {
       await page.goto("file://" + path.resolve(DIR, "../index.html"), { waitUntil: "load" });
       await page.evaluate((t) => { window.__timelines["ad-duha-intro"].seek(t, false); return true; }, spec.room);
-      await page.evaluate(applyVariant, spec.variant, SUBS[spec.variant]);
+      await page.evaluate(applyVariant, spec.variant, SUBS[spec.variant], spec.tag || "");
     }
     await page.evaluate(() => document.fonts.ready.then(() => true));
     const png = path.join(FRAMES, id + ".png");
