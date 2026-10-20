@@ -1,4 +1,4 @@
-# Reprise : Ad-Duha, premiers versets (état au 2026-10-20)
+# Reprise : Ad-Duha, premiers versets (état au 2026-10-20, storyboard complet)
 
 Branche : `claude/determined-tesla-akfm85`. Règles : `../CLAUDE.md` (série) et `../AGENTS.md` (garde-fous HyperFrames).
 Dossier distinct de `ep01-medisance/` (conservé tel quel ; sa direction visuelle n'est pas reprise).
@@ -25,7 +25,7 @@ Contrôle après rendu : décalage 0 ms avec l'original, mêmes pauses, silence 
 - Captures versionnées : `prototype/capture-0.8s.jpg`, `capture-3.7s.jpg`, `capture-7.5s.jpg`.
 - Aperçus rapides : `npx hyperframes snapshot --at 0.5,3.6,5.0,7.6 --no-end`.
 
-## Direction visuelle retenue (à valider)
+## Direction visuelle retenue (validée avec l'introduction V2)
 - Illustration 2D vectorielle construite en SVG (aucun outil gratuit de génération d'images disponible : les modèles
   de media-use passent par des API payantes). Texture « peinte » : bords légèrement déformés (feTurbulence +
   feDisplacementMap), marbrures du mur et du sol, grain papier ; tout est statique et déterministe (PRNG à graine).
@@ -56,6 +56,28 @@ Contrôle après rendu : décalage 0 ms avec l'original, mêmes pauses, silence 
 - Personnage stylisé et peu articulé (respiration, inclinaison de tête seulement).
 - Rendu `draft` ; rendu final de qualité après validation seulement.
 
-## Prochaine tâche
-Attendre la validation du prototype. Ensuite seulement : script complet découpé sur `transcription/`, sources
-(`serie-coran/episodes/<ep>/SOURCES.md`), storyboard, et déclinaison des illustrations sur toute la vidéo.
+## Statut
+- **Introduction V2 validée** par l'utilisateur (animation + correction du personnage). Ne plus modifier `index.html`
+  sans demande ; la séquence et sa direction artistique sont la référence de tout le film.
+- **Storyboard complet préparé, en attente de validation** : `STORYBOARD.md` (17 séquences, minutage réel, passage,
+  image, action, caméra, transition), vignettes `storyboard/frames/S00…S16.jpg`, planches `storyboard/planche-1.jpg` à
+  `planche-3.jpg`. Vignettes : `storyboard/scenes.html` (décors hors chambre, SVG peint) et variantes de la chambre
+  validée appliquées dans la page ; export `node ad-duha/storyboard/build-storyboard.cjs`.
+- Minutage mot à mot du fichier entier : `transcription/dhuha-mots.json` (transcription automatique, indicative).
+- Affirmations religieuses à vérifier, séparément : `VERIFICATIONS.md` (16 points, aucun vérifié à ce stade).
+
+## Choix visuels du storyboard
+- Trois décors récurrents pour la continuité : la chambre (nuit pluvieuse → nuit calme → matin), la vallée et son
+  chemin (crépuscule, poussière, chemin dégagé, horizon, demi-tour, schéma vu d'en haut), la façade (nuit / matin).
+- Aucune figure hors de la personne contemporaine anonyme ; pas de Prophète, d'ange, de foule, ni de lieu historique
+  reconstitué ; pas de lumière surnaturelle ; aucune image de l'au-delà ou du Paradis (horizon naturel, jarre).
+- Schémas pédagogiques en illustration (pierres et intervalle S08, chemin passé/réponse/avenir S12), mots très courts.
+- Cadrages variés (liste de contrôle en fin de `STORYBOARD.md`) ; raccord de forme étoile → fenêtre (S04 → S05).
+- Fin : image tenue ~0,5 s après la fin du fichier audio (silence ajouté après, audio intact).
+
+## Prochaines tâches
+1. Validation du storyboard par l'utilisateur (séquences, métaphores visuelles, cadrages).
+2. Vérifications religieuses de `VERIFICATIONS.md` avec sources et extraits dans `serie-coran/episodes/<ep>/SOURCES.md` ;
+   décision sur la distinction paraphrase de verset / explication dans les sous-titres.
+3. Ensuite seulement : animation séquence par séquence (aperçus basse résolution), en réutilisant les plans de
+   profondeur et la caméra de `index.html` ; rendu complet après validation.

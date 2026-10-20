@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<title>Ad-Duha · vignettes du storyboard (hors chambre)</title>
+<!-- Storyboard stills only (not the animation). Same painted-SVG treatment as ../index.html.
+     Open scenes.html#<id> ; ids listed in SCENES below. Exported by build-storyboard.cjs. -->
+<style>
+  @font-face { font-family: "Inter"; src: url("../assets/fonts/inter-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+  @font-face { font-family: "Source Serif 4"; src: url("../assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); }
+  html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #070d1f; }
+  #stage { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
+  svg { position: absolute; inset: 0; width: 1080px; height: 1920px; }
+  .sub { position: absolute; left: 100px; right: 160px; top: 1352px; text-align: center;
+    font: 400 50px/1.3 "Source Serif 4", serif; color: #f3ead7; text-shadow: 0 2px 18px rgba(4, 8, 20, 0.85); }
+  .title { position: absolute; left: 100px; right: 160px; top: 252px; text-align: center; white-space: nowrap;
+    font: 500 23px/1.3 "Inter", sans-serif; letter-spacing: 0.1em; text-transform: uppercase; color: #c6a15b; }
+  .label { font: 500 30px "Inter", sans-serif; letter-spacing: 0.12em; text-transform: uppercase; fill: #f3ead7; }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<script>
+// ---------- deterministic helpers ----------
+let seed = 93;
+const rnd = () => { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; };
+const R = (a, b) => a + rnd() * (b - a);
+let gid = 0;
+const grad = (stops, x2 = 0, y2 = 1) => {
+  const id = "g" + (gid++);
+  defs.push(`<linearGradient id="${id}" x1="0" y1="0" x2="${x2}" y2="${y2}">` +
+    stops.map(([o, c, a = 1]) => `<stop offset="${o}" stop-color="${c}" stop-opacity="${a}"/>`).join("") + `</linearGradient>`);
+  return `url(#${id})`;
+};
+const radial = (stops) => {
+  const id = "g" + (gid++);
+  defs.push(`<radialGradient id="${id}">` + stops.map(([o, c, a = 1]) => `<stop offset="${o}" stop-color="${c}" stop-opacity="${a}"/>`).join("") + `</radialGradient>`);
+  return `url(#${id})`;
+};
+let defs = [];
+const BASE_DEFS = `
+  <filter id="f-paint" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.025" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/></filter>
+  <filter id="f-mottle" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.006 0.012" numOctaves="4" seed="11"/><feColorMatrix type="matrix" values="0 0 0 0 0.95  0 0 0 0 0.88  0 0 0 0 0.78  0 0 0 0.9 -0.32"/></filter>
+  <filter id="f-mottle-dark" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.009 0.004" numOctaves="3" seed="23"/><feColorMatrix type="matrix" values="0 0 0 0 0.02  0 0 0 0 0.03  0 0 0 0 0.08  0 0 0 1.1 -0.38"/></filter>
+  <filter id="f-sand" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.02 0.09" numOctaves="3" seed="31"/><feColorMatrix type="matrix" values="0 0 0 0 0.95  0 0 0 0 0.85  0 0 0 0 0.65  0 0 0 0.9 -0.35"/></filter>
+  <filter id="f-grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="7"/><feColorMatrix type="saturate" values="0"/></filter>
+  <filter id="f-blur-sm" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter>
+  <filter id="f-blur-md" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+  <filter id="f-blur-fg" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="10"/></filter>
+  <radialGradient id="g-vignette" cx="0.5" cy="0.47" r="0.72"><stop offset="0.55" stop-color="#03060f" stop-opacity="0"/><stop offset="1" stop-color="#03060f" stop-opacity="0.72"/></radialGradient>
+  <linearGradient id="g-bottom" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#05080f" stop-opacity="0"/><stop offset="1" stop-color="#05080f" stop-opacity="0.55"/></linearGradient>`;
+
+// smooth ridge line from a few seeded sine waves
+const ridge = (y, amp, freq, s, x0 = -60, x1 = 1140, bottom = 1980) => {
+  const ph = [R(0, 6), R(0, 6), R(0, 6)];
+  let d = `M ${x0} ${bottom} L `;
+  for (let x = x0; x <= x1; x += 20) {
+    const v = Math.sin(x * freq + ph[0]) * 0.6 + Math.sin(x * freq * 2.3 + ph[1]) * 0.28 + Math.sin(x * freq * 5.1 + ph[2]) * 0.12;
+    d += `${x} ${(y - v * amp).toFixed(1)} L `;
+  }
+  return d + `${x1} ${bottom} Z`;
+};
+const layer = (d, fill, extra = "") => `<path d="${d}" fill="${fill}" ${extra}/>`;
+const mottle = (d, op = 0.1, f = "f-mottle") => `<path d="${d}" filter="url(#${f})" opacity="${op}"/>`;
+// perspective path from the bottom of the frame to a vanishing point
+const road = (vx, vy, nearL, nearR, fill, curve = 0) =>
+  `<path d="M ${nearL} 1990 Q ${(nearL + vx) / 2 + curve} ${(1990 + vy) / 2} ${vx - 6} ${vy} L ${vx + 6} ${vy} Q ${(nearR + vx) / 2 + curve} ${(1990 + vy) / 2} ${nearR} 1990 Z" fill="${fill}"/>`;
+const rock = (x, y, w, h, c1, c2) => `<g filter="url(#f-paint)"><path d="M ${x - w / 2} ${y} Q ${x - w / 2 + 6} ${y - h * 0.8} ${x - w * 0.1} ${y - h} Q ${x + w * 0.3} ${y - h * 1.02} ${x + w / 2} ${y - h * 0.3} L ${x + w / 2} ${y} Z" fill="${c1}"/><path d="M ${x + w * 0.05} ${y - h * 0.95} Q ${x + w * 0.35} ${y - h} ${x + w / 2} ${y - h * 0.3} L ${x + w / 2} ${y} L ${x + w * 0.12} ${y} Z" fill="${c2}" opacity="0.7"/></g>`;
+const cairn = (x, y, s, c1, c2, lit) => {
+  let g = `<g filter="url(#f-paint)">`;
+  const sizes = [[1, 0], [0.8, -0.55], [0.6, -1.0], [0.42, -1.35]];
+  sizes.forEach(([k, dy]) => { g += `<ellipse cx="${x + R(-4, 4) * s}" cy="${y + dy * 60 * s}" rx="${46 * k * s}" ry="${26 * k * s}" fill="${c1}"/><ellipse cx="${x - 10 * k * s}" cy="${y + dy * 60 * s - 8 * k * s}" rx="${28 * k * s}" ry="${9 * k * s}" fill="${c2}" opacity="0.6"/>`; });
+  return g + `</g>` + (lit ? `<ellipse cx="${x}" cy="${y + 18 * s}" rx="${80 * s}" ry="${14 * s}" fill="#05070d" opacity="0.4" filter="url(#f-blur-sm)"/>` : "");
+};
+const finish = (bottomShade = true) => `<rect width="1080" height="1920" fill="url(#g-vignette)"/>` +
+  (bottomShade ? `<rect y="1200" width="1080" height="720" fill="url(#g-bottom)"/>` : "") +
+  `<rect width="1080" height="1920" filter="url(#f-grain)" opacity="0.07" style="mix-blend-mode:overlay"/>`;
+const stars = (n, y0, y1, op = 0.5) => { let s = ""; for (let i = 0; i < n; i++) s += `<circle cx="${R(40, 1040)}" cy="${R(y0, y1)}" r="${R(0.8, 2.2)}" fill="#f3ead7" opacity="${R(0.2, op)}"/>`; return s; };
+const icon = { // discreet gold line pictograms for the calls to action
+  bell: (x, y) => `<g transform="translate(${x} ${y})" fill="none" stroke="#c6a15b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M -22 14 Q -18 10 -18 -4 Q -18 -26 0 -28 Q 18 -26 18 -4 Q 18 10 22 14 Z"/><path d="M -6 20 Q 0 27 6 20"/></g>`,
+  heart: (x, y) => `<g transform="translate(${x} ${y})" fill="none" stroke="#c6a15b" stroke-width="4" stroke-linejoin="round"><path d="M 0 22 Q -30 0 -26 -12 Q -20 -28 0 -14 Q 20 -28 26 -12 Q 30 0 0 22 Z"/></g>`,
+  share: (x, y) => `<g transform="translate(${x} ${y})" fill="none" stroke="#c6a15b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M -24 20 Q -22 -8 10 -8"/><path d="M 2 -20 L 16 -8 L 2 4"/></g>`
+};
+
+// ---------- reusable decor: the valley (S02, S03, S04, S07) ----------
+function valley(p) {
+  seed = 512; // same geometry for every valley shot (continuity)
+  let s = layer("M0 0H1080V1920H0Z", grad(p.sky));
+  s += p.extraSky || "";
+  const r1 = ridge(820, 70, 0.006, 1); s += layer(r1, p.m1) + mottle(r1, 0.08);
+  seed = 520; s += layer(ridge(960, 90, 0.008, 2), p.m2);
+  seed = 530; const r3 = ridge(1120, 60, 0.01, 3); s += layer(r3, p.m3) + mottle(r3, 0.12);
+  s += layer("M -60 1150 Q 540 1110 1140 1160 V 1990 H -60 Z", grad(p.ground)) + mottle("M -60 1150 Q 540 1110 1140 1160 V 1990 H -60 Z", 0.14, "f-sand");
+  s += road(560, 1140, 300, 820, p.road, -40);
+  seed = 540;
+  s += rock(170, 1260, 260, 170, p.rock1, p.rock2) + rock(930, 1300, 300, 210, p.rock1, p.rock2) + rock(760, 1190, 120, 60, p.rock1, p.rock2);
+  return s;
+}
+const VALLEY_DUSK = { sky: [[0, "#101b3c"], [0.5, "#2d3657"], [0.8, "#7a5f5a"], [1, "#c08a62"]], m1: "#3b3550", m2: "#4a3a44", m3: "#5a4238",
+  ground: [[0, "#7a5a40"], [1, "#2c2024"]], road: "#9a7a58", rock1: "#3a2a2a", rock2: "#7a5a46" };
+
+// ---------- scenes ----------
+const SCENES = {
+  // S01: the building facade at night, our window lit, rain; discreet pictograms.
+  s01() {
+    let s = layer("M0 0H1080V1920H0Z", grad([[0, "#060c22"], [0.6, "#13224a"], [1, "#24304f"]])) + stars(18, 80, 500);
+    s += layer("M 140 120 H 1000 V 1990 H 140 Z", grad([[0, "#1a2340"], [1, "#0e1428"]], 1, 1)) + mottle("M 140 120 H 1000 V 1990 H 140 Z", 0.12) + mottle("M 140 120 H 1000 V 1990 H 140 Z", 0.5, "f-mottle-dark");
+    s += `<g filter="url(#f-paint)">`;
+    for (let r = 0; r < 7; r++) for (let c = 0; c < 3; c++) {
+      const x = 210 + c * 270, y = 220 + r * 250, ours = r === 3 && c === 1;
+      const lit = ours || rnd() < 0.18;
+      s += `<rect x="${x - 10}" y="${y - 10}" width="190" height="200" fill="#2b2328"/>`;
+      s += `<rect x="${x}" y="${y}" width="170" height="180" fill="${ours ? "#d9a96a" : lit ? "#8a6a4a" : "#121a33"}"/>`;
+      if (ours) s += `<rect x="${x}" y="${y}" width="40" height="180" fill="#4a3c3e"/><rect x="${x + 130}" y="${y}" width="40" height="180" fill="#3f3439"/><circle cx="${x + 60}" cy="${y + 110}" r="70" fill="#f2c98a" opacity="0.35" filter="url(#f-blur-md)"/>`;
+      s += `<rect x="${x + 81}" y="${y}" width="8" height="180" fill="#2b2328"/><rect x="${x - 16}" y="${y + 186}" width="202" height="14" fill="#3b3035"/>`;
+    }
+    s += `</g><g stroke="#c9d4ea" stroke-linecap="round" opacity="0.5">`;
+    for (let i = 0; i < 70; i++) { const x = R(0, 1080), y = R(0, 1900); s += `<line x1="${x}" y1="${y}" x2="${x - 6}" y2="${y + R(30, 70)}" stroke-width="${R(1, 2.4)}"/>`; }
+    s += `</g>` + finish();
+    s += icon.bell(400, 1560) + icon.heart(540, 1562) + icon.share(680, 1560);
+    return { svg: s, sub: "Pour mieux comprendre le Coran, abonne-toi." };
+  },
+  // S02: an arid valley at dusk, no figure; "what was being said": faint wind/echo curves crossing it.
+  s02() {
+    let s = valley(VALLEY_DUSK);
+    s += `<g fill="none" stroke="#f3ead7" stroke-linecap="round" filter="url(#f-blur-sm)">`;
+    for (let i = 0; i < 6; i++) { const y = 900 + i * 55; s += `<path d="M ${-40 + i * 30} ${y} Q 300 ${y - 70} 560 ${y - 10} T 1120 ${y - 40}" stroke-width="${3 - i * 0.3}" opacity="${0.35 - i * 0.04}"/>`; }
+    s += `</g>` + finish();
+    return { svg: s, sub: "… il faut revenir à ce qui se disait autour de lui." };
+  },
+  // S03a: same valley, locked-off time-lapse: arc of suns and moons = days passing; shadows turning.
+  s03a() {
+    let s = valley({ ...VALLEY_DUSK, sky: [[0, "#1d2c52"], [0.55, "#4a5878"], [1, "#b89a78"]] });
+    for (let i = 0; i < 9; i++) {
+      const a = Math.PI * (0.1 + i * 0.1), x = 540 - Math.cos(a) * 430, y = 860 - Math.sin(a) * 520, sun = i % 2 === 0;
+      s += sun ? `<circle cx="${x}" cy="${y}" r="20" fill="#f0d9a8" opacity="${0.35 + i * 0.06}"/>` : `<path d="M ${x + 14} ${y - 16} A 18 18 0 1 0 ${x + 14} ${y + 16} A 14 14 0 1 1 ${x + 14} ${y - 16} Z" fill="#efe6cf" opacity="${0.3 + i * 0.06}"/>`;
+    }
+    s += `<path d="M 110 860 A 430 520 0 0 1 970 860" fill="none" stroke="#f3ead7" stroke-width="2" stroke-dasharray="4 14" opacity="0.35"/>`;
+    for (let k = 0; k < 4; k++) s += `<path d="M 230 1255 L ${470 - k * 120} ${1300 + k * 20} L ${520 - k * 120} ${1330 + k * 20} Z" fill="#120d14" opacity="${0.12 + k * 0.05}"/>`;
+    s += finish();
+    return { svg: s, sub: "Jundub raconte que Gabriel tarde à venir auprès du Prophète." };
+  },
+  // S03b: wind rises, dust ribbons sweep across the valley and cover the path (what was said).
+  s03b() {
+    let s = valley({ ...VALLEY_DUSK, sky: [[0, "#2a2a44"], [0.5, "#6a5452"], [1, "#b88a60"]] });
+    s += `<rect width="1080" height="1920" fill="#b88a60" opacity="0.18"/>`;
+    s += `<g fill="#d8b688" filter="url(#f-blur-md)">`;
+    for (let i = 0; i < 7; i++) { const y = 980 + i * 80; s += `<path d="M -80 ${y} Q 300 ${y - 90} 560 ${y - 20} T 1180 ${y - 50} L 1180 ${y - 20} Q 820 ${y + 30} 560 ${y + 10} T -80 ${y + 30} Z" opacity="${0.22 + (i % 3) * 0.08}"/>`; }
+    s += `</g>` + finish();
+    return { svg: s, sub: "Les polythéistes affirment alors qu’il a été abandonné." };
+  },
+  // S04: the dust settles; a geometric eight-pointed frame (gold line) closes around the valley -> window match cut.
+  s04() {
+    let s = valley({ ...VALLEY_DUSK, sky: [[0, "#13204a"], [0.6, "#3a4466"], [1, "#9a7a68"]] });
+    s += `<rect width="1080" height="1920" fill="#b88a60" opacity="0.06"/>`;
+    const star = (cx, cy, r) => { let d = ""; for (let i = 0; i < 16; i++) { const a = Math.PI / 8 * i, rr = i % 2 ? r * 0.72 : r; d += (i ? "L" : "M") + (cx + Math.cos(a) * rr).toFixed(1) + " " + (cy + Math.sin(a) * rr).toFixed(1); } return d + "Z"; };
+    s += `<path fill-rule="evenodd" d="M -10 -10 H 1090 V 1930 H -10 Z ${star(540, 900, 520)}" fill="#0b1630" opacity="0.93"/>`;
+    s += `<path d="${star(540, 900, 520)}" fill="none" stroke="#c6a15b" stroke-width="4" opacity="0.85"/><path d="${star(540, 900, 548)}" fill="none" stroke="#c6a15b" stroke-width="1.5" opacity="0.5"/>`;
+    s += finish(false);
+    return { svg: s, sub: "C’est dans ce contexte que sont révélés les premiers versets d’Ad-Duha.", title: "Ad-Duha" };
+  },
+  // S07: the wind drops, the dust falls back to the ground, the path is clear again; low angle.
+  s07() {
+    let s = valley({ ...VALLEY_DUSK, sky: [[0, "#1a2850"], [0.55, "#56607e"], [1, "#d6b88e"]] });
+    s += `<g fill="#d8b688" filter="url(#f-blur-sm)">`;
+    for (let i = 0; i < 40; i++) s += `<ellipse cx="${R(0, 1080)}" cy="${R(1180, 1900)}" rx="${R(10, 40)}" ry="${R(2, 5)}" opacity="${R(0.1, 0.3)}"/>`;
+    s += `</g><path d="M 300 1990 Q 520 1560 554 1140 L 566 1140 Q 600 1560 820 1990 Z" fill="#c9a676" opacity="0.18"/>` + finish();
+    return { svg: s, sub: "Son Seigneur ne l’a ni abandonné, ni détesté." };
+  },
+  // S08: top-down on the sand: a row of stones (days) with a gap; the line drawn in the sand runs through the gap.
+  s08() {
+    let s = layer("M0 0H1080V1920H0Z", grad([[0, "#a07c58"], [1, "#6a4e3a"]], 1, 1)) + mottle("M0 0H1080V1920H0Z", 0.3, "f-sand");
+    for (let i = 0; i < 30; i++) { const y = R(0, 1920); s += `<path d="M -20 ${y} Q 540 ${y + R(-60, 60)} 1100 ${y + R(-30, 30)}" stroke="#4a3426" stroke-width="2" fill="none" opacity="0.18"/>`; }
+    s += `<path d="M 540 120 C 470 520 610 900 540 1250" stroke="#f3ead7" stroke-width="5" fill="none" opacity="0.55" stroke-dasharray="2 0"/>`;
+    const ys = [180, 280, 380, 480, 580, 940, 1040, 1140, 1240];
+    ys.forEach((y, i) => { const x = 540 + Math.sin(y / 180) * 40; s += `<g filter="url(#f-paint)"><ellipse cx="${x + 6}" cy="${y + 8}" rx="34" ry="24" fill="#2a1e18" opacity="0.5"/><ellipse cx="${x}" cy="${y}" rx="32" ry="24" fill="${i % 2 ? "#4a4a5a" : "#6a5a4e"}"/><ellipse cx="${x - 8}" cy="${y - 8}" rx="14" ry="7" fill="#d8c8a8" opacity="0.4"/></g>`; });
+    s += `<path d="M 610 700 Q 640 760 610 820" stroke="#c6a15b" stroke-width="3" fill="none" opacity="0.7"/>` + finish();
+    return { svg: s, sub: "Le retard de la révélation ne signifiait pas qu’Allah avait rejeté son prophète." };
+  },
+  // S09a: forward travelling along the path through dunes towards a natural dawn horizon.
+  s09a() {
+    seed = 900;
+    let s = layer("M0 0H1080V1920H0Z", grad([[0, "#1c2a50"], [0.45, "#6a7090"], [0.75, "#d8b890"], [1, "#f0dcb4"]]));
+    s += `<circle cx="700" cy="960" r="62" fill="#f6e6c2" opacity="0.85"/><circle cx="700" cy="960" r="180" fill="${radial([[0, "#f6e6c2", 0.3], [1, "#f6e6c2", 0]])}"/>`;
+    s += layer(ridge(950, 30, 0.006, 1), "#a8826a", 'opacity="0.8"');
+    const d2 = ridge(1040, 60, 0.005, 2), d3 = ridge(1180, 90, 0.004, 3);
+    s += layer(d2, "#8a6650") + mottle(d2, 0.15, "f-sand");
+    s += layer(d3, "#6a4c3c") + mottle(d3, 0.15, "f-sand");
+    s += `<path d="M 330 1990 C 360 1600 700 1450 520 1250 S 420 1080 470 1010 L 482 1010 C 450 1090 560 1180 556 1250 S 450 1600 760 1990 Z" fill="#a8845e"/>`;
+    s += `<path d="M 330 1990 C 360 1600 700 1450 520 1250" stroke="#d8b88c" stroke-width="3" fill="none" opacity="0.35"/>`;
+    s += finish();
+    return { svg: s, sub: "Pour lui, la vie dernière sera meilleure que la vie présente." };
+  },
+  // S09b: close-up, side view: water from a stone channel fills a clay jar to the brim.
+  s09b() {
+    let s = layer("M0 0H1080V1920H0Z", grad([[0, "#3a4a6a"], [0.6, "#8a7a6a"], [1, "#5a4234"]]));
+    s += `<g filter="url(#f-paint)"><path d="M -40 520 H 620 L 640 600 H -40 Z" fill="#6a5a4e"/><path d="M -40 520 H 620 L 626 540 H -40 Z" fill="#b8a488" opacity="0.6"/></g>`;
+    s += `<path d="M 610 560 Q 650 620 640 1100" stroke="#cfe0ee" stroke-width="22" fill="none" opacity="0.65"/><path d="M 616 570 Q 652 640 646 1100" stroke="#ffffff" stroke-width="5" fill="none" opacity="0.5"/>`;
+    s += `<g filter="url(#f-paint)"><path d="M 470 1060 Q 440 1110 450 1180 Q 400 1260 410 1420 Q 430 1600 540 1640 Q 640 1660 720 1640 Q 830 1600 850 1420 Q 860 1260 810 1180 Q 820 1110 790 1060 Z" fill="${grad([[0, "#b0704a"], [0.5, "#8a5038"], [1, "#4a2a22"]], 1, 0)}"/>`;
+    s += `<ellipse cx="630" cy="1062" rx="162" ry="26" fill="#3a2520"/><ellipse cx="630" cy="1064" rx="148" ry="20" fill="#9fc0d8" opacity="0.85"/><ellipse cx="640" cy="1062" rx="60" ry="8" fill="#ffffff" opacity="0.5"/>`;
+    s += `<path d="M 470 1060 Q 440 1110 450 1180 Q 400 1260 410 1420" stroke="#e0a878" stroke-width="6" fill="none" opacity="0.5"/></g>`;
+    s += layer("M -40 1640 H 1120 V 1990 H -40 Z", "#3a2a24") + mottle("M -40 1640 H 1120 V 1990 H -40 Z", 0.15, "f-sand");
+    s += finish();
+    return { svg: s, sub: "Son Seigneur lui accordera de ses bienfaits, jusqu’à ce qu’il soit satisfait." };
+  },
+  // S10: the camera has turned round: the path behind, three cairns in the late light.
+  s10() {
+    seed = 1000;
+    let s = layer("M0 0H1080V1920H0Z", grad([[0, "#22305a"], [0.55, "#7a6a7a"], [1, "#d0a070"]]));
+    s += layer(ridge(980, 50, 0.007, 1), "#5a4a5a") + layer(ridge(1080, 50, 0.006, 2), "#6a4e44");
+    s += layer("M -60 1100 Q 540 1080 1140 1110 V 1990 H -60 Z", grad([[0, "#9a7656"], [1, "#3a2a26"]])) + mottle("M -60 1100 Q 540 1080 1140 1110 V 1990 H -60 Z", 0.16, "f-sand");
+    s += road(600, 1092, 220, 860, "#b8946a", 60);
+    s += cairn(700, 1150, 0.55, "#5a4a46", "#d8c0a0") + cairn(410, 1300, 0.9, "#5a4a46", "#d8c0a0", 1) + cairn(820, 1560, 1.4, "#4a3c3a", "#d8c0a0", 1);
+    s += finish();
+    return { svg: s, sub: "Elle lui rappelle aussi ce qu’il a déjà reçu." };
+  },
+  // S11a: refuge: a simple doorway at dusk; the door opens and warm light spills onto the ground.
+  s11a() {
+    let s = layer("M0 0H1080V1920H0Z", grad([[0, "#1a2448"], [1, "#5a4a5a"]]));
+    s += `<g filter="url(#f-paint)"><path d="M 60 300 H 1020 V 1500 H 60 Z" fill="${grad([[0, "#8a6a52"], [1, "#5a4234"]], 1, 1)}"/>`;
+    s += `<path d="M 360 760 Q 360 620 540 600 Q 720 620 720 760 V 1500 H 360 Z" fill="#f0c890"/><path d="M 360 760 Q 360 620 540 600 L 540 1500 H 360 Z" fill="#f6dcae" opacity="0.6"/>`;
+    s += `<path d="M 720 760 L 860 700 V 1540 L 720 1500 Z" fill="#4a3226"/><path d="M 730 780 L 850 730 V 1520 L 730 1490 Z" fill="none" stroke="#2a1c16" stroke-width="5"/>`;
+    s += `<path d="M 330 600 Q 540 540 750 600" stroke="#3a2a22" stroke-width="22" fill="none"/></g>`;
+    s += mottle("M 60 300 H 1020 V 1500 H 60 Z", 0.18, "f-sand");
+    s += `<path d="M 360 1500 H 720 L 900 1990 H 200 Z" fill="#f0c890" opacity="0.45" filter="url(#f-blur-md)"/>`;
+    s += layer("M -40 1500 H 1120 V 1990 H -40 Z", "#3a2a24", 'opacity="0.75"') + `<path d="M 360 1500 H 720 L 900 1990 H 200 Z" fill="#f0c890" opacity="0.3"/>`;
+    s += finish();
+    return { svg: s, sub: "Orphelin, il a été accueilli." };
+  },
+  // S11b: guidance: night desert, stone markers lead the way, natural starlight; the camera follows them.
+  s11b() {
+    seed = 1100;
+    let s = layer("M0 0H1080V1920H0Z", grad([[0, "#050a1e"], [0.6, "#14224a"], [1, "#2a3456"]])) + stars(60, 60, 1000, 0.8);
+    s += layer(ridge(1060, 50, 0.006, 1), "#141c34") + layer("M -60 1100 Q 540 1070 1140 1110 V 1990 H -60 Z", grad([[0, "#2a3048"], [1, "#100f18"]])) + mottle("M -60 1100 Q 540 1070 1140 1110 V 1990 H -60 Z", 0.1, "f-sand");
+    const pts = [[620, 1110, 0.45], [570, 1160, 0.65], [650, 1240, 0.9], [520, 1370, 1.3], [700, 1580, 1.9], [380, 1900, 2.8]];
+    pts.forEach(([x, y, k]) => { s += `<g filter="url(#f-paint)"><path d="M ${x - 18 * k} ${y} L ${x - 12 * k} ${y - 90 * k} L ${x + 12 * k} ${y - 96 * k} L ${x + 18 * k} ${y} Z" fill="#3a3a50"/><path d="M ${x + 2 * k} ${y - 94 * k} L ${x + 12 * k} ${y - 96 * k} L ${x + 18 * k} ${y} L ${x + 4 * k} ${y} Z" fill="#9fb0d6" opacity="0.45"/></g>`; });
+    s += `<path d="M 470 1990 Q 600 1500 560 1300 T 620 1110" stroke="#9fb0d6" stroke-width="3" fill="none" opacity="0.25" stroke-dasharray="6 14"/>` + finish();
+    return { svg: s, sub: "Il a reçu la guidée." };
+  },
+  // S11c: means of living: woven baskets on a mat, filling with dates and grain (top-down, three-quarter).
+  s11c() {
+    seed = 1200;
+    let s = layer("M0 0H1080V1920H0Z", grad([[0, "#6a4e3a"], [1, "#2e2220"]], 1, 1)) + mottle("M0 0H1080V1920H0Z", 0.2, "f-sand");
+    s += `<g filter="url(#f-paint)"><path d="M 80 520 H 1000 L 1060 1500 H 20 Z" fill="#8a6a48"/>`;
+    for (let i = 0; i < 18; i++) s += `<path d="M ${80 + i * 52} 520 L ${20 + i * 59} 1500" stroke="#6a4e34" stroke-width="5" opacity="0.6"/>`;
+    s += `</g>`;
+    const basket = (x, y, r, fill, kind) => {
+      let g = `<g filter="url(#f-paint)"><ellipse cx="${x}" cy="${y + 12}" rx="${r + 10}" ry="${r * 0.62}" fill="#1e1612" opacity="0.5"/><ellipse cx="${x}" cy="${y}" rx="${r}" ry="${r * 0.6}" fill="#b08a56"/><ellipse cx="${x}" cy="${y - 6}" rx="${r * 0.86}" ry="${r * 0.5}" fill="${fill}"/>`;
+      for (let i = 0; i < 26; i++) { const a = R(0, 6.28), d = R(0, 0.78); const px = x + Math.cos(a) * r * d, py = y - 6 + Math.sin(a) * r * 0.45 * d; g += kind === "date" ? `<ellipse cx="${px}" cy="${py}" rx="13" ry="8" fill="#5a2a1a"/><ellipse cx="${px - 3}" cy="${py - 3}" rx="5" ry="2" fill="#c08060" opacity="0.6"/>` : `<circle cx="${px}" cy="${py}" r="4" fill="#e8d4a0" opacity="0.8"/>`; }
+      for (let i = 0; i < 10; i++) g += `<ellipse cx="${x}" cy="${y}" rx="${r - i * 1.2}" ry="${(r - i * 1.2) * 0.6}" fill="none" stroke="#7a5a36" stroke-width="1.5" opacity="0.25"/>`;
+      return g + `</g>`;
+    };
+    s += basket(330, 820, 190, "#4a2418", "date") + basket(740, 1000, 170, "#cdb07a", "grain") + basket(420, 1250, 150, "#4a2418", "date");
+    s += finish();
+    return { svg: s, sub: "Démuni, il a été enrichi." };
+  },
+  // S12: pedagogical diagram, seen from above: past (three cairns), the answer, the future (path ahead).
+  s12() {
+    let s = layer("M0 0H1080V1920H0Z", grad([[0, "#8a6a4e"], [1, "#4a3428"]], 1, 1)) + mottle("M0 0H1080V1920H0Z", 0.25, "f-sand");
+    const P = "M 520 1290 C 420 1100 640 960 540 760 S 500 420 560 260";
+    s += `<path d="${P}" stroke="#d8bc90" stroke-width="80" fill="none" opacity="0.55" stroke-linecap="round"/>`;
+    s += `<path d="${P}" stroke="#f3ead7" stroke-width="3" fill="none" opacity="0.5" stroke-dasharray="3 12"/>`;
+    // three cairns (past) from above, each with its engraved sign: door, marker, basket
+    [[420, 1200], [640, 1080], [440, 950]].forEach(([x, y], i) => {
+      s += `<g filter="url(#f-paint)"><circle cx="${x + 6}" cy="${y + 8}" r="64" fill="#2a1e18" opacity="0.4"/><circle cx="${x}" cy="${y}" r="62" fill="#5a4a46"/><circle cx="${x}" cy="${y}" r="44" fill="#6a5a52"/></g>`;
+      s += [`<path d="M ${x - 16} ${y + 20} V ${y - 4} Q ${x} ${y - 24} ${x + 16} ${y - 4} V ${y + 20}" stroke="#f0d9a8" stroke-width="4" fill="none"/>`,
+            `<path d="M ${x} ${y + 22} L ${x - 5} ${y - 20} L ${x + 7} ${y - 22} Z" fill="#f0d9a8"/>`,
+            `<ellipse cx="${x}" cy="${y + 4}" rx="20" ry="12" fill="none" stroke="#f0d9a8" stroke-width="4"/><path d="M ${x - 20} ${y + 4} Q ${x} ${y - 30} ${x + 20} ${y + 4}" stroke="#f0d9a8" stroke-width="3" fill="none"/>`][i];
+    });
+    s += `<circle cx="540" cy="760" r="30" fill="none" stroke="#c6a15b" stroke-width="5"/><circle cx="540" cy="760" r="10" fill="#c6a15b"/>`;
+    s += `<path d="M 560 260 l -20 44 M 560 260 l 24 40" stroke="#f3ead7" stroke-width="5" opacity="0.75"/>`;
+    s += `<text class="label" x="740" y="1100">passé</text><text class="label" x="610" y="770">réponse</text><text class="label" x="630" y="320">avenir</text>`;
+    s += finish();
+    return { svg: s, sub: "Un refuge, une guidée, des moyens de vivre." };
+  },
+  // S16: end card, the building facade again, now in the morning.
+  s16() {
+    seed = 1600;
+    let s = layer("M0 0H1080V1920H0Z", grad([[0, "#6a86ae"], [0.6, "#c8c8c0"], [1, "#e8d4b0"]]));
+    s += layer("M 140 400 H 1000 V 1990 H 140 Z", grad([[0, "#a08a74"], [1, "#6a5446"]], 1, 1)) + mottle("M 140 400 H 1000 V 1990 H 140 Z", 0.2, "f-sand");
+    s += `<g filter="url(#f-paint)">`;
+    for (let r = 0; r < 6; r++) for (let c = 0; c < 3; c++) {
+      const x = 210 + c * 270, y = 500 + r * 250, ours = r === 2 && c === 1;
+      s += `<rect x="${x - 10}" y="${y - 10}" width="190" height="200" fill="#4a3a32"/><rect x="${x}" y="${y}" width="170" height="180" fill="${ours ? "#e8dcc4" : "#8a9ab4"}"/>`;
+      if (ours) s += `<rect x="${x}" y="${y}" width="40" height="180" fill="#8a6a56"/><rect x="${x + 130}" y="${y}" width="40" height="180" fill="#7a5e50"/>`;
+      s += `<rect x="${x + 81}" y="${y}" width="8" height="180" fill="#4a3a32"/><rect x="${x - 16}" y="${y + 186}" width="202" height="14" fill="#5a463c"/>`;
+    }
+    s += `</g><path d="M 0 0 L 700 0 L 0 1100 Z" fill="#f6e6c2" opacity="0.18" filter="url(#f-blur-md)"/>` + finish();
+    s += icon.heart(440, 1560) + icon.share(540, 1560) + icon.bell(640, 1560);
+    return { svg: s, sub: "Abonne-toi pour les prochaines explications !", title: "Ad-Duha · Comprendre les premiers versets", titleColor: "#4a3326" };
+  }
+};
+
+const id = location.hash.slice(1) || "s02";
+defs = [];
+const out = SCENES[id]();
+document.getElementById("stage").innerHTML =
+  `<svg viewBox="0 0 1080 1920"><defs>${BASE_DEFS}${defs.join("")}</defs>${out.svg}</svg>` +
+  (out.title ? `<div class="title"${out.titleColor ? ` style="color:${out.titleColor}"` : ""}>${out.title}</div>` : "") + (out.sub ? `<div class="sub">${out.sub}</div>` : "");
+window.__ready = true;
+</script>
+</body>
+</html>
