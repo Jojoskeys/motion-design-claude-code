@@ -1,39 +1,45 @@
-# Ad-Duha · affirmations religieuses à vérifier
+# Ad-Duha · vérifications avant publication (liste unique)
 
-Document de préparation. **Le texte de la narration n'est pas vérifié dans son ensemble.** Rien ici n'a été contrôlé
-sur une source primaire pendant cette session (réseau limité : les sites de hadith et de tafsir sont bloqués, cf.
-`../serie-coran/SOURCES-OUTILS.md`). Les pistes signalées « à confirmer » viennent de la mémoire du modèle et ne
-valent pas source : chacune doit être confirmée, avec un court extrait, dans `serie-coran/episodes/<ep>/SOURCES.md`
-avant tout rendu public. Une validation visuelle n'est jamais une validation religieuse.
+Liste de référence, réconciliée le 2026-10-20 avec `REPRISE.md` (qui renvoie désormais ici et ne tient plus de liste
+parallèle). **Le contenu religieux n'est pas vérifié dans son ensemble.** Aucun point ci-dessous n'a été contrôlé sur une
+source primaire dans cet environnement : les sites de hadith et de tafsir y sont bloqués (cf.
+`../serie-coran/SOURCES-OUTILS.md`) et ces accès ne sont pas retentés. Les « pistes » viennent de la mémoire du modèle et
+ne valent pas source. Une validation visuelle de l'animation n'est jamais une validation religieuse.
 
-La narration n'est pas modifiée ici. Si une affirmation ne peut pas être vérifiée, la décision (garder, reformuler en
-réenregistrant, retirer) revient à l'utilisateur.
+Chaque point se règle par une source nommée et un court extrait copié dans `serie-coran/episodes/<ep>/SOURCES.md`
+(fichier à créer pour Ad-Duha). Si un point ne peut pas être établi, la décision (garder, reformuler en réenregistrant,
+retirer) revient à l'utilisateur. La narration enregistrée n'est pas modifiée.
 
-| # | Minutage | Passage de la narration | Ce qui doit être vérifié | Piste (non vérifiée) |
-|---|----------|-------------------------|--------------------------|----------------------|
-| 1 | 13,7-17,3 | « La sourate Ad-Duha s'adresse d'abord au Prophète » | Tafsir nommé qui l'établit. | Tafsir classique (Ibn Kathir, al-Tabari…) à citer. |
-| 2 | 21,5-23,3 | « Dans un récit rapporté par Muslim » | Recueil, livre, numéro, degré, qui l'établit. | Sahih Muslim, livre du jihad et des expéditions (numéro à confirmer selon l'édition). |
-| 3 | 23,3-26,6 | « Jundub raconte… » | Nom du transmetteur à l'écoute (transcrit « John Dobre ») et dans le hadith. | Jundub ibn Sufyan al-Bajali, à confirmer. |
-| 4 | 23,3-26,6 | « Gabriel tarde à venir auprès du Prophète » | Formulation exacte du hadith ; ne pas présenter une paraphrase comme une citation. | À comparer au texte arabe et à une traduction nommée. |
-| 5 | 26,6-29,4 | « Les polythéistes affirment alors qu'il a été abandonné » | Qui a parlé selon chaque version (Muslim, et une version d'al-Bukhari qui attribuerait la parole à une femme, à vérifier) ; ne pas présenter une version comme la seule. | À confirmer sur les deux recueils. |
-| 6 | 29,4-32,7 | « C'est dans ce contexte que sont révélés les premiers versets » | Circonstance de révélation : source et portée (versets concernés). | Asbab al-nuzul cités par les tafsirs, à confirmer. |
-| 7 | 32,8-38,8 | « La clarté de la matinée, puis la nuit lorsqu'elle devient calme » | Paraphrase des versets 1-2 : la rapprocher d'une **traduction du sens nommée** ou l'annoncer comme explication. | Traduction retenue pour la série (Hamidullah ?) : droit d'usage à vérifier. |
-| 8 | 40,4-43,4 | « Son Seigneur ne l'a ni abandonné, ni détesté » | Idem, verset 3. | Idem. |
-| 9 | 43,4-49,5 | « Voilà ce que ces paroles viennent démentir. Le retard de la révélation ne signifiait pas qu'Allah avait rejeté son prophète. » | Explication : tafsir nommé. | À confirmer. |
-| 10 | 51,8-55,1 | « la vie dernière sera meilleure que la vie présente » | Paraphrase du verset 4 ; certains commentaires lisent aussi « la fin meilleure que le début » : ne pas présenter une lecture comme consensus. | À confirmer sur deux tafsirs. |
-| 11 | 55,2-58,9 | « lui accordera de ses bienfaits, jusqu'à ce qu'il soit satisfait » | Paraphrase du verset 5. | Traduction nommée. |
-| 12 | 63,7-65,5 | « Orphelin, il a été accueilli » | Paraphrase du verset 6. | Traduction nommée. |
-| 13 | 65,5-70,7 | « Il a reçu la guidée. Avant la révélation, il ne connaissait pas encore le livre qui allait lui être révélé. » | **Point sensible** : interprétation du verset 7 ; plusieurs lectures existent. Source précise, et ne pas la présenter comme la seule. | Rapprochement possible avec un autre verset sur le Livre avant la révélation (42:52 ?), à confirmer dans un tafsir nommé. |
-| 14 | 70,7-72,9 | « Démuni, il a été enrichi » | Paraphrase du verset 8. | Traduction nommée. |
-| 15 | 72,9-83,2 | « Trois rappels… refuge, guidée, moyens de vivre… répondu à l'accusation d'abandon, annoncé l'avenir, rappelé les bienfaits du passé » | Lecture de la structure du passage : explication à rattacher à un commentaire nommé ou à présenter comme lecture pédagogique. | À confirmer. |
-| 16 | 16,3-17,3 | « paix et salut sur lui » | Formule à confirmer (même question que l'épisode 1). | Choix éditorial de la série. |
+Statuts : **À vérifier** (rien d'établi) · **Communiqué** (donné par l'utilisateur, non consulté ici) ·
+**Décision** (choix éditorial de l'utilisateur, pas une vérification).
 
-## Points de forme (non religieux)
-- Transcription automatique : « Ad-Duha », « Muslim », « Jundub » mal reconnus ; « ces/ses versets » (84 s) et
-  « annoncé/annoncer » (80 s) indécidables à la transcription : à confirmer à l'oreille (sans effet sur les images).
-- Règle de la série (CLAUDE.md) : séparer à l'écran traduction du sens / explication. La narration mêle paraphrases
-  des versets et explications ; l'utilisateur a demandé qu'aucune source n'apparaisse à l'image. **Décision à prendre** :
-  comment distinguer, dans les sous-titres, les paraphrases de versets des explications (par exemple une typographie
-  différente), sans afficher de référence.
-- Aucun texte arabe n'est prévu à l'image. S'il en faut un, il sera copié par script depuis une source citée.
-- Fin du fichier : la voix va jusqu'à ~107,4 s sans silence final ; vérifier à l'oreille que le dernier mot n'est pas tronqué.
+## A. Points religieux nécessaires avant publication
+
+| # | Minutage | Passage de la narration | Ce qui doit être établi | Statut | Mention à l'écran dans l'aperçu |
+|---|----------|-------------------------|-------------------------|--------|---------------------------------|
+| 1 | 21,4-26,6 | « Dans un récit rapporté par Muslim, Jundub raconte que Gabriel tarde à venir auprès du Prophète » | Ṣaḥīḥ Muslim 1797a : texte arabe et traduction nommée de l'extrait ; numérotation selon l'édition citée ; formulation exacte (« tarde à venir ») ; ne pas présenter la paraphrase comme une citation. | Communiqué (référence et contenu résumés par l'utilisateur ; sunnah.com non consulté) | « Ṣaḥīḥ Muslim 1797a » |
+| 2 | 23,3-24,0 | « Jundub » | Nom du transmetteur à l'écoute (transcrit « John Dobre ») et dans le hadith. Piste : Jundub ibn Sufyan al-Bajali. | À vérifier (écoute + source) | — |
+| 3 | 26,6-29,4 | « Les polythéistes affirment alors qu'il a été abandonné » | Qui a parlé selon chaque version (Muslim ; une version d'al-Bukhari attribuerait la parole à une femme, à vérifier) ; ne pas présenter une version comme la seule. | À vérifier | — |
+| 4 | 13,7-16,3 | « La sourate Ad-Duha s'adresse d'abord au Prophète » | Tafsir nommé qui l'établit. | À vérifier | — |
+| 5 | 29,4-32,7 | « C'est dans ce contexte que sont révélés les premiers versets » | Circonstance de révélation : source (tafsir / asbab al-nuzul nommé) et versets concernés. | À vérifier | — |
+| 6 | 35,2-98 | Numéros affichés 93:1–2, 93:3 … 93:8 | Contrôle sur un mushaf ou une édition citée. | À vérifier | « Sens des versets 93:1–2 », « Sens du verset 93:3 » … « 93:8 » |
+| 7 | 35,2-72,9 | Paraphrases des versets 1 à 8 | Comparaison avec une traduction du sens nommée (droit d'usage) ; si l'écart est grand, garder la mention « Sens du verset » et ne jamais les citer comme traduction. Aucun guillemet à l'écran. | À vérifier | « Sens du verset… » au-dessus du sous-titre |
+| 8 | 43,4-49,6 | « Voilà ce que ces paroles viennent démentir. Le retard de la révélation ne signifiait pas qu'Allah avait rejeté son prophète. » | Tafsir nommé, ou présentation comme lecture pédagogique. | À vérifier | « Explication » |
+| 9 | 51,8-55,1 | Verset 4 : « la vie dernière sera meilleure que la vie présente » | Une autre lecture (« la fin meilleure que le début ») existe dans des commentaires : ne pas présenter une lecture comme consensus. Deux tafsirs nommés. | À vérifier | « Sens du verset 93:4 » |
+| 10 | 66,8-70,7 | Verset 7 : « Avant la révélation, il ne connaissait pas encore le livre… » | **Point sensible** : interprétation discutée ; source précise ; ne pas la présenter comme la seule lecture. Piste : rapprochement avec 42:52, à confirmer. | À vérifier | « Explication » |
+| 11 | 72,9-83,2 | Structure réponse / avenir / passé ; « refuge, guidée, moyens de vivre » | Commentaire nommé, ou présentation comme lecture pédagogique. | À vérifier | « Explication » (frise « réponse · avenir · passé ») |
+| 12 | 16,3-17,3 | « paix et salut sur lui » | Formule de la série (même question qu'en épisode 1). | Décision | — |
+
+## B. Points de forme (non religieux), à confirmer à l'oreille
+
+| # | Minutage | Point | Choix fait dans l'aperçu |
+|---|----------|-------|--------------------------|
+| 13 | 84,0-85,2 | « ces » ou « ses versets » (indécidable à la transcription) | Sous-titre « ces versets » |
+| 14 | 79,8-81,0 | « annoncé / annoncer l'avenir » | « annoncé » (accord avec « avoir répondu… et annoncé ») |
+| 15 | 107,3 | Dernier mot « explications » : non tronqué ? Le signal décroît naturellement jusqu'au silence à 107,35 s (mesure RMS), sans coupure audible attendue. | Image tenue jusqu'à 108,2 s |
+| 16 | — | Noms propres mal reconnus par la transcription automatique (« Adboha », « Muslime », « Addocha », « soeurate ») | Rétablis dans les sous-titres : Ad-Duha, Muslim, sourate |
+
+## C. Ce que ce fichier n'établit pas
+- Aucun texte arabe n'est affiché. S'il en faut un, il sera copié par script depuis une source citée.
+- La distinction paraphrase / explication est faite par les mentions discrètes ; elle ne dit rien de l'exactitude des
+  paraphrases (point 7).

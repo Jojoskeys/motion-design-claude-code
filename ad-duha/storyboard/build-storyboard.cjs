@@ -121,7 +121,7 @@ function applyVariant(variant, sub, tag) {
       await page.reload({ waitUntil: "load" });
     } else {
       await page.goto("file://" + path.resolve(DIR, "../index.html"), { waitUntil: "load" });
-      await page.evaluate((t) => { window.__timelines["ad-duha-intro"].seek(t, false); return true; }, spec.room);
+      await page.evaluate((t) => { window.__timelines["ad-duha"].seek(t, false); return true; }, spec.room);
       await page.evaluate(applyVariant, spec.variant, SUBS[spec.variant], spec.tag || "");
     }
     await page.evaluate(() => document.fonts.ready.then(() => true));

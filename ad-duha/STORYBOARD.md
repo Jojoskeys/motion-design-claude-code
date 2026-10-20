@@ -13,6 +13,17 @@ commentaire éditorial. Références complètes : description de la vidéo et `S
   Régénération : `node ad-duha/storyboard/build-storyboard.cjs` (depuis la racine du dépôt).
 - Les vignettes montrent un instant représentatif ; le sous-titre y est indicatif (position et police du prototype).
 
+## Écarts de l'animation par rapport aux vignettes (2026-10-20)
+Le storyboard révision 2 reste la base ; l'animation (`index.html`) y apporte seulement ceci :
+- S01 / S16 : pictogrammes au-dessus du sous-titre (y ≈ 1210, sur un disque sombre) plutôt que dans les 420 px du bas.
+- S04 : la phrase est affichée en deux sous-titres (« … sont révélés » / « les premiers versets d'Ad-Duha. »).
+- S09b : la formulation du verset 5 en quatre groupes de mots, 56 px, sans sous-titre en double.
+- S11a : cadrage plus large (la lumière de la porte reste au-dessus du sous-titre) ; la lumière se resserre en point.
+- S11c : nouvel angle plus bas ; paniers à parois et bord tressés, contenu qui monte au-dessus du bord.
+- S12 : arches un peu plus hautes, frise à y = 1110, étiquettes en 34 px.
+- Mentions : Inter 26 px (au lieu de 22) pour la lecture sur téléphone.
+- Fin : image tenue jusqu'à 108,2 s (dernier mot ~107,33 s).
+
 ## Fils de continuité
 - **La chambre** (décor validé) ouvre, sert de pivot au milieu (S05-S06 : « deux moments que l'on connaît ») et
   ferme le film (S13-S15). Elle passe de la nuit pluvieuse à la nuit calme puis au matin : la lumière change pour
