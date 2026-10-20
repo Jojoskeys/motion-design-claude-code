@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<title>Ad-Duha · prototype introduction</title>
+<script src="assets/vendor/gsap.min.js"></script>
+<style>
+  @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+  @font-face { font-family: "Inter"; src: url("assets/fonts/inter-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+  @font-face { font-family: "Source Serif 4"; src: url("assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+  body { margin: 0; background: #070d1f; }
+  #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #070d1f; }
+  /* Each depth plane is drawn with a 200 px bleed, its origin at the frame centre (540, 960). */
+  .plane { position: absolute; left: -200px; top: -200px; width: 1480px; height: 2320px; transform-origin: 740px 1160px; }
+  .plane svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .fx { position: absolute; inset: 0; pointer-events: none; }
+  #title {
+    position: absolute; left: 100px; right: 160px; top: 252px; text-align: center;
+    font: 500 23px/1.3 "Inter", sans-serif; letter-spacing: 0.1em; white-space: nowrap; text-transform: uppercase; color: #c6a15b; opacity: 0;
+  }
+  #title span { display: block; margin: 14px auto 0; width: 64px; height: 1px; background: #c6a15b; opacity: 0.7; }
+  .sub {
+    position: absolute; left: 100px; right: 160px; top: 1352px; text-align: center; opacity: 0;
+    font: 400 50px/1.3 "Source Serif 4", serif; color: #f3ead7; text-shadow: 0 2px 18px rgba(4, 8, 20, 0.85);
+  }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="ad-duha-intro" data-start="0" data-width="1080" data-height="1920" data-duration="8.4">
+
+  <!-- Shared SVG definitions (gradients, painterly filters) -->
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <linearGradient id="g-sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#070f27" />
+        <stop offset="0.55" stop-color="#14244a" />
+        <stop offset="0.82" stop-color="#2a3555" />
+        <stop offset="1" stop-color="#4a4352" />
+      </linearGradient>
+      <radialGradient id="g-moonhalo"><stop offset="0" stop-color="#f3ead7" stop-opacity="0.35" /><stop offset="1" stop-color="#f3ead7" stop-opacity="0" /></radialGradient>
+      <linearGradient id="g-wall" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#1a2747" />
+        <stop offset="0.5" stop-color="#14203d" />
+        <stop offset="1" stop-color="#0d1530" />
+      </linearGradient>
+      <linearGradient id="g-floor" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#2b2730" />
+        <stop offset="0.5" stop-color="#211c22" />
+        <stop offset="1" stop-color="#140f13" />
+      </linearGradient>
+      <linearGradient id="g-curtain" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#2c2633" /><stop offset="0.18" stop-color="#4a3c3e" /><stop offset="0.35" stop-color="#2f2834" />
+        <stop offset="0.55" stop-color="#4d3f3f" /><stop offset="0.75" stop-color="#2a2431" /><stop offset="1" stop-color="#3f3439" />
+      </linearGradient>
+      <linearGradient id="g-glass" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#cfd8ea" stop-opacity="0.10" /><stop offset="0.45" stop-color="#cfd8ea" stop-opacity="0.02" />
+        <stop offset="0.6" stop-color="#cfd8ea" stop-opacity="0.07" /><stop offset="1" stop-color="#cfd8ea" stop-opacity="0" />
+      </linearGradient>
+      <linearGradient id="g-hoodie" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#4a3a36" /><stop offset="0.25" stop-color="#2a2b3c" />
+        <stop offset="0.75" stop-color="#1f2638" /><stop offset="1" stop-color="#3d4b6e" />
+      </linearGradient>
+      <linearGradient id="g-hair" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#2a2120" /><stop offset="0.6" stop-color="#151319" /><stop offset="1" stop-color="#28304a" />
+      </linearGradient>
+      <linearGradient id="g-pouf" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#6a4b36" /><stop offset="0.5" stop-color="#3e2f2a" /><stop offset="1" stop-color="#2b2830" />
+      </linearGradient>
+      <linearGradient id="g-shade" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#e9cf9c" /><stop offset="1" stop-color="#c79a5e" />
+      </linearGradient>
+      <linearGradient id="g-moonshaft" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#b9c6e4" stop-opacity="0.32" /><stop offset="1" stop-color="#b9c6e4" stop-opacity="0" />
+      </linearGradient>
+      <radialGradient id="g-lamp" cx="0.5" cy="0.5" r="0.5">
+        <stop offset="0" stop-color="#f2c98a" stop-opacity="0.55" /><stop offset="0.35" stop-color="#d79a5a" stop-opacity="0.22" />
+        <stop offset="1" stop-color="#d79a5a" stop-opacity="0" />
+      </radialGradient>
+      <radialGradient id="g-vignette" cx="0.5" cy="0.47" r="0.72">
+        <stop offset="0.55" stop-color="#03060f" stop-opacity="0" /><stop offset="1" stop-color="#03060f" stop-opacity="0.78" />
+      </radialGradient>
+      <linearGradient id="g-bottom" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#05080f" stop-opacity="0" /><stop offset="1" stop-color="#05080f" stop-opacity="0.55" />
+      </linearGradient>
+      <!-- Hand-painted edges: a slight, static wobble of the outlines -->
+      <filter id="f-paint" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.025" numOctaves="2" seed="4" result="n" />
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+      <!-- Mottled paint layer: low-frequency noise used as a tone variation -->
+      <filter id="f-mottle" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.006 0.012" numOctaves="4" seed="11" />
+        <feColorMatrix type="matrix" values="0 0 0 0 0.95  0 0 0 0 0.88  0 0 0 0 0.78  0 0 0 0.9 -0.32" />
+      </filter>
+      <filter id="f-mottle-dark" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.009 0.004" numOctaves="3" seed="23" />
+        <feColorMatrix type="matrix" values="0 0 0 0 0.02  0 0 0 0 0.03  0 0 0 0 0.08  0 0 0 1.1 -0.38" />
+      </filter>
+      <filter id="f-grain" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="7" />
+        <feColorMatrix type="saturate" values="0" />
+      </filter>
+      <filter id="f-blur-fg" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="9" /></filter>
+      <filter id="f-blur-sm" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3" /></filter>
+      <filter id="f-blur-xl" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22" /></filter>
+      <clipPath id="c-window"><rect x="312" y="342" width="536" height="736" /></clipPath>
+    </defs>
+  </svg>
+
+  <!-- PLANE 0 : night sky, moon, clouds and distant town (seen only through the window) -->
+  <div class="plane" id="p-sky">
+    <svg viewBox="-200 -200 1480 2320">
+      <rect x="-200" y="-200" width="1480" height="1500" fill="url(#g-sky)" />
+      <rect x="-200" y="-200" width="1480" height="1500" filter="url(#f-mottle)" opacity="0.10" />
+      <g id="stars" fill="#f3ead7"></g>
+      <circle id="moon-halo" cx="720" cy="470" r="150" fill="url(#g-moonhalo)" />
+      <circle id="moon" cx="720" cy="470" r="40" fill="#efe6cf" />
+      <circle cx="708" cy="462" r="9" fill="#d9cfb6" opacity="0.6" /><circle cx="732" cy="485" r="6" fill="#d9cfb6" opacity="0.5" />
+      <g id="clouds" filter="url(#f-blur-sm)">
+        <path d="M560 470 q40 -46 100 -26 q30 -40 90 -16 q60 -8 70 34 q40 10 20 40 h-300 q-30 -10 20 -32z" fill="#2c3657" opacity="0.92" />
+        <path d="M700 540 q50 -34 110 -10 q50 -20 80 16 q30 20 0 34 h-230 q-20 -20 40 -40z" fill="#253050" opacity="0.9" />
+        <path d="M430 400 q40 -30 90 -10 q40 -16 60 14 q20 18 -10 26 h-180 q-10 -16 40 -30z" fill="#2a3456" opacity="0.8" />
+      </g>
+      <!-- distant hills and town -->
+      <path d="M-200 900 Q 100 840 380 880 T 900 860 T 1280 880 V 1300 H -200 Z" fill="#1b2442" />
+      <g id="town" fill="#0f1730">
+        <rect x="250" y="905" width="70" height="400" /><rect x="320" y="870" width="54" height="430" />
+        <rect x="374" y="930" width="90" height="370" /><rect x="464" y="890" width="46" height="410" />
+        <rect x="510" y="950" width="120" height="350" /><rect x="630" y="860" width="62" height="440" />
+        <rect x="692" y="915" width="84" height="385" /><rect x="776" y="940" width="60" height="360" />
+        <rect x="836" y="880" width="70" height="420" />
+      </g>
+      <g id="townlights" fill="#e2bd7c"></g>
+    </svg>
+  </div>
+
+  <!-- PLANE 1 : wall, window, curtains, clock, floor, moonlight on the floor -->
+  <div class="plane" id="p-room">
+    <svg viewBox="-200 -200 1480 2320">
+      <!-- rain on the glass (behind the frame, clipped to the window) -->
+      <g clip-path="url(#c-window)">
+        <rect x="312" y="342" width="536" height="736" fill="url(#g-glass)" />
+        <g id="rain" stroke="#c9d4ea" stroke-linecap="round" opacity="0"></g>
+      </g>
+      <!-- wall with the window opening -->
+      <path fill-rule="evenodd" fill="url(#g-wall)" d="M-200 -200 H1280 V1262 H-200 Z M312 342 V1078 H848 V342 Z" />
+      <path fill-rule="evenodd" filter="url(#f-mottle)" opacity="0.13" d="M-200 -200 H1280 V1262 H-200 Z M312 342 V1078 H848 V342 Z" />
+      <path fill-rule="evenodd" filter="url(#f-mottle-dark)" opacity="0.5" d="M-200 -200 H1280 V1262 H-200 Z M312 342 V1078 H848 V342 Z" />
+      <!-- window frame -->
+      <g filter="url(#f-paint)">
+        <path fill-rule="evenodd" fill="#2b2328" d="M290 320 H870 V1100 H290 Z M312 342 V1078 H848 V342 Z" />
+        <rect x="568" y="342" width="22" height="736" fill="#2b2328" />
+        <rect x="312" y="598" width="536" height="18" fill="#2b2328" />
+        <path d="M290 320 H870 V330 H290 Z" fill="#4a3c3a" opacity="0.6" />
+        <rect x="262" y="1096" width="636" height="26" rx="4" fill="#3b3035" />
+        <rect x="262" y="1096" width="636" height="5" fill="#8c7a6a" opacity="0.35" />
+        <!-- small plant pot on the sill -->
+        <path d="M760 1096 l8 -46 h56 l8 46z" fill="#7a5640" />
+        <path d="M772 1050 q-30 -60 -10 -110 q14 50 20 108z M790 1050 q4 -70 40 -100 q-6 60 -28 102z M800 1052 q30 -40 60 -44 q-20 34 -50 48z" fill="#26322c" />
+      </g>
+      <!-- curtains -->
+      <g filter="url(#f-paint)">
+        <rect x="200" y="290" width="760" height="10" rx="5" fill="#3d3236" />
+        <path d="M206 300 H330 Q 322 700 300 1080 Q 340 1140 288 1240 H210 Q 196 760 206 300 Z" fill="url(#g-curtain)" />
+        <path d="M842 300 H948 Q 958 760 944 1240 H872 Q 836 1150 862 1060 Q 846 700 842 300 Z" fill="url(#g-curtain)" opacity="0.92" />
+      </g>
+      <!-- wall clock -->
+      <g id="clock" filter="url(#f-paint)">
+        <circle cx="120" cy="560" r="62" fill="#2e2a2e" />
+        <circle cx="120" cy="560" r="52" fill="#d8ccb2" opacity="0.62" />
+        <g stroke="#3a3034" stroke-width="4" stroke-linecap="round">
+          <line x1="120" y1="514" x2="120" y2="522" /><line x1="166" y1="560" x2="158" y2="560" />
+          <line x1="120" y1="606" x2="120" y2="598" /><line x1="74" y1="560" x2="82" y2="560" />
+        </g>
+        <line id="hand-h" x1="120" y1="560" x2="120" y2="530" stroke="#241d22" stroke-width="6" stroke-linecap="round" />
+        <line id="hand-m" x1="120" y1="560" x2="120" y2="518" stroke="#241d22" stroke-width="4" stroke-linecap="round" />
+        <circle cx="120" cy="560" r="5" fill="#241d22" />
+      </g>
+      <!-- framed picture on the right wall (abstract, dunes at dawn) -->
+      <g filter="url(#f-paint)">
+        <rect x="1000" y="470" width="150" height="190" fill="#2b2328" />
+        <rect x="1012" y="482" width="126" height="166" fill="#3a4364" />
+        <path d="M1012 600 q40 -30 70 -6 q30 -22 56 -4 v58 h-126z" fill="#8a6f52" opacity="0.8" />
+      </g>
+      <!-- baseboard and floor -->
+      <rect x="-200" y="1240" width="1480" height="24" fill="#1d1a22" />
+      <path d="M-200 1262 H1280 V2120 H-200 Z" fill="url(#g-floor)" />
+      <path d="M-200 1262 H1280 V2120 H-200 Z" filter="url(#f-mottle)" opacity="0.08" />
+      <g id="boards" stroke="#0f0c10" stroke-width="2" opacity="0.55"></g>
+      <!-- moonlight falling on the floor through the window -->
+      <path id="moonshaft" d="M330 1264 H840 L1060 2120 H40 Z" fill="url(#g-moonshaft)" filter="url(#f-blur-sm)" />
+      <path d="M330 1264 H840" stroke="#b9c6e4" stroke-opacity="0.15" stroke-width="3" />
+    </svg>
+  </div>
+
+  <!-- PLANE 2 : rug and the anonymous person, seen from behind, on a floor cushion -->
+  <div class="plane" id="p-person">
+    <svg viewBox="-200 -200 1480 2320">
+      <!-- living-room rug in perspective -->
+      <g filter="url(#f-paint)">
+        <path d="M 250 1286 H 850 L 1060 1760 H 40 Z" fill="#3a2b2a" />
+        <path d="M 278 1300 H 822 L 1012 1730 H 88 Z" fill="none" stroke="#a5835e" stroke-width="5" opacity="0.55" />
+        <path d="M 300 1314 H 800 L 972 1704 H 128 Z" fill="none" stroke="#6e5040" stroke-width="12" opacity="0.7" />
+        <g id="rugmotif" fill="none" stroke="#b08c62" stroke-width="3" opacity="0.24"></g>
+      </g>
+      <path d="M 250 1286 H 850 L 1060 1760 H 40 Z" filter="url(#f-mottle)" opacity="0.10" />
+      <!-- folded prayer rug beside the cushion (plain geometric border, no writing) -->
+      <g filter="url(#f-paint)">
+        <path d="M 760 1352 L 900 1344 L 936 1410 L 790 1420 Z" fill="#5b3a34" />
+        <path d="M 772 1360 L 892 1353 L 922 1404 L 798 1412 Z" fill="none" stroke="#c6a15b" stroke-width="2.5" opacity="0.55" />
+        <path d="M 790 1420 L 936 1410 L 938 1424 L 792 1434 Z" fill="#3e2826" />
+      </g>
+      <ellipse cx="548" cy="1338" rx="240" ry="36" fill="#05070d" opacity="0.55" filter="url(#f-blur-sm)" />
+      <g filter="url(#f-paint)">
+        <!-- cushion -->
+        <path d="M 360 1262 Q 548 1222 736 1262 L 728 1324 Q 548 1356 368 1324 Z" fill="url(#g-pouf)" />
+        <path d="M 360 1262 Q 548 1222 736 1262 Q 548 1292 360 1262 Z" fill="#7a5a42" opacity="0.55" />
+        <!-- crossed legs: knees wider than the hips -->
+        <path d="M 384 1262 Q 380 1214 452 1200 H 644 Q 716 1214 712 1262 Q 548 1300 384 1262 Z" fill="#1b2030" />
+        <path d="M 386 1250 Q 400 1222 452 1214" stroke="#d29a62" stroke-width="4" fill="none" opacity="0.4" />
+        <path d="M 710 1250 Q 696 1222 644 1214" stroke="#9fb0d6" stroke-width="4" fill="none" opacity="0.45" />
+        <g id="torso">
+          <!-- back (hoodie): broad shoulders, narrower waist -->
+          <path d="M 452 990 Q 458 948 548 940 Q 638 948 644 990 Q 652 1080 638 1150 Q 650 1210 656 1236 Q 548 1258 440 1236 Q 446 1210 458 1150 Q 444 1080 452 990 Z" fill="url(#g-hoodie)" />
+          <!-- arms along the sides, elbows slightly out -->
+          <path d="M 456 972 Q 426 992 420 1060 Q 414 1130 432 1196 Q 446 1206 462 1196 Q 458 1120 470 1040 Z" fill="#2c2d3c" />
+          <path d="M 640 972 Q 670 992 676 1060 Q 682 1130 664 1196 Q 650 1206 634 1196 Q 638 1120 626 1040 Z" fill="#242c42" />
+          <path d="M 462 1000 Q 450 1100 458 1190" stroke="#10131e" stroke-width="4" fill="none" opacity="0.7" />
+          <path d="M 634 1000 Q 646 1100 638 1190" stroke="#10131e" stroke-width="4" fill="none" opacity="0.7" />
+          <!-- folds and seam -->
+          <path d="M 500 1070 Q 520 1140 506 1230" stroke="#141a2a" stroke-width="4" fill="none" opacity="0.45" />
+          <path d="M 598 1060 Q 584 1140 596 1230" stroke="#141a2a" stroke-width="4" fill="none" opacity="0.4" />
+          <path d="M 470 1150 Q 548 1170 626 1150" stroke="#141a2a" stroke-width="3" fill="none" opacity="0.4" />
+          <!-- rim lights: cool from the window (right), warm from the lamp (left) -->
+          <path d="M 664 996 Q 672 1100 658 1188" stroke="#9fb0d6" stroke-width="4" fill="none" opacity="0.45" filter="url(#f-blur-sm)" />
+          <path d="M 432 996 Q 424 1100 438 1188" stroke="#d29a62" stroke-width="4" fill="none" opacity="0.45" filter="url(#f-blur-sm)" />
+          <path d="M 470 960 Q 548 932 626 960" stroke="#8e9cc0" stroke-width="3" fill="none" opacity="0.35" />
+          <!-- hood resting on the back -->
+          <path d="M 494 948 Q 548 1036 602 948 Q 600 986 548 1012 Q 496 986 494 948 Z" fill="#1f2638" />
+          <path d="M 502 952 Q 548 1018 594 952" stroke="#3e4a6a" stroke-width="3" fill="none" opacity="0.6" />
+        </g>
+        <!-- head and neck: short hair, nape, ears -->
+        <g id="head">
+          <rect x="530" y="896" width="36" height="56" rx="14" fill="#6a4a3a" />
+          <path d="M 528 930 Q 548 940 568 930" stroke="#3a2a24" stroke-width="3" fill="none" opacity="0.6" />
+          <ellipse cx="494" cy="872" rx="9" ry="16" fill="#7a5442" />
+          <ellipse cx="602" cy="872" rx="9" ry="16" fill="#5f4a48" />
+          <path d="M 496 870 Q 490 808 548 800 Q 606 808 600 870 Q 598 904 574 914 Q 548 906 522 914 Q 498 904 496 870 Z" fill="url(#g-hair)" />
+          <g stroke="#3a3446" stroke-width="2" fill="none" opacity="0.28">
+            <path d="M 520 820 Q 540 860 532 906" /><path d="M 552 812 Q 560 860 552 904" /><path d="M 580 822 Q 578 860 570 906" />
+          </g>
+          <path d="M 596 840 Q 606 872 592 906" stroke="#9fb0d6" stroke-width="4" fill="none" opacity="0.6" filter="url(#f-blur-sm)" />
+          <path d="M 500 840 Q 490 872 504 906" stroke="#c48a58" stroke-width="4" fill="none" opacity="0.5" filter="url(#f-blur-sm)" />
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <!-- PLANE 3 : side table, lamp, mug -->
+  <div class="plane" id="p-table">
+    <svg viewBox="-200 -200 1480 2320">
+      <g filter="url(#f-paint)">
+        <rect x="40" y="1190" width="250" height="18" rx="4" fill="#4b3a30" />
+        <rect x="40" y="1190" width="250" height="4" fill="#9a7a5a" opacity="0.5" />
+        <rect x="62" y="1208" width="12" height="230" fill="#33282a" /><rect x="256" y="1208" width="12" height="230" fill="#33282a" />
+        <rect x="74" y="1330" width="182" height="8" fill="#33282a" />
+        <!-- books on the lower shelf -->
+        <rect x="96" y="1300" width="120" height="14" fill="#5d4a3c" /><rect x="104" y="1286" width="104" height="14" fill="#3e4562" />
+        <!-- lamp -->
+        <ellipse cx="128" cy="1188" rx="40" ry="8" fill="#2a2326" />
+        <rect x="124" y="1010" width="8" height="178" fill="#3a3034" />
+        <path id="shade" d="M 72 1018 L 94 930 H 162 L 184 1018 Z" fill="url(#g-shade)" />
+        <path d="M 72 1018 H 184" stroke="#f6dfb2" stroke-width="3" opacity="0.8" />
+        <!-- mug -->
+        <path d="M 218 1146 h 40 v 40 q 0 6 -6 6 h -28 q -6 0 -6 -6 z" fill="#c9b79a" />
+        <path d="M 258 1156 q 16 2 14 14 q -2 12 -14 12" stroke="#c9b79a" stroke-width="5" fill="none" />
+      </g>
+      <!-- warm light pool from the lamp -->
+      <circle id="lampglow" cx="128" cy="990" r="460" fill="url(#g-lamp)" style="mix-blend-mode:screen" />
+      <ellipse cx="160" cy="1196" rx="190" ry="26" fill="#f2c98a" opacity="0.18" filter="url(#f-blur-sm)" />
+    </svg>
+  </div>
+
+  <!-- PLANE 4 : out-of-focus foreground (armchair arm, low table, plant leaves) -->
+  <div class="plane" id="p-fg">
+    <svg viewBox="-200 -200 1480 2320">
+      <g filter="url(#f-blur-fg)">
+        <!-- armchair arm, warm-lit by the lamp -->
+        <path d="M -220 1500 Q -40 1440 170 1480 Q 250 1500 256 1590 L 262 2140 H -220 Z" fill="#3b2c2a" />
+        <path d="M -220 1500 Q -40 1440 170 1480 Q 240 1496 252 1560" stroke="#c08a5a" stroke-width="14" fill="none" opacity="0.6" />
+        <!-- low table edge with a closed notebook and a glass of water -->
+        <path d="M 230 1760 H 900 L 960 1840 H 180 Z" fill="#4a372d" />
+        <path d="M 180 1840 H 960 V 1870 H 180 Z" fill="#2a1f1c" />
+        <path d="M 232 1762 H 898" stroke="#b58a60" stroke-width="5" opacity="0.6" />
+        <path d="M 360 1772 L 560 1766 L 580 1812 L 352 1820 Z" fill="#8a6a4e" />
+        <path d="M 356 1814 L 578 1806" stroke="#e1cfae" stroke-width="5" opacity="0.6" />
+        <path d="M 690 1700 h 56 l -6 100 h -44 z" fill="#9fb0d6" opacity="0.35" />
+        <path d="M 694 1740 h 48" stroke="#dfe6f4" stroke-width="4" opacity="0.5" />
+        <!-- plant -->
+        <g fill="#22332c">
+          <path d="M 1000 2140 Q 960 1800 1040 1560 Q 1080 1500 1120 1560 Q 1150 1800 1090 2140 Z" />
+          <path d="M 1060 1700 Q 900 1560 820 1380 Q 900 1370 980 1450 Q 1060 1560 1080 1700 Z" />
+          <path d="M 1080 1760 Q 1180 1560 1300 1480 Q 1310 1600 1220 1700 Q 1150 1770 1090 1790 Z" />
+          <path d="M 1050 1900 Q 880 1840 780 1700 Q 870 1680 960 1740 Q 1030 1800 1060 1880 Z" />
+        </g>
+        <path d="M 820 1380 Q 900 1370 980 1450" stroke="#5a6e8c" stroke-width="7" fill="none" opacity="0.7" />
+        <path d="M 1040 1560 Q 1080 1500 1120 1560" stroke="#5a6e8c" stroke-width="6" fill="none" opacity="0.6" />
+      </g>
+    </svg>
+  </div>
+
+  <!-- Light, vignette, paper grain (fixed to the frame) -->
+  <svg class="fx" viewBox="0 0 1080 1920" preserveAspectRatio="none">
+    <rect width="1080" height="1920" fill="url(#g-vignette)" />
+    <rect y="1200" width="1080" height="720" fill="url(#g-bottom)" />
+    <rect width="1080" height="1920" filter="url(#f-grain)" opacity="0.07" style="mix-blend-mode:overlay" />
+  </svg>
+
+  <div id="title">Ad-Duha · Comprendre les premiers versets<span></span></div>
+  <div class="sub" id="s1">Il y a des moments où tu invoques…</div>
+  <div class="sub" id="s2">… et où l’attente devient lourde.</div>
+  <div class="sub" id="s3">Tu regardes tes épreuves,</div>
+  <div class="sub" id="s4">et tu te sens seul.</div>
+
+  <!-- Voice: Dhuha.mp3 unchanged, 0.00 to 7.30 s (introduction ends 6.96 s, next sentence starts 7.55 s) -->
+  <audio id="voix" src="assets/audio/Dhuha.mp3" data-start="0" data-duration="7.3" data-media-start="0" data-track-index="9" data-volume="1"></audio>
+</div>
+
+<script>
+  // Seeded generator: the scene is identical on every render.
+  let seed = 20261020;
+  const rnd = () => { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; };
+  const NS = "http://www.w3.org/2000/svg";
+  const el = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); parent.appendChild(n); return n; };
+
+  // Sparse stars, lit windows of the town, floorboards, rain streaks.
+  const stars = document.getElementById("stars");
+  for (let i = 0; i < 14; i++) el("circle", { cx: 300 + rnd() * 560, cy: 350 + rnd() * 420, r: 0.8 + rnd() * 1.4, opacity: 0.25 + rnd() * 0.4 }, stars);
+  const lights = document.getElementById("townlights");
+  const lit = [];
+  [[262, 930], [290, 980], [334, 900], [346, 960], [390, 960], [430, 1010], [478, 920], [528, 980], [580, 1000], [604, 970],
+   [646, 890], [664, 950], [710, 940], [748, 1000], [792, 970], [850, 910], [872, 990]].forEach(([x, y]) => {
+    lit.push(el("rect", { x, y, width: 9, height: 12, opacity: 0.55 + rnd() * 0.35 }, lights));
+  });
+  const boards = document.getElementById("boards");
+  for (let i = -6; i <= 14; i++) {
+    const x0 = 560 + i * 90, x1 = 560 + i * 90 * 2.6;
+    el("line", { x1: x0, y1: 1264, x2: x1, y2: 2120 }, boards);
+  }
+  const rug = document.getElementById("rugmotif");
+  for (let i = 0; i < 7; i++) {
+    const t = (i + 0.5) / 7, y = 1380 + t * 260, half = 230 + t * 190, cx = 550;
+    for (let j = -2; j <= 2; j++) {
+      const x = cx + j * half * 0.38, w = 22 + t * 14, h = 9 + t * 7;
+      el("path", { d: `M ${x - w} ${y} L ${x} ${y - h} L ${x + w} ${y} L ${x} ${y + h} Z` }, rug);
+    }
+  }
+  const rain = document.getElementById("rain");
+  const drops = [];
+  for (let i = 0; i < 26; i++) {
+    const x = 320 + rnd() * 520, len = 18 + rnd() * 40;
+    drops.push({ n: el("line", { x1: x, y1: 0, x2: x + 2, y2: len, "stroke-width": 1.4 + rnd() * 1.6, opacity: 0.35 + rnd() * 0.45 }, rain), speed: 0.9 + rnd() * 1.2, delay: rnd() * 1.6 });
+  }
+
+  const tl = gsap.timeline({ paused: true });
+
+  // ---- Camera: one virtual camera, every plane follows with its own depth (parallax) ----
+  const planes = [["#p-sky", 0.25], ["#p-room", 0.6], ["#p-person", 0.75], ["#p-table", 0.88], ["#p-fg", 1.35]];
+  const pose = (c, d) => ({ x: -c.x * d, y: -c.y * d, scale: Math.pow(c.z, d) });
+  const shot = (c, t, dur, ease) => planes.forEach(([s, d]) => {
+    if (dur === 0) tl.set(s, pose(c, d), t); else tl.to(s, { ...pose(c, d), duration: dur, ease }, t);
+  });
+  // Wide, from the foreground armchair towards the window; slow lateral glide.
+  shot({ x: 80, y: 30, z: 1.22 }, 0, 0);
+  shot({ x: 6, y: 0, z: 1.15 }, 0, 2.3, "sine.inOut");
+  // The wait gets heavy: slow push-in on the person and the window.
+  shot({ x: 0, y: -40, z: 1.32 }, 2.3, 2.05, "power1.inOut");
+  // Cut (in the pause before "Tu regardes"): closer, behind the shoulder, the window fills the frame.
+  shot({ x: -30, y: -230, z: 1.62 }, 4.4, 0);
+  shot({ x: -50, y: -260, z: 1.70 }, 4.4, 1.65, "none");
+  // "et tu te sens seul": the camera pulls back, the room grows around the person.
+  shot({ x: 0, y: 50, z: 0.98 }, 6.0, 2.4, "power2.inOut");
+
+  // ---- Scene life ----
+  // Breathing (finite repeats).
+  tl.fromTo("#torso", { scaleY: 1, transformOrigin: "548px 1272px" }, { scaleY: 1.012, duration: 1.4, ease: "sine.inOut", yoyo: true, repeat: 5 }, 0);
+  // The head lowers a little as the wait gets heavy, then lifts towards the window.
+  tl.fromTo("#head", { y: 0, rotation: 0, transformOrigin: "548px 940px" }, { y: 9, rotation: -3, duration: 1.3, ease: "sine.inOut" }, 2.6);
+  tl.to("#head", { y: -3, rotation: 2, duration: 1.1, ease: "sine.inOut" }, 4.6);
+  tl.to("#head", { y: 4, rotation: 0, duration: 1.4, ease: "sine.inOut" }, 6.3);
+  // Clock: time passes.
+  tl.fromTo("#hand-m", { rotation: 40, svgOrigin: "120 560" }, { rotation: 150, duration: 5.6, ease: "none" }, 1.5);
+  tl.fromTo("#hand-h", { rotation: 280, svgOrigin: "120 560" }, { rotation: 290, duration: 5.6, ease: "none" }, 1.5);
+  // Clouds slide over the moon; the moonlight on the floor weakens.
+  tl.fromTo("#clouds", { x: 300 }, { x: -20, duration: 5.2, ease: "sine.inOut" }, 0.8);
+  tl.to("#moon-halo", { opacity: 0.25, duration: 2.0, ease: "sine.inOut" }, 3.4);
+  tl.to("#moonshaft", { opacity: 0.35, duration: 2.2, ease: "sine.inOut" }, 3.4);
+  // Rain starts on the glass when the wait gets heavy.
+  tl.to("#rain", { opacity: 1, duration: 1.0, ease: "sine.in" }, 2.4);
+  drops.forEach(d => {
+    const reps = Math.ceil((8.4 - 2.3) / d.speed);
+    tl.fromTo(d.n, { y: 300 + d.delay * 120 }, { y: 1120, duration: d.speed, ease: "power1.in", repeat: reps }, 2.3 + d.delay * 0.4);
+  });
+  // "seul": the town's windows go dark one after another.
+  const order = [3, 11, 7, 0, 14, 5, 9, 16, 1, 12, 6, 15, 2, 8, 13];
+  order.forEach((k, i) => tl.to(lit[k], { opacity: 0.04, duration: 0.25, ease: "power1.out" }, 6.0 + i * 0.12));
+  tl.to("#lampglow", { opacity: 0.7, duration: 2.0, ease: "sine.inOut" }, 6.0);
+
+  // ---- Text: discreet title, subtitles on the voice (phrases 0.00-1.89, 2.33-3.89, 4.44-5.58, 6.10-6.96) ----
+  tl.fromTo("#title", { opacity: 0, y: 8 }, { opacity: 0.92, y: 0, duration: 0.8, ease: "power2.out" }, 0.25);
+  tl.to("#title", { opacity: 0, duration: 0.6, ease: "power1.in" }, 2.7);
+  const sub = (id, a, b) => {
+    tl.fromTo(id, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, a);
+    tl.to(id, { opacity: 0, duration: 0.25, ease: "power1.in" }, b);
+  };
+  sub("#s1", 0.0, 2.05);
+  sub("#s2", 2.25, 4.15);
+  sub("#s3", 4.4, 5.85);
+  sub("#s4", 6.02, 7.9);
+
+  window.__timelines["ad-duha-intro"] = tl;
+</script>
+</body>
+</html>
