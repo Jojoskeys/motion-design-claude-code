@@ -21,13 +21,15 @@ d'origine sont bloqués dans cet environnement) : à relire sur la source d'orig
 
 | # | Formulation du script | Source | Extrait justificatif |
 |---|---|---|---|
-| 1 | Accroche « Et si ce que je dis sur lui est vrai ? » (formulation éditoriale, sans guillemets) | Sahih Muslim 2589 (HadeethEnc 5326) | AR : « أَفَرَأَيْتَ إِنْ كَانَ فِي أَخِي مَا أَقُولُ » ; FR HadeethEnc : « Et qu’en est-il si cette caractéristique est présente en lui ? » |
+| 1 | Accroche « Et si ce que je dis sur lui est vrai ? » (formulation éditoriale, sans guillemets) | Sahih Muslim 2589 (HadeethEnc 5326) | FR HadeethEnc : « Et qu’en est-il si cette caractéristique est présente en lui ? » ; AR : « أَفَرَأَيْتَ إِنْ كَانَ فِي أَخِي مَا أَقُولُ » |
 | 2 | Hadith cité en entier, sans coupure | Sahih Muslim 2589, traduction publiée sur HadeethEnc (https://hadeethenc.com/fr/browse/hadith/5326), contenu fourni par l'utilisateur | « Savez-vous ce qu’est la médisance ? - Ils répondirent : Allah et Son Messager savent mieux ! - Il a dit : C'est que tu évoques ton frère en des termes qu’il répugnerait. » On demanda : « Et qu’en est-il si cette caractéristique est présente en lui ? - Il répondit : si ce que tu dis est présent en lui, tu auras alors médit à son sujet ; mais si ce n’est pas le cas, tu l'auras alors diffamé. » |
-| 2 bis | « Le commentaire de HadeethEnc signale des situations particulières, non traitées dans cet épisode. » | Commentaire de la page HadeethEnc 5326, point 5 des enseignements (résumé fourni par l'utilisateur) | Selon le résumé : situations particulières, notamment la plainte d’une personne opprimée auprès de quelqu’un pouvant lui rendre justice et la consultation. Commentaire de la page, pas paroles du hadith ; non développé dans l'épisode. |
 | 3 | Citation du verset (extrait annoncé) | Hamidullah 49:12 | « … et ne médisez pas les uns des autres. L'un de vous aimerait-il manger la chair de son frère mort? (Non!) vous en aurez horreur. Et craignez Allah. Car Allah est Grand Accueillant au repentir, Très Miséricordieux » |
-| 4 | « Ce verset demande aussi d'éviter l'excès de soupçon et l'espionnage » | Hamidullah 49:12 | « Evitez de trop conjecturer [sur autrui] car une partie des conjectures est péché. Et n'espionnez pas » |
-| 5 | « le précédent, la moquerie, le dénigrement et les surnoms blessants » | Hamidullah 49:11 | « Qu'un groupe ne se raille pas d'un autre groupe […] Ne vous dénigrez pas et ne vous lancez pas mutuellement des sobriquets (injurieux) » |
-| 6 | « Le verset se termine sur le repentir et la miséricorde » + citation | Hamidullah 49:12, fin | « Car Allah est Grand Accueillant au repentir, Très Miséricordieux » |
+| E1 | « Donc, si c'est vrai, c'est de la médisance. Si c'est faux, c'est de la diffamation. » (révision 5) | Sahih Muslim 2589, traduction HadeethEnc | « si ce que tu dis est présent en lui, tu auras alors médit à son sujet ; mais si ce n’est pas le cas, tu l'auras alors diffamé » |
+| E2 | « Dans le Coran, sourate Al-Hujurat, verset douze : après le soupçon et l'espionnage, vient la médisance. » (révision 5) | Hamidullah 49:12 | « Evitez de trop conjecturer [sur autrui] car une partie des conjectures est péché. Et n'espionnez pas; et ne médisez pas les uns des autres » |
+| E3 | « Selon le tafsir Al-Mukhtasar, on devrait ressentir la même répulsion devant la médisance. » (révision 5, paraphrase attribuée, sans l'image du cadavre) | Al-Mukhtasar 49:12 ; concordant : Al-Muyassar 49:12 | « ayez donc la même répulsion à l’égard de ces deux méfaits » ; « فأنتم تكرهون ذلك، فاكرهوا اغتيابه » |
+| E4 | « Alors, avant de parler de quelqu'un, demande-toi : est-ce qu'il aimerait entendre ça ? » (illustration pédagogique, présentée comme une question à se poser, pas comme une règle) | Sahih Muslim 2589, traduction HadeethEnc | « C'est que tu évoques ton frère en des termes qu’il répugnerait. » |
+| E5 | « Et si une parole t'a échappé, le verset se termine sur le repentir et la miséricorde. » (révision 5) | Hamidullah 49:12, fin | « Car Allah est Grand Accueillant au repentir, Très Miséricordieux » |
+| Écran / description | Verset 11 (moquerie, dénigrement, surnoms) ; situations particulières | Hamidullah 49:11 ; commentaire HadeethEnc 5326, point 5 (résumé fourni par l'utilisateur) | voir lignes ci-dessus et `sources-brutes/ep01-hadeethenc-5326.txt` ; retirés de la voix off en révision 5 |
 
 Retirés en révision 3 : la paraphrase d'Al-Mukhtasar (« dévorer le cadavre »), la section « La nuance » (aucune
 source lue ne traite les cas où parler d'un absent serait permis ou nécessaire) et la citation d'Al-Mukhtasar en
@@ -73,7 +75,7 @@ Extrait affiché (mots 14 à 31 de l'édition retenue) :
 5. Des spectateurs demanderont s'il est permis de parler d'un absent pour avertir ou demander conseil : sujet non
    traité ici, possible épisode futur après recherche sourcée.
 
-## 6. État des vérifications pour la révision 4 (2026-10-20)
+## 6. État des vérifications (révision 4, inchangé par la révision 5 de style)
 
 **Vérifié** :
 - Hadith, traduction FR : la citation du script est identique, caractère pour caractère, au texte HadeethEnc fourni par
