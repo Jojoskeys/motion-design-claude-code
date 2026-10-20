@@ -124,3 +124,37 @@ l'environnement (une tentative le 2026-10-20), texte intégral demandé à l'uti
 
 Points d'attention (non corrigés, à décider par l'utilisateur) : N2 (« compagnons » n'est pas dans le texte du hadith) ;
 N9 est la définition du hadith, sans ses exceptions : la carte « situations particulières » à l'écran l'accompagne.
+
+## 8. Verset 49:12 fourni depuis Quran.com et comparaison (2026-10-20)
+
+Copie exacte : `sources-brutes/ep01-qurancom-49-12.txt`, **contenu fourni par l'utilisateur depuis
+https://quran.com/fr/al-hujurat/12** (page ouverte par l'utilisateur ; Claude ne l'a pas consultée, site refusé par le
+proxy). La traduction française y est attribuée à Muhammad Hamidullah. C'est elle qu'utilisent désormais
+`VOIX-OFF.txt` et l'écran (adaptation de ponctuation pour ElevenLabs : `VOIX-OFF-ADAPTATIONS.md`).
+
+Comparaison faite par script (`difflib`, `unicodedata`), sans normalisation manuelle.
+
+**Français, Quran.com ↔ miroir `fra-muhammadhamidul` (tanzil.net)** : mêmes 60 mots, dans le même ordre. Différences :
+- graphie : « Ô » (Quran.com) / « O » (miroir) ;
+- apostrophes : « n’espionnez », « L’un » (U+2019) / « n'espionnez », « L'un » (U+0027) ;
+- espaces avant « ! » et « ? » : « cru ! », « mort ? », « (Non !) » / « cru! », « mort? », « (Non!) » ;
+- point final présent sur Quran.com, absent du miroir.
+Aucune différence de mots.
+
+**Arabe, Quran.com ↔ sources du projet** (129 lettres de base dans chaque texte) :
+- `ara-qurankhaledhosn` : mêmes lettres dans le même ordre ; seule différence d'encodage des lettres : le ya est codé
+  U+06CC (ya persan, sans points) dans le miroir et U+064A (ya arabe) sur Quran.com, 10 occurrences. Différences de
+  signes : tanwin ouvert U+08F0/U+08F1 (miroir) / tanwin U+064B/U+064C (Quran.com) ; sukun U+06E1 / U+0652 ; madda
+  U+06E4 / U+0653. Mêmes signes de pause (U+06D6, puis 3 × U+06DA) ; sur Quran.com ils sont séparés par des espaces, et
+  le numéro de verset « ١٢ » est ajouté (36 éléments séparés par des espaces, contre 31 mots).
+- `ara-quranuthmanihaf` : mêmes lettres une fois la hamza décomposée (alif U+0627 + hamza combinante U+0654/U+0655
+  dans le miroir, alif à hamza précomposé U+0623/U+0625 sur Quran.com : même graphie, codage différent, 9 occurrences).
+  Différences de signes : tatwil U+0640 et petit zéro U+06DF présents seulement sur Quran.com ; tanwin ouvert et
+  sukun U+06E1 seulement dans le miroir ; marque U+200F en fin de verset dans le miroir.
+**Aucune différence de lettres** entre les trois textes ; les écarts portent sur le codage et les signes. Cela ne
+remplace pas la comparaison avec un mushaf imprimé : l'arabe reste en emplacement réservé à l'écran.
+
+## 9. Provenance de « ses compagnons » (narration N2)
+Le texte du hadith dit « ils » (قَالُوا). La mention des compagnons s'appuie, selon l'utilisateur, sur le commentaire de
+la page HadeethEnc 5326 qu'il a consultée et fournie précédemment. Le texte exact de ce passage du commentaire n'est
+pas enregistré dans `sources-brutes/` (seul le résumé du point 5 l'est) : à ajouter si une citation est affichée.

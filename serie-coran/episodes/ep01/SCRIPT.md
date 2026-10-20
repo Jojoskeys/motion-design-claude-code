@@ -1,10 +1,11 @@
 # Épisode 1 : « La médisance » (sourate 49, extrait du verset 12)
 
 Statut : **révision 7 (2026-10-20) : nouvelle direction narrative fournie par l'utilisateur ; style validé, pas une
-validation religieuse ; verset 49:12 encore en attente de comparaison avec quran.com ; publication non validée.**
+validation religieuse ; C1 et C2 validées, C3 retirée ; verset 49:12 : traduction fournie depuis Quran.com (SOURCES.md § 8) ; texte
+finalisé pour l'essai audio ; publication non validée.**
 Texte à enregistrer : `VOIX-OFF.txt`, produit par `build-voix-off.py` à partir de `NARRATION-r7.txt` (narration) et des
 fichiers sources (citations copiées par script). La révision 6 ci-dessous est conservée pour l'historique.
-Traduction du sens du Coran : Muhammad Hamidullah (49:12 entier, miroir GitHub de tanzil.net). Hadith : Sahih Muslim
+Traduction du sens du Coran : Muhammad Hamidullah (49:12 entier, texte fourni par l'utilisateur depuis Quran.com). Hadith : Sahih Muslim
 n° 2589, traduction HadeethEnc (contenu de la page fourni par l'utilisateur). Tafsir : Al-Mukhtasar (FR), Al-Muyassar
 et As-Sa'di (AR). Sources et extraits : `SOURCES.md` § 7.
 
@@ -14,10 +15,11 @@ et As-Sa'di (AR). Sources et extraits : `SOURCES.md` § 7.
 - C2 « Soupçonner quelqu’un, c’est lui prêter une intention ou une faute sans savoir. » → « Le soupçon visé, c’est
   prêter à quelqu’un une mauvaise intention ou une faute sans preuve. » (Al-Mukhtasar : « accusations qui ne reposent
   souvent sur aucune preuve », « pense du mal » ; Al-Muyassar : ظن السوء).
-- C3 « … élargit cette mise en garde : » → « … élargit cette mise en garde. En voici une traduction du sens : » (règle
-  de la série : lecture française annoncée comme traduction du sens).
-- Verset provisoire remplacé par Hamidullah 49:12 entier, mot pour mot. Seule adaptation pour ElevenLabs : « [sur
-  autrui] » en « (sur autrui) », car le modèle v3 lit les crochets comme des balises. À l'écran : crochets d'origine.
+- C1 et C2 validées par l'utilisateur (2026-10-20).
+- C3 retirée à la demande de l'utilisateur : la narration garde « … élargit cette mise en garde : » ; l'écran affiche
+  « Traduction du sens — Muhammad Hamidullah » pendant la lecture du verset.
+- Verset provisoire remplacé par Hamidullah 49:12 entier, mot pour mot, dans le texte fourni depuis Quran.com.
+  Adaptation de ponctuation pour ElevenLabs : `VOIX-OFF-ADAPTATIONS.md`. À l'écran : crochets d'origine.
 
 ## Vérification du cadrage (faite avant rédaction)
 - Le verset 12 contient trois interdits liés : trop soupçonner, espionner, médire. Le verset 11 interdit la moquerie,

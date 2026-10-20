@@ -1,10 +1,10 @@
 # Reprise : épisode 1 « La médisance » (état au 2026-10-20, révision 7)
 
 ## État actuel (révision 7 : nouvelle narration, ~3 min 30)
-- Texte à enregistrer : `serie-coran/episodes/ep01/VOIX-OFF.txt` (472 mots), construit par `build-voix-off.py`
+- Texte à enregistrer : `serie-coran/episodes/ep01/VOIX-OFF.txt` (466 mots), construit par `build-voix-off.py`
   depuis `NARRATION-r7.txt` + sources. Corrections signalées C1-C3 : `SCRIPT.md` ; sources : `SOURCES.md` § 7.
-- **Blocage avant enregistrement définitif** : Hamidullah 49:12 entier (miroir tanzil) à comparer avec le texte
-  intégral de https://quran.com/fr/al-hujurat/12, fourni par l'utilisateur (site refusé par le proxy).
+- Verset 49:12 : texte fourni depuis Quran.com, comparé (SOURCES.md § 8). Texte finalisé pour l'essai audio (466 mots).
+  Restent avant publication : conditions de réutilisation des traductions, arabe vs mushaf imprimé.
 - Montage : `ep01-medisance/index.html` est **généré** par `python3 -I ep01-medisance/build-composition.py`
   (gabarit `composition.tpl`) : 20 scènes, sous-titres, minutage provisoire estimé (`temps-provisoires.json`).
   Après réception de la voix : mesurer les débuts/fins de chaque unité (u01…u36), les écrire dans un `temps.json`

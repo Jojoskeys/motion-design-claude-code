@@ -1,6 +1,7 @@
 """Construit VOIX-OFF.txt (révision 7) : narration validée + citations copiées depuis les fichiers sources.
 Usage, depuis la racine du dépôt : python3 -I serie-coran/episodes/ep01/build-voix-off.py
-Aucune citation n'est tapée ici : {H1}..{H5} viennent de la traduction HadeethEnc, {V} de Hamidullah 49:12."""
+Aucune citation n'est tapée ici : {H1}..{H5} viennent de la traduction HadeethEnc, {V} de Hamidullah 49:12 (Quran.com).
+Adaptations de ponctuation pour ElevenLabs : VOIX-OFF-ADAPTATIONS.md."""
 import json, pathlib, re
 
 D = pathlib.Path(__file__).parent
@@ -20,8 +21,8 @@ H = {
     "H4": extrait("Et qu’en est-il", "en lui ?"),
     "H5": extrait("si ce que tu dis", "diffamé."),
 }
-v = json.loads((D / "sources-brutes/ep01-extraits.json").read_text(encoding="utf-8"))
-V = v["coran_49_11_12"]["fra-muhammadhamidul"]["12"]
+qc = (D / "sources-brutes/ep01-qurancom-49-12.txt").read_text(encoding="utf-8")
+V = qc.split("TRADUCTION FRANÇAISE\n")[1].split("\n")[0]       # Quran.com, fourni par l'utilisateur
 # Seule adaptation pour ElevenLabs : les crochets du traducteur « [sur autrui] » deviendraient une balise audio
 # (le modèle v3 lit les crochets comme des indications de jeu) ; ils passent en parenthèses. Aucun mot changé.
 V_oral = V.replace("[sur autrui]", "(sur autrui)")

@@ -29,7 +29,7 @@ H3 = hadith("C'est que tu", "répugnerait.")
 H4 = hadith("Et qu’en est-il", "en lui ?")
 H5a = hadith("si ce que tu dis", "son sujet ;")
 H5b = hadith("mais si ce n’est", "diffamé.")
-V = json.loads((EP / "sources-brutes/ep01-extraits.json").read_text(encoding="utf-8"))["coran_49_11_12"]["fra-muhammadhamidul"]["12"]
+V = (EP / "sources-brutes/ep01-qurancom-49-12.txt").read_text(encoding="utf-8").split("TRADUCTION FRANÇAISE\n")[1].split("\n")[0]
 coupes = ["péché. ", "autres. ", "horreur. "]
 V1, reste = V.split(coupes[0], 1); V1 += coupes[0].strip()
 V2, reste = reste.split(coupes[1], 1); V2 += coupes[1].strip()
@@ -62,8 +62,7 @@ U = [
     ("u18", "Lui attribuer ce qui n’est pas en lui, c’est de la diffamation.", "st"),
     ("u19", "Dire la vérité ne suffit donc pas, à lui seul, à justifier cette parole.", "carton"),
     ("u20", "Le hadith nous aide à reconnaître la médisance.", "st"),
-    ("u21", "Le verset douze de la sourate Al-Hujurat élargit cette mise en garde.", "st"),
-    ("u22", "En voici une traduction du sens :", "st"),
+    ("u21", "Le verset douze de la sourate Al-Hujurat élargit cette mise en garde :", "st"),
     ("u23a", oral(V1), "carton"),
     ("u23b", V2, "carton"),
     ("u23c", V3, "carton"),
@@ -91,7 +90,7 @@ assert norm(" ".join(t for _, t, _ in U)) == norm(VOIX), "unités ≠ VOIX-OFF.t
 
 # ---- minutage provisoire ------------------------------------------------------------------------------------------
 CITATION = {"u06", "u08", "u10", "u12", "u15a", "u15b", "u23a", "u23b", "u23c", "u23d"}
-PAUSE_LONGUE = {"u02", "u03", "u05", "u08", "u10", "u12", "u13", "u15b", "u16", "u18", "u19", "u22", "u23d",
+PAUSE_LONGUE = {"u02", "u03", "u05", "u08", "u10", "u12", "u13", "u15b", "u16", "u18", "u19", "u21", "u23d",
                 "u27", "u28", "u30", "u31", "u32", "u33", "u35"}
 T, t = {}, 0.15
 for k, txt, _ in U:
@@ -239,7 +238,7 @@ scene("s-expl2", "u19", "u19", carton("c-u19", "u19", "à lui seul", note=e(NOTE
 a("#c-u19", "u19", -0.2); a("#c-u19-note", "u19", 1.2)
 
 # ---- 5. Le verset ---------------------------------------------------------------------------------------------------
-scene("s-transition", "u20", "u22", f'''
+scene("s-transition", "u20", "u21", f'''
 <svg class="decor" viewBox="0 0 1080 1920" aria-hidden="true">
   {fil("ft1", "M120 520 C 260 520, 300 760, 504 800")}
   {etoile(540, 800, s=1.8, idx='id="t-etoile"')}
@@ -260,7 +259,7 @@ CADRE = '''<svg class="decor" viewBox="0 0 1080 1920" aria-hidden="true">
   ''' + etoile(540, 690) + '''
 </svg>
 <p class="bloc tag tag-ar">Texte arabe de 49:12 · emplacement réservé</p>
-<p class="bloc ref-v"><strong>Traduction du sens</strong> · Muhammad Hamidullah</p>'''
+<p class="bloc ref-v"><strong>Traduction du sens</strong> — Muhammad Hamidullah</p>'''
 vers = [("u23a", V1, True, False), ("u23b", V2, False, False), ("u23c", V3, False, False), ("u23d", V4, False, True)]
 scene("s-verset", "u23a", "u23d", CADRE + "".join(
     f'<p class="bloc verset" id="v-{k}">{guill(txt, o, f)}</p>' for k, txt, o, f in vers), "Coran · 49:12 · verset entier")
