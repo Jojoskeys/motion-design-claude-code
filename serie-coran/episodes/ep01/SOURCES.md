@@ -79,17 +79,82 @@ Extrait affiché (mots 14 à 31 de l'édition retenue) :
 
 **Vérifié** :
 - Hadith, traduction FR : la citation du script est identique, caractère pour caractère, au texte HadeethEnc fourni par
-  l'utilisateur (`sources-brutes/ep01-hadeethenc-5326.txt`), contrôle fait par script. Claude n'a pas consulté la page
-  lui-même : la fidélité de la copie repose sur le contenu fourni.
+  l'utilisateur (`sources-brutes/ep01-hadeethenc-5326.txt`), contrôle fait par script. L'utilisateur a lui-même ouvert
+  la page HadeethEnc et fourni son texte ; Claude ne l'a pas consultée (site bloqué dans cet environnement).
 - Hadith, référence et degré : « Authentique », Sahih Muslim 2589, tels qu'affichés sur HadeethEnc (contenu fourni).
 - Hamidullah 49:12 et 49:11 : citations identiques aux extraits du miroir GitHub (`sources-brutes/ep01-extraits.json`).
   Une correspondance avec un miroir ne valide pas la source d'origine.
+- Hamidullah 49:12, vérification externe rapportée (2026-10-20) : l'utilisateur indique avoir comparé l'extrait
+  français à la page https://quran.com/fr/al-hujurat/12, qui l'attribue à Muhammad Hamidullah. Claude n'a pas consulté
+  cette page ; la comparaison est enregistrée telle que rapportée.
+- Formule « paix et salut sur lui » : retenue par l'utilisateur (2026-10-20).
 
-**Restant à vérifier** :
-1. Passage coranique, traduction : relire l'extrait de 49:12 (et 49:11 pour le contexte) dans l'édition Hamidullah
-   que vous afficherez (la version de tanzil.net peut différer d'autres éditions révisées) ; vérifier le droit d'usage.
+**Restant à vérifier** (mis à jour le 2026-10-20) :
+1. Conditions de réutilisation de la traduction Hamidullah (49:12, et 49:11 cité dans la description) : à vérifier
+   séparément avant publication. 49:11 n'a pas fait l'objet de la comparaison quran.com rapportée.
 2. Passage coranique, texte arabe affiché : comparer mot par mot avec un mushaf imprimé (rasm uthmani, Hafs) ; voir § 4.
 3. Commentaire HadeethEnc, point 5 : le script ne s'appuie que sur le résumé fourni ; si vous voulez une attribution
    plus précise à l'écran, fournir le texte exact de ce point.
-4. Formule « paix et salut sur lui » : à confirmer.
-5. Droit d'usage de la traduction HadeethEnc dans une vidéo : à vérifier sur le site.
+4. [Réglé le 2026-10-20] Formule « paix et salut sur lui » : retenue par l'utilisateur.
+5. Conditions de réutilisation de la traduction HadeethEnc dans une vidéo : à vérifier séparément avant publication.
+
+## 7. Révision 7 : tableau narration ↔ sources (2026-10-20)
+
+Citations : extraits exacts de la traduction HadeethEnc (H1 à H5) et Hamidullah 49:12 entier (V), copiés par
+`build-voix-off.py`. Hamidullah 49:12 : texte du miroir `fra-muhammadhamidul` (origine déclarée tanzil.net) ; l'extrait
+« … et ne médisez pas … Très Miséricordieux » a été comparé par l'utilisateur à https://quran.com/fr/al-hujurat/12
+(vérification rapportée) ; **le début du verset n'est pas encore comparé** : quran.com refusé par le proxy de
+l'environnement (une tentative le 2026-10-20), texte intégral demandé à l'utilisateur.
+
+| # | Narration (r7) | Source | Extrait justificatif |
+|---|---|---|---|
+| N1 | « Dans le Coran, Allah interdit la médisance. » | Hamidullah 49:12 | « et ne médisez pas les uns des autres » |
+| N2 | « un échange entre le Prophète … et ses compagnons » ; « Ses compagnons lui répondent » | Muslim 2589 (HadeethEnc) | AR : « قَالُوا: اللهُ وَرَسُولُهُ أَعْلَمُ » ; le hadith dit « ils », « compagnons » désigne ses interlocuteurs croyants (cadrage éditorial, sans nom ni scène) |
+| N3 | « Une question lui est alors posée » | idem | AR « قِيلَ » ; FR « On demanda » |
+| N4 | « Autrement dit : et si ce qu’on dit de cette personne est vrai ? » (reformulation annoncée) | idem | AR « أَفَرَأَيْتَ إِنْ كَانَ فِي أَخِي مَا أَقُولُ » |
+| N5 | « ne consiste pas forcément à inventer » ; « un défaut réel … peut déjà être de la médisance » ; « Lui attribuer ce qui n’est pas en lui, c’est de la diffamation » ; « Dire la vérité ne suffit donc pas, à lui seul, à justifier cette parole » | idem | « si ce que tu dis est présent en lui, tu auras alors médit à son sujet ; mais si ce n’est pas le cas, tu l'auras alors diffamé » ; « peut » et « à lui seul » laissent la place aux situations particulières du commentaire HadeethEnc (point 5, résumé de l'utilisateur), affichées à l'écran |
+| N6 | « l’excès de soupçons, l’espionnage et la médisance » (C1) | Hamidullah 49:12 | « Evitez de trop conjecturer [sur autrui] car une partie des conjectures est péché. Et n'espionnez pas; et ne médisez pas » |
+| N7 | « Le soupçon visé, c’est prêter à quelqu’un une mauvaise intention ou une faute sans preuve » (C2) | Al-Mukhtasar 49:12 ; Al-Muyassar 49:12 | « abstenez-vous de porter des accusations qui ne reposent souvent sur aucune preuve car certaines conjectures sont des péchés, comme lorsque l’on pense du mal de quelqu’un qui est droit en apparence » ; « اجتنبوا كثيرًا من ظن السوء بالمؤمنين » |
+| N8 | « Espionner, c’est chercher à découvrir ce qu’il garde privé » | Al-Muyassar 49:12 ; As-Sa'di 49:12 | « ولا تُفَتِّشوا عن عورات المسلمين » ; « لا تفتشوا عن عورات المسلمين، ولا تتبعوها » |
+| N9 | « Médire, c’est évoquer de lui ce qui lui déplaît, même lorsque c’est vrai » | Muslim 2589 ; Al-Mukhtasar 49:12 | « C'est que tu évoques ton frère en des termes qu’il répugnerait » ; « que personne parmi vous ne mentionne son frère d’une manière qui ne lui plaît pas » |
+| N10 | « ce qu’une personne ne peut pas défendre à cet instant : sa vie privée et sa réputation » (explication éditoriale) | Al-Muyassar 49:12 | « ولا يقل بعضكم في بعضٍ بظهر الغيب ما يكره » (en son absence) ; « عورات » (ce qui est caché) |
+| N11 | « une répulsion … pour nous faire mesurer la gravité de la médisance » | Al-Mukhtasar 49:12 ; As-Sa'di 49:12 | « ayez donc la même répulsion à l’égard de ces deux méfaits » ; « دليل على التحذير الشديد من الغيبة » |
+| N12 | « il se termine sur le repentir et la miséricorde d’Allah » | Hamidullah 49:12 | « Car Allah est Grand Accueillant au repentir, Très Miséricordieux » |
+| N13 | « Reconnaître ses paroles comme une faute, c’est aussi comprendre qu’il faut changer sa manière de parler des autres » (explication éditoriale) | Al-Mukhtasar 49:12 | « Craignez Allah en vous conformant à Ses commandements et en renonçant à Ses interdits. Allah accepte le repentir de Ses serviteurs » |
+
+Points d'attention (non corrigés, à décider par l'utilisateur) : N2 (« compagnons » n'est pas dans le texte du hadith) ;
+N9 est la définition du hadith, sans ses exceptions : la carte « situations particulières » à l'écran l'accompagne.
+
+## 8. Verset 49:12 fourni depuis Quran.com et comparaison (2026-10-20)
+
+Copie exacte : `sources-brutes/ep01-qurancom-49-12.txt`, **contenu fourni par l'utilisateur depuis
+https://quran.com/fr/al-hujurat/12** (page ouverte par l'utilisateur ; Claude ne l'a pas consultée, site refusé par le
+proxy). La traduction française y est attribuée à Muhammad Hamidullah. C'est elle qu'utilisent désormais
+`VOIX-OFF.txt` et l'écran (adaptation de ponctuation pour ElevenLabs : `VOIX-OFF-ADAPTATIONS.md`).
+
+Comparaison faite par script (`difflib`, `unicodedata`), sans normalisation manuelle.
+
+**Français, Quran.com ↔ miroir `fra-muhammadhamidul` (tanzil.net)** : mêmes 60 mots, dans le même ordre. Différences :
+- graphie : « Ô » (Quran.com) / « O » (miroir) ;
+- apostrophes : « n’espionnez », « L’un » (U+2019) / « n'espionnez », « L'un » (U+0027) ;
+- espaces avant « ! » et « ? » : « cru ! », « mort ? », « (Non !) » / « cru! », « mort? », « (Non!) » ;
+- point final présent sur Quran.com, absent du miroir.
+Aucune différence de mots.
+
+**Arabe, Quran.com ↔ sources du projet** (129 lettres de base dans chaque texte) :
+- `ara-qurankhaledhosn` : mêmes lettres dans le même ordre ; seule différence d'encodage des lettres : le ya est codé
+  U+06CC (ya persan, sans points) dans le miroir et U+064A (ya arabe) sur Quran.com, 10 occurrences. Différences de
+  signes : tanwin ouvert U+08F0/U+08F1 (miroir) / tanwin U+064B/U+064C (Quran.com) ; sukun U+06E1 / U+0652 ; madda
+  U+06E4 / U+0653. Mêmes signes de pause (U+06D6, puis 3 × U+06DA) ; sur Quran.com ils sont séparés par des espaces, et
+  le numéro de verset « ١٢ » est ajouté (36 éléments séparés par des espaces, contre 31 mots).
+- `ara-quranuthmanihaf` : mêmes lettres une fois la hamza décomposée (alif U+0627 + hamza combinante U+0654/U+0655
+  dans le miroir, alif à hamza précomposé U+0623/U+0625 sur Quran.com : même graphie, codage différent, 9 occurrences).
+  Différences de signes : tatwil U+0640 et petit zéro U+06DF présents seulement sur Quran.com ; tanwin ouvert et
+  sukun U+06E1 seulement dans le miroir ; marque U+200F en fin de verset dans le miroir.
+**Aucune différence de lettres** entre les trois textes ; les écarts portent sur le codage et les signes. Cela ne
+remplace pas la comparaison avec un mushaf imprimé : l'arabe reste en emplacement réservé à l'écran.
+
+## 9. Provenance de « ses compagnons » (narration N2)
+Le texte du hadith dit « ils » (قَالُوا). La mention des compagnons s'appuie, selon l'utilisateur, sur le commentaire de
+la page HadeethEnc 5326 qu'il a consultée et fournie précédemment. Le texte exact de ce passage du commentaire n'est
+pas enregistré dans `sources-brutes/` (seul le résumé du point 5 l'est) : à ajouter si une citation est affichée.

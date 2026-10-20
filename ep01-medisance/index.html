@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1080, height=1920">
+  <title>ep01 La médisance : montage (minutage provisoire)</title>
+  <!-- Fichier généré par build-composition.py depuis composition.tpl : modifier le générateur, pas index.html. -->
+  <!-- GSAP 3.14.2 embarqué en local (jsDelivr bloqué dans cet environnement), copié depuis le paquet npm gsap@3.14.2 -->
+  <script src="assets/vendor/gsap-3.14.2.min.js"></script>
+  <style>
+    @font-face { font-family: "Source Serif 4"; font-weight: 400; src: url(assets/fonts/source-serif-4-latin-400-normal.woff2); }
+    @font-face { font-family: "Source Serif 4"; font-weight: 600; src: url(assets/fonts/source-serif-4-latin-600-normal.woff2); }
+    @font-face { font-family: "Source Serif 4"; font-weight: 400; font-style: italic; src: url(assets/fonts/source-serif-4-latin-400-italic.woff2); }
+    @font-face { font-family: "Inter"; font-weight: 400; src: url(assets/fonts/inter-latin-400-normal.woff2); }
+    @font-face { font-family: "Inter"; font-weight: 500; src: url(assets/fonts/inter-latin-500-normal.woff2); }
+    @font-face { font-family: "Inter"; font-weight: 600; src: url(assets/fonts/inter-latin-600-normal.woff2); }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: #0b1630; }
+    #root {
+      position: relative; width: 100%; height: 100%; overflow: hidden;
+      background: radial-gradient(110% 60% at 35% 45%, #13254f 0%, #0b1630 72%);
+      color: #f3ead7; font-family: "Inter", sans-serif;
+    }
+    svg.decor { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .scene, .lab { opacity: 0; }
+    .scene { position: absolute; inset: 0; }
+    .bloc { position: absolute; }
+    /* Zone sûre : contenu entre 220 et 1500 px, à gauche de 920 px. */
+    .etiquette { left: 88px; top: 236px; width: 832px; font: 600 28px/1.2 "Inter", sans-serif; letter-spacing: .16em; text-transform: uppercase; color: #c6a15b; }
+    .or { color: #c6a15b; }
+    .or-it { display: block; margin-top: 10px; font: 400 italic 88px/1.1 "Source Serif 4", serif; color: #c6a15b; }
+    .cta { color: #c6a15b; }
+
+    .hook1 { left: 88px; top: 1030px; width: 832px; font: 600 60px/1.15 "Source Serif 4", serif; }
+    .hook2 { left: 88px; top: 1196px; width: 832px; font: 600 62px/1.15 "Source Serif 4", serif; }
+
+    .bulle { position: absolute; width: 760px; padding: 34px 46px 40px; border-radius: 44px; background: #0f1d40; border: 2.5px solid rgba(198,161,91,.6); }
+    .bulle.g { left: 88px; }
+    .bulle.d { left: 160px; border-color: rgba(243,234,215,.42); }
+    .bulle::after { content: ""; position: absolute; bottom: -19px; width: 34px; height: 34px; background: #0f1d40; border: inherit; border-top: 0; border-left: 0; transform: rotate(45deg); }
+    .bulle.g::after { left: 92px; }
+    .bulle.d::after { right: 92px; }
+    .qui { font: 600 24px/1.2 "Inter", sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #c6a15b; margin-bottom: 14px; }
+    .bulle.d .qui { color: #b9b3a5; }
+    .qui:empty { display: none; }
+    .cit { font: 400 52px/1.3 "Source Serif 4", serif; }
+    .bulle.grand .cit { font-size: 58px; }
+    .ref { left: 88px; top: 1196px; width: 832px; font: 500 28px/1.4 "Inter", sans-serif; color: #b9b3a5; }
+    .ref strong, .ref-v strong, .ref-rappel strong { color: #f3ead7; font-weight: 600; }
+
+    .lab-autrement { left: 88px; top: 700px; font: 600 54px/1.15 "Source Serif 4", serif; color: #b9b3a5; }
+    .question { left: 88px; top: 790px; width: 832px; font: 600 76px/1.12 "Source Serif 4", serif; letter-spacing: -.01em; }
+    .question .debut { display: block; }
+    .question .vrai { display: block; width: max-content; margin-top: 14px; font: 400 italic 140px/1 "Source Serif 4", serif; color: #c6a15b; }
+
+    .expl { left: 88px; top: 600px; width: 832px; font: 600 62px/1.2 "Source Serif 4", serif; }
+    .expl.grand { top: 640px; font-size: 76px; }
+    .note { left: 88px; top: 1180px; width: 800px; font: 400 29px/1.42 "Inter", sans-serif; color: #b9b3a5; }
+    .note.bas { top: 1110px; }
+
+    .tete { left: 88px; top: 316px; width: 832px; text-align: center; font: 400 italic 46px/1.2 "Source Serif 4", serif; color: #b9b3a5; }
+    .branche { top: 690px; width: 360px; text-align: center; }
+    .branche.g { left: 88px; }
+    .branche.d { left: 560px; }
+    .cle { font: 500 32px/1.3 "Inter", sans-serif; color: #f3ead7; }
+    .mot { margin-top: 16px; font: 400 italic 70px/1.1 "Source Serif 4", serif; color: #c6a15b; }
+
+    .titre-sourate { left: 88px; top: 960px; width: 832px; text-align: center; font: 600 76px/1.1 "Source Serif 4", serif; }
+    .sous-titre-sourate { left: 88px; top: 1066px; width: 832px; text-align: center; font: 600 30px/1.2 "Inter", sans-serif; letter-spacing: .16em; text-transform: uppercase; color: #c6a15b; }
+
+    .tag { font: 500 24px/1.5 "Inter", sans-serif; letter-spacing: .14em; text-transform: uppercase; color: #b9b3a5; opacity: .75; }
+    .tag-ar { left: 88px; width: 832px; top: 590px; text-align: center; }
+    .verset { left: 150px; width: 708px; top: 760px; text-align: center; font: 400 50px/1.32 "Source Serif 4", serif; }
+    .ref-v { left: 88px; width: 832px; top: 1340px; text-align: center; font: 500 28px/1.4 "Inter", sans-serif; color: #b9b3a5; }
+
+    .noeud { left: 204px; width: 716px; font: 600 54px/1.15 "Source Serif 4", serif; color: #f3ead7; }
+
+    .rappel { left: 88px; top: 620px; width: 832px; font: 400 italic 62px/1.3 "Source Serif 4", serif; }
+    .ref-rappel { left: 88px; top: 1010px; width: 832px; font: 500 28px/1.4 "Inter", sans-serif; color: #b9b3a5; }
+    .ref-rappel.bas2 { top: 1070px; }
+
+    .pilule { left: 88px; top: 1010px; padding: 18px 34px; border: 2px solid #c6a15b; border-radius: 999px; font: 600 32px/1.2 "Inter", sans-serif; color: #c6a15b; }
+
+    .fin-titre { left: 88px; top: 600px; width: 832px; font: 600 108px/1.05 "Source Serif 4", serif; }
+    .fin-ref { left: 88px; top: 750px; width: 832px; font: 600 30px/1.2 "Inter", sans-serif; letter-spacing: .16em; text-transform: uppercase; color: #c6a15b; }
+    .pilules { left: 88px; top: 860px; display: flex; gap: 22px; }
+    .pilule-i { padding: 16px 32px; border: 2px solid #c6a15b; border-radius: 999px; font: 600 30px/1.2 "Inter", sans-serif; color: #f3ead7; }
+    .pilule-i.or-fond { background: #c6a15b; color: #0b1630; }
+    .fin-sources { left: 88px; top: 1010px; width: 800px; font: 400 26px/1.5 "Inter", sans-serif; color: #b9b3a5; }
+
+    /* Sous-titres : 2 lignes au plus, au-dessus des 420 px du bas */
+    .st { position: absolute; left: 88px; top: 1290px; width: 832px; font: 500 44px/1.3 "Inter", sans-serif; color: #f3ead7; opacity: 0; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="ep01-medisance" data-start="0" data-width="1080" data-height="1920" data-duration="149.43">
+    <svg class="decor" viewBox="0 0 1080 1920" aria-hidden="true">
+      <defs>
+        <pattern id="trame" width="132" height="132" patternUnits="userSpaceOnUse">
+          <g transform="translate(66 66)" fill="none" stroke="#c6a15b" stroke-width="1.4">
+            <rect x="-26" y="-26" width="52" height="52"/><rect x="-26" y="-26" width="52" height="52" transform="rotate(45)"/>
+          </g>
+        </pattern>
+        <radialGradient id="fondu" cx="85%" cy="12%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity="1"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <mask id="m"><rect width="1080" height="1920" fill="url(#fondu)"/></mask>
+      </defs>
+      <!-- Trame fixe, commune à tout l'épisode -->
+      <rect width="1080" height="1920" fill="url(#trame)" opacity=".09" mask="url(#m)"/>
+    </svg>
+    <p class="bloc etiquette lab" id="lab-s-accroche">La médisance · Coran 49:12</p>
+    <p class="bloc etiquette lab" id="lab-s-echange">Hadith · un échange</p>
+    <p class="bloc etiquette lab" id="lab-s-h1">Hadith · Sahih Muslim 2589</p>
+    <p class="bloc etiquette lab" id="lab-s-h2">Hadith · Sahih Muslim 2589</p>
+    <p class="bloc etiquette lab" id="lab-s-h3">Hadith · Sahih Muslim 2589</p>
+    <p class="bloc etiquette lab" id="lab-s-autrement">Autrement dit</p>
+    <p class="bloc etiquette lab" id="lab-s-h4">Hadith · Sahih Muslim 2589</p>
+    <p class="bloc etiquette lab" id="lab-s-expl1">Explication · d'après le hadith</p>
+    <p class="bloc etiquette lab" id="lab-s-schema">Explication · d'après le hadith</p>
+    <p class="bloc etiquette lab" id="lab-s-expl2">À retenir</p>
+    <p class="bloc etiquette lab" id="lab-s-transition">Coran · 49:12</p>
+    <p class="bloc etiquette lab" id="lab-s-verset">Coran · 49:12 · verset entier</p>
+    <p class="bloc etiquette lab" id="lab-s-trois">Coran 49:12 · trois mises en garde</p>
+    <p class="bloc etiquette lab" id="lab-s-expl3">Explication</p>
+    <p class="bloc etiquette lab" id="lab-s-image">Coran 49:12 · l’image du verset</p>
+    <p class="bloc etiquette lab" id="lab-s-recap">Ce que le verset nous apprend</p>
+    <p class="bloc etiquette lab" id="lab-s-fin-verset">Coran 49:12 · fin du verset</p>
+    <p class="bloc etiquette lab" id="lab-s-expl4">Explication</p>
+    <p class="bloc etiquette lab" id="lab-s-question">Et toi&nbsp;?</p>
+    <p class="bloc etiquette lab" id="lab-s-fin">Comprendre le Coran · épisode 1</p>
+    <section class="scene" id="s-accroche">
+<svg class="decor" viewBox="0 0 1080 1920" aria-hidden="true">
+  <g id="bulles" fill="#0f1d40" stroke-linecap="round" stroke-linejoin="round">
+    <g id="bulle1"><path d="M150 330 h250 a46 46 0 0 1 46 46 v84 a46 46 0 0 1 -46 46 h-176 l-46 40 v-40 h-28 a46 46 0 0 1 -46 -46 v-84 a46 46 0 0 1 46 -46 z" stroke="#f3ead7" stroke-opacity=".55" stroke-width="3"/>
+      <g fill="#f3ead7" fill-opacity=".55"><circle cx="232" cy="418" r="9"/><circle cx="275" cy="418" r="9"/><circle cx="318" cy="418" r="9"/></g></g>
+    <g id="bulle2"><path d="M560 560 h250 a46 46 0 0 1 46 46 v84 a46 46 0 0 1 -46 46 h-28 v40 l-46 -40 h-176 a46 46 0 0 1 -46 -46 v-84 a46 46 0 0 1 46 -46 z" stroke="#f3ead7" stroke-opacity=".32" stroke-width="3"/>
+      <g fill="#f3ead7" fill-opacity=".32"><circle cx="642" cy="648" r="9"/><circle cx="685" cy="648" r="9"/><circle cx="728" cy="648" r="9"/></g></g>
+    <g id="bulle3"><path d="M210 790 h170 a40 40 0 0 1 40 40 v58 a40 40 0 0 1 -40 40 h-140 l-38 34 v-34 h-0 a40 40 0 0 1 -32 -40 v-58 a40 40 0 0 1 40 -40 z" stroke="#f3ead7" stroke-opacity=".22" stroke-width="3" stroke-dasharray="10 12"/></g>
+    <mask id="fa1-m" maskUnits="userSpaceOnUse" x="0" y="0" width="1080" height="1920"><path id="fa1" fill="none" stroke="#fff" stroke-width="16" d="M224 546 C 300 640, 430 580, 512 650"/></mask><path fill="none" mask="url(#fa1-m)" d="M224 546 C 300 640, 430 580, 512 650" stroke="#c6a15b" stroke-width="3" stroke-dasharray="2 14" opacity="0.9"/>
+    <mask id="fa2-m" maskUnits="userSpaceOnUse" x="0" y="0" width="1080" height="1920"><path id="fa2" fill="none" stroke="#fff" stroke-width="16" d="M736 776 C 700 850, 520 820, 422 858"/></mask><path fill="none" mask="url(#fa2-m)" d="M736 776 C 700 850, 520 820, 422 858" stroke="#c6a15b" stroke-width="3" stroke-dasharray="2 14" opacity="0.7"/>
+  </g>
+</svg>
+<p class="bloc hook1" id="a-u01">Dans le Coran, Allah interdit la médisance.</p>
+<p class="bloc hook2" id="a-u02">Mais est-ce que tu sais vraiment <span class="or-it">ce qui en fait partie&nbsp;?</span></p>
+<p class="bloc hook2" id="a-u03">Pour mieux comprendre le Coran, <span class="cta">abonne-toi.</span></p>
+</section>
+    <section class="scene" id="s-echange">
+<svg class="decor" viewBox="0 0 1080 1920" aria-hidden="true"><g fill="#0f1d40" stroke-linecap="round" stroke-linejoin="round">
+  <g id="e-b1"><path d="M150 520 h300 a50 50 0 0 1 50 50 v100 a50 50 0 0 1 -50 50 h-210 l-50 44 v-44 h-40 a50 50 0 0 1 -50 -50 v-100 a50 50 0 0 1 50 -50 z" stroke="#c6a15b" stroke-opacity=".6" stroke-width="3"/>
+    <g fill="#c6a15b" fill-opacity=".7"><circle cx="252" cy="620" r="10"/><circle cx="300" cy="620" r="10"/><circle cx="348" cy="620" r="10"/></g></g>
+  <g id="e-b2"><path d="M580 860 h300 a50 50 0 0 1 50 50 v100 a50 50 0 0 1 -50 50 h-40 v44 l-50 -44 h-210 a50 50 0 0 1 -50 -50 v-100 a50 50 0 0 1 50 -50 z" stroke="#f3ead7" stroke-opacity=".45" stroke-width="3"/>
+    <g fill="#f3ead7" fill-opacity=".5"><circle cx="682" cy="960" r="10"/><circle cx="730" cy="960" r="10"/><circle cx="778" cy="960" r="10"/></g></g>
+  <mask id="fe1-m" maskUnits="userSpaceOnUse" x="0" y="0" width="1080" height="1920"><path id="fe1" fill="none" stroke="#fff" stroke-width="16" d="M250 770 C 300 880, 470 900, 576 940"/></mask><path fill="none" mask="url(#fe1-m)" d="M250 770 C 300 880, 470 900, 576 940" stroke="#c6a15b" stroke-width="3" stroke-dasharray="2 14" opacity="0.9"/>
+</g></svg>
+<p class="bloc ref"><strong>Sahih Muslim 2589</strong> · authentique · traduction&nbsp;: HadeethEnc</p></section>
+    <section class="scene" id="s-h1"><div class="bulle g" id="b-u06" style="top:360px"><p class="qui">Le Prophète</p><p class="cit">«&nbsp;Savez-vous ce qu’est la médisance&nbsp;?&nbsp;»</p></div><div class="bulle d" id="b-u08" style="top:760px"><p class="qui">Ses compagnons</p><p class="cit">«&nbsp;Allah et Son Messager savent mieux&nbsp;!&nbsp;»</p></div><p class="bloc ref"><strong>Sahih Muslim 2589</strong> · authentique · traduction&nbsp;: HadeethEnc</p></section>
+    <section class="scene" id="s-h2"><div class="bulle g grand" id="b-u10" style="top:520px"><p class="qui">Le Prophète</p><p class="cit">«&nbsp;C'est que tu évoques ton frère en des termes qu’il répugnerait.&nbsp;»</p></div><p class="bloc ref"><strong>Sahih Muslim 2589</strong> · authentique · traduction&nbsp;: HadeethEnc</p></section>
+    <section class="scene" id="s-h3"><div class="bulle d grand" id="b-u12" style="top:560px"><p class="qui">Une question</p><p class="cit">«&nbsp;Et qu’en est-il si cette caractéristique est présente en lui&nbsp;?&nbsp;»</p></div><p class="bloc ref"><strong>Sahih Muslim 2589</strong> · authentique · traduction&nbsp;: HadeethEnc</p></section>
+    <section class="scene" id="s-autrement">
+<p class="bloc lab-autrement" id="r-1">Autrement dit&nbsp;:</p>
+<p class="bloc question" id="r-2"><span class="debut">et si ce qu’on dit de cette personne est</span> <span class="vrai">vrai&nbsp;?</span></p>
+<svg class="decor" viewBox="0 0 1080 1920" aria-hidden="true"><line id="r-filet" x1="88" y1="1196" x2="520" y2="1196" stroke="#c6a15b" stroke-width="3" opacity=".75"/>
+<g transform="translate(548 1196) scale(0.86)"><g id="r-etoile" class="" fill="none" stroke="#c6a15b" stroke-width="2.5"><rect x="-14" y="-14" width="28" height="28"/><rect x="-14" y="-14" width="28" height="28" transform="rotate(45)"/></g></g></svg></section>
+    <section class="scene" id="s-h4"><div class="bulle g" id="b-u15a" style="top:380px"><p class="qui">Le Prophète</p><p class="cit">«&nbsp;si ce que tu dis est présent en lui, tu auras alors médit à son sujet&nbsp;;</p></div><div class="bulle g" id="b-u15b" style="top:780px"><p class="qui"></p><p class="cit">mais si ce n’est pas le cas, tu l'auras alors diffamé.&nbsp;»</p></div><p class="bloc ref"><strong>Sahih Muslim 2589</strong> · authentique · traduction&nbsp;: HadeethEnc</p></section>
+    <section class="scene" id="s-expl1"><p class="bloc expl" id="c-u16">Ce qu’il explique ici, c’est que la médisance <span class="or">ne consiste pas forcément à inventer</span> quelque chose sur quelqu’un.</p></section>
+    <section class="scene" id="s-schema">
+<svg class="decor" viewBox="0 0 1080 1920" aria-hidden="true">
+  <g transform="translate(504 430) scale(1.1)"><g  class="" fill="none" stroke="#c6a15b" stroke-width="2.5"><rect x="-14" y="-14" width="28" height="28"/><rect x="-14" y="-14" width="28" height="28" transform="rotate(45)"/></g></g>
+  <mask id="fs1-m" maskUnits="userSpaceOnUse" x="0" y="0" width="1080" height="1920"><path id="fs1" fill="none" stroke="#fff" stroke-width="16" d="M490 470 C 420 560, 300 560, 270 660"/></mask><path fill="none" mask="url(#fs1-m)" d="M490 470 C 420 560, 300 560, 270 660" stroke="#c6a15b" stroke-width="3" stroke-dasharray="2 14" opacity="0.9"/>
+  <mask id="fs2-m" maskUnits="userSpaceOnUse" x="0" y="0" width="1080" height="1920"><path id="fs2" fill="none" stroke="#fff" stroke-width="16" d="M518 470 C 590 560, 710 560, 740 660"/></mask><path fill="none" mask="url(#fs2-m)" d="M518 470 C 590 560, 710 560, 740 660" stroke="#c6a15b" stroke-width="3" stroke-dasharray="2 14" opacity="0.9"/>
+</svg>
+<p class="bloc tete">Ce que tu dis de lui…</p>
+<div class="bloc branche g" id="br-g"><p class="cle">est présent en lui</p><p class="mot">médisance</p></div>
+<div class="bloc branche d" id="br-d"><p class="cle">n’est pas en lui</p><p class="mot">diffamation</p></div></section>
+    <section class="scene" id="s-expl2"><p class="bloc expl" id="c-u19">Dire la vérité ne suffit donc pas, <span class="or">à lui seul</span>, à justifier cette parole.</p><p class="bloc note" id="c-u19-note">Le commentaire de ce hadith sur HadeethEnc mentionne des situations particulières (plainte d’une personne opprimée, consultation). Elles ne sont pas traitées ici.</p></section>
+    <section class="scene" id="s-transition">
+<svg class="decor" viewBox="0 0 1080 1920" aria-hidden="true">
+  <mask id="ft1-m" maskUnits="userSpaceOnUse" x="0" y="0" width="1080" height="1920"><path id="ft1" fill="none" stroke="#fff" stroke-width="16" d="M120 520 C 260 520, 300 760, 504 800"/></mask><path fill="none" mask="url(#ft1-m)" d="M120 520 C 260 520, 300 760, 504 800" stroke="#c6a15b" stroke-width="3" stroke-dasharray="2 14" opacity="0.9"/>
+  <g transform="translate(540 800) scale(1.8)"><g id="t-etoile" class="" fill="none" stroke="#c6a15b" stroke-width="2.5"><rect x="-14" y="-14" width="28" height="28"/><rect x="-14" y="-14" width="28" height="28" transform="rotate(45)"/></g></g>
+</svg>
+<p class="bloc titre-sourate" id="t-titre">Sourate Al-Hujurat</p>
+<p class="bloc sous-titre-sourate" id="t-ref">Coran · 49:12</p></section>
+    <section class="scene" id="s-verset"><svg class="decor" viewBox="0 0 1080 1920" aria-hidden="true">
+  <rect x="88" y="300" width="832" height="1140" rx="28" fill="#0f1d40" fill-opacity=".6" stroke="#c6a15b" stroke-opacity=".6" stroke-width="2.5"/>
+  <rect x="104" y="316" width="800" height="1108" rx="18" fill="none" stroke="#c6a15b" stroke-opacity=".22" stroke-width="1.5"/>
+  <g transform="translate(88 300) scale(1.0)"><g  class="" fill="#0b1630" stroke="#c6a15b" stroke-width="2.5"><rect x="-14" y="-14" width="28" height="28"/><rect x="-14" y="-14" width="28" height="28" transform="rotate(45)"/></g></g><g transform="translate(920 300) scale(1.0)"><g  class="" fill="#0b1630" stroke="#c6a15b" stroke-width="2.5"><rect x="-14" y="-14" width="28" height="28"/><rect x="-14" y="-14" width="28" height="28" transform="rotate(45)"/></g></g><g transform="translate(88 1440) scale(1.0)"><g  class="" fill="#0b1630" stroke="#c6a15b" stroke-width="2.5"><rect x="-14" y="-14" width="28" height="28"/><rect x="-14" y="-14" width="28" height="28" transform="rotate(45)"/></g></g><g transform="translate(920 1440) scale(1.0)"><g  class="" fill="#0b1630" stroke="#c6a15b" stroke-width="2.5"><rect x="-14" y="-14" width="28" height="28"/><rect x="-14" y="-14" width="28" height="28" transform="rotate(45)"/></g></g>
+  <g fill="#f3ead7" fill-opacity=".13"><rect x="180" y="420" width="650" height="44" rx="22"/><rect x="290" y="500" width="540" height="44" rx="22"/></g>
+  <line x1="250" y1="690" x2="512" y2="690" stroke="#c6a15b" stroke-opacity=".6" stroke-width="2"/>
+  <line x1="568" y1="690" x2="830" y2="690" stroke="#c6a15b" stroke-opacity=".6" stroke-width="2"/>
+  <g transform="translate(540 690) scale(1.0)"><g  class="" fill="none" stroke="#c6a15b" stroke-width="2.5"><rect x="-14" y="-14" width="28" height="28"/><rect x="-14" y="-14" width="28" height="28" transform="rotate(45)"/></g></g>
+</svg>
+<p class="bloc tag tag-ar">Texte arabe de 49:12 · provisoire, non affiché <span style="display:block">(vérification sur mushaf imprimé en cours)</span></p>
+<p class="bloc ref-v"><strong>Traduction du sens</strong> — Muhammad Hamidullah</p><p class="bloc verset" id="v-u23a">«&nbsp;Ô vous qui avez cru&nbsp;! Evitez de trop conjecturer [sur autrui] car une partie des conjectures est péché.</p><p class="bloc verset" id="v-u23b">Et n’espionnez pas; et ne médisez pas les uns des autres.</p><p class="bloc verset" id="v-u23c">L’un de vous aimerait-il manger la chair de son frère mort&nbsp;? (Non&nbsp;!) vous en aurez horreur.</p><p class="bloc verset" id="v-u23d">Et craignez Allah. Car Allah est Grand Accueillant au repentir, Très Miséricordieux.&nbsp;»</p></section>
+    <section class="scene" id="s-trois"><svg class="decor" viewBox="0 0 1080 1920" aria-hidden="true"><mask id="f3-m" maskUnits="userSpaceOnUse" x="0" y="0" width="1080" height="1920"><path id="f3" fill="none" stroke="#fff" stroke-width="16" d="M150 400 L 150 1060"/></mask><path fill="none" mask="url(#f3-m)" d="M150 400 L 150 1060" stroke="#c6a15b" stroke-width="3" stroke-dasharray="2 14" opacity="0.9"/><g transform="translate(150 480) scale(1.0)"><g id="t3-e0" class="" fill="#0b1630" stroke="#c6a15b" stroke-width="2.5"><rect x="-14" y="-14" width="28" height="28"/><rect x="-14" y="-14" width="28" height="28" transform="rotate(45)"/></g></g><g transform="translate(150 730) scale(1.0)"><g id="t3-e1" class="" fill="#0b1630" stroke="#c6a15b" stroke-width="2.5"><rect x="-14" y="-14" width="28" height="28"/><rect x="-14" y="-14" width="28" height="28" transform="rotate(45)"/></g></g><g transform="translate(150 980) scale(1.0)"><g id="t3-e2" class="" fill="#0b1630" stroke="#c6a15b" stroke-width="2.5"><rect x="-14" y="-14" width="28" height="28"/><rect x="-14" y="-14" width="28" height="28" transform="rotate(45)"/></g></g></svg><p class="bloc noeud" id="t3-n0" style="top:436px">l’excès de soupçons</p><p class="bloc noeud" id="t3-n1" style="top:686px">l’espionnage</p><p class="bloc noeud" id="t3-n2" style="top:936px">la médisance</p><p class="bloc note bas" id="t3-note">Le commentaire de ce hadith sur HadeethEnc mentionne des situations particulières (plainte d’une personne opprimée, consultation). Elles ne sont pas traitées ici.</p></section>
+    <section class="scene" id="s-expl3"><p class="bloc expl" id="c-u28">Ces interdictions protègent donc aussi ce qu’une personne ne peut pas défendre à cet instant&nbsp;: <span class="or">sa vie privée et sa réputation</span>.</p></section>
+    <section class="scene" id="s-image"><p class="bloc rappel" id="i-cit">«&nbsp;L’un de vous aimerait-il manger la chair de son frère mort&nbsp;?&nbsp;…&nbsp;»</p>
+<p class="bloc ref-rappel" id="i-ref"><strong>Coran 49:12</strong> · traduction du sens&nbsp;: Muhammad Hamidullah</p>
+<p class="bloc ref-rappel bas2" id="i-taf">Voir aussi&nbsp;: tafsir Al-Mukhtasar et As-Sa'di, 49:12</p></section>
+    <section class="scene" id="s-recap"><svg class="decor" viewBox="0 0 1080 1920" aria-hidden="true"><mask id="f4-m" maskUnits="userSpaceOnUse" x="0" y="0" width="1080" height="1920"><path id="f4" fill="none" stroke="#fff" stroke-width="16" d="M150 400 L 150 1060"/></mask><path fill="none" mask="url(#f4-m)" d="M150 400 L 150 1060" stroke="#c6a15b" stroke-width="3" stroke-dasharray="2 14" opacity="0.9"/><g transform="translate(150 480) scale(1.0)"><g id="rc-e0" class="" fill="#0b1630" stroke="#c6a15b" stroke-width="2.5"><rect x="-14" y="-14" width="28" height="28"/><rect x="-14" y="-14" width="28" height="28" transform="rotate(45)"/></g></g><g transform="translate(150 730) scale(1.0)"><g id="rc-e1" class="" fill="#0b1630" stroke="#c6a15b" stroke-width="2.5"><rect x="-14" y="-14" width="28" height="28"/><rect x="-14" y="-14" width="28" height="28" transform="rotate(45)"/></g></g><g transform="translate(150 980) scale(1.0)"><g id="rc-e2" class="" fill="#0b1630" stroke="#c6a15b" stroke-width="2.5"><rect x="-14" y="-14" width="28" height="28"/><rect x="-14" y="-14" width="28" height="28" transform="rotate(45)"/></g></g></svg><p class="bloc noeud" id="rc-n0" style="top:436px">faire attention à ce que nous supposons des autres</p><p class="bloc noeud" id="rc-n1" style="top:686px">respecter leur vie privée</p><p class="bloc noeud" id="rc-n2" style="top:936px">préserver leur réputation</p></section>
+    <section class="scene" id="s-fin-verset"><p class="bloc rappel" id="f-cit">«&nbsp;…&nbsp;Car Allah est Grand Accueillant au repentir, Très Miséricordieux.&nbsp;»</p>
+<p class="bloc ref-rappel" id="f-ref"><strong>Coran 49:12, fin du verset</strong> · traduction du sens&nbsp;: Muhammad Hamidullah</p></section>
+    <section class="scene" id="s-expl4"><p class="bloc expl" id="c-u33">Reconnaître ses paroles comme une faute, c’est aussi comprendre qu’il faut <span class="or">changer sa manière de parler des autres</span>.</p></section>
+    <section class="scene" id="s-question"><p class="bloc expl grand" id="q-u34">Et toi, qu’est-ce que tu retiens de ce verset&nbsp;?</p>
+<p class="bloc pilule" id="q-u35">Dis-le en commentaire.</p></section>
+    <section class="scene" id="s-fin">
+<p class="bloc fin-titre" id="z-titre">La médisance</p>
+<p class="bloc fin-ref" id="z-ref">Coran 49:12 · Sahih Muslim 2589</p>
+<div class="bloc pilules" id="z-cta"><span class="pilule-i">Partager</span><span class="pilule-i or-fond">S’abonner</span></div>
+<p class="bloc fin-sources" id="z-src">Hadith&nbsp;: Sahih Muslim 2589, traduction HadeethEnc · Coran&nbsp;: traduction du sens de Muhammad Hamidullah · Tafsir&nbsp;: Al-Mukhtasar, Al-Muyassar, As-Sa'di</p></section>
+    <p class="st" id="st-u04-0">Pour comprendre la médisance, commençons par un échange entre</p>
+    <p class="st" id="st-u04-1">le Prophète, paix et salut sur lui,</p>
+    <p class="st" id="st-u04-2">et ses compagnons.</p>
+    <p class="st" id="st-u05-0">Dans un hadith rapporté par Muslim,</p>
+    <p class="st" id="st-u05-1">il les interroge&nbsp;:</p>
+    <p class="st" id="st-u07-0">Ses compagnons lui répondent&nbsp;:</p>
+    <p class="st" id="st-u09-0">Il leur explique alors&nbsp;:</p>
+    <p class="st" id="st-u11-0">Une question lui est alors posée&nbsp;:</p>
+    <p class="st" id="st-u14-0">Le Prophète répond&nbsp;:</p>
+    <p class="st" id="st-u17-0">Évoquer un défaut réel qu’il détesterait voir mentionné peut</p>
+    <p class="st" id="st-u17-1">déjà être de la médisance.</p>
+    <p class="st" id="st-u18-0">Lui attribuer ce qui n’est pas en lui,</p>
+    <p class="st" id="st-u18-1">c’est de la diffamation.</p>
+    <p class="st" id="st-u20-0">Le hadith nous aide à reconnaître la médisance.</p>
+    <p class="st" id="st-u21-0">Le verset douze de la sourate Al-Hujurat élargit cette mise en garde&nbsp;:</p>
+    <p class="st" id="st-u24-0">Le verset attire notre attention sur trois choses&nbsp;:</p>
+    <p class="st" id="st-u24-1">l’excès de soupçons, l’espionnage et la médisance.</p>
+    <p class="st" id="st-u25-0">Le soupçon visé, c’est prêter à quelqu’un une mauvaise</p>
+    <p class="st" id="st-u25-1">intention ou une faute sans preuve.</p>
+    <p class="st" id="st-u26-0">Espionner, c’est chercher à découvrir ce qu’il garde privé.</p>
+    <p class="st" id="st-u27-0">Médire, c’est évoquer de lui ce qui lui déplaît,</p>
+    <p class="st" id="st-u27-1">même lorsque c’est vrai.</p>
+    <p class="st" id="st-u29-0">Puis vient cette image du frère mort.</p>
+    <p class="st" id="st-u30-0">Le verset fait appel à une répulsion que l’on comprend</p>
+    <p class="st" id="st-u30-1">immédiatement, pour nous faire mesurer la gravité de la médisance.</p>
+    <p class="st" id="st-u31-0">Ce verset nous apprend donc à faire attention à ce que nous</p>
+    <p class="st" id="st-u31-1">supposons des autres, à respecter leur vie privée et à</p>
+    <p class="st" id="st-u31-2">préserver leur réputation.</p>
+    <p class="st" id="st-u32-0">Et après ces mises en garde, il se termine sur le repentir et</p>
+    <p class="st" id="st-u32-1">la miséricorde d’Allah.</p>
+    <p class="st" id="st-u36-0">Si cette explication t’a aidé à mieux le comprendre,</p>
+    <p class="st" id="st-u36-1">partage-la et abonne-toi pour la suite.</p>
+    <audio id="voix-ep01" src="assets/audio/voix-ep01.wav" data-start="0.3" data-track-index="10" data-volume="1"></audio>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    // Fil de la parole : un tracé plein, dans un masque, se déroule et révèle le pointillé
+    const LONGUEURS = {};
+    for (const id of ["fa1", "fa2", "fe1", "fs1", "fs2", "ft1", "f3", "f4"]) {
+      const p = document.getElementById(id);
+      const L = p.getTotalLength();
+      // trait L, puis vide L + 40 ; départ décalé de L + 20 : aucun reste visible avant le tracé
+      LONGUEURS[id] = L + 20;
+      gsap.set(p, { strokeDasharray: L + " " + (L + 40), strokeDashoffset: L + 20 });
+    }
+    const trace = (id, at, d) => tl.fromTo("#" + id,
+      { strokeDashoffset: LONGUEURS[id] }, { strokeDashoffset: 0, duration: d, ease: "power1.inOut" }, at);
+    tl.set("#s-accroche, #lab-s-accroche", {opacity: 1}, 0);
+    tl.fromTo("#a-u01", {opacity: 0.6, y: 10}, {opacity: 1, y: 0, duration: 0.4, ease: "power2.out"}, 0);
+    tl.fromTo("#bulle1", {opacity: 0, scale: .94}, {opacity: 1, scale: 1, duration: .45, transformOrigin: "50% 100%"}, 0);
+    trace("fa1", 0.70, 0.45);
+    tl.fromTo("#bulle2", {opacity: 0, scale: .94}, {opacity: 1, scale: 1, duration: .45, transformOrigin: "50% 100%"}, 0.6);
+    trace("fa2", 1.25, 0.45);
+    tl.fromTo("#bulle3", {opacity: 0, scale: .94}, {opacity: 1, scale: 1, duration: .45, transformOrigin: "50% 100%"}, 1.2);
+    tl.fromTo("#a-u02", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 3.19);
+    tl.to("#a-u02", {opacity: 0, duration: 0.3}, 5.94);
+    tl.to("#bulles", {opacity: 0.6, duration: 0.6}, 5.94);
+    tl.fromTo("#a-u03", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 6.24);
+    tl.fromTo("#e-b1", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 9.02);
+    trace("fe1", 10.32, 0.8);
+    tl.fromTo("#e-b2", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 10.92);
+    tl.fromTo("#b-u06", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 17.84);
+    tl.fromTo("#b-u08", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 21.26);
+    tl.to("#b-u06", {opacity: 0.55, duration: 0.4}, 19.94);
+    tl.fromTo("#b-u10", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 24.99);
+    tl.fromTo("#b-u12", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 30.07);
+    tl.fromTo("#r-1", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 33.35);
+    tl.fromTo("#r-2", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 33.55);
+    tl.fromTo("#r-filet", {scaleX: 0}, {scaleX: 1, duration: 0.5, ease: "power2.inOut", transformOrigin: "0% 50%"}, 34.55);
+    tl.fromTo("#r-etoile", {opacity: 0, rotation: -45}, {opacity: 1, rotation: 0, duration: 0.45, svgOrigin: "0 0"}, 34.95);
+    tl.fromTo("#b-u15a", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 38.21);
+    tl.fromTo("#b-u15b", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 42.31);
+    tl.fromTo("#c-u16", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 45.27);
+    trace("fs1", 51.03, 0.6);
+    tl.fromTo("#br-g", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 51.43);
+    trace("fs2", 56.13, 0.6);
+    tl.fromTo("#br-d", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 56.53);
+    tl.fromTo("#c-u19", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 59.07);
+    tl.fromTo("#c-u19-note", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 60.47);
+    trace("ft1", 63.55, 1.0);
+    tl.fromTo("#t-etoile", {opacity: 0, rotation: -45}, {opacity: 1, rotation: 0, duration: 0.6, svgOrigin: "0 0"}, 64.45);
+    tl.fromTo("#t-titre", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 66.07);
+    tl.fromTo("#t-ref", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 66.37);
+    tl.fromTo("#v-u23a", {opacity: 0.0, y: 12}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 69.68);
+    tl.to("#v-u23a", {opacity: 0, duration: 0.3}, 76.06);
+    tl.fromTo("#v-u23b", {opacity: 0.0, y: 12}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 76.36);
+    tl.to("#v-u23b", {opacity: 0, duration: 0.3}, 79.14);
+    tl.fromTo("#v-u23c", {opacity: 0.0, y: 12}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 79.44);
+    tl.to("#v-u23c", {opacity: 0, duration: 0.3}, 84.16);
+    tl.fromTo("#v-u23d", {opacity: 0.0, y: 12}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 84.46);
+    trace("f3", 89.97, 1.2);
+    tl.fromTo("#t3-n0", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 92.66);
+    tl.fromTo("#t3-n1", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 93.79);
+    tl.fromTo("#t3-n2", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 94.65);
+    tl.to("#t3-n0", {color: "#c6a15b", duration: 0.35, ease: "power1.out"}, 96.07);
+    tl.to("#t3-n0", {color: "#f3ead7", duration: 0.35, ease: "power1.inOut"}, 100.55);
+    tl.to("#t3-n1", {color: "#c6a15b", duration: 0.35, ease: "power1.out"}, 100.91);
+    tl.to("#t3-n1", {color: "#f3ead7", duration: 0.35, ease: "power1.inOut"}, 103.91);
+    tl.to("#t3-n2", {color: "#c6a15b", duration: 0.35, ease: "power1.out"}, 104.21);
+    tl.to("#t3-n2", {color: "#f3ead7", duration: 0.35, ease: "power1.inOut"}, 107.93);
+    tl.fromTo("#t3-note", {opacity: 0}, {opacity: 1, duration: 0.4}, 105.01);
+    tl.fromTo("#c-u28", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 108.05);
+    tl.fromTo("#i-cit", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 114.65);
+    tl.fromTo("#i-ref", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 115.15);
+    tl.fromTo("#i-taf", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 117.27);
+    trace("f4", 122.57, 0.9);
+    tl.fromTo("#rc-n0", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 124.04);
+    tl.fromTo("#rc-n1", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 126.53);
+    tl.fromTo("#rc-n2", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 127.95);
+    tl.fromTo("#f-cit", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 130.23);
+    tl.fromTo("#f-ref", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 130.63);
+    tl.fromTo("#c-u33", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 134.09);
+    tl.fromTo("#q-u34", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 139.39);
+    tl.fromTo("#q-u35", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 141.65);
+    tl.fromTo("#z-titre", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 142.79);
+    tl.fromTo("#z-ref", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 143.09);
+    tl.fromTo("#z-cta", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 145.39);
+    tl.fromTo("#z-src", {opacity: 0.0, y: 18}, {opacity: 1, y: 0, duration: 0.45, ease: "power2.out"}, 143.59);
+    tl.to("#s-accroche, #lab-s-accroche", {opacity: 0, duration: 0.3, ease: "power1.in"}, 8.10);
+    tl.fromTo("#s-echange, #lab-s-echange", {opacity: 0}, {opacity: 1, duration: 0.35, ease: "power1.out"}, 8.42);
+    tl.to("#s-echange, #lab-s-echange", {opacity: 0, duration: 0.3, ease: "power1.in"}, 17.42);
+    tl.fromTo("#s-h1, #lab-s-h1", {opacity: 0}, {opacity: 1, duration: 0.35, ease: "power1.out"}, 17.74);
+    tl.to("#s-h1, #lab-s-h1", {opacity: 0, duration: 0.3, ease: "power1.in"}, 23.17);
+    tl.fromTo("#s-h2, #lab-s-h2", {opacity: 0}, {opacity: 1, duration: 0.35, ease: "power1.out"}, 23.49);
+    tl.to("#s-h2, #lab-s-h2", {opacity: 0, duration: 0.3, ease: "power1.in"}, 27.79);
+    tl.fromTo("#s-h3, #lab-s-h3", {opacity: 0}, {opacity: 1, duration: 0.35, ease: "power1.out"}, 28.11);
+    tl.to("#s-h3, #lab-s-h3", {opacity: 0, duration: 0.3, ease: "power1.in"}, 32.93);
+    tl.fromTo("#s-autrement, #lab-s-autrement", {opacity: 0}, {opacity: 1, duration: 0.35, ease: "power1.out"}, 33.25);
+    tl.to("#s-autrement, #lab-s-autrement", {opacity: 0, duration: 0.3, ease: "power1.in"}, 36.41);
+    tl.fromTo("#s-h4, #lab-s-h4", {opacity: 0}, {opacity: 1, duration: 0.35, ease: "power1.out"}, 36.73);
+    tl.to("#s-h4, #lab-s-h4", {opacity: 0, duration: 0.3, ease: "power1.in"}, 44.85);
+    tl.fromTo("#s-expl1, #lab-s-expl1", {opacity: 0}, {opacity: 1, duration: 0.35, ease: "power1.out"}, 45.17);
+    tl.to("#s-expl1, #lab-s-expl1", {opacity: 0, duration: 0.3, ease: "power1.in"}, 50.41);
+    tl.fromTo("#s-schema, #lab-s-schema", {opacity: 0}, {opacity: 1, duration: 0.35, ease: "power1.out"}, 50.73);
+    tl.to("#s-schema, #lab-s-schema", {opacity: 0, duration: 0.3, ease: "power1.in"}, 58.65);
+    tl.fromTo("#s-expl2, #lab-s-expl2", {opacity: 0}, {opacity: 1, duration: 0.35, ease: "power1.out"}, 58.97);
+    tl.to("#s-expl2, #lab-s-expl2", {opacity: 0, duration: 0.3, ease: "power1.in"}, 62.73);
+    tl.fromTo("#s-transition, #lab-s-transition", {opacity: 0}, {opacity: 1, duration: 0.35, ease: "power1.out"}, 63.05);
+    tl.to("#s-transition, #lab-s-transition", {opacity: 0, duration: 0.3, ease: "power1.in"}, 69.31);
+    tl.fromTo("#s-verset, #lab-s-verset", {opacity: 0}, {opacity: 1, duration: 0.35, ease: "power1.out"}, 69.63);
+    tl.to("#s-verset, #lab-s-verset", {opacity: 0, duration: 0.3, ease: "power1.in"}, 89.35);
+    tl.fromTo("#s-trois, #lab-s-trois", {opacity: 0}, {opacity: 1, duration: 0.35, ease: "power1.out"}, 89.67);
+    tl.to("#s-trois, #lab-s-trois", {opacity: 0, duration: 0.3, ease: "power1.in"}, 107.63);
+    tl.fromTo("#s-expl3, #lab-s-expl3", {opacity: 0}, {opacity: 1, duration: 0.35, ease: "power1.out"}, 107.95);
+    tl.to("#s-expl3, #lab-s-expl3", {opacity: 0, duration: 0.3, ease: "power1.in"}, 114.03);
+    tl.fromTo("#s-image, #lab-s-image", {opacity: 0}, {opacity: 1, duration: 0.35, ease: "power1.out"}, 114.35);
+    tl.to("#s-image, #lab-s-image", {opacity: 0, duration: 0.3, ease: "power1.in"}, 122.15);
+    tl.fromTo("#s-recap, #lab-s-recap", {opacity: 0}, {opacity: 1, duration: 0.35, ease: "power1.out"}, 122.47);
+    tl.to("#s-recap, #lab-s-recap", {opacity: 0, duration: 0.3, ease: "power1.in"}, 129.01);
+    tl.fromTo("#s-fin-verset, #lab-s-fin-verset", {opacity: 0}, {opacity: 1, duration: 0.35, ease: "power1.out"}, 129.33);
+    tl.to("#s-fin-verset, #lab-s-fin-verset", {opacity: 0, duration: 0.3, ease: "power1.in"}, 133.67);
+    tl.fromTo("#s-expl4, #lab-s-expl4", {opacity: 0}, {opacity: 1, duration: 0.35, ease: "power1.out"}, 133.99);
+    tl.to("#s-expl4, #lab-s-expl4", {opacity: 0, duration: 0.3, ease: "power1.in"}, 138.97);
+    tl.fromTo("#s-question, #lab-s-question", {opacity: 0}, {opacity: 1, duration: 0.35, ease: "power1.out"}, 139.29);
+    tl.to("#s-question, #lab-s-question", {opacity: 0, duration: 0.3, ease: "power1.in"}, 142.37);
+    tl.fromTo("#s-fin, #lab-s-fin", {opacity: 0}, {opacity: 1, duration: 0.35, ease: "power1.out"}, 142.69);
+    tl.fromTo("#st-u04-0", {opacity: 0}, {opacity: 1, duration: 0.15}, 8.72);
+    tl.to("#st-u04-0", {opacity: 0, duration: 0.15}, 11.46);
+    tl.fromTo("#st-u04-1", {opacity: 0}, {opacity: 1, duration: 0.15}, 11.61);
+    tl.to("#st-u04-1", {opacity: 0, duration: 0.15}, 13.12);
+    tl.fromTo("#st-u04-2", {opacity: 0}, {opacity: 1, duration: 0.15}, 13.27);
+    tl.to("#st-u04-2", {opacity: 0, duration: 0.15}, 14.62);
+    tl.fromTo("#st-u05-0", {opacity: 0}, {opacity: 1, duration: 0.15}, 14.82);
+    tl.to("#st-u05-0", {opacity: 0, duration: 0.15}, 16.35);
+    tl.fromTo("#st-u05-1", {opacity: 0}, {opacity: 1, duration: 0.15}, 16.50);
+    tl.to("#st-u05-1", {opacity: 0, duration: 0.15}, 17.84);
+    tl.fromTo("#st-u07-0", {opacity: 0}, {opacity: 1, duration: 0.15}, 19.94);
+    tl.to("#st-u07-0", {opacity: 0, duration: 0.15}, 21.26);
+    tl.fromTo("#st-u09-0", {opacity: 0}, {opacity: 1, duration: 0.15}, 23.79);
+    tl.to("#st-u09-0", {opacity: 0, duration: 0.15}, 24.99);
+    tl.fromTo("#st-u11-0", {opacity: 0}, {opacity: 1, duration: 0.15}, 28.41);
+    tl.to("#st-u11-0", {opacity: 0, duration: 0.15}, 30.07);
+    tl.fromTo("#st-u14-0", {opacity: 0}, {opacity: 1, duration: 0.15}, 37.03);
+    tl.to("#st-u14-0", {opacity: 0, duration: 0.15}, 38.21);
+    tl.fromTo("#st-u17-0", {opacity: 0}, {opacity: 1, duration: 0.15}, 51.03);
+    tl.to("#st-u17-0", {opacity: 0, duration: 0.15}, 54.03);
+    tl.fromTo("#st-u17-1", {opacity: 0}, {opacity: 1, duration: 0.15}, 54.18);
+    tl.to("#st-u17-1", {opacity: 0, duration: 0.15}, 55.93);
+    tl.fromTo("#st-u18-0", {opacity: 0}, {opacity: 1, duration: 0.15}, 56.13);
+    tl.to("#st-u18-0", {opacity: 0, duration: 0.15}, 57.67);
+    tl.fromTo("#st-u18-1", {opacity: 0}, {opacity: 1, duration: 0.15}, 57.82);
+    tl.to("#st-u18-1", {opacity: 0, duration: 0.15}, 59.07);
+    tl.fromTo("#st-u20-0", {opacity: 0}, {opacity: 1, duration: 0.15}, 63.35);
+    tl.to("#st-u20-0", {opacity: 0, duration: 0.15}, 65.87);
+    tl.fromTo("#st-u21-0", {opacity: 0}, {opacity: 1, duration: 0.15}, 66.07);
+    tl.to("#st-u21-0", {opacity: 0, duration: 0.15}, 69.73);
+    tl.fromTo("#st-u24-0", {opacity: 0}, {opacity: 1, duration: 0.15}, 89.97);
+    tl.to("#st-u24-0", {opacity: 0, duration: 0.15}, 92.58);
+    tl.fromTo("#st-u24-1", {opacity: 0}, {opacity: 1, duration: 0.15}, 92.73);
+    tl.to("#st-u24-1", {opacity: 0, duration: 0.15}, 95.87);
+    tl.fromTo("#st-u25-0", {opacity: 0}, {opacity: 1, duration: 0.15}, 96.07);
+    tl.to("#st-u25-0", {opacity: 0, duration: 0.15}, 98.57);
+    tl.fromTo("#st-u25-1", {opacity: 0}, {opacity: 1, duration: 0.15}, 98.72);
+    tl.to("#st-u25-1", {opacity: 0, duration: 0.15}, 100.71);
+    tl.fromTo("#st-u26-0", {opacity: 0}, {opacity: 1, duration: 0.15}, 100.91);
+    tl.to("#st-u26-0", {opacity: 0, duration: 0.15}, 104.01);
+    tl.fromTo("#st-u27-0", {opacity: 0}, {opacity: 1, duration: 0.15}, 104.21);
+    tl.to("#st-u27-0", {opacity: 0, duration: 0.15}, 106.47);
+    tl.fromTo("#st-u27-1", {opacity: 0}, {opacity: 1, duration: 0.15}, 106.62);
+    tl.to("#st-u27-1", {opacity: 0, duration: 0.15}, 108.05);
+    tl.fromTo("#st-u29-0", {opacity: 0}, {opacity: 1, duration: 0.15}, 114.65);
+    tl.to("#st-u29-0", {opacity: 0, duration: 0.15}, 116.57);
+    tl.fromTo("#st-u30-0", {opacity: 0}, {opacity: 1, duration: 0.15}, 116.77);
+    tl.to("#st-u30-0", {opacity: 0, duration: 0.15}, 119.06);
+    tl.fromTo("#st-u30-1", {opacity: 0}, {opacity: 1, duration: 0.15}, 119.21);
+    tl.to("#st-u30-1", {opacity: 0, duration: 0.15}, 122.57);
+    tl.fromTo("#st-u31-0", {opacity: 0}, {opacity: 1, duration: 0.15}, 122.77);
+    tl.to("#st-u31-0", {opacity: 0, duration: 0.15}, 125.37);
+    tl.fromTo("#st-u31-1", {opacity: 0}, {opacity: 1, duration: 0.15}, 125.52);
+    tl.to("#st-u31-1", {opacity: 0, duration: 0.15}, 127.88);
+    tl.fromTo("#st-u31-2", {opacity: 0}, {opacity: 1, duration: 0.15}, 128.03);
+    tl.to("#st-u31-2", {opacity: 0, duration: 0.15}, 129.43);
+    tl.fromTo("#st-u32-0", {opacity: 0}, {opacity: 1, duration: 0.15}, 129.63);
+    tl.to("#st-u32-0", {opacity: 0, duration: 0.15}, 132.56);
+    tl.fromTo("#st-u32-1", {opacity: 0}, {opacity: 1, duration: 0.15}, 132.71);
+    tl.to("#st-u32-1", {opacity: 0, duration: 0.15}, 134.09);
+    tl.fromTo("#st-u36-0", {opacity: 0}, {opacity: 1, duration: 0.15}, 142.99);
+    tl.to("#st-u36-0", {opacity: 0, duration: 0.15}, 145.09);
+    tl.fromTo("#st-u36-1", {opacity: 0}, {opacity: 1, duration: 0.15}, 145.24);
+    tl.to("#st-u36-1", {opacity: 0, duration: 0.15}, 147.58);
+    window.__timelines["ep01-medisance"] = tl;
+  </script>
+</body>
+</html>
