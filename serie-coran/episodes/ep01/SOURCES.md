@@ -79,17 +79,21 @@ Extrait affiché (mots 14 à 31 de l'édition retenue) :
 
 **Vérifié** :
 - Hadith, traduction FR : la citation du script est identique, caractère pour caractère, au texte HadeethEnc fourni par
-  l'utilisateur (`sources-brutes/ep01-hadeethenc-5326.txt`), contrôle fait par script. Claude n'a pas consulté la page
-  lui-même : la fidélité de la copie repose sur le contenu fourni.
+  l'utilisateur (`sources-brutes/ep01-hadeethenc-5326.txt`), contrôle fait par script. L'utilisateur a lui-même ouvert
+  la page HadeethEnc et fourni son texte ; Claude ne l'a pas consultée (site bloqué dans cet environnement).
 - Hadith, référence et degré : « Authentique », Sahih Muslim 2589, tels qu'affichés sur HadeethEnc (contenu fourni).
 - Hamidullah 49:12 et 49:11 : citations identiques aux extraits du miroir GitHub (`sources-brutes/ep01-extraits.json`).
   Une correspondance avec un miroir ne valide pas la source d'origine.
+- Hamidullah 49:12, vérification externe rapportée (2026-10-20) : l'utilisateur indique avoir comparé l'extrait
+  français à la page https://quran.com/fr/al-hujurat/12, qui l'attribue à Muhammad Hamidullah. Claude n'a pas consulté
+  cette page ; la comparaison est enregistrée telle que rapportée.
+- Formule « paix et salut sur lui » : retenue par l'utilisateur (2026-10-20).
 
-**Restant à vérifier** :
-1. Passage coranique, traduction : relire l'extrait de 49:12 (et 49:11 pour le contexte) dans l'édition Hamidullah
-   que vous afficherez (la version de tanzil.net peut différer d'autres éditions révisées) ; vérifier le droit d'usage.
+**Restant à vérifier** (mis à jour le 2026-10-20) :
+1. Conditions de réutilisation de la traduction Hamidullah (49:12, et 49:11 cité dans la description) : à vérifier
+   séparément avant publication. 49:11 n'a pas fait l'objet de la comparaison quran.com rapportée.
 2. Passage coranique, texte arabe affiché : comparer mot par mot avec un mushaf imprimé (rasm uthmani, Hafs) ; voir § 4.
 3. Commentaire HadeethEnc, point 5 : le script ne s'appuie que sur le résumé fourni ; si vous voulez une attribution
    plus précise à l'écran, fournir le texte exact de ce point.
-4. Formule « paix et salut sur lui » : à confirmer.
-5. Droit d'usage de la traduction HadeethEnc dans une vidéo : à vérifier sur le site.
+4. [Réglé le 2026-10-20] Formule « paix et salut sur lui » : retenue par l'utilisateur.
+5. Conditions de réutilisation de la traduction HadeethEnc dans une vidéo : à vérifier séparément avant publication.

@@ -1,6 +1,7 @@
 # Épisode 1 : « La médisance » (sourate 49, extrait du verset 12)
 
-Statut : **révision 6 (narration, 2 corrections de l'utilisateur), structure validée, texte définitif non validé**. Après validation, texte conservé
+Statut : **révision 6 (narration, 2 corrections de l'utilisateur), structure validée ; texte validé le 2026-10-20 pour
+un essai de voix off privé, publication non validée** (texte à enregistrer : `VOIX-OFF.txt`). Après validation, texte conservé
 mot pour mot.
 Traduction du sens du Coran : Muhammad Hamidullah. Hadith : Sahih Muslim n° 2589, traduction française publiée sur
 HadeethEnc (https://hadeethenc.com/fr/browse/hadith/5326), contenu fourni par l'utilisateur depuis la page d'origine.

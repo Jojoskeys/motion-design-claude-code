@@ -21,12 +21,14 @@ Le script et les maquettes V2 ne sont plus à modifier sans demande explicite.
   branches** au trait (trame très pâle, ornements). Accroche : bulles qui pâlissent, « vrai ? » en italique doré.
 - Interdits : particules, lueur excessive, figures humaines, scène historique, illustration de la comparaison du verset.
 
-## Vérifications encore ouvertes
-1. Traduction Hamidullah de 49:12 (et 49:11, cité dans la description) : relire sur l'édition retenue, droit d'usage.
+## Vérifications encore ouvertes (mises à jour le 2026-10-20)
+Texte de la voix off validé pour un essai privé (`serie-coran/episodes/ep01/VOIX-OFF.txt`), pas pour la publication.
+Réglé : formule « paix et salut sur lui » retenue ; HadeethEnc ouvert par l'utilisateur, texte fourni ; Hamidullah 49:12
+comparé par l'utilisateur à quran.com (vérification externe rapportée, voir `SOURCES.md` § 6).
+1. Conditions de réutilisation des traductions Hamidullah et HadeethEnc : à vérifier avant publication.
 2. Texte arabe de 49:12 : comparer mot par mot avec un mushaf imprimé ; choisir une police coranique.
 3. Commentaire HadeethEnc, point 5 : seul un résumé est enregistré ; texte exact à fournir s'il est cité.
-4. Droit d'usage de la traduction HadeethEnc dans une vidéo.
-5. Formule « paix et salut sur lui » : à confirmer.
+4. Accroche : début de la question visible dès l'image 0 corrigé dans `index.html`, pas encore rendu.
 Réseau de l'environnement cloud : sunnah.com, dorar.net, hadeethenc.com, quranenc.com, tanzil.net, jsDelivr bloqués.
 
 ## Prototype de l'accroche (étape D, en attente de retour)
