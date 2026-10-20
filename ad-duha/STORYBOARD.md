@@ -115,7 +115,8 @@ Prototype V2 conservé tel quel (`index.html`). Sa dernière action (le recul de
   polythéistes · selon le récit rapporté » et le mot « Abandonné » (italique), jamais l'un sans l'autre. Des bulles
   vides poussées par le vent restent sur les bords.
 - Le spectateur comprend : c'est leur accusation, rapportée par le récit ; le narrateur ne la confirme pas.
-- Texte à l'écran : attribution + « Abandonné », sans guillemets (résumé, pas citation du texte arabe).
+- Texte à l'écran : attribution + « Abandonné », sans guillemets (résumé, pas citation du texte arabe). Pas de
+  sous-titre pendant cette phrase (test animé) : l'attribution et le mot disent déjà la phrase.
 - Remplace : l'acacia dans le vent. Aucune personne délaissée, aucune figure du Prophète.
 
 ### S04 · 29,25-32,60 · Le passage coranique arrive · **modifié**
@@ -149,18 +150,20 @@ Prototype V2 conservé tel quel (`index.html`). Sa dernière action (le recul de
 - Action visible :
   1. S07a, « Vient ensuite la réponse » : retour de la composition de S03b (même place, ciel de nuit calme) :
      attribution + « Abandonné ».
-  2. S07b, juste avant « Son Seigneur » (40,3 s) : le bloc de l'accusation s'efface entièrement ; la phrase de la réponse
-     apparaît **en une fois, complète** (jamais mot par mot : aucune image ne montre « abandonné » sans sa négation),
-     avec « Sens du verset 93:3 » au-dessus. Pas de sous-titre pendant cette phrase (même texte déjà à l'écran).
-  3. S07c, « démentir » : la réponse remonte et pâlit ; l'accusation attribuée revient en petit, sous elle, et un trait
-     doré la barre sur « démentir » (44,7 s). Mention « Explication » au-dessus du sous-titre.
+  2. S07b, juste avant « Son Seigneur » (40,0-40,4 s) : l'accusation attribuée remonte et se réduit (sans disparaître) ;
+     la phrase de la réponse apparaît dessous **en une fois, complète** (jamais mot par mot : aucune image ne montre
+     « abandonné » sans sa négation), avec « Sens du verset 93:3 ». Pas de sous-titre pendant cette phrase.
+  3. S07c, « démentir » (44,6 s) : un trait doré barre l'accusation, au-dessus de la réponse. Mention « Explication ».
+  (Test animé : une seule composition qui évolue, accusation en haut, réponse dessous ; plus de second écran
+  « Abandonné ».)
 - Le spectateur comprend : le verset dément l'accusation.
 - Remplace : l'acacia au calme.
 
 ### S08 · 45,40-49,60 · L'explication · **modifié**
 - Phrase exacte : « Le retard de la révélation ne signifiait pas qu'Allah avait rejeté Son Prophète. »
-- Action visible : même ciel nocturne. « Un retard » apparaît sur « retard » (45,7 s) à gauche ; « un rejet » sur
-  « rejeté » (48,3 s) à droite ; puis le signe ≠, tracé en or, se dessine entre les deux (48,8 s).
+- Action visible : même ciel nocturne ; la réponse s'efface (45,25 s). « Un retard » apparaît sur « retard » (45,7 s) ;
+  le signe ≠ se trace sur « ne signifiait pas » (46,9 s) ; « un rejet » apparaît sur « rejeté » (48,2 s). « Retard » et
+  « rejet » ne sont jamais côte à côte sans la négation ; chaque élément garde sa place.
 - Le spectateur comprend : le délai et le rejet sont deux choses distinctes.
 - Texte à l'écran : « Un retard ≠ un rejet » ; mention « Explication ».
 - Remplace : le trait dans le sable.

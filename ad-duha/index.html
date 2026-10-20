@@ -54,6 +54,20 @@
   .ttl span { display: block; margin: 14px auto 0; width: 64px; height: 1px; background: currentColor; opacity: 0.7; }
   .ttl.big { font: 400 64px/1.1 "Source Serif 4", serif; letter-spacing: 0.02em; text-transform: none; color: #f3ead7; top: 236px; }
   .picto { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; opacity: 0; }
+  @font-face { font-family: "Source Serif 4"; src: url("assets/fonts/source-serif-4-latin-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; }
+  .acc { position: absolute; left: 160px; right: 160px; top: 740px; text-align: center; opacity: 0; transform-origin: 50% 0; }
+  .acc-a { font: 500 30px/1.2 "Inter", sans-serif; letter-spacing: 0.14em; text-transform: uppercase; color: #d6b36c; }
+  .acc-s { margin-top: 8px; font: 500 27px/1.2 "Inter", sans-serif; letter-spacing: 0.06em; color: #c9bfae; }
+  .acc-w { position: relative; display: inline-block; margin-top: 14px; font: italic 400 96px/1.15 "Source Serif 4", serif; color: #f3ead7; }
+  .strike { position: absolute; display: block; left: -8px; right: -8px; top: 56%; height: 6px; background: #d6b36c; }
+  .ans { position: absolute; left: 160px; right: 160px; top: 760px; text-align: center; opacity: 0; }
+  .ans-t { margin-bottom: 18px; font: 500 26px/1.2 "Inter", sans-serif; letter-spacing: 0.14em; text-transform: uppercase; color: #d6b36c; }
+  .ans-l { font: 400 66px/1.28 "Source Serif 4", serif; color: #f3ead7; }
+  /* fixed positions: each part keeps its place whatever is already visible */
+  .prop { position: absolute; left: 0; right: 0; top: 812px; height: 80px; font: 400 66px/80px "Source Serif 4", serif; color: #f3ead7; white-space: nowrap; }
+  #prop-a { position: absolute; right: 610px; top: 0; display: block; opacity: 0; }
+  #prop-ne { position: absolute; left: 500px; top: 0; right: auto; bottom: auto; width: 80px; height: 80px; display: block; opacity: 0; }
+  #prop-b { position: absolute; left: 610px; top: 0; display: block; opacity: 0; }
   .verse { position: absolute; left: 160px; right: 160px; text-align: center; white-space: nowrap; font: 400 56px/1.25 "Source Serif 4", serif; color: #f3ead7; opacity: 0; }
 </style>
 </head>
@@ -361,10 +375,8 @@
   <div class="clip scene" id="sc01" data-start="8.1" data-duration="5.65" data-track-index="1"></div>
   <div class="clip scene" id="sc02" data-start="13.25" data-duration="8.3" data-track-index="2"></div>
   <div class="clip scene" id="sc03a" data-start="21.05" data-duration="5.6" data-track-index="1"></div>
-  <div class="clip scene" id="sc03b" data-start="26.4" data-duration="3.35" data-track-index="2"></div>
-  <div class="clip scene" id="sc04" data-start="29.2" data-duration="3.65" data-track-index="1"></div>
-  <div class="clip scene" id="sc07" data-start="38.5" data-duration="7.3" data-track-index="2"></div>
-  <div class="clip scene" id="sc08" data-start="45.35" data-duration="4.6" data-track-index="1"></div>
+  <div class="clip scene" id="sc03b" data-start="26.4" data-duration="6.45" data-track-index="2"></div>
+  <div class="clip scene" id="sc07" data-start="38.5" data-duration="11.4" data-track-index="2"></div>
   <div class="clip scene" id="sc09a" data-start="49.3" data-duration="6.0" data-track-index="2"></div>
   <div class="clip scene" id="sc09b" data-start="54.75" data-duration="4.4" data-track-index="1"></div>
   <div class="clip scene" id="sc10" data-start="58.65" data-duration="5.2" data-track-index="2"></div>
@@ -561,7 +573,7 @@
     });
     // Hidden with display (not only the runtime's visibility): Chrome still paints feTurbulence filters of
     // elements under visibility:hidden.
-    const t0 = +el.dataset.start, t1 = t0 + +el.dataset.duration;
+    const t0 = +(el.dataset.origStart ?? el.dataset.start), t1 = t0 + +(el.dataset.origDuration ?? el.dataset.duration);
     tl.set(w, { display: "none" }, 0); tl.set(w, { display: "block" }, t0); tl.set(w, { display: "none" }, t1);
     SC[id] = sc; return sc;
   }
@@ -595,17 +607,17 @@
     [19.24, 21.40, "il faut revenir à ce qui se disait autour de lui."],
     [21.44, 23.30, "Dans un récit rapporté par Muslim,"],
     [23.32, 26.60, "Jundub raconte que Gabriel tarde à venir auprès du Prophète."],
-    [26.62, 29.40, `Les polythéistes affirment alors qu${AP}il a été abandonné.`],
+    // 26.62-29.40 "Les polythéistes affirment alors qu'il a été abandonné.": said by the composition (attribution + word)
     [29.42, 30.96, `C${AP}est dans ce contexte que sont révélés`],
     [30.98, 32.74, `les premiers versets d${AP}Ad-Duha.`],
     [32.78, 35.16, `La sourate commence par deux moments que l${AP}on connaît.`],
     [35.18, 36.76, "La clarté de la matinée,"],
     [36.78, 38.80, `puis la nuit lorsqu${AP}elle devient calme.`],
     [38.84, 40.36, "Vient ensuite la réponse."],
-    [40.38, 43.42, `Son Seigneur ne l${AP}a ni abandonné, ni détesté.`],
+    // 40.38-43.42 "Son Seigneur ne l'a ni abandonné ni détesté.": the whole sentence is on screen (S07)
     [43.44, 45.58, "Voilà ce que ces paroles viennent démentir."],
     [45.62, 47.56, "Le retard de la révélation ne signifiait pas"],
-    [47.58, 49.56, `qu${AP}Allah avait rejeté son prophète.`],
+    [47.58, 49.56, `qu${AP}Allah avait rejeté Son Prophète.`],
     [49.74, 51.78, `Puis le passage se tourne vers l${AP}avenir.`],
     [51.80, 55.08, "Pour lui, la vie dernière sera meilleure que la vie présente."],
     // 55.20-58.86: verse 5 is set in the S09b composition itself (no duplicate subtitle)
@@ -641,7 +653,6 @@
   const TAGS = [
     [21.44, 26.50, "Ṣaḥīḥ Muslim 1797a", "tag ref"],
     [35.18, 38.80, "Sens des versets 93:1–2"],
-    [40.38, 43.42, "Sens du verset 93:3"],
     [43.44, 49.56, "Explication"],
     [51.80, 55.08, "Sens du verset 93:4"],
     [63.72, 65.52, "Sens du verset 93:6"],
@@ -849,74 +860,89 @@
   $$(".s03a-cl").forEach((p, i) => ft(21.05, p, { x: 0 }, { x: 40 + i * 22, duration: 5.6, ease: "none" }));
   hideAll("#s03a-stars circle");
   $$("#s03a-stars circle").forEach((c, i) => fadeIn(22.6 + (i % 15) * 0.22, c, 0.6, +c.dataset.o));
-  ft(25.95, "#s03a-gust", { x: -1400, opacity: 0 }, { x: 0, opacity: 0.9, duration: 0.7, ease: "power2.in" });
 
   // =====================================================================================
-  // S03b · 26.40-29.25 · the acacia in the wind: the words that circulate and weigh. Shaken fixed frame.
-  // S07  · 38.70-45.40 · the same acacia, same frame: the wind drops, the tree straightens, the sand settles.
+  // Revision 3 · the reported account and its answer, one composition that evolves (same night sky as S03a).
+  // S03b · 26.40-29.25 · the accusation, as reported speech (attribution and word together, never one alone).
+  // S04  · 29.25-32.60 · the reported words recede; the title Ad-Duha arrives in a frame that becomes the window (S05).
+  // S07  · 38.70-45.40 · the same composition comes back; the accusation moves aside, the answer appears complete.
+  // S08  · 45.40-49.60 · "Un retard ≠ un rejet": never "retard" and "rejet" side by side without the negation.
+  // No figure, no depiction of revelation, of Gabriel or of the Prophet.
   // =====================================================================================
-  const TREE_TRUNK = `M 440 1510 Q 450 1300 430 1150 Q 420 1080 380 1030 L 400 1020 Q 460 1070 470 1140 Q 510 1060 600 1020 L 606 1032 Q 520 1090 480 1200 Q 470 1340 480 1510 Z`;
-  const TREE_CANOPY = `<path d="M 200 1010 Q 300 900 520 880 Q 760 890 860 990 Q 700 1050 520 1040 Q 330 1050 200 1010 Z" fill="#2e3a2e"/><path d="M 300 1000 Q 330 960 420 950 Q 380 985 300 1000 Z" fill="#26302a" opacity="0.8"/><path d="M 260 990 Q 420 930 560 930" stroke="#7a8a5a" stroke-width="6" fill="none" opacity="0.5"/><path d="M 640 1000 Q 740 960 820 985" stroke="#5a6a46" stroke-width="5" fill="none" opacity="0.45"/>`;
-  const tree = (p) => `<g filter="url(#f-paint)"><g id="${p}-trunk"><path d="${TREE_TRUNK}" fill="#2a1e1c"/><g id="${p}-canopy">${TREE_CANOPY}</g></g></g>`;
-  const SAND_G = "M -400 1500 Q 540 1470 1480 1510 V 2900 H -400 Z";
-  const sandRibbons = (id, n, y0, op) => {
-    let tile = ""; for (let i = 0; i < n; i++) { const y = y0 + i * 110; tile += `<path d="M -80 ${y} Q 300 ${y - 50} 600 ${y - 10} T 1180 ${y - 30} L 1180 ${y - 10} Q 820 ${y + 20} 600 ${y + 8} T -80 ${y + 22} Z" opacity="${(op + (i % 3) * 0.07).toFixed(2)}"/>`; }
-    return `<g id="${id}" fill="#e2c08e" filter="url(#f-blur-md)"><g>${tile}</g><g transform="translate(-1260 0)">${tile}</g></g>`;
-  };
-  sd = 330;
-  const s03b = build("sc03b", [
-    { d: 0.6, svg: svg(() => layer("M-400 -400H1480V2400H-400Z", grad([[0, "#3a3048"], [0.5, "#8a6450"], [1, "#c89464"]])) + `<rect x="-400" y="-400" width="1880" height="2800" fill="#c89464" opacity="0.15"/>`) },
-    { d: 1, svg: svg(() => tree("s03b") + layer(SAND_G, grad([[0, "#9a7050"], [1, "#3a2a24"]])) + mottle(SAND_G, 0.18, "f-sand")) },
-    { d: 1.1, svg: svg(() => sandRibbons("s03b-sand", 9, 700, 0.16) +
-      `<g id="s03b-leaves" fill="#3a3a26">` + Array.from({ length: 16 }, () => `<ellipse cx="${R(260, 820).toFixed(0)}" cy="${R(890, 1040).toFixed(0)}" rx="8" ry="3.5" opacity="0"/>`).join("") + `</g>`) },
-    { svg: svg(() => FINISH(true, 12) + `<rect id="s03b-veil" x="-100" y="-100" width="1280" height="2120" fill="#c9a378" opacity="0"/>`) },
-  ]);
-  cam(s03b, { z: 1.0 }, 26.4);
-  cam(s03b, { z: 1.05, y: -15 }, 26.4, 2.9, "none");
-  // Gusts: the trunk leans (rotation at its base), the crown bends (skew from the fork). Wind from the left.
-  const gusts = [[0.0, 1.5, -6], [0.45, 3.6, -13], [0.95, 2.0, -7], [1.45, 4.0, -15], [2.0, 2.4, -8], [2.55, 4.3, -16]];
-  tl.set("#s03b-trunk", { rotation: gusts[0][1], svgOrigin: "460 1510" }, 26.4);
-  tl.set("#s03b-canopy", { skewX: gusts[0][2], svgOrigin: "520 1040" }, 26.4);
-  for (let i = 1; i < gusts.length; i++) {
-    const [t, r, k] = gusts[i], d = t - gusts[i - 1][0];
-    tl.to("#s03b-trunk", { rotation: r, duration: d, ease: "sine.inOut" }, 26.4 + gusts[i - 1][0]);
-    tl.to("#s03b-canopy", { skewX: k, duration: d, ease: "sine.inOut" }, 26.4 + gusts[i - 1][0]);
-  }
-  ft(26.4, "#s03b-sand", { x: 0 }, { x: 1260, duration: 0.95, ease: "none", repeat: 2 });
-  $$("#s03b-leaves ellipse").forEach((e, i) => {
-    const t0 = 26.5 + (i % 8) * 0.3 + (i > 7 ? 0.15 : 0);
-    ft(t0, e, { x: 0, y: 0, rotation: 0, opacity: 0.9 }, { x: 600 + (i % 5) * 90, y: 160 + (i % 4) * 90, rotation: 300 + i * 30, opacity: 0, duration: 1.3 + (i % 3) * 0.25, ease: "power1.in" });
+  const recitSky = () => svg(() => {
+    let s = layer("M-300 -300H1380V2300H-300Z", bigSkyGrad(1)); sd = 301; s += stars(30, 80, 1150, 0.75, 20, 1060);
+    sd = 300; s += `<g filter="url(#f-blur-md)">`;
+    for (let i = 0; i < 6; i++) { const y = 380 + i * 160, x = R(-260, 260); s += `<path class="rc-cl" d="M ${x + 160} ${y} q 160 -60 340 -10 q 160 -50 300 10 q 120 10 160 40 h -800 z" fill="#1a2446" opacity="${(0.5 - i * 0.04).toFixed(2)}"/>`; }
+    sd = 300; return s + `</g>` + layer(ridge(1560, 18, 0.006, -400, 1480), "#0e1426");
   });
-  [[26.45, 7, -4], [26.6, -6, 3], [26.75, 4, 2], [26.9, 0, 0], [27.85, 6, -3], [28.0, -5, 2], [28.15, 3, 3], [28.3, 0, 0], [28.95, 7, -4], [29.1, -6, 3], [29.25, 0, 0]]
-    .forEach(([t, x, y], i, a) => tl.to(s03b.w, { x, y, duration: i ? t - a[i - 1][0] : 0.05, ease: "sine.inOut" }, i ? a[i - 1][0] : t - 0.05));
-  ft(28.85, "#s03b-veil", { opacity: 0 }, { opacity: 0.95, duration: 0.42, ease: "power2.in" });
-
-  // =====================================================================================
-  // S04 · 29.25-32.60 · an eight-pointed star closes around the calm sky: entering the text. Match cut on the window.
-  // =====================================================================================
-  const s04 = build("sc04", [
-    { d: 1, svg: svg(() => {
-      let s = layer("M-200 -200H1280V2120H-200Z", bigSkyGrad(1)); sd = 301; s += stars(30, 80, 1150, 0.75, 20, 1060);
-      sd = 300; s += `<g id="s04-clouds" filter="url(#f-blur-md)">`;
-      for (let i = 0; i < 6; i++) { const y = 380 + i * 160, x = R(-260, 260); s += `<path d="M ${x + 160} ${y} q 160 -60 340 -10 q 160 -50 300 10 q 120 10 160 40 h -800 z" fill="#1a2446" opacity="${(0.5 - i * 0.04).toFixed(2)}"/>`; }
-      sd = 300; return s + `</g>` + layer(ridge(1560, 18, 0.006, -400, 1480), "#0e1426");
-    }) },
-    { d: 1, svg: svg(() => `<path id="s04-mask" fill-rule="evenodd" d="M -1200 -1600 H 2280 V 3500 H -1200 Z ${star8(540, 900, 520)}" fill="#0b1630" opacity="0"/>` +
-      `<path id="s04-star1" ${dashed()} d="${star8(540, 900, 520)}" fill="none" stroke="#c6a15b" stroke-width="4" opacity="0.9"/><path id="s04-star2" ${dashed()} d="${star8(540, 900, 548)}" fill="none" stroke="#c6a15b" stroke-width="1.5" opacity="0.5"/>`) },
-    { svg: svg(() => FINISH(false) + `<rect id="s04-veil" x="-100" y="-100" width="1280" height="2120" fill="#c9a378" opacity="0.95"/>`) },
+  // wordless speech fragments (three dots, never words), kept on the edges of the frame
+  const recitBubbles = (id) => svg(() => {
+    let s = `<g id="${id}" fill="none" stroke="#f3ead7" stroke-linecap="round" opacity="0">`;
+    [[190, 1040, 1], [900, 660, 1.0], [880, 1100, 0.8], [140, 800, 0.6], [930, 470, 0.7], [130, 540, 0.8]].forEach(([x, y, k], i) => {
+      const w = 96 * k, h = 62 * k;
+      s += `<g class="${id}-b"><g transform="translate(${x} ${y}) rotate(${(i % 2 ? 6 : -5)})"><path d="M ${-w / 2 + 14} ${-h / 2} h ${w - 28} a 14 14 0 0 1 14 14 v ${h - 28} a 14 14 0 0 1 -14 14 h ${-(w / 2 - 34)} l -20 18 l 2 -18 h ${-(w / 2 - 4)} a 14 14 0 0 1 -14 -14 v ${-(h - 28)} a 14 14 0 0 1 14 -14 z" stroke-width="3"/>` +
+        [-1, 0, 1].map((j) => `<circle cx="${(j * 18 * k).toFixed(1)}" cy="0" r="${(4 * k).toFixed(1)}" fill="#f3ead7" stroke="none"/>`).join("") + `</g></g>`;
+    });
+    return s + `</g>`;
+  });
+  const accusationHTML = (id) => `<div class="acc" id="${id}"><div class="acc-a">Propos des polythéistes</div><div class="acc-s">selon le récit rapporté</div>` +
+    `<div class="acc-w">Abandonné<span class="strike" id="${id}-x"></span></div></div>`;
+  // S04's frame has the proportions of the room window as framed in S05 (290-876 x 316-1117): 440 x 600 at (540, 830).
+  const FRAME = { x: 320, y: 530, w: 440, h: 600 }, WIN = { cx: 583, cy: 716, w: 586 };
+  const s03b = build("sc03b", [
+    { d: 0.6, svg: recitSky() },
+    { d: 1, svg: recitBubbles("rcb1"), id: "rcb1-ly" },
+    { d: 1, svg: svg(() => `<rect id="s04-frame" ${dashed()} x="${FRAME.x}" y="${FRAME.y}" width="${FRAME.w}" height="${FRAME.h}" fill="none" stroke="#c6a15b" stroke-width="3" opacity="0.8"/>` +
+      `<text id="s04-title" x="540" y="868" text-anchor="middle" opacity="0" style="font:400 84px 'Source Serif 4',serif" fill="#f3ead7">Ad-Duha</text>`) },
+    { svg: svg(() => FINISH()) },
+    { html: accusationHTML("acc1") },
   ]);
-  cam(s04, { z: 1 }, 29.2);
-  cam(s04, { z: 1.16 }, 29.3, 3.0, "sine.inOut");
-  cam(s04, { z: 2.3, y: -60 }, 32.3, 0.55, "power2.in");
-  ft(29.2, "#s04-veil", { opacity: 0.95 }, { opacity: 0, duration: 0.6, ease: "power1.out" });
-  ft(29.2, "#s04-clouds", { x: 0 }, { x: 90, duration: 3.6, ease: "none" });
-  draw(29.6, "#s04-star1", 1.4, "power2.inOut");
-  draw(30.1, "#s04-star2", 1.2, "power2.inOut");
-  ft(29.6, "#s04-mask", { opacity: 0 }, { opacity: 0.93, duration: 1.5, ease: "sine.inOut" });
-  fadeOut(32.35, s04.w, 0.5);
-  const t04 = mk("ttl big", "Ad-Duha", "t-s04");
-  ft(30.1, t04, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" });
-  fadeOut(32.1, t04, 0.35);
+  fadeIn(26.4, s03b.w, 0.45);
+  cam(s03b, { z: 1 }, 26.4);
+  cam(s03b, { z: 1.05, y: -10 }, 26.4, 3.0, "sine.inOut");
+  ft(26.5, "#rcb1", { opacity: 0 }, { opacity: 0.5, duration: 0.6, ease: "power1.out" });
+  $$(".rcb1-b").forEach((b, i) => ft(26.4, b, { x: 0, y: 0 }, { x: (i % 2 ? -1 : 1) * 30, y: -14 - i * 3, duration: 3.6, ease: "sine.inOut" }));
+  ft(27.2, "#acc1", { opacity: 0, scale: 0.97, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.35, ease: "power2.out" });   // "affirment"
+  // S04: the reported words recede completely before the title arrives (never "Ad-Duha" next to "Abandonné")
+  ft(29.45, "#acc1", { opacity: 1, filter: "blur(0px)" }, { opacity: 0, filter: "blur(10px)", duration: 0.6, ease: "power1.in" });
+  ft(29.45, "#rcb1", { opacity: 0.5 }, { opacity: 0.16, duration: 0.7, ease: "sine.inOut" });
+  ft(29.45, "#rcb1-ly", { filter: "blur(0px)" }, { filter: "blur(4px)", duration: 0.7, ease: "sine.inOut" });
+  draw(30.15, "#s04-frame", 0.9, "power2.inOut");
+  ft(30.35, "#s04-title", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" });
+  fadeOut(31.95, "#s04-title", 0.3);
+  // push until the frame covers exactly the window of S05, then the room appears through it
+  const zf = WIN.w / FRAME.w;
+  cam(s03b, { x: 540 - WIN.cx, y: 960 + zf * (FRAME.y + FRAME.h / 2 - 960) - WIN.cy, z: zf }, 30.2, 2.2, "sine.inOut");
+  fadeOut(32.35, s03b.w, 0.45);
+
+  // ---------- S07 + S08: the same composition comes back after the room ----------
+  const s07 = build("sc07", [
+    { d: 0.6, svg: recitSky() },
+    { d: 1, svg: recitBubbles("rcb2") },
+    { svg: svg(() => FINISH()) },
+    { html: accusationHTML("acc2") +
+      `<div class="ans" id="ans3"><div class="ans-t">Sens du verset 93:3</div><div class="ans-l">Son Seigneur ne l’a</div><div class="ans-l">ni abandonné</div><div class="ans-l">ni détesté.</div></div>` +
+      `<div class="prop"><span id="prop-a">Un retard</span><svg id="prop-ne" viewBox="0 0 80 80" width="80" height="80"><g stroke="#d6b36c" stroke-width="6" stroke-linecap="round" fill="none">` +
+      `<path ${dashed()} d="M 14 30 H 66"/><path ${dashed()} d="M 14 54 H 66"/><path ${dashed()} d="M 56 10 L 24 72"/></g></svg><span id="prop-b">un rejet</span></div>` },
+  ]);
+  fadeIn(38.5, s07.w, 0.45);
+  cam(s07, { z: 1.05, y: -10 }, 38.5);
+  cam(s07, { z: 1.0, y: 0 }, 38.5, 6.9, "sine.inOut");            // slow pull back
+  cam(s07, { x: 36, y: 0, z: 1.0 }, 45.4, 4.5, "sine.inOut");      // S08: slow lateral glide
+  tl.set("#acc2", { opacity: 1 }, 38.5);
+  ft(38.5, "#rcb2", { opacity: 0.4 }, { opacity: 0, duration: 1.6, ease: "sine.inOut" });   // the talk dies down
+  // "Son Seigneur…": the accusation moves aside (still attributed), the answer appears complete, at once
+  ft(40.0, "#acc2", { y: 0, scale: 1, opacity: 1, transformOrigin: "50% 0%" }, { y: -235, scale: 0.75, opacity: 0.8, duration: 0.4, ease: "power2.inOut" });
+  ft(40.36, "#ans3", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out" });
+  // "démentir": the reported word is struck through
+  tl.set(["#acc1-x", "#acc2-x"], { scaleX: 0, transformOrigin: "0% 50%" }, 0);
+  ft(44.6, "#acc2-x", { scaleX: 0, transformOrigin: "0% 50%" }, { scaleX: 1, duration: 0.45, ease: "power2.out" });
+  // S08: the answer leaves; the proposition is built so that "rejet" only ever appears after the negation
+  ft(45.25, ["#acc2", "#ans3"], { opacity: (i) => (i ? 1 : 0.8) }, { opacity: 0, duration: 0.35, ease: "power1.in" });
+  ft(45.7, "#prop-a", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" });   // "retard"
+  ft(46.9, "#prop-ne", { opacity: 0 }, { opacity: 1, duration: 0.1 });                                    // "ne signifiait pas"
+  draw(46.9, "#prop-ne path", 0.5, "power2.out");
+  ft(48.2, "#prop-b", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" });   // "rejeté"
 
   // =====================================================================================
   // S05 · 32.60-36.60 · the empty room in the morning ; S06 · 36.60-38.70 · the same frame, calm night.
@@ -948,68 +974,6 @@
   [1, 6, 11].forEach((k, i) => ft(36.8 + i * 0.25, townLights[k], { opacity: 0.15 }, { opacity: 0.6, duration: 0.5, ease: "sine.inOut" }));
   ft(36.7, "#moon-halo", { opacity: 0.5 }, { opacity: 1, duration: 1.6, ease: "sine.out" });
   roomVisible(39.0, false);
-
-  // ---------- S07 (acacia at rest) ----------
-  sd = 331;
-  const s07 = build("sc07", [
-    { d: 0.6, svg: svg(() => {
-      let s = layer("M-400 -400H1480V2400H-400Z", grad([[0, "#3a3048"], [0.5, "#8a6450"], [1, "#c89464"]]));
-      s += `<path id="s07-clear" d="M-400 -400H1480V2400H-400Z" fill="${grad([[0, "#14224a"], [0.55, "#4a5a80"], [1, "#d8b88e"]])}" opacity="0"/>`;
-      s += `<g id="s07-stars">${stars(14, 100, 650, 0.6)}</g>`;
-      s += `<ellipse id="s07-glow" cx="540" cy="1480" rx="1000" ry="420" fill="${radial([[0, "#f0c890", 0.8], [0.5, "#f0c890", 0.3], [1, "#f0c890", 0]])}" opacity="0"/>`;
-      s += `<g id="s07-dust" fill="#e2c08e" filter="url(#f-blur-md)" opacity="0.35"><path d="M -100 640 Q 400 590 700 630 T 1200 610 L 1200 630 Q 800 660 600 650 T -100 664 Z"/><path d="M -100 800 Q 300 760 640 790 T 1200 770 L 1200 788 Q 760 812 600 806 T -100 820 Z" opacity="0.7"/></g>`;
-      return s;
-    }) },
-    { d: 1, svg: svg(() => {
-      let s = tree("s07") + layer(SAND_G, grad([[0, "#a8805a"], [1, "#3a2a24"]])) + mottle(SAND_G, 0.18, "f-sand");
-      s += `<g id="s07-rip">` + Array.from({ length: 10 }, (_, i) => { const y = 1540 + i * 48; return `<path ${dashed()} d="M -100 ${y} Q 540 ${y - 14} 1180 ${y + 6}" stroke="#5a3e2c" stroke-width="2.4" fill="none" opacity="0.3"/>`; }).join("") + `</g>`;
-      return s;
-    }) },
-    { d: 1.1, svg: svg(() => sandRibbons("s07-sand", 9, 700, 0.16) +
-      `<g id="s07-grains" fill="#e2c08e">` + Array.from({ length: 34 }, () => `<circle cx="${R(0, 1080).toFixed(0)}" cy="${R(650, 1150).toFixed(0)}" r="${R(1.5, 3.2).toFixed(1)}" opacity="0.6"/>`).join("") + `</g>`) },
-    { svg: svg(() => FINISH()) },
-  ]);
-  fadeIn(38.5, s07.w, 0.45);
-  cam(s07, { z: 1.05, y: -15 }, 38.5);
-  cam(s07, { z: 1.075, y: -25 }, 38.5, 6.5, "none");
-  cam(s07, { x: 0, y: 560, z: 1.4 }, 45.0, 0.8, "power2.in");   // down along the trunk to the sand
-  kf(38.5, "#s07-trunk", { rotation: 4.3, svgOrigin: "460 1510" }, [{ rotation: 4.3, duration: 0.1 }, { rotation: -0.7, duration: 1.1, ease: "power2.out" }, { rotation: 0, duration: 0.9, ease: "sine.inOut" }]);
-  kf(38.5, "#s07-canopy", { skewX: -16, svgOrigin: "520 1040" }, [{ skewX: -16, duration: 0.1 }, { skewX: 2.5, duration: 1.2, ease: "power2.out" }, { skewX: 0, duration: 1.0, ease: "sine.inOut" }]);
-  ft(38.5, "#s07-sand", { x: 0, opacity: 1 }, { x: 700, opacity: 0, duration: 2.2, ease: "power2.out" });
-  $$("#s07-grains circle").forEach((c, i) => ft(38.6 + (i % 12) * 0.12, c, { y: 0, opacity: 0.6 }, { y: 1500 - +c.getAttribute("cy") + R(0, 40), opacity: 0, duration: 1.0 + (i % 4) * 0.2, ease: "power2.in" }));
-  ft(38.9, "#s07-clear", { opacity: 0 }, { opacity: 1, duration: 2.6, ease: "sine.inOut" });
-  draw(40.4, "#s07-rip path", 1.6, "sine.out");
-  hideAll("#s07-stars circle");
-  $$("#s07-stars circle").forEach((c, i) => fadeIn(41.8 + i * 0.2, c, 0.6, +c.dataset.o));
-  fadeOut(43.6, "#s07-dust", 1.3, 0.35);                     // "ce que ces paroles viennent démentir"
-  ft(43.5, "#s07-glow", { opacity: 0 }, { opacity: 0.45, duration: 1.6, ease: "sine.inOut" });
-
-  // =====================================================================================
-  // S08 · 45.40-49.60 · top view of the sand: a line fades on a stretch, then goes on; a gold line rejoins it.
-  // =====================================================================================
-  const curve = (y0, y1) => { let d = ""; for (let y = y0; y <= y1; y += 20) d += (y === y0 ? "M " : "L ") + (540 + 70 * Math.sin(y / 420) + 26 * Math.sin(y / 170)).toFixed(1) + " " + y; return d; };
-  sd = 800;
-  const s08 = build("sc08", [
-    { d: 1, svg: svg(() => {
-      const bg = "M-400 -1000H1480V3200H-400Z";
-      let s = layer(bg, grad([[0, "#a07c58"], [1, "#6a4e3a"]], 1, 1)) + mottle(bg, 0.3, "f-sand");
-      s += `<g id="s08-rip">` + Array.from({ length: 46 }, () => { const y = R(-1000, 3200); return `<path d="M -400 ${y.toFixed(0)} Q 540 ${(y + R(-60, 60)).toFixed(0)} 1480 ${(y + R(-30, 30)).toFixed(0)}" stroke="#4a3426" stroke-width="2" fill="none" opacity="0.18"/>`; }).join("") + `</g>`;
-      const A = curve(-760, 820), G = curve(820, 1180), B = curve(1180, 2760);
-      s += `<path d="${G}" stroke="#3a2a20" stroke-width="10" fill="none" opacity="0.07" stroke-dasharray="4 26"/>`;
-      [["A", A], ["B", B]].forEach(([k, d]) => { s += `<path id="s08-${k}g" ${dashed()} d="${d}" stroke="#3a2a20" stroke-width="16" fill="none" opacity="0.35"/><path id="s08-${k}l" ${dashed()} d="${d}" stroke="#f3ead7" stroke-width="5" fill="none" opacity="0.6"/>`; });
-      s += `<path id="s08-gold-glow" ${dashed()} d="${curve(800, 1200)}" stroke="#e8c27a" stroke-width="16" fill="none" opacity="0.3" filter="url(#f-blur-sm)"/><path id="s08-gold" ${dashed()} d="${curve(800, 1200)}" stroke="#c6a15b" stroke-width="5" fill="none"/>`;
-      return s;
-    }) },
-    { svg: svg(() => FINISH()) },
-  ]);
-  fadeIn(45.35, s08.w, 0.4);
-  cam(s08, { y: -620, z: 1 }, 45.35);
-  cam(s08, { y: 640, z: 1 }, 45.4, 4.0, "sine.inOut");
-  cam(s08, { y: 1400, z: 1.05 }, 49.4, 0.5, "power2.in");
-  ft(45.35, "#s08-rip", { x: 0 }, { x: 60, duration: 4.6, ease: "none" });
-  draw(45.4, ["#s08-Ag", "#s08-Al"], 1.25, "none");
-  draw(46.5, ["#s08-Bg", "#s08-Bl"], 1.1, "none");
-  draw(47.5, ["#s08-gold", "#s08-gold-glow"], 1.15, "power1.inOut");   // "qu'Allah avait rejeté son prophète": it is one line
 
   // =====================================================================================
   // S09a · 49.60-55.00 · from a dune crest in shade, a slow tilt up to an open horizon at first light.
@@ -1353,9 +1317,6 @@
   pictos("pic-b", [["heart", 430, 104.16], ["share", 540, 104.72], ["bell", 650, 105.65]], 1212, 0);
 
 })();
-</script>
-<script>
-  window.__timelines["ad-duha"] = tl;
 </script>
 </body>
 </html>

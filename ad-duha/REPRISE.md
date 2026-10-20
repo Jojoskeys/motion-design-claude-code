@@ -143,9 +143,24 @@ L'ancienne liste de ce fichier y a été fusionnée ; ne plus tenir de liste ici
   `planche-r3-2.jpg` (fonctions `r3s…` de `storyboard/scenes.html` ; `node ad-duha/storyboard/build-storyboard.cjs --r3`).
 - Aucune animation ni aucun rendu vidéo à cette étape. `index.html` (aperçu complet) n'est pas modifié.
 
+## Test animé S03b → S08 (2026-10-20)
+- Révision 3 retenue comme base du test (résultat animé non encore validé). Animé dans `index.html` : S03b-S04 (clip
+  `sc03b`, 26,4-32,85 s) et S07-S08 (clip `sc07`, 38,5-49,9 s), une seule composition sur le ciel de nuit de S03a ;
+  S05-S06 (chambre matin / nuit) conservées entre les deux. L'ancien S03a reste en place (sans la rafale de sable qui
+  menait à l'acacia) ; S02, S03a, S09a, S10, S12, S15 ne sont pas encore animés selon la révision 3.
+- Raccord S04 → S05 : le cadre doré du titre est poussé jusqu'à couvrir exactement la fenêtre de la chambre.
+- Sous-titres sans doublon : pas de sous-titre pendant « Les polythéistes affirment… » ni « Son Seigneur ne l'a… » (les
+  mêmes mots sont dans la composition) ; graphie harmonisée « Son Prophète », « ni abandonné ni détesté ».
+- Aperçu de l'extrait : `node ad-duha/apercu-extrait.cjs 26.4 49.6` → `prototype/extrait-26.4-49.6.mp4` (540×960,
+  non versionné). Capture image par image de la timeline du film dans Chromium (mêmes fenêtres de clips que le runtime)
+  et extrait de Dhuha.mp3 réencodé en AAC (vitesse et hauteur inchangées). Choisi parce qu'une composition décalée
+  rendue par HyperFrames n'affichait pas les bons plans (essais abandonnés). Contrôle : silences de l'extrait = silences
+  de la source (29,05 / 32,34 / … / 45,25 s), écart nul.
+- Fin de l'extrait (49,3-49,6 s) : début du fondu vers l'ancien S09a (dune), pas encore remplacé.
+
 ## Prochaines tâches
-1. Validation des vignettes de la révision 3 par l'utilisateur.
-2. Puis test animé du seul passage « accusation → réponse → retard différent de rejet » (S03b à S08, ≈ 26,4-49,6 s)
-   avec l'audio réel ; pas de rendu complet avant validation de ce test.
+1. Vignettes de la révision 3 : retenues comme base du test.
+2. Retour de l'utilisateur sur l'extrait animé S03b → S08 (`prototype/extrait-26.4-49.6.mp4`) ; pas de rendu complet
+   avant validation.
 3. Ensuite : animation des autres plans modifiés, nouvel aperçu, export final après accord.
 4. En parallèle et avant publication : points de `VERIFICATIONS.md` (sources et extraits dans `SOURCES.md`).
