@@ -20,14 +20,16 @@ d'origine sont bloqués dans cet environnement) : à relire sur la source d'orig
 
 | # | Formulation du script | Source | Extrait justificatif |
 |---|---|---|---|
-| 1 | Accroche « Et si ce que je dis sur lui est vrai ? » (reformulation, sans guillemets) | Sahih Muslim n° 2589 | FR : « Et si ce que je dis est vrai ? » ; AR : « أَفَرَأَيْتَ إِنْ كَانَ فِي أَخِي مَا أَقُولُ » (« sur lui » est plus proche de l'arabe « فِي أَخِي ») |
-| 2 | Définition, question, réponse (citations mot pour mot) | Sahih Muslim n° 2589 (Livre de la vertu, des bonnes manières et des liens de parenté), Abu Hurayra | FR : « La médisance, c'est de parler de ton frère d'une manière qu'il n'aime pas. […] Et si ce que je dis est vrai ? […] Si ce défaut est vraiment en lui, tu as médit de lui ; et s'il n'y est pas, tu l'as calomnié. » AR : « ذِكْرُكَ أَخَاكَ بِمَا يَكْرَهُ … إِنْ كَانَ فِيهِ مَا تَقُولُ فَقَدِ اغْتَبْتَهُ وَإِنْ لَمْ يَكُنْ فِيهِ فَقَدْ بَهَتَّهُ » |
-| 3 | « Médire, ce n'est donc pas toute parole sur un absent : c'est en dire ce qu'il n'aime pas, même si c'est vrai » | Sahih Muslim n° 2589 (définition et cas « si c'est vrai ») ; Al-Muyassar 49:12 (absence) ; Al-Mukhtasar 49:12 | « ذِكْرُكَ أَخَاكَ بِمَا يَكْرَهُ » ; « ولا يقل بعضكم في بعضٍ بظهر الغيب ما يكره » ; « que personne parmi vous ne mentionne son frère d'une manière qui ne lui plaît pas » |
-| 4 | Citation du verset (extrait annoncé) | Hamidullah 49:12 | « … et ne médisez pas les uns des autres. L'un de vous aimerait-il manger la chair de son frère mort? (Non!) vous en aurez horreur. Et craignez Allah. Car Allah est Grand Accueillant au repentir, Très Miséricordieux » |
-| 5 | « Ce verset demande aussi d'éviter l'excès de soupçon et l'espionnage » | Hamidullah 49:12 | « Evitez de trop conjecturer [sur autrui] car une partie des conjectures est péché. Et n'espionnez pas » |
-| 6 | « le précédent, la moquerie, le dénigrement et les surnoms blessants » | Hamidullah 49:11 | « Qu'un groupe ne se raille pas d'un autre groupe […] Ne vous dénigrez pas et ne vous lancez pas mutuellement des sobriquets (injurieux) » |
-| 7 | « Pour le tafsir Al-Mukhtasar, médire revient à dévorer le cadavre de son frère » (paraphrase attribuée) | Al-Mukhtasar 49:12 | « Médire de son frère revient en effet à dévorer son cadavre ». Concordant : Al-Muyassar « فأنتم تكرهون ذلك، فاكرهوا اغتيابه » |
-| 8 | « Le verset se termine sur le repentir » + citation | Hamidullah 49:12, fin ; Al-Mukhtasar 49:12 | « Allah accepte le repentir de Ses serviteurs et leur fait miséricorde. »
+| 1 | Accroche « Et si ce que je dis sur lui est vrai ? » (reformulation, sans guillemets) | Sahih Muslim n° 2589 | AR : « أَفَرَأَيْتَ إِنْ كَانَ فِي أَخِي مَا أَقُولُ » (« sur lui » est plus proche de l'arabe « فِي أَخِي ») |
+| 2 | Définition, question, réponse — **traduction française de travail, non validée** | Sahih Muslim n° 2589 (Livre de la vertu, des bonnes manières et des liens de parenté), Abu Hurayra | AR (référence) : « ذِكْرُكَ أَخَاكَ بِمَا يَكْرَهُ … إِنْ كَانَ فِيهِ مَا تَقُولُ فَقَدِ اغْتَبْتَهُ وَإِنْ لَمْ يَكُنْ فِيهِ فَقَدْ بَهَتَّهُ ». FR provisoire (miroir, traducteur non indiqué) : « La médisance, c'est de parler de ton frère d'une manière qu'il n'aime pas. […] Et si ce que je dis est vrai ? […] Si ce défaut est vraiment en lui, tu as médit de lui ; et s'il n'y est pas, tu l'as calomnié. » |
+| 3 | Citation du verset (extrait annoncé) | Hamidullah 49:12 | « … et ne médisez pas les uns des autres. L'un de vous aimerait-il manger la chair de son frère mort? (Non!) vous en aurez horreur. Et craignez Allah. Car Allah est Grand Accueillant au repentir, Très Miséricordieux » |
+| 4 | « Ce verset demande aussi d'éviter l'excès de soupçon et l'espionnage » | Hamidullah 49:12 | « Evitez de trop conjecturer [sur autrui] car une partie des conjectures est péché. Et n'espionnez pas » |
+| 5 | « le précédent, la moquerie, le dénigrement et les surnoms blessants » | Hamidullah 49:11 | « Qu'un groupe ne se raille pas d'un autre groupe […] Ne vous dénigrez pas et ne vous lancez pas mutuellement des sobriquets (injurieux) » |
+| 6 | « Le verset se termine sur le repentir et la miséricorde » + citation | Hamidullah 49:12, fin | « Car Allah est Grand Accueillant au repentir, Très Miséricordieux » |
+
+Retirés en révision 3 : la paraphrase d'Al-Mukhtasar (« dévorer le cadavre »), la section « La nuance » (aucune
+source lue ne traite les cas où parler d'un absent serait permis ou nécessaire) et la citation d'Al-Mukhtasar en
+conclusion. Al-Mukhtasar et Al-Muyassar restent utilisés seulement pour le cadrage (l'image porte sur la médisance).
 
 Degré du hadith : rapporté par Muslim dans son Sahih. Le miroir ne donne aucun verdict propre à ce hadith (champ
 « grades » vide) : à confirmer sur dorar.net ou sunnah.com (Sahih Muslim 2589).
@@ -67,3 +69,26 @@ Extrait affiché (mots 14 à 31 de l'édition retenue) :
 4. Formule « paix et salut sur lui » : choix de formulation à confirmer.
 5. Des spectateurs demanderont s'il est permis de parler d'un absent pour avertir ou demander conseil : sujet non
    traité ici, possible épisode futur après recherche sourcée.
+
+## 6. État des vérifications pour la révision 3 (2026-10-20)
+
+Réseau de cet environnement : hadeethenc.com et dorar.net testés une fois, injoignables (comme sunnah.com,
+quranenc.com et tanzil.net). Aucun autre miroir essayé.
+
+**Vérifié dans cet environnement** (copie exacte des extraits lus sur les miroirs GitHub du § 1 ; un contrôle sur la
+source d'origine reste nécessaire avant publication, une correspondance avec un miroir ne valide pas la source) :
+- Chaque citation entre guillemets du script est identique à l'extrait brut (`sources-brutes/ep01-extraits.json`),
+  contrôle fait par script.
+- Hamidullah 49:12 et 49:11 : extrait cité, contexte (soupçon, espionnage ; moquerie, dénigrement, sobriquets), fin du
+  verset sur le repentir et la miséricorde.
+- Muslim 2589 : texte arabe du miroir, numérotation 'Abd al-Baqi 2589 (livre 45, hadith 91 dans le miroir).
+
+**Bloquant (non validé)** :
+1. Traduction française publiée et attribuée de Muslim 2589 : non identifiée ici. À fournir par l'utilisateur :
+   l'extrait exact (texte copié ou photo lisible) d'une traduction française publiée du hadith, avec traducteur,
+   éditeur, édition, tome, page et numéro du hadith ; ou le lien de la page du hadith sur l'Encyclopédie des hadiths
+   traduits (hadeethenc.com, version française) avec le texte de la page collé, ce site n'étant pas joignable ici.
+2. Numéro et degré de Muslim 2589 : à confirmer sur https://sunnah.com/muslim:2589 (arabe et anglais) ou
+   dorar.net ; coller le passage (référence et texte arabe) si vous voulez que je le compare à l'extrait du miroir.
+3. Hamidullah 49:12 : relire l'extrait sur l'édition que vous afficherez et vérifier son droit d'usage.
+4. Formule « paix et salut sur lui » : à confirmer.
