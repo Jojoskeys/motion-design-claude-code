@@ -13,8 +13,8 @@ commentaire éditorial. Références complètes : description de la vidéo et `S
   Régénération : `node ad-duha/storyboard/build-storyboard.cjs` (depuis la racine du dépôt).
 - Les vignettes montrent un instant représentatif ; le sous-titre y est indicatif (position et police du prototype).
 
-## Écarts de l'animation par rapport aux vignettes (2026-10-20)
-Le storyboard révision 2 reste la base ; l'animation (`index.html`) y apporte seulement ceci :
+## Écarts de l'animation par rapport aux vignettes (2026-10-20, aperçu complet)
+Notes de l'aperçu complet, avant la révision 3 (qui remplace S02-S04, S07, S08, S09a, S10, S12). Le storyboard révision 2 restait la base ; l'animation (`index.html`) y apporte seulement ceci :
 - S01 / S16 : pictogrammes au-dessus du sous-titre (y ≈ 1210, sur un disque sombre) plutôt que dans les 420 px du bas.
 - S04 : la phrase est affichée en deux sous-titres (« … sont révélés » / « les premiers versets d'Ad-Duha. »).
 - S09b : la formulation du verset 5 en quatre groupes de mots, 56 px, sans sous-titre en double.
@@ -28,13 +28,12 @@ Le storyboard révision 2 reste la base ; l'animation (`index.html`) y apporte s
 - **La chambre** (décor validé) ouvre, sert de pivot au milieu (S05-S06 : « deux moments que l'on connaît ») et
   ferme le film (S13-S15). Elle passe de la nuit pluvieuse à la nuit calme puis au matin : la lumière change pour
   des raisons naturelles (pluie, nuages, aube), jamais surnaturelles.
-- **Un décor = une idée** (révision 2, pour éviter la répétition de la vallée et du chemin) :
-  la vallée n'apparaît qu'une fois (S02, le contexte) ; un grand ciel à horizon bas porte l'attente (S03a) ;
-  un acacia isolé porte le couple accusation / réponse (S03b dans le vent, S07 au calme : même arbre, action inverse) ;
-  un tracé dans le sable porte l'idée de continuité (S08) ; un horizon ouvert sans chemin porte l'avenir (S09a) ;
-  l'étoile à huit branches porte la structure du texte (S04 cadre, S10 retour vers le passé, S12 triptyque).
+- **Un décor pour le récit rapporté** (révision 3) : le grand ciel à horizon bas, du crépuscule (S02) à la nuit
+  (S03a-S08), porte des compositions éditoriales courtes : bulles vides (paroles qui circulent), intervalle ouvert,
+  accusation attribuée, titre, réponse, « Un retard ≠ un rejet ». Les mêmes éléments reviennent pour la réponse (S07
+  reprend S03b). Les trois arches (S10, S12) contiennent les miniatures des trois rappels illustrés (S11a-c).
 - **La façade** : appel à s'abonner la nuit (S01), carte de fin au matin (S16).
-- Aucune figure humaine hors de la personne contemporaine anonyme de la chambre. Ciel, arbre, maison, bornes, paniers
+- Aucune figure humaine hors de la personne contemporaine anonyme de la chambre. Ciel, maison, bornes, paniers
   sont des **illustrations pédagogiques génériques** : aucune ne prétend reconstituer un lieu, un objet ou un événement
   historique, ni une durée.
 
@@ -45,6 +44,34 @@ Le storyboard révision 2 reste la base ; l'animation (`index.html`) y apporte s
   S12, S07 2e phrase).
 - Référence courte autorisée : « Ṣaḥīḥ Muslim 1797a » en S03a (référence communiquée par l'utilisateur, voir REPRISE).
 - Numéros de versets, traductions et références complètes : à confirmer avant rendu (liste dans `REPRISE.md`).
+
+## Révision 3 (2026-10-20) : plans remplacés pour suivre la narration
+Correction ciblée demandée par l'utilisateur après l'aperçu : l'acacia, le trait dans le sable et l'étoile tournante
+demandaient une interprétation impossible à deviner. Plans modifiés : S02, S03a, S03b, S04, S07, S08, S09a, S10, S12,
+S15 (et précision de l'action en S13-S14). Conservés : audio, introduction V2, S01, S05-S06, S09b, illustrations de
+S11a-c, chambre S13-S15, S16. Vignettes des seuls plans modifiés : `storyboard/frames-r3/`, planches
+`storyboard/planche-r3-1.jpg` et `planche-r3-2.jpg` (`node ad-duha/storyboard/build-storyboard.cjs --r3`).
+Règle : jamais le même texte en grand et en sous-titre au même moment (S07b et S12a sans sous-titre, comme S09b).
+
+### Ambiguïtés signalées (illustration contemporaine / parole rapportée / explication)
+1. **S03a** « La venue de Gabriel tarde » est un résumé du récit, pas une citation ; il se lit avec la référence
+   « Ṣaḥīḥ Muslim 1797a », non consultée ici (VERIFICATIONS 1).
+2. **S03b** « Propos des polythéistes » : attribution de la version de Muslim ; une autre version attribuerait la parole
+   à une femme (VERIFICATIONS 3). « Abandonné » résume leur parole ; ce n'est pas la formulation arabe, d'où l'absence
+   de guillemets et la précision « selon le récit rapporté ».
+3. **S04** : le titre arrive après l'effacement complet de l'accusation, pour qu'aucune image n'associe « Ad-Duha » et
+   « Abandonné ».
+4. **S07b** : « Son Seigneur ne l'a ni abandonné ni détesté » est la paraphrase de la narration, à la troisième
+   personne (le verset s'adresse au Prophète) ; elle est donnée comme « Sens du verset 93:3 », jamais comme traduction
+   (VERIFICATIONS 7). Le trait qui barre l'accusation (S07c) relève de l'explication (mention « Explication »).
+5. **S08** : « Un retard ≠ un rejet » est une explication, à rattacher à un tafsir nommé (VERIFICATIONS 8).
+6. **S09a** : le schéma fixe la lecture « vie dernière / vie présente » ; une autre lecture (« la fin meilleure que le
+   début ») existe et n'est pas montrée (VERIFICATIONS 9). Le décor de dune n'illustre pas l'au-delà.
+7. **S10-S12** : porte, bornes, paniers sont des illustrations pédagogiques génériques, pas des reconstitutions ; la
+   route balisée illustre la « guidée » par une image (verset 7, point sensible, VERIFICATIONS 10). La suite
+   « Réponse · Avenir · Passé » est la lecture de la narration (VERIFICATIONS 11).
+8. **S13-S15** : la personne de la chambre est contemporaine et représente le spectateur, jamais le Prophète ; le passage
+   est marqué par « Et nous » et le retour au décor de l'introduction.
 
 ## Séquences
 
@@ -60,41 +87,46 @@ Prototype V2 conservé tel quel (`index.html`). Sa dernière action (le recul de
 - Caméra : recul continu (grue arrière) de la vitre jusqu'à la façade entière.
 - Transition : la caméra monte le long de la façade vers les nuages ; fondu enchaîné nuage → ciel de crépuscule (S02).
 
-### S02 · 13,45-21,25 · La vallée au crépuscule
-« La sourate [Ad-Duha] s'adresse d'abord au Prophète, paix et salut sur lui. Pour en comprendre les premiers versets,
-il faut revenir à ce qui se disait autour de lui. »
-- On voit : une vallée aride générique, montagnes en plans successifs, rochers, un chemin clair. Personne.
-- Action : sur « ce qui se disait », de fines lignes de vent ivoire traversent la vallée, comme des échos.
-- Caméra : descente lente (grue avant) du ciel vers le chemin.
-- Transition : la caméra bascule vers le haut, le relief sort du cadre, il ne reste que le ciel (S03a).
-- Seule apparition de la vallée et de son chemin dans le film.
+### S02 · 13,45-21,25 · Le contexte d'Ad-Duha · **modifié (révision 3)**
+- Phrase exacte : « La sourate Ad-Duha s'adresse d'abord au Prophète, paix et salut sur lui. Pour en comprendre les
+  premiers versets, il faut revenir à ce qui se disait autour de lui. »
+- Action visible : la caméra quitte la façade (S01) par le haut ; le grand ciel au crépuscule et son horizon bas
+  remplacent l'immeuble. Sur « Pour en comprendre » (17,4 s), le titre « Le contexte d'Ad-Duha » se pose ; sur
+  « ce qui se disait » (19,8 s), des bulles vides (trois points, jamais de mots) apparaissent et circulent sur des
+  trajectoires courbes. Aucun personnage, aucun dialogue inventé.
+- Le spectateur comprend : on quitte la chambre d'aujourd'hui pour entrer dans un récit rapporté.
+- Texte à l'écran : « Le contexte d'Ad-Duha » (titre) ; sous-titres de la narration.
+- Remplace : la vallée au crépuscule. Le grand ciel devient le décor unique du récit (S02 à S08), du crépuscule à la nuit.
 
-### S03a · 21,25-26,40 · L'attente : un grand ciel
-« Dans un récit rapporté par [Muslim], [Jundub] raconte que Gabriel tarde à venir auprès du Prophète. »
-- On voit : un très grand ciel au-dessus d'un horizon bas et sombre ; nuages étirés. Mention discrète
-  « Ṣaḥīḥ Muslim 1797a ».
-- Action : le ciel passe **une seule fois**, lentement, du crépuscule à la nuit ; les nuages dérivent, quelques étoiles
-  apparaissent. Ni soleils ni lunes successifs, ni accéléré : l'image dit l'attente sans compter de jours ni suggérer de
-  durée. Aucune représentation de Gabriel ni du Prophète ; aucune lumière surnaturelle.
-- Caméra : plan fixe, horizon très bas (le ciel occupe presque tout le cadre).
-- Transition : un souffle de vent fait entrer du sable par la gauche ; coupe sur l'acacia (S03b).
+### S03a · 21,25-26,40 · L'attente · **modifié**
+- Phrase exacte : « Dans un récit rapporté par Muslim, Jundub raconte que Gabriel tarde à venir auprès du Prophète. »
+- Action visible : les bulles s'effacent ; une ligne fine traverse le ciel. Un premier repère doré se pose à gauche ;
+  le trait avance puis se change en pointillés qui pâlissent ; le second repère (contour seul) reste non atteint :
+  l'intervalle reste ouvert. Sur « tarde à venir » (24,5 s) apparaît « La venue de Gabriel tarde ». Le ciel passe une
+  seule fois du crépuscule à la nuit.
+- Le spectateur comprend : un délai, sans durée précise et sans explication de sa cause.
+- Texte à l'écran : « La venue de Gabriel tarde » ; mention « Ṣaḥīḥ Muslim 1797a » au-dessus du sous-titre.
+- Interdits respectés : ni calendrier, ni nombre de jours, ni personnage, ni représentation de Gabriel.
+- Remplace : le grand ciel seul.
 
-### S03b · 26,40-29,25 · L'acacia dans le vent
-« Les polythéistes affirment alors qu'il a été abandonné. »
-- On voit : un acacia isolé, cadré de près et en légère contre-plongée, ciel ocre.
-- Action : le vent se lève ; le sable file en rubans, l'arbre plie, quelques feuilles s'arrachent : les paroles qui
-  circulent et pèsent. Aucun personnage, aucune scène reconstituée.
-- Caméra : plan fixe légèrement secoué par les rafales.
-- Transition : une rafale emplit l'image de sable ; quand elle retombe, on est revenu au grand ciel apaisé (S04).
+### S03b · 26,40-29,25 · L'accusation · **modifié**
+- Phrase exacte : « Les polythéistes affirment alors qu'il a été abandonné. »
+- Action visible : sur « affirment » (27,3 s), un seul bloc apparaît d'un coup : l'attribution « Propos des
+  polythéistes · selon le récit rapporté » et le mot « Abandonné » (italique), jamais l'un sans l'autre. Des bulles
+  vides poussées par le vent restent sur les bords.
+- Le spectateur comprend : c'est leur accusation, rapportée par le récit ; le narrateur ne la confirme pas.
+- Texte à l'écran : attribution + « Abandonné », sans guillemets (résumé, pas citation du texte arabe).
+- Remplace : l'acacia dans le vent. Aucune personne délaissée, aucune figure du Prophète.
 
-### S04 · 29,25-32,60 · Le cadre se referme
-« C'est dans ce contexte que sont révélés les premiers versets d'[Ad-Duha]. »
-- On voit : le grand ciel de S03a, nocturne et calme, vu à travers une étoile à huit branches tracée en or discret ;
-  titre « Ad-Duha ».
-- Action : les branches de l'étoile se dessinent et cadrent le ciel : on « entre » dans le texte. La révélation
-  n'est pas illustrée (ni rayon, ni éclat).
-- Caméra : poussée lente dans l'ouverture de l'étoile.
-- Transition : **raccord de forme** : le contour de l'étoile s'ouvre et devient le cadre de la fenêtre de la chambre (S05).
+### S04 · 29,25-32,60 · Le passage coranique arrive · **modifié**
+- Phrase exacte : « C'est dans ce contexte que sont révélés les premiers versets d'Ad-Duha. »
+- Action visible : le bloc de l'accusation se floute et s'efface **entièrement** avant l'apparition du titre (aucune
+  image où « Abandonné » et « Ad-Duha » sont lisibles ensemble) ; seules quelques bulles vides restent floues à
+  l'arrière-plan. Le titre « Ad-Duha » se pose au centre (30,6 s), dans un cadre doré aux proportions de la fenêtre de la
+  chambre ; ce cadre devient la fenêtre de S05 (raccord de forme).
+- Le spectateur comprend : les paroles rapportées passent au second plan ; on arrive au texte de la sourate.
+- Interdits respectés : aucun rayon, éclat ou présence censés représenter la révélation.
+- Remplace : l'étoile à huit branches.
 
 ### S05 · 32,60-36,60 · La clarté de la matinée
 « La sourate commence par deux moments que l'on connaît. La clarté de la matinée, »
@@ -109,32 +141,41 @@ il faut revenir à ce qui se disait autour de lui. »
 - On voit : même cadre, nuit claire sans pluie, lune, quelques fenêtres allumées.
 - Action : les derniers mouvements s'arrêtent (rideaux immobiles, lumières qui se stabilisent) : le calme s'installe.
 - Caméra : le même cadre que S05, immobile (le parallèle des deux moments se lit par le cadre identique).
-- Transition : fondu enchaîné vers l'acacia de S03b, au calme (S07).
+- Transition : fondu enchaîné vers le grand ciel de nuit et la composition de l'accusation (S07, révision 3).
 
-### S07 · 38,70-45,40 · L'acacia au calme
-« Vient ensuite la réponse. Son Seigneur ne l'a ni abandonné, ni détesté. Voilà ce que ces paroles viennent démentir. »
-- On voit : le même acacia qu'en S03b, même cadre, au crépuscule clair ; sable lisse, premières étoiles.
-  Mention « Sens du verset 93:3 » sur la deuxième phrase, « Explication » sur la troisième.
-- Action : l'inverse exact de S03b : le vent tombe, l'arbre se redresse, le sable retombe en rides régulières.
-  La réponse se lit par contraste avec l'image de l'accusation, sans rien ajouter au récit.
-- Caméra : même cadre que S03b, désormais immobile (le contraste vient de l'action, pas du cadrage).
-- Transition : la caméra descend le long du tronc jusqu'au sable et passe en plongée verticale (S08).
+### S07 · 38,70-45,40 · La réponse · **modifié**
+- Phrases exactes : « Vient ensuite la réponse. » (38,8-40,4) · « Son Seigneur ne l'a ni abandonné ni détesté. »
+  (40,4-43,4) · « Voilà ce que ces paroles viennent démentir. » (43,4-45,6)
+- Action visible :
+  1. S07a, « Vient ensuite la réponse » : retour de la composition de S03b (même place, ciel de nuit calme) :
+     attribution + « Abandonné ».
+  2. S07b, juste avant « Son Seigneur » (40,3 s) : le bloc de l'accusation s'efface entièrement ; la phrase de la réponse
+     apparaît **en une fois, complète** (jamais mot par mot : aucune image ne montre « abandonné » sans sa négation),
+     avec « Sens du verset 93:3 » au-dessus. Pas de sous-titre pendant cette phrase (même texte déjà à l'écran).
+  3. S07c, « démentir » : la réponse remonte et pâlit ; l'accusation attribuée revient en petit, sous elle, et un trait
+     doré la barre sur « démentir » (44,7 s). Mention « Explication » au-dessus du sous-titre.
+- Le spectateur comprend : le verset dément l'accusation.
+- Remplace : l'acacia au calme.
 
-### S08 · 45,40-49,60 · L'intervalle n'est pas une rupture
-« Le retard de la révélation ne signifiait pas qu'Allah avait rejeté son prophète. »
-- On voit : vue de dessus, sable ; un trait tracé, qui s'efface sur une portion puis reprend. Mention « Explication ».
-  Rien de dénombrable (ni pierres, ni marques de jours) : la longueur de l'interruption n'a aucune valeur de durée.
-- Action : un fin trait doré repasse dans la portion effacée et relie les deux parties : c'est le même tracé.
-- Caméra : plongée verticale, glissement le long du trait.
-- Transition : la caméra se redresse et découvre un horizon (S09a).
+### S08 · 45,40-49,60 · L'explication · **modifié**
+- Phrase exacte : « Le retard de la révélation ne signifiait pas qu'Allah avait rejeté Son Prophète. »
+- Action visible : même ciel nocturne. « Un retard » apparaît sur « retard » (45,7 s) à gauche ; « un rejet » sur
+  « rejeté » (48,3 s) à droite ; puis le signe ≠, tracé en or, se dessine entre les deux (48,8 s).
+- Le spectateur comprend : le délai et le rejet sont deux choses distinctes.
+- Texte à l'écran : « Un retard ≠ un rejet » ; mention « Explication ».
+- Remplace : le trait dans le sable.
 
-### S09a · 49,60-55,00 · L'horizon ouvert
-« Puis le passage se tourne vers l'avenir. Pour lui, la vie dernière sera meilleure que la vie présente. »
-- On voit : la crête d'une dune dans l'ombre au premier plan, puis une plaine et un horizon très ouvert au petit jour ;
-  ni chemin, ni disque solaire, rien « au bout ». Mention « Sens du verset 93:4 ».
-- Action : la lumière naturelle gagne la crête ; on ne montre aucune image de l'au-delà ni du Paradis.
-- Caméra : panoramique vertical lent de la crête vers le ciel (seul mouvement de bascule du film).
-- Transition : le ciel se fond dans le bleu nuit de la composition suivante (S09b).
+### S09a · 49,60-55,00 · L'avenir · **modifié**
+- Phrases exactes : « Puis le passage se tourne vers l'avenir. » · « Pour lui, la vie dernière sera meilleure que la vie
+  présente. »
+- Action visible : décor discret, une crête de dune sombre au bas de l'image, ciel de nuit sans lueur d'aube. Sur
+  « vie dernière » (52,7 s), « Vie présente » apparaît à gauche ; une flèche dorée se trace vers « Vie dernière » ;
+  sur « meilleure » (53,4 s), « meilleure pour lui » s'inscrit sous « Vie dernière ».
+- Le spectateur comprend : une promesse adressée au Prophète.
+- Texte à l'écran : « Vie présente → Vie dernière · meilleure pour lui » ; mention « Sens du verset 93:4 ».
+- Interdits respectés : le paysage n'est pas présenté comme l'au-delà (pas de lumière à l'horizon, le schéma n'est pas
+  posé sur l'horizon, aucun chemin vers lui).
+- Remplace : l'horizon ouvert au petit jour.
 
 ### S09b · 55,00-58,85 · La formulation du verset
 « Son Seigneur lui accordera de ses bienfaits, jusqu'à ce qu'il soit satisfait. »
@@ -143,75 +184,62 @@ il faut revenir à ce qui se disait autour de lui. »
 - Action : la phrase apparaît par groupes de mots au rythme de la voix (jamais lettre par lettre) ; un trait doré se
   trace sous « jusqu'à ce qu'il soit satisfait ». Aucune forme n'est donnée aux bienfaits promis (remplace la jarre).
 - Caméra : fixe ; très légère respiration de l'ornement.
-- Transition : l'étoile pâle se rapproche et devient le schéma de S10.
+- Transition (révision 3) : la composition monte et pâlit sur « ce qui viendra » ; les arches de S10 apparaissent.
 
-### S10 · 58,85-63,50 · L'étoile se tourne vers le passé
-« Mais la sourate ne parle pas seulement de ce qui viendra. Elle lui rappelle aussi ce qu'il a déjà reçu. »
-- On voit : l'étoile à huit branches en schéma ; une flèche courbe dans le sens inverse des aiguilles d'une montre.
-- Action : sur « ne parle pas seulement de ce qui viendra », l'étoile tourne en arrière ; sur « ce qu'il a déjà reçu »,
-  trois branches s'allument l'une après l'autre (les trois rappels qui suivent).
-- Caméra : fixe, légère poussée vers la première branche allumée.
-- Transition : la branche allumée s'ouvre comme une porte : raccord sur S11a.
+### S10 · 58,85-63,50 · Retour aux bienfaits passés · **modifié**
+- Phrases exactes : « Mais la sourate ne parle pas seulement de ce qui viendra. » · « Elle lui rappelle aussi ce qu'il a
+  déjà reçu. »
+- Action visible : la composition du verset 5 (S09b) monte et pâlit sur « ce qui viendra » ; puis trois arches dorées
+  s'ouvrent l'une après l'autre, chacune avec la miniature du plan qui suit : la porte du refuge (61,5 s), le parcours
+  balisé (62,2 s), le panier des moyens de vivre (62,9 s). La caméra entre ensuite dans la première arche (raccord S11a).
+- Le spectateur comprend : l'annonce concrète des trois rappels qui suivent.
+- Remplace : l'étoile tournante.
 
-### S11a · 63,50-65,40 · Un refuge
-« Orphelin, il a été accueilli. »
-- On voit : un mur de terre, une porte simple au crépuscule. Mention « Sens du verset 93:6 ».
-- Action : la porte s'ouvre ; la lumière chaude d'une lampe intérieure s'étend sur le sol. Aucun enfant, aucun adulte
-  représenté ; la maison est générique et ne prétend pas être une maison historique.
-- Caméra : plan fixe frontal, légère poussée vers le seuil.
-- Transition : la lumière de la porte se resserre en point ; raccord sur la nuit étoilée (S11b).
+### S11a · 63,50-65,40 · Un refuge · *illustration conservée*
+« Orphelin, il a été accueilli. » — Action simple : la porte s'ouvre, la lumière gagne le sol. Mention « Sens du verset
+93:6 ». Illustration pédagogique générique, pas une reconstitution ; aucun personnage.
 
-### S11b · 65,40-70,65 · Une guidée
-« Il a reçu la guidée. Avant la révélation, il ne connaissait pas encore le livre qui allait lui être révélé. »
-- On voit : désert de nuit, ciel étoilé, une suite de bornes de pierre. Mention « Sens du verset 93:7 », puis
-  « Explication » sur « Avant la révélation… ».
-- Action : les bornes se découvrent une à une dans la lumière des étoiles et tracent la route. Aucun livre ni écriture
-  représentés.
-- Caméra : travelling qui suit les bornes en zigzag (rythme régulier, à la voix).
-- Transition : fondu vers l'intérieur chaud (S11c).
+### S11b · 65,40-70,65 · Une guidée · *illustration conservée*
+« Il a reçu la guidée. Avant la révélation, il ne connaissait pas encore le livre qui allait lui être révélé. » — Action
+simple : les bornes apparaissent une à une, le parcours devient lisible. « Sens du verset 93:7 », puis « Explication ».
+Aucun livre ni écriture représentés ; aucun personnage.
 
-### S11c · 70,65-72,80 · Des moyens de vivre
-« Démuni, il a été enrichi. »
-- On voit : une natte et des paniers tressés, vides au départ. Mention « Sens du verset 93:8 ».
-- Action : les paniers se remplissent de dattes et de grain.
-- Caméra : plongée en trois-quarts, très légère rotation.
-- Transition : l'image se réduit et prend place dans la troisième arche du triptyque (S12).
-- À retravailler à l'animation : les paniers vus de dessus se lisent mal (ajouter le bord tressé, un angle plus bas).
+### S11c · 70,65-72,80 · Des moyens de vivre · *illustration conservée (version animée retravaillée)*
+« Démuni, il a été enrichi. » — Action simple : le contenu des paniers apparaît et monte au-dessus du bord. « Sens du
+verset 93:8 ». L'image se réduit ensuite dans la troisième arche de S12.
 
-### S12 · 72,80-83,10 · Triptyque et frise
-« Trois rappels successifs. Un refuge, une guidée, des moyens de vivre. Après avoir répondu à l'accusation d'abandon
-et annoncé l'avenir, le passage rappelle ainsi les bienfaits du passé. »
-- On voit : trois arches dorées contenant en miniature la porte (S11a), les bornes (S11b), le panier (S11c) ; dessous,
-  une frise courte réponse · avenir · passé. Mention « Explication ».
-- Action : les arches s'allument une à une sur « un refuge, une guidée, des moyens de vivre » ; puis les trois points de
-  la frise s'allument dans l'ordre de la phrase, le dernier (« passé ») reste souligné.
-- Caméra : léger recul pour tout cadrer, puis immobile.
-- Transition : les arches s'effacent en traînées de pluie : raccord sur la vitre (S13).
+### S12 · 72,80-83,10 · Synthèse · **modifié**
+- Phrases exactes : « Trois rappels successifs. » · « Un refuge, une guidée, des moyens de vivre. » · « Après avoir
+  répondu à l'accusation d'abandon et annoncé l'avenir, le passage rappelle ainsi les bienfaits du passé. »
+- Action visible :
+  1. Les trois mêmes arches qu'en S10, avec les mêmes miniatures (porte, parcours balisé, panier).
+  2. S12a : chaque nom s'inscrit sous la bonne image, sur le mot entendu : « Refuge » (74,6 s), « Guidée » (75,5 s),
+     « Moyens de vivre » (76,4 s). Pas de sous-titre pendant cette phrase : les noms à l'écran la disent déjà.
+  3. S12b : les noms s'effacent ; trois mots seulement, sans ligne ni points : « Réponse » (78,0 s), « Avenir »
+     (79,8 s), « Passé » (82,0 s), ce dernier en or et souligné, sous l'arche du panier ; les arches restent visibles.
+- Le spectateur comprend : les trois bienfaits sont ceux du passé ; le passage suit l'ordre réponse, avenir, passé.
+- Mention « Explication ». Aucun nouveau symbole abstrait.
+- Transition : les arches s'effacent en traînées de pluie (raccord sur la vitre, S13).
 
-### S13 · 83,10-92,55 · La pluie occupe tout
-« Et nous, en méditant [ces] versets, nous pouvons examiner notre propre regard. Quand une épreuve occupe toute la
-place, les soutiens et les bienfaits déjà reçus peuvent devenir difficiles à voir. »
-- On voit : retour dans la chambre, la personne de dos, la pluie forte sur la vitre.
-- Action : sur « occupe toute la place », la pluie gagne toute la vitre ; les objets de la pièce (tasse, livres,
-  plante, cadre, tapis plié) s'enfoncent dans l'ombre.
-- Caméra : plan serré derrière l'épaule (cadrage de S00 à 4,4 s), mise au point sur la vitre, le reste flou.
-- Transition : la mise au point bascule de la vitre vers l'intérieur de la pièce (S14).
+### S13 · 83,10-92,55 · La pluie occupe l'attention · *décor conservé, action précisée*
+- Phrases exactes : « Et nous, en méditant ces versets, nous pouvons examiner notre propre regard. » · « Quand une
+  épreuve occupe toute la place, les soutiens et les bienfaits déjà reçus peuvent devenir difficiles à voir. »
+- Action visible : plan serré derrière l'épaule ; la pluie occupe la vitre et l'attention ; la pièce est dans l'ombre.
+- Le spectateur comprend : on revient à soi ; l'épreuve prend toute la place du regard.
 
-### S14 · 92,55-98,65 · Ce qui était déjà là
-« Les reconnaître ne veut pas dire que notre peine n'existe pas. Cela permet de ne pas réduire toute notre vie à cette
-peine. »
-- On voit : la chambre ; la pluie diminue sans disparaître, l'horizon s'éclaircit (aube naturelle).
-- Action : les objets réapparaissent un à un dans la lumière chaude de la lampe ; la pluie reste visible sur la vitre
-  (la peine n'est pas niée).
-- Caméra : recul lent jusqu'au plan large, qui fait entrer toute la pièce dans le cadre.
-- Transition : fondu lumineux naturel vers le matin, même cadre (S15).
+### S14 · 92,55-98,65 · Ce qui était déjà là · *décor conservé, action précisée*
+- Phrases exactes : « Les reconnaître ne veut pas dire que notre peine n'existe pas. » · « Cela permet de ne pas réduire
+  toute notre vie à cette peine. »
+- Action visible : le cadrage s'élargit lentement et révèle les éléments chaleureux déjà présents (lampe, tasse, livres,
+  plante, tapis plié) ; la pluie reste visible sur la vitre.
+- Le spectateur comprend : reconnaître ce qui est là n'efface pas la peine.
 
-### S15 · 98,65-101,40 · Le matin
-« Aujourd'hui, de quel bienfait te souviens-tu ? »
-- On voit : la chambre au matin, ciel pâle, la personne toujours de dos.
-- Action : la lampe s'éteint parce que le jour suffit ; le soleil gagne le tapis.
-- Caméra : légère poussée vers la fenêtre (écho inverse du recul de S00).
-- Transition : la caméra traverse la fenêtre et recule hors de l'immeuble (S16, reprise de S01 au matin).
+### S15 · 98,65-101,40 · Le matin · **modifié (la pluie reste visible)**
+- Phrase exacte : « Aujourd'hui, de quel bienfait te souviens-tu ? »
+- Action visible : le jour se lève, la lampe s'éteint ; une pluie légère reste visible sur la vitre (au lieu de
+  disparaître) : le matin ne promet pas la fin immédiate de toute peine.
+- Le spectateur comprend : une question adressée à lui, sans promesse que tout disparaît.
+- Transition inchangée vers S16.
 
 ### S16 · 101,40-108,00 · Fin : la façade au matin
 « Si cette vidéo t'a aidé à mieux comprendre ce passage, aime-la et partage-la. Abonne-toi pour les prochaines
@@ -223,21 +251,21 @@ explications ! »
 - Fin : la voix va jusqu'au bout du fichier (≈ 107,4 s, sans silence final) : image tenue jusqu'à ~108,0 s sur le
   silence ajouté **après** le fichier (aucune modification de l'audio).
 
-## Variété des images et des cadrages (contrôle, révision 2)
+## Variété des images et des cadrages (contrôle, révision 3)
 | Séq. | Décor | Ce que l'image raconte | Caméra |
 |------|-------|------------------------|--------|
 | S00-S01 | chambre, façade | solitude ; appel | recul, grue arrière |
-| S02 | vallée (unique) | le contexte, les échos | descente |
-| S03a | grand ciel | l'attente, sans durée | fixe, horizon bas |
-| S03b | acacia | les paroles qui pèsent | fixe secoué |
-| S04 | étoile + ciel | entrée dans le texte | poussée |
+| S02 | grand ciel, bulles vides | entrée dans le récit rapporté | sortie de la façade par le haut, descente vers l'horizon |
+| S03a | grand ciel, deux repères | un délai sans durée | fixe, le ciel passe à la nuit |
+| S03b | grand ciel, accusation attribuée | leur parole, pas un fait | légère poussée |
+| S04 | grand ciel, titre dans un cadre | arrivée du texte | poussée vers le cadre, raccord fenêtre |
 | S05-S06 | chambre vide | deux moments connus | frontal identique |
-| S07 | acacia | la réponse (inverse de S03b) | même cadre, immobile |
-| S08 | sable vu de dessus | l'interruption n'est pas une rupture | plongée verticale |
-| S09a | horizon | l'avenir | bascule verticale |
+| S07 | même composition que S03b | le verset dément l'accusation | même cadre, puis léger recul |
+| S08 | grand ciel, deux mots et un signe | délai ≠ rejet | glissement latéral lent |
+| S09a | crête sombre, schéma | une promesse pour lui | légère montée |
 | S09b | typographie | la formulation, sans image des bienfaits | fixe |
-| S10 | étoile-schéma | retour vers ce qui est déjà reçu | fixe, poussée |
+| S10 | trois arches | annonce des trois rappels | recul, puis entrée dans la première arche |
 | S11a-c | seuil, nuit, natte | refuge, guidée, moyens de vivre | frontal, suivi, trois-quarts |
-| S12 | triptyque, frise | la structure du passage | recul |
-| S13-S15 | chambre | regard sur sa propre épreuve | serré, recul, poussée |
+| S12 | trois arches nommées, trois mots | synthèse | léger recul |
+| S13-S15 | chambre | regard sur sa propre épreuve | serré, élargissement, poussée |
 | S16 | façade au matin | fin | recul final |

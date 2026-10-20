@@ -1,15 +1,17 @@
 // Exports the storyboard stills and the contact sheets.
 // Usage (from the repository root):
-//   node ad-duha/storyboard/build-storyboard.cjs [chromium path]
+//   node ad-duha/storyboard/build-storyboard.cjs [--r3] [chromium path]
+// --r3: only the shots replaced in revision 3 (frames-r3/ and planche-r3.jpg).
 // Room shots reuse the validated scene (../index.html) seeked to a time, with a variant applied in the page;
 // the other shots come from scenes.html#<id>. Output: storyboard/frames/*.jpg and storyboard/planche-*.jpg.
 const path = require("path");
 const fs = require("fs");
 const { execFileSync } = require("child_process");
 const puppeteer = require(path.resolve(__dirname, "../../node_modules/puppeteer-core"));
-const CHROME = process.argv[2] || "/opt/pw-browsers/chromium";
+const R3 = process.argv.includes("--r3");
+const CHROME = process.argv.slice(2).find((a) => !a.startsWith("--")) || "/opt/pw-browsers/chromium";
 const DIR = __dirname;
-const FRAMES = path.join(DIR, "frames");
+const FRAMES = path.join(DIR, R3 ? "frames-r3" : "frames");
 fs.mkdirSync(FRAMES, { recursive: true });
 
 // id, time range, short title (sheet captions: preparation document, never shown in the film)
@@ -37,7 +39,25 @@ const SHOTS = [
   ["S16", "101,40–108,0", "Fin : la façade au matin", { scene: "s16" }],
 ];
 
+// Revision 3: only the replaced shots (narration-led compositions), plus the morning with light rain (S15).
+const SHOTS_R3 = [
+  ["S02", "13,45–21,25", "Le contexte d’Ad-Duha", { scene: "r3s02" }],
+  ["S03a", "21,25–26,40", "L’attente : un intervalle ouvert", { scene: "r3s03a" }],
+  ["S03b", "26,40–29,25", "L’accusation rapportée", { scene: "r3s03b" }],
+  ["S04", "29,25–32,60", "Le titre remplace les paroles", { scene: "r3s04" }],
+  ["S07a", "38,70–40,38", "La réponse : retour de l’accusation", { scene: "r3s07a" }],
+  ["S07b", "40,38–43,42", "Sens du verset 93:3", { scene: "r3s07b" }],
+  ["S07c", "43,44–45,40", "Ce que le verset dément", { scene: "r3s07c" }],
+  ["S08", "45,40–49,60", "Un retard ≠ un rejet", { scene: "r3s08" }],
+  ["S09a", "49,60–55,00", "Vie présente → vie dernière", { scene: "r3s09a" }],
+  ["S10", "58,85–63,50", "Les trois rappels annoncés", { scene: "r3s10" }],
+  ["S12a", "74,54–77,56", "Refuge, guidée, moyens de vivre", { scene: "r3s12a" }],
+  ["S12b", "77,58–83,10", "Réponse, avenir, passé", { scene: "r3s12b" }],
+  ["S15", "98,65–101,40", "Le matin, la pluie encore visible", { room: 2.0, variant: "morningRain" }],
+];
+
 const SUBS = {
+  morningRain: "Aujourd’hui, de quel bienfait te souviens-tu ?",
   intro: "Il y a des moments où tu invoques…",
   morning: "La clarté de la matinée,",
   calm: "puis la nuit lorsqu’elle devient calme.",
@@ -69,6 +89,17 @@ function applyVariant(variant, sub, tag) {
   if (variant === "intro") { $("#title").style.opacity = "0.92"; }
   if (variant === "morning") { morning(); hidePerson(); }
   if (variant === "morningPerson") { morning(); }
+  if (variant === "morningRain") { // morning; a light rain still visible on the glass
+    morning();
+    const rain = $("#rain"); rain.style.display = ""; rain.style.opacity = "1";
+    rain.querySelectorAll("line").forEach((l) => l.remove());
+    for (let i = 0; i < 30; i++) {
+      const l = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      const x = 320 + ((i * 97) % 520), y = 360 + ((i * 211) % 700);
+      l.setAttribute("x1", x); l.setAttribute("y1", y); l.setAttribute("x2", x + 2); l.setAttribute("y2", y + 22 + (i % 4) * 8);
+      l.setAttribute("stroke-width", 1.4 + (i % 2)); l.setAttribute("opacity", 0.25 + (i % 3) * 0.08); rain.appendChild(l);
+    }
+  }
   if (variant === "calm") {
     hidePerson();
     ["#rain", "#clouds"].forEach((s) => ($(s).style.display = "none"));
@@ -115,7 +146,8 @@ function applyVariant(variant, sub, tag) {
   const page = await browser.newPage();
   await page.setViewport({ width: 1080, height: 1920 });
   await page.evaluateOnNewDocument(() => { window.__timelines = {}; });
-  for (const [id, , , spec] of SHOTS) {
+  const LIST = R3 ? SHOTS_R3 : SHOTS;
+  for (const [id, , , spec] of LIST) {
     if (spec.scene) {
       await page.goto("file://" + path.join(DIR, "scenes.html") + "#" + spec.scene, { waitUntil: "load" });
       await page.reload({ waitUntil: "load" });
@@ -133,9 +165,9 @@ function applyVariant(variant, sub, tag) {
   }
   // Contact sheets, 4 x 2 per page.
   const per = 8;
-  for (let p = 0; p * per < SHOTS.length; p++) {
-    const cells = SHOTS.slice(p * per, p * per + per).map(([id, tc, title]) =>
-      `<figure><img src="frames/${id}.jpg"><figcaption><b>${id}</b> · ${tc} s<br>${title}</figcaption></figure>`).join("");
+  for (let p = 0; p * per < LIST.length; p++) {
+    const cells = LIST.slice(p * per, p * per + per).map(([id, tc, title]) =>
+      `<figure><img src="${R3 ? "frames-r3" : "frames"}/${id}.jpg"><figcaption><b>${id}</b> · ${tc} s<br>${title}</figcaption></figure>`).join("");
     const html = `<!doctype html><meta charset="utf-8"><style>
       @font-face { font-family: Inter; src: url("../assets/fonts/inter-latin-500-normal.woff2"); }
       body { margin: 0; background: #0b1020; font-family: Inter, sans-serif; color: #f3ead7; }
@@ -143,7 +175,7 @@ function applyVariant(variant, sub, tag) {
       .grid { display: grid; grid-template-columns: repeat(4, 360px); gap: 22px 28px; padding: 18px 36px 36px; }
       figure { margin: 0; } img { width: 360px; height: 640px; display: block; border-radius: 6px; }
       figcaption { font-size: 19px; line-height: 1.35; margin-top: 10px; } b { color: #c6a15b; }
-    </style><h1>Ad-Duha · storyboard · planche ${p + 1}/${Math.ceil(SHOTS.length / per)}</h1><div class="grid">${cells}</div>`;
+    </style><h1>Ad-Duha · storyboard · ${R3 ? "révision 3 · plans modifiés · " : ""}planche ${p + 1}/${Math.ceil(LIST.length / per)}</h1><div class="grid">${cells}</div>`;
     const file = path.join(DIR, `_planche-${p + 1}.html`);
     fs.writeFileSync(file, html);
     await page.setViewport({ width: 1620, height: 1500 });
@@ -151,9 +183,9 @@ function applyVariant(variant, sub, tag) {
     await page.evaluate(() => document.fonts.ready.then(() => true));
     const h = await page.evaluate(() => document.body.scrollHeight);
     await page.setViewport({ width: 1620, height: h });
-    const png = path.join(DIR, `planche-${p + 1}.png`);
+    const png = path.join(DIR, `planche${R3 ? "-r3" : ""}-${p + 1}.png`);
     await page.screenshot({ path: png });
-    execFileSync("ffmpeg", ["-v", "error", "-y", "-i", png, "-q:v", "3", path.join(DIR, `planche-${p + 1}.jpg`)]);
+    execFileSync("ffmpeg", ["-v", "error", "-y", "-i", png, "-q:v", "3", path.join(DIR, `planche${R3 ? "-r3" : ""}-${p + 1}.jpg`)]);
     fs.unlinkSync(png); fs.unlinkSync(file);
     await page.setViewport({ width: 1080, height: 1920 });
     console.log("sheet", p + 1);

@@ -1,4 +1,4 @@
-# Reprise : Ad-Duha, premiers versets (état au 2026-10-20, film complet animé, aperçu léger)
+# Reprise : Ad-Duha, premiers versets (état au 2026-10-20, storyboard révision 3 en attente de validation)
 
 
 Branche : `claude/determined-tesla-akfm85`. Règles : `../CLAUDE.md` (série) et `../AGENTS.md` (garde-fous HyperFrames).
@@ -134,7 +134,18 @@ L'ancienne liste de ce fichier y a été fusionnée ; ne plus tenir de liste ici
 - Défaut corrigé avant livraison : ligne claire au bord gauche pendant les secousses de S03b (cadre de finition
   élargi ; un seul nouveau rendu).
 
+## Storyboard révision 3 (2026-10-20, après l'aperçu complet)
+- Retour de l'utilisateur : le rendu est techniquement satisfaisant, mais l'acacia, le trait dans le sable et l'étoile
+  tournante ne se comprennent pas sans interprétation. Découpage de correction fourni par l'utilisateur (dans le message).
+- Plans remplacés dans `STORYBOARD.md` (minutage, phrase exacte, action, ce que le spectateur comprend) : S02, S03a,
+  S03b, S04, S07, S08, S09a, S10, S12, S15 ; action précisée en S13-S14. Ambiguïtés signalées en tête de la révision 3.
+- Vignettes des seuls plans modifiés : `storyboard/frames-r3/*.jpg`, planches `storyboard/planche-r3-1.jpg` et
+  `planche-r3-2.jpg` (fonctions `r3s…` de `storyboard/scenes.html` ; `node ad-duha/storyboard/build-storyboard.cjs --r3`).
+- Aucune animation ni aucun rendu vidéo à cette étape. `index.html` (aperçu complet) n'est pas modifié.
+
 ## Prochaines tâches
-1. Retour de l'utilisateur sur l'aperçu complet (`prototype/ad-duha-apercu.mp4`).
-2. Corrections éventuelles, puis export final haute résolution (`-q delivery`) seulement après accord.
-3. En parallèle et avant publication : points de `VERIFICATIONS.md`, avec extraits dans `SOURCES.md`.
+1. Validation des vignettes de la révision 3 par l'utilisateur.
+2. Puis test animé du seul passage « accusation → réponse → retard différent de rejet » (S03b à S08, ≈ 26,4-49,6 s)
+   avec l'audio réel ; pas de rendu complet avant validation de ce test.
+3. Ensuite : animation des autres plans modifiés, nouvel aperçu, export final après accord.
+4. En parallèle et avant publication : points de `VERIFICATIONS.md` (sources et extraits dans `SOURCES.md`).

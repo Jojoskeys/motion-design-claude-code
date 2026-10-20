@@ -7,7 +7,9 @@
      Open scenes.html#<id> ; ids listed in SCENES below. Exported by build-storyboard.cjs. -->
 <style>
   @font-face { font-family: "Inter"; src: url("../assets/fonts/inter-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
-  @font-face { font-family: "Source Serif 4"; src: url("../assets/fonts/source-serif-4-latin-400-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Source Serif 4"; src: url("../assets/fonts/source-serif-4-latin-400-normal.woff2"); }
+  @font-face { font-family: "Source Serif 4"; src: url("../assets/fonts/source-serif-4-latin-400-italic.woff2"); font-style: italic; }
+  @font-face { font-family: "Inter"; src: url("../assets/fonts/inter-medium-full.otf") format("opentype"); font-weight: 500; unicode-range: U+0100-024F, U+1E00-1EFF; }
   html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #070d1f; }
   #stage { position: relative; width: 1080px; height: 1920px; overflow: hidden; }
   svg { position: absolute; inset: 0; width: 1080px; height: 1920px; }
@@ -15,10 +17,19 @@
     font: 400 50px/1.3 "Source Serif 4", serif; color: #f3ead7; text-shadow: 0 2px 18px rgba(4, 8, 20, 0.85); }
   .title { position: absolute; left: 100px; right: 160px; top: 252px; text-align: center; white-space: nowrap;
     font: 500 23px/1.3 "Inter", sans-serif; letter-spacing: 0.1em; text-transform: uppercase; color: #c6a15b; }
-  .tag { position: absolute; left: 100px; right: 160px; top: 1296px; text-align: center;
-    font: 500 22px/1.2 "Inter", sans-serif; letter-spacing: 0.12em; text-transform: uppercase; color: #c6a15b; opacity: 0.9; }
+  .tag { position: absolute; left: 100px; right: 160px; top: 1288px; text-align: center;
+    font: 500 26px/1.2 "Inter", sans-serif; letter-spacing: 0.12em; text-transform: uppercase; color: #d6b36c; opacity: 0.95;
+    text-shadow: 0 2px 14px rgba(4, 8, 20, 0.95); }
+  .tag.ref { text-transform: none; letter-spacing: 0.06em; }
   .tagsvg { font: 500 24px "Inter", sans-serif; letter-spacing: 0.12em; text-transform: uppercase; fill: #c6a15b; }
   .quote { font: 400 62px "Source Serif 4", serif; fill: #f3ead7; }
+  .big { font: 400 66px "Source Serif 4", serif; fill: #f3ead7; }
+  .bigi { font: italic 400 96px "Source Serif 4", serif; fill: #f3ead7; }
+  .mid { font: 400 50px "Source Serif 4", serif; fill: #f3ead7; }
+  .midi { font: italic 400 42px "Source Serif 4", serif; fill: #d6b36c; }
+  .attr { font: 500 26px "Inter", sans-serif; letter-spacing: 0.14em; text-transform: uppercase; fill: #d6b36c; }
+  .attrs { font: 500 24px "Inter", sans-serif; letter-spacing: 0.08em; fill: #c9bfae; }
+  .lab { font: 400 40px "Source Serif 4", serif; fill: #f3ead7; }
   .label { font: 500 30px "Inter", sans-serif; letter-spacing: 0.12em; text-transform: uppercase; fill: #f3ead7; }
 </style>
 </head>
@@ -127,6 +138,56 @@ function acacia(bend) {
   return s;
 }
 const star8 = (cx, cy, r) => { let d = ""; for (let i = 0; i < 16; i++) { const a = Math.PI / 8 * i, rr = i % 2 ? r * 0.72 : r; d += (i ? "L" : "M") + (cx + Math.cos(a) * rr).toFixed(1) + " " + (cy + Math.sin(a) * rr).toFixed(1); } return d + "Z"; };
+
+// ---------- revision 3 helpers ----------
+// speech fragments: empty bubbles (three dots, never words) drifting on curved paths
+function bubbles(op, wind, edges) {
+  seed = 777;
+  let s = `<g fill="none" stroke="#f3ead7" stroke-linecap="round" opacity="${op}">`;
+  for (let i = 0; i < 4; i++) { const y = 940 + i * 90; s += `<path d="M ${-40 + i * 40} ${y} Q 300 ${y - 120} 560 ${y - 60} T 1120 ${y - 140}" stroke-width="2" opacity="0.35" stroke-dasharray="4 14"/>`; }
+  [[190, 1010, 1], [360, 900, 0.8], [640, 960, 0.9], [830, 840, 1.1], [500, 1150, 0.7], [880, 1100, 0.8], [150, 780, 0.6]].filter(([x]) => !edges || x < 200 || x > 820).forEach(([x, y, k]) => {
+    const w = 96 * k, h = 62 * k, dx = wind ? 40 : 0;
+    s += `<g transform="translate(${x + dx} ${y}) rotate(${R(-8, 8).toFixed(0)})"><path d="M ${-w / 2 + 14} ${-h / 2} h ${w - 28} a 14 14 0 0 1 14 14 v ${h - 28} a 14 14 0 0 1 -14 14 h ${-(w / 2 - 34)} l -20 18 l 2 -18 h ${-(w / 2 - 4)} a 14 14 0 0 1 -14 -14 v ${-(h - 28)} a 14 14 0 0 1 14 -14 z" stroke-width="3"/>` +
+      [-1, 0, 1].map((j) => `<circle cx="${(j * 18 * k).toFixed(1)}" cy="0" r="${(4 * k).toFixed(1)}" fill="#f3ead7" stroke="none"/>`).join("") + `</g>`;
+  });
+  return s + `</g>`;
+}
+// the wait: marker A reached, the line goes on and thins out, marker B (outline only) not reached
+function interval() {
+  return `<path d="M 180 930 H 900" stroke="#f3ead7" stroke-width="2" opacity="0.18"/>` +
+    `<circle cx="250" cy="930" r="16" fill="#d6b36c"/><path d="M 250 930 H 470" stroke="#d6b36c" stroke-width="5"/>` +
+    `<path d="M 470 930 H 770" stroke="#d6b36c" stroke-width="5" stroke-dasharray="14 18" opacity="0.5"/>` +
+    `<circle cx="830" cy="930" r="16" fill="none" stroke="#d6b36c" stroke-width="3" opacity="0.6"/>`;
+}
+// the reported accusation: attribution and word drawn as one block
+function accusation() {
+  return `<text class="attr" x="540" y="790" text-anchor="middle">Propos des polythéistes</text>` +
+    `<text class="attrs" x="540" y="828" text-anchor="middle">selon le récit rapporté</text>` +
+    `<text class="bigi" x="540" y="950" text-anchor="middle">Abandonné</text>`;
+}
+// the three arches with the miniatures of S11a, S11b, S11c (same images as the full shots)
+function arches(labels, top) {
+  const b = top + 600, W = 260, X = [90, 410, 730];
+  const A = (x) => `M ${x} ${b} V ${top + 160} Q ${x} ${top + 20} ${x + W / 2} ${top} Q ${x + W} ${top + 20} ${x + W} ${top + 160} V ${b} Z`;
+  const mini = [
+    (x) => `<rect x="${x}" y="${top - 20}" width="260" height="640" fill="#7a5a44"/><path d="M ${x + 80} ${b} V ${b - 280} Q ${x + 130} ${b - 340} ${x + 180} ${b - 280} V ${b} Z" fill="#f0c890"/><path d="M ${x + 180} ${b - 270} L ${x + 222} ${b - 290} V ${b + 6} L ${x + 180} ${b} Z" fill="#4a3226"/>`,
+    (x) => `<rect x="${x}" y="${top - 20}" width="260" height="640" fill="#0e1834"/>` + [[60, 90], [180, 130], [120, 210], [220, 250], [40, 300]].map(([a, c]) => `<circle cx="${x + a}" cy="${top + c}" r="2.6" fill="#f3ead7"/>`).join("") +
+      `<rect x="${x}" y="${b - 170}" width="260" height="180" fill="#26304a"/><path d="M ${x + 160} ${b} Q ${x + 90} ${b - 70} ${x + 115} ${b - 100} T ${x + 140} ${b - 150}" stroke="#9fb0d6" stroke-width="2.5" fill="none" stroke-dasharray="5 8" opacity="0.7"/>` +
+      [[140, b - 140, 0.4], [110, b - 95, 0.7], [165, b - 30, 1]].map(([a, c, k]) => `<path d="M ${x + a - 10 * k} ${c} L ${x + a - 6 * k} ${c - 60 * k} L ${x + a + 6 * k} ${c - 62 * k} L ${x + a + 10 * k} ${c} Z" fill="#9fb0d6" opacity="0.85"/>`).join(""),
+    (x) => `<rect x="${x}" y="${top - 20}" width="260" height="640" fill="#4a3428"/><path d="M ${x - 20} ${b - 100} H ${x + 280} V ${b} H ${x - 20} Z" fill="#8a6a48"/>` +
+      `<path d="M ${x + 50} ${b - 160} C ${x + 50} ${b - 110} ${x + 70} ${b - 60} ${x + 80} ${b - 55} Q ${x + 130} ${b - 45} ${x + 180} ${b - 55} C ${x + 190} ${b - 60} ${x + 210} ${b - 110} ${x + 210} ${b - 160} Z" fill="#b48a52"/>` +
+      [0, 1, 2, 3, 4].map((k) => `<path d="M ${x + 52 + k * 2} ${b - 148 + k * 20} Q ${x + 130} ${b - 138 + k * 20} ${x + 208 - k * 2} ${b - 148 + k * 20}" stroke="${k % 2 ? "#d2aa6a" : "#8a6236"}" stroke-width="9" fill="none"/>`).join("") +
+      `<path d="M ${x + 56} ${b - 160} Q ${x + 130} ${b - 200} ${x + 204} ${b - 160} Z" fill="#4a1e12"/><ellipse cx="${x + 130}" cy="${b - 160}" rx="80" ry="15" fill="none" stroke="#d8b278" stroke-width="6" stroke-dasharray="8 6"/>`,
+  ];
+  const names = [["Refuge"], ["Guidée"], ["Moyens", "de vivre"]];
+  let s = "";
+  X.forEach((x, i) => {
+    defs.push(`<clipPath id="r3a${i}${top}"><path d="${A(x)}"/></clipPath>`);
+    s += `<g clip-path="url(#r3a${i}${top})" filter="url(#f-paint)">${mini[i](x)}</g><path d="${A(x)}" fill="none" stroke="#c6a15b" stroke-width="3"/>`;
+    if (labels) names[i].forEach((t, j) => (s += `<text class="lab" x="${x + W / 2}" y="${b + 70 + j * 46}" text-anchor="middle">${t}</text>`));
+  });
+  return s;
+}
 
 // ---------- scenes ----------
 const SCENES = {
@@ -299,6 +360,99 @@ const SCENES = {
     s += finish(false);
     return { svg: s, sub: "Un refuge, une guidée, des moyens de vivre.", tag: "Explication" };
   },
+  // ===================== Revision 3 (2026-10-20): narration-led replacements =====================
+  // One stage for the reported context and the answer: the great sky over a low horizon (dusk -> night), with graphic
+  // elements and short words on it. No figure, no depiction of revelation, of Gabriel or of the Prophet.
+  // S02: "Le contexte d'Ad-Duha": wordless speech fragments (bubbles without text) circulate around the title.
+  r3s02() {
+    let s = bigSky(0.2);
+    s += `<text class="mid" x="540" y="600" text-anchor="middle" style="font-size:58px">Le contexte d’Ad-Duha</text><path d="M 490 640 H 590" stroke="#c6a15b" stroke-width="2" opacity="0.8"/>`;
+    s += bubbles(1);
+    return { svg: s + finish(), sub: "il faut revenir à ce qui se disait autour de lui." };
+  },
+  // S03a: the wait: two markers on a line, the second not reached; the interval stays open. No count, no calendar.
+  r3s03a() {
+    let s = bigSky(0.6);
+    s += `<text class="mid" x="540" y="790" text-anchor="middle">La venue de Gabriel tarde</text>`;
+    s += interval();
+    return { svg: s + finish(), sub: "Jundub raconte que Gabriel tarde à venir auprès du Prophète.", tag: "Ṣaḥīḥ Muslim 1797a", ref: true };
+  },
+  // S03b: the accusation as reported speech: attribution and word shown together (never one without the other).
+  r3s03b() {
+    let s = bigSky(0.85) + bubbles(0.5, true, true);
+    s += accusation();
+    return { svg: s + finish(), sub: "Les polythéistes affirment alors qu’il a été abandonné." };
+  },
+  // S04: the reported words recede (small, blurred); the title takes their place, in a frame shaped like the window
+  // of S05 (match cut), without any light or effect standing for revelation.
+  r3s04() {
+    let s = bigSky(1);
+    s += `<g filter="url(#f-blur-sm)">${bubbles(0.18, false, true)}</g>`;  // only wordless fragments remain behind
+    s += `<rect x="300" y="480" width="480" height="660" fill="none" stroke="#c6a15b" stroke-width="2.5" opacity="0.7"/>`;
+    s += `<text x="540" y="850" text-anchor="middle" style="font:400 104px 'Source Serif 4',serif" fill="#f3ead7">Ad-Duha</text>`;
+    return { svg: s + finish(), sub: "les premiers versets d’Ad-Duha." };
+  },
+  // S07a "Vient ensuite la réponse": the S03b composition comes back, calm night.
+  r3s07a() {
+    let s = bigSky(1) + stars(10, 100, 600, 0.6) + accusation();
+    return { svg: s + finish(), sub: "Vient ensuite la réponse." };
+  },
+  // S07b: the accusation has gone completely; the whole sentence appears at once (no partial negation, no subtitle).
+  r3s07b() {
+    let s = bigSky(1) + stars(10, 100, 600, 0.6);
+    s += `<text class="attr" x="540" y="650" text-anchor="middle">Sens du verset 93:3</text>`;
+    s += `<text class="big" x="540" y="770" text-anchor="middle">Son Seigneur ne l’a</text><text class="big" x="540" y="855" text-anchor="middle">ni abandonné</text><text class="big" x="540" y="940" text-anchor="middle">ni détesté.</text>`;
+    return { svg: s + finish() };
+  },
+  // S07c "Voilà ce que ces paroles viennent démentir": the verse stays above; the reported word returns small, struck.
+  r3s07c() {
+    let s = bigSky(1) + stars(10, 100, 600, 0.6);
+    s += `<g opacity="0.6"><text class="attr" x="540" y="560" text-anchor="middle">Sens du verset 93:3</text>`;
+    s += `<text class="big" x="540" y="650" text-anchor="middle" style="font-size:50px">Son Seigneur ne l’a</text><text class="big" x="540" y="716" text-anchor="middle" style="font-size:50px">ni abandonné ni détesté.</text></g>`;
+    s += `<g transform="translate(540 960) scale(0.62) translate(-540 -880)">${accusation()}</g>`;
+    s += `<path d="M 395 986 H 685" stroke="#d6b36c" stroke-width="5"/>`;
+    return { svg: s + finish(), sub: "Voilà ce que ces paroles viennent démentir.", tag: "Explication" };
+  },
+  // S08: a delay is not a rejection: both words appear, then the sign that separates them.
+  r3s08() {
+    let s = bigSky(1) + stars(12, 100, 600, 0.6);
+    s += `<text class="big" x="300" y="880" text-anchor="middle">Un retard</text><text class="big" x="790" y="880" text-anchor="middle">un rejet</text>`;
+    s += `<g stroke="#d6b36c" stroke-width="6" stroke-linecap="round"><path d="M 515 846 H 575"/><path d="M 515 874 H 575"/><path d="M 565 820 L 525 900"/></g>`;
+    return { svg: s + finish(), sub: "qu’Allah avait rejeté Son Prophète.", tag: "Explication" };
+  },
+  // S09a: present life -> last life, "meilleure pour lui"; discreet dune crest, no dawn glow, diagram away from the horizon.
+  r3s09a() {
+    seed = 900;
+    let s = layer("M0 0H1080V1920H0Z", grad([[0, "#0c1634"], [0.55, "#22305a"], [1, "#3a3a58"]])) + stars(14, 80, 700, 0.5);
+    const c = "M -60 1990 L -60 1480 Q 300 1380 640 1430 Q 900 1470 1140 1420 L 1140 1990 Z";
+    s += `<path d="${c}" fill="#241c22"/>` + mottle(c, 0.1, "f-sand");
+    s += `<text class="mid" x="300" y="800" text-anchor="middle">Vie présente</text><text class="mid" x="785" y="800" text-anchor="middle">Vie dernière</text>`;
+    s += `<g stroke="#d6b36c" stroke-width="4" fill="none" stroke-linecap="round"><path d="M 465 785 H 610"/><path d="M 592 770 L 612 785 L 592 800"/></g>`;
+    s += `<text class="midi" x="785" y="870" text-anchor="middle">meilleure pour lui</text>`;
+    return { svg: s + finish(), sub: "Pour lui, la vie dernière sera meilleure que la vie présente.", tag: "Sens du verset 93:4" };
+  },
+  // S10: the three reminders announced concretely: door, marked route, basket appear one after the other (end state).
+  r3s10() {
+    let s = layer("M0 0H1080V1920H0Z", grad([[0, "#0b1630"], [1, "#16274f"]], 0.4, 1)) + mottle("M0 0H1080V1920H0Z", 0.08);
+    s += arches(false, 460);
+    return { svg: s + finish(false), sub: "Elle lui rappelle aussi ce qu’il a déjà reçu." };
+  },
+  // S12a: the same three images in the same arches, with their names (no subtitle: the labels say the words).
+  r3s12a() {
+    let s = layer("M0 0H1080V1920H0Z", grad([[0, "#0b1630"], [1, "#16274f"]], 0.4, 1)) + mottle("M0 0H1080V1920H0Z", 0.08);
+    s += arches(true, 360);
+    return { svg: s + finish(false), tag: "Explication" };
+  },
+  // S12b: the order of the passage in words only (no line, no dots); "Passé" is emphasised under the arches.
+  r3s12b() {
+    let s = layer("M0 0H1080V1920H0Z", grad([[0, "#0b1630"], [1, "#16274f"]], 0.4, 1)) + mottle("M0 0H1080V1920H0Z", 0.08);
+    s += arches(false, 360);
+    [[220, "Réponse"], [540, "Avenir"], [860, "Passé"]].forEach(([x, t], i) => {
+      s += `<text class="lab" x="${x}" y="1110" text-anchor="middle" opacity="${i === 2 ? 1 : 0.5}"${i === 2 ? ' style="fill:#d6b36c"' : ""}>${t}</text>`;
+    });
+    s += `<path d="M 805 1130 H 915" stroke="#d6b36c" stroke-width="3"/>`;
+    return { svg: s + finish(false), sub: "le passage rappelle ainsi les bienfaits du passé.", tag: "Explication" };
+  },
   // S16: end card, the building facade again, now in the morning.
   s16() {
     seed = 1600;
@@ -322,7 +476,7 @@ defs = [];
 const out = SCENES[id]();
 document.getElementById("stage").innerHTML =
   `<svg viewBox="0 0 1080 1920"><defs>${BASE_DEFS}${defs.join("")}</defs>${out.svg}</svg>` +
-  (out.title ? `<div class="title"${out.titleColor ? ` style="color:${out.titleColor}"` : ""}>${out.title}</div>` : "") + (out.tag ? `<div class="tag">${out.tag}</div>` : "") + (out.sub ? `<div class="sub">${out.sub}</div>` : "");
+  (out.title ? `<div class="title"${out.titleColor ? ` style="color:${out.titleColor}"` : ""}>${out.title}</div>` : "") + (out.tag ? `<div class="tag${out.ref ? " ref" : ""}">${out.tag}</div>` : "") + (out.sub ? `<div class="sub">${out.sub}</div>` : "");
 window.__ready = true;
 </script>
 </body>
