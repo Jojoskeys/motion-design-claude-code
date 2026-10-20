@@ -29,9 +29,14 @@ Le script et les maquettes V2 ne sont plus à modifier sans demande explicite.
 5. Formule « paix et salut sur lui » : à confirmer.
 Réseau de l'environnement cloud : sunnah.com, dorar.net, hadeethenc.com, quranenc.com, tanzil.net, jsDelivr bloqués.
 
-## Prochaine tâche
-Prototype animé **de 10 à 15 s de l'accroche seulement** (maquette 01, motif du fil et des bulles), aperçu basse
-résolution. Pas de vidéo complète, pas de rendu final, pas d'autre écran sans validation.
+## Prototype de l'accroche (étape D, en attente de retour)
+- Composition : `ep01-medisance/index.html` (1080×1920, 7 s, muette), d'après la maquette V2 01 ; `meta.json` passé en 1080×1920.
+- Aperçu : `ep01-medisance/prototypes/ep01-accroche-proto-540x960.mp4` (rendu `draft` 1080×1920 puis réduit par ffmpeg).
+- Rythme : bulles et fil 0,1–1,9 s ; question 1,4 s ; « vrai ? » 2,35 s ; filet et étoile 2,7–3,55 s ; bulles à 60 % dès 3,6 s.
+- GSAP 3.14.2 embarqué dans `assets/vendor/` (jsDelivr bloqué ; copié du paquet npm, licence GSAP « Standard no-charge »).
+- Rendu : `npx hyperframes render -q draft -o renders/accroche-1080.mp4` depuis `ep01-medisance/`, puis
+  `ffmpeg -i renders/accroche-1080.mp4 -vf scale=540:960:flags=lanczos -c:v libx264 -crf 20 -pix_fmt yuv420p -an …`.
+Pas de vidéo complète, pas d'autre écran sans validation du prototype.
 
 ## Outils audio disponibles (constatés le 2026-10-20)
 - `ffmpeg` / `ffprobe` : présents (`/usr/bin`).

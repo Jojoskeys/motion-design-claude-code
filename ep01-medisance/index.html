@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1080, height=1920">
+  <title>ep01 accroche : prototype animé</title>
+  <!-- GSAP 3.14.2 embarqué en local (jsDelivr bloqué dans cet environnement), copié depuis le paquet npm gsap@3.14.2 -->
+  <script src="assets/vendor/gsap-3.14.2.min.js"></script>
+  <style>
+    /* Prototype de l'accroche, d'après la maquette V2 styleframes/01-accroche.html (mêmes polices, couleurs, SVG). */
+    @font-face { font-family: "Source Serif 4"; font-weight: 600; src: url(assets/fonts/source-serif-4-latin-600-normal.woff2); }
+    @font-face { font-family: "Source Serif 4"; font-weight: 400; font-style: italic; src: url(assets/fonts/source-serif-4-latin-400-italic.woff2); }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: #0b1630; }
+    #root {
+      position: relative; width: 100%; height: 100%; overflow: hidden;
+      background: radial-gradient(110% 60% at 35% 45%, #13254f 0%, #0b1630 72%);
+      color: #f3ead7;
+    }
+    .clip { position: absolute; inset: 0; }
+    svg.decor { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .question { position: absolute; left: 88px; top: 1010px; width: 820px; font: 600 92px/1.12 "Source Serif 4", serif; letter-spacing: -.01em; }
+    .question .debut { display: block; }
+    .question .vrai { display: block; width: max-content; margin-top: 18px; font: 400 italic 156px/1 "Source Serif 4", serif; color: #c6a15b; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="ep01-accroche" data-start="0" data-width="1080" data-height="1920" data-duration="7">
+    <section id="accroche" class="clip">
+      <svg class="decor" viewBox="0 0 1080 1920" aria-hidden="true">
+        <defs>
+          <pattern id="trame" width="132" height="132" patternUnits="userSpaceOnUse">
+            <g transform="translate(66 66)" fill="none" stroke="#c6a15b" stroke-width="1.4">
+              <rect x="-26" y="-26" width="52" height="52"/><rect x="-26" y="-26" width="52" height="52" transform="rotate(45)"/>
+            </g>
+          </pattern>
+          <radialGradient id="fondu" cx="85%" cy="12%" r="55%"><stop offset="0" stop-color="#fff" stop-opacity="1"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+          <mask id="m"><rect width="1080" height="1920" fill="url(#fondu)"/></mask>
+          <!-- Masques de tracé : un trait plein qui se déroule révèle le fil pointillé, point après point -->
+          <mask id="fil1-masque" maskUnits="userSpaceOnUse" x="0" y="0" width="1080" height="1920">
+            <path id="fil1-trace" fill="none" stroke="#fff" stroke-width="16" stroke-linecap="butt" d="M224 516 C 300 640, 430 580, 512 650"/>
+          </mask>
+          <mask id="fil2-masque" maskUnits="userSpaceOnUse" x="0" y="0" width="1080" height="1920">
+            <path id="fil2-trace" fill="none" stroke="#fff" stroke-width="16" stroke-linecap="butt" d="M736 776 C 700 860, 520 830, 422 868"/>
+          </mask>
+        </defs>
+        <!-- Trame fixe -->
+        <rect width="1080" height="1920" fill="url(#trame)" opacity=".09" mask="url(#m)"/>
+
+        <g id="bulles" fill="#0f1d40" stroke-linecap="round" stroke-linejoin="round">
+          <g id="bulle1">
+            <path d="M150 300 h250 a46 46 0 0 1 46 46 v84 a46 46 0 0 1 -46 46 h-176 l-46 40 v-40 h-28 a46 46 0 0 1 -46 -46 v-84 a46 46 0 0 1 46 -46 z"
+                  stroke="#f3ead7" stroke-opacity=".55" stroke-width="3"/>
+            <g fill="#f3ead7" fill-opacity=".55"><circle class="p1" cx="232" cy="388" r="9"/><circle class="p1" cx="275" cy="388" r="9"/><circle class="p1" cx="318" cy="388" r="9"/></g>
+          </g>
+          <g id="bulle2">
+            <path d="M560 560 h250 a46 46 0 0 1 46 46 v84 a46 46 0 0 1 -46 46 h-28 v40 l-46 -40 h-176 a46 46 0 0 1 -46 -46 v-84 a46 46 0 0 1 46 -46 z"
+                  stroke="#f3ead7" stroke-opacity=".32" stroke-width="3"/>
+            <g fill="#f3ead7" fill-opacity=".32"><circle class="p2" cx="642" cy="648" r="9"/><circle class="p2" cx="685" cy="648" r="9"/><circle class="p2" cx="728" cy="648" r="9"/></g>
+          </g>
+          <g id="bulle3">
+            <path d="M210 800 h170 a40 40 0 0 1 40 40 v58 a40 40 0 0 1 -40 40 h-140 l-38 34 v-34 h-0 a40 40 0 0 1 -32 -40 v-58 a40 40 0 0 1 40 -40 z"
+                  stroke="#f3ead7" stroke-opacity=".22" stroke-width="3" stroke-dasharray="10 12"/>
+          </g>
+
+          <!-- Le fil de la parole -->
+          <path id="fil1" fill="none" mask="url(#fil1-masque)" d="M224 516 C 300 640, 430 580, 512 650" stroke="#c6a15b" stroke-width="3" stroke-dasharray="2 14" opacity=".9"/>
+          <path id="fil2" fill="none" mask="url(#fil2-masque)" d="M736 776 C 700 860, 520 830, 422 868" stroke="#c6a15b" stroke-width="3" stroke-dasharray="2 14" opacity=".7"/>
+          <g fill="#c6a15b"><circle id="noeud1" cx="224" cy="516" r="7"/><circle id="noeud2" cx="736" cy="776" r="7" opacity=".8"/><circle id="noeud3" cx="240" cy="972" r="6" opacity=".6"/></g>
+        </g>
+
+        <!-- Filet sous « vrai ? » -->
+        <line id="filet" x1="88" y1="1420" x2="520" y2="1420" stroke="#c6a15b" stroke-width="3" opacity=".75"/>
+        <g transform="translate(548 1420)">
+          <g id="etoile" fill="none" stroke="#c6a15b" stroke-width="2.5" opacity=".9">
+            <rect x="-12" y="-12" width="24" height="24"/><rect x="-12" y="-12" width="24" height="24" transform="rotate(45)"/>
+          </g>
+        </g>
+      </svg>
+
+      <p class="question"><span class="debut" id="debut">Et si ce que je dis sur lui est</span> <span class="vrai" id="vrai">vrai&nbsp;?</span></p>
+    </section>
+  </div>
+
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    const trace = (id) => {
+      const p = document.getElementById(id);
+      const len = p.getTotalLength();
+      return { el: p, len };
+    };
+    const f1 = trace("fil1-trace");
+    const f2 = trace("fil2-trace");
+
+    const bulle = (sel, at) => tl.fromTo(sel,
+      { opacity: 0, scale: 0.94 },
+      { opacity: 1, scale: 1, duration: 0.45, ease: "power2.out", transformOrigin: "50% 100%" }, at);
+    const noeud = (sel, at) => tl.fromTo(sel,
+      { scale: 0 }, { scale: 1, duration: 0.25, ease: "back.out(2)", transformOrigin: "50% 50%" }, at);
+    const fil = (f, at, d) => tl.fromTo(f.el,
+      { strokeDasharray: f.len + 2, strokeDashoffset: f.len + 2 },
+      { strokeDashoffset: 0, duration: d, ease: "power1.inOut" }, at);
+
+    // 1. La parole passe de bulle en bulle (0 à 1,9 s)
+    bulle("#bulle1", 0.1);
+    tl.fromTo(".p1", { opacity: 0 }, { opacity: 1, duration: 0.2, stagger: 0.08, ease: "none" }, 0.3);
+    noeud("#noeud1", 0.45);
+    fil(f1, 0.55, 0.5);
+    bulle("#bulle2", 0.9);
+    tl.fromTo(".p2", { opacity: 0 }, { opacity: 1, duration: 0.2, stagger: 0.08, ease: "none" }, 1.05);
+    noeud("#noeud2", 1.15);
+    fil(f2, 1.25, 0.5);
+    bulle("#bulle3", 1.6);
+    noeud("#noeud3", 1.85);
+
+    // 2. La question (dès 1,4 s), puis « vrai ? » mis en valeur
+    tl.fromTo("#debut", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 1.4);
+    tl.fromTo("#vrai", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 2.35);
+    tl.fromTo("#filet", { scaleX: 0 }, { scaleX: 1, duration: 0.55, ease: "power2.inOut", transformOrigin: "0% 50%" }, 2.7);
+    tl.fromTo("#etoile", { opacity: 0, rotation: -45 }, { opacity: 0.9, rotation: 0, duration: 0.45, ease: "power2.out", svgOrigin: "0 0" }, 3.1);
+
+    // 3. Les bulles s'effacent un peu : le regard reste sur la question jusqu'à la fin
+    tl.to("#bulles", { opacity: 0.6, duration: 1.0, ease: "power1.inOut" }, 3.6);
+
+    window.__timelines["ep01-accroche"] = tl;
+  </script>
+</body>
+</html>
