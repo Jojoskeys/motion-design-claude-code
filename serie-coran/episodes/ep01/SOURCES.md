@@ -15,13 +15,15 @@ d'origine sont bloqués dans cet environnement) : à relire sur la source d'orig
 | Al-Muyassar AR, 49:12 | https://raw.githubusercontent.com/spa5k/tafsir_api/main/tafsir/ar-tafsir-muyassar/49/12.json | quran.com |
 | As-Sa'di AR, 49:12 (lu, non cité) | https://raw.githubusercontent.com/spa5k/tafsir_api/main/tafsir/ar-tafseer-al-saddi/49/12.json | quran.com |
 | Sahih Muslim AR et FR | https://raw.githubusercontent.com/fawazahmed0/hadith-api/1/editions/ara-muslim.json et `.../fra-muslim.json` | numérotation 'Abd al-Baqi ; traducteur français **non indiqué** par le miroir |
+| Sahih Muslim 2589, page HadeethEnc (AR, traduction FR publiée, référence, commentaire) | https://hadeethenc.com/fr/browse/hadith/5326 | **Contenu fourni par l'utilisateur depuis la page d'origine** (non consulté par Claude, site injoignable ici) ; copie : `sources-brutes/ep01-hadeethenc-5326.txt` |
 
 ## 2. Tableau script ↔ sources
 
 | # | Formulation du script | Source | Extrait justificatif |
 |---|---|---|---|
-| 1 | Accroche « Et si ce que je dis sur lui est vrai ? » (reformulation, sans guillemets) | Sahih Muslim n° 2589 | AR : « أَفَرَأَيْتَ إِنْ كَانَ فِي أَخِي مَا أَقُولُ » (« sur lui » est plus proche de l'arabe « فِي أَخِي ») |
-| 2 | Définition, question, réponse — **traduction française de travail, non validée** | Sahih Muslim n° 2589 (Livre de la vertu, des bonnes manières et des liens de parenté), Abu Hurayra | AR (référence) : « ذِكْرُكَ أَخَاكَ بِمَا يَكْرَهُ … إِنْ كَانَ فِيهِ مَا تَقُولُ فَقَدِ اغْتَبْتَهُ وَإِنْ لَمْ يَكُنْ فِيهِ فَقَدْ بَهَتَّهُ ». FR provisoire (miroir, traducteur non indiqué) : « La médisance, c'est de parler de ton frère d'une manière qu'il n'aime pas. […] Et si ce que je dis est vrai ? […] Si ce défaut est vraiment en lui, tu as médit de lui ; et s'il n'y est pas, tu l'as calomnié. » |
+| 1 | Accroche « Et si ce que je dis sur lui est vrai ? » (formulation éditoriale, sans guillemets) | Sahih Muslim 2589 (HadeethEnc 5326) | AR : « أَفَرَأَيْتَ إِنْ كَانَ فِي أَخِي مَا أَقُولُ » ; FR HadeethEnc : « Et qu’en est-il si cette caractéristique est présente en lui ? » |
+| 2 | Hadith cité en entier, sans coupure | Sahih Muslim 2589, traduction publiée sur HadeethEnc (https://hadeethenc.com/fr/browse/hadith/5326), contenu fourni par l'utilisateur | « Savez-vous ce qu’est la médisance ? - Ils répondirent : Allah et Son Messager savent mieux ! - Il a dit : C'est que tu évoques ton frère en des termes qu’il répugnerait. » On demanda : « Et qu’en est-il si cette caractéristique est présente en lui ? - Il répondit : si ce que tu dis est présent en lui, tu auras alors médit à son sujet ; mais si ce n’est pas le cas, tu l'auras alors diffamé. » |
+| 2 bis | « Le commentaire de HadeethEnc signale des situations particulières, non traitées dans cet épisode. » | Commentaire de la page HadeethEnc 5326, point 5 des enseignements (résumé fourni par l'utilisateur) | Selon le résumé : situations particulières, notamment la plainte d’une personne opprimée auprès de quelqu’un pouvant lui rendre justice et la consultation. Commentaire de la page, pas paroles du hadith ; non développé dans l'épisode. |
 | 3 | Citation du verset (extrait annoncé) | Hamidullah 49:12 | « … et ne médisez pas les uns des autres. L'un de vous aimerait-il manger la chair de son frère mort? (Non!) vous en aurez horreur. Et craignez Allah. Car Allah est Grand Accueillant au repentir, Très Miséricordieux » |
 | 4 | « Ce verset demande aussi d'éviter l'excès de soupçon et l'espionnage » | Hamidullah 49:12 | « Evitez de trop conjecturer [sur autrui] car une partie des conjectures est péché. Et n'espionnez pas » |
 | 5 | « le précédent, la moquerie, le dénigrement et les surnoms blessants » | Hamidullah 49:11 | « Qu'un groupe ne se raille pas d'un autre groupe […] Ne vous dénigrez pas et ne vous lancez pas mutuellement des sobriquets (injurieux) » |
@@ -31,8 +33,9 @@ Retirés en révision 3 : la paraphrase d'Al-Mukhtasar (« dévorer le cadavre �
 source lue ne traite les cas où parler d'un absent serait permis ou nécessaire) et la citation d'Al-Mukhtasar en
 conclusion. Al-Mukhtasar et Al-Muyassar restent utilisés seulement pour le cadrage (l'image porte sur la médisance).
 
-Degré du hadith : rapporté par Muslim dans son Sahih. Le miroir ne donne aucun verdict propre à ce hadith (champ
-« grades » vide) : à confirmer sur dorar.net ou sunnah.com (Sahih Muslim 2589).
+Degré du hadith : affiché sur HadeethEnc « [Authentique] — [Rapporté par Muslim] — [Sahîh Muslim — 2589] » (contenu
+fourni par l'utilisateur). Concorde avec la numérotation 2589 du miroir et son texte arabe (mêmes mots ; vocalisation
+et ponctuation un peu différentes). La traduction anonyme du miroir n'est plus utilisée dans le script.
 
 ## 3. Lu mais volontairement non utilisé
 - Al-Mukhtasar 49:11 : sobriquets « comme cela était le cas de certains Ansar » : aucune référence de hadith dans le
@@ -63,32 +66,28 @@ Extrait affiché (mots 14 à 31 de l'édition retenue) :
 1. Texte arabe de l'extrait : comparer mot par mot avec un mushaf imprimé.
 2. Hamidullah : la version de tanzil.net peut différer d'autres éditions révisées. Vérifier sur l'édition que vous
    choisissez d'afficher (et son droit d'usage).
-3. Sahih Muslim 2589 : vérifier numéro et degré ; choisir une traduction française publiée et nommée (celle du
+3. [Réglé en révision 4, voir § 6] Sahih Muslim 2589 : vérifier numéro et degré ; choisir une traduction française publiée et nommée (celle du
    miroir n'a pas de traducteur indiqué). Note : « les Compagnons » est un ajout de cette traduction, l'arabe dit
    « ils dirent ».
 4. Formule « paix et salut sur lui » : choix de formulation à confirmer.
 5. Des spectateurs demanderont s'il est permis de parler d'un absent pour avertir ou demander conseil : sujet non
    traité ici, possible épisode futur après recherche sourcée.
 
-## 6. État des vérifications pour la révision 3 (2026-10-20)
+## 6. État des vérifications pour la révision 4 (2026-10-20)
 
-Réseau de cet environnement : hadeethenc.com et dorar.net testés une fois, injoignables (comme sunnah.com,
-quranenc.com et tanzil.net). Aucun autre miroir essayé.
+**Vérifié** :
+- Hadith, traduction FR : la citation du script est identique, caractère pour caractère, au texte HadeethEnc fourni par
+  l'utilisateur (`sources-brutes/ep01-hadeethenc-5326.txt`), contrôle fait par script. Claude n'a pas consulté la page
+  lui-même : la fidélité de la copie repose sur le contenu fourni.
+- Hadith, référence et degré : « Authentique », Sahih Muslim 2589, tels qu'affichés sur HadeethEnc (contenu fourni).
+- Hamidullah 49:12 et 49:11 : citations identiques aux extraits du miroir GitHub (`sources-brutes/ep01-extraits.json`).
+  Une correspondance avec un miroir ne valide pas la source d'origine.
 
-**Vérifié dans cet environnement** (copie exacte des extraits lus sur les miroirs GitHub du § 1 ; un contrôle sur la
-source d'origine reste nécessaire avant publication, une correspondance avec un miroir ne valide pas la source) :
-- Chaque citation entre guillemets du script est identique à l'extrait brut (`sources-brutes/ep01-extraits.json`),
-  contrôle fait par script.
-- Hamidullah 49:12 et 49:11 : extrait cité, contexte (soupçon, espionnage ; moquerie, dénigrement, sobriquets), fin du
-  verset sur le repentir et la miséricorde.
-- Muslim 2589 : texte arabe du miroir, numérotation 'Abd al-Baqi 2589 (livre 45, hadith 91 dans le miroir).
-
-**Bloquant (non validé)** :
-1. Traduction française publiée et attribuée de Muslim 2589 : non identifiée ici. À fournir par l'utilisateur :
-   l'extrait exact (texte copié ou photo lisible) d'une traduction française publiée du hadith, avec traducteur,
-   éditeur, édition, tome, page et numéro du hadith ; ou le lien de la page du hadith sur l'Encyclopédie des hadiths
-   traduits (hadeethenc.com, version française) avec le texte de la page collé, ce site n'étant pas joignable ici.
-2. Numéro et degré de Muslim 2589 : à confirmer sur https://sunnah.com/muslim:2589 (arabe et anglais) ou
-   dorar.net ; coller le passage (référence et texte arabe) si vous voulez que je le compare à l'extrait du miroir.
-3. Hamidullah 49:12 : relire l'extrait sur l'édition que vous afficherez et vérifier son droit d'usage.
+**Restant à vérifier** :
+1. Passage coranique, traduction : relire l'extrait de 49:12 (et 49:11 pour le contexte) dans l'édition Hamidullah
+   que vous afficherez (la version de tanzil.net peut différer d'autres éditions révisées) ; vérifier le droit d'usage.
+2. Passage coranique, texte arabe affiché : comparer mot par mot avec un mushaf imprimé (rasm uthmani, Hafs) ; voir § 4.
+3. Commentaire HadeethEnc, point 5 : le script ne s'appuie que sur le résumé fourni ; si vous voulez une attribution
+   plus précise à l'écran, fournir le texte exact de ce point.
 4. Formule « paix et salut sur lui » : à confirmer.
+5. Droit d'usage de la traduction HadeethEnc dans une vidéo : à vérifier sur le site.
