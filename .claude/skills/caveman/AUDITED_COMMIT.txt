@@ -1,0 +1,3 @@
+Source: https://github.com/JuliusBrussee/caveman
+Commit: 3dc497a7f858c774d6e15b25e8c6120ef3a0eda8
+Copied: skills/caveman, skills/ultracave (Markdown only, no hooks/CLI).

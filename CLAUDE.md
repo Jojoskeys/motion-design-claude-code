@@ -33,6 +33,8 @@ Ce fichier complète `AGENTS.md` (garde-fous HyperFrames, toujours valables). Po
   E vidéo complète et contrôles. Pas d'étape sautée, pas de sous-agent sans demande.
 - Aperçus basse résolution pendant la conception ; rendu complet seulement après validation du prototype.
 - Signaler tout service payant avant usage. Deux échecs identiques → s'arrêter et expliquer.
+- Réponses dans le chat : style skill `caveman` (`.claude/skills/caveman`), en français. Ne s'applique jamais aux fichiers
+  (scripts, SOURCES.md, storyboards, commits) ni aux textes religieux, qui restent complets et mot pour mot.
 
 ## Fichiers
 - `serie-coran/SOURCES-OUTILS.md` : sources accessibles et limites. `serie-coran/HISTORIQUE.md` : sujets traités.
